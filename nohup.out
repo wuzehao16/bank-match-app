@@ -1,0 +1,42 @@
+
+> custom-server-koa@1.0.0 dev D:\project\bank-match-app
+> node server.js
+
+> Using external babel configuration
+> Location: "D:\project\bank-match-app\.babelrc"
+ DONE  Compiled successfully in 2426ms11:46:47
+
+> Ready on http://localhost:3000
+> Building page: /match
+
+> custom-server-koa@1.0.0 dev D:\project\bank-match-app
+> node server.js
+
+> Using external babel configuration
+> Location: "D:\project\bank-match-app\.babelrc"
+ DONE  Compiled successfully in 2874ms11:47:14
+
+> Ready on http://localhost:3000
+> Building page: /match
+ DONE  Compiled successfully in 7662ms11:47:22
+
+ WAIT  Compiling...11:47:24
+
+ DONE  Compiled successfully in 601ms11:47:25
+
+
+> custom-server-koa@1.0.0 dev D:\project\bank-match-app
+> node server.js
+
+> Using external babel configuration
+> Location: "D:\project\bank-match-app\.babelrc"
+ DONE  Compiled successfully in 2730ms11:50:27
+
+> Ready on http://localhost:3000
+> Building page: /match
+ DONE  Compiled successfully in 7507ms11:50:45
+
+ WAIT  Compiling...11:50:47
+
+ DONE  Compiled successfully in 507ms11:50:48
+

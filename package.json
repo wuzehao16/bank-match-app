@@ -1,0 +1,23 @@
+{
+  "name": "custom-server-koa",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "antd": "^3.3.1",
+    "babel-plugin-styled-components": "^1.1.5",
+    "koa": "^2.0.1",
+    "koa-router": "^7.1.0",
+    "material-ui": "^1.0.0-beta.38",
+    "next": "latest",
+    "node-fetch": "^2.1.1",
+    "prop-types": "latest",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-radio-buttons": "^1.2.1",
+    "styled-components": "^2.1.0"
+  }
+}
