@@ -33,15 +33,18 @@ export default ({ children, title = '众银云测' }) => (
         margin-right:5px;
         background: #f2f2f2;
         padding: 3px 5px 3px 3px;
-        border-radius:5px;
+        border-radius:3px;
         border:1px solid #ebebeb;
         color:#969696;
-        font-size: 14px;
+        font-size: 11px;
       }
       .ant-radio-button-wrapper input[type="radio"] {
           opacity: 0;
           width: 0;
           height: 0;
+      }
+      .ant-radio-button{
+        display:none;
       }
       .ant-radio-button-wrapper span{
 
@@ -52,6 +55,9 @@ export default ({ children, title = '众银云测' }) => (
       }
       .ant-radio-button-input{
         opacity:0;
+      }
+      p{
+        font-size:12px;
       }
     `}
     </style>
