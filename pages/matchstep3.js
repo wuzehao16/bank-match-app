@@ -136,6 +136,7 @@ class MatchStep1 extends React.Component {
     const sumConsumerFinanceLoanError = isFieldTouched('sumConsumerFinanceLoan') && getFieldError('sumConsumerFinanceLoan');
     const isParticleLoanError = isFieldTouched('isParticleLoan') && getFieldError('isParticleLoan');
     const particleLoanLimitError = isFieldTouched('particleLoanLimit') && getFieldError('particleLoanLimit');
+    const isLoanCloseError = isFieldTouched('isLoanClose') && getFieldError('isLoanClose');
     const isLoanLossError = isFieldTouched('isLoanLoss') && getFieldError('isLoanLoss');
     const isOverdueError = isFieldTouched('isOverdue') && getFieldError('isOverdue');
     const overdueCategoryError = isFieldTouched('overdueCategory') && getFieldError('overdueCategory');
@@ -268,10 +269,10 @@ class MatchStep1 extends React.Component {
           <Contain>
             <p>名下贷款/信用卡账户状态是否有冻结/呆账/止付/挂失/收卡/作废 </p>
             <FormItem
-              validateStatus={particleLoanLimitError ? 'error' : ''}
-              help={particleLoanLimitError || ''}
+              validateStatus={isLoanCloseError ? 'error' : ''}
+              help={isLoanCloseError || ''}
               >
-              {getFieldDecorator('particleLoanLimit', {
+              {getFieldDecorator('isLoanClose', {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -284,10 +285,10 @@ class MatchStep1 extends React.Component {
           <Contain>
             <p>名下贷款/信用卡五级分类是否有关住/次级/可疑/损失 </p>
             <FormItem
-              validateStatus={particleLoanLimitError ? 'error' : ''}
-              help={particleLoanLimitError || ''}
+              validateStatus={isLoanLossError ? 'error' : ''}
+              help={isLoanLossError || ''}
               >
-              {getFieldDecorator('particleLoanLimit', {
+              {getFieldDecorator('isLoanLoss', {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">

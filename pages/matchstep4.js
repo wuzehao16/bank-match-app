@@ -159,7 +159,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div style={{verticalAlign:'bottom'}}>
                   <span>单位名称</span>
-                  <input placeholder="请填写社保缴纳单位或工资代发单位"  type="number" min={0} max={1000} style={{width:200,border:'none'}}/>
+                  <input placeholder="请填写社保缴纳单位或工资代发单位"  type="text"style={{width:200,border:'none'}}/>
                 </div>
               )}
             </FormItem>
@@ -348,10 +348,10 @@ class MatchStep4 extends React.Component {
           <SubContain>
             <SubContainTitle>本单位有无公积金基数调整</SubContainTitle>
             <FormItem
-              validateStatus={isProvidentFundAdjustmenttError ? 'error' : ''}
-              help={isProvidentFundAdjustmenttError || ''}
+              validateStatus={isProvidentFundAdjustmentError ? 'error' : ''}
+              help={isProvidentFundAdjustmentError || ''}
               >
-              {getFieldDecorator('isProvidentFundAdjustmentt', {
+              {getFieldDecorator('isProvidentFundAdjustment', {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
