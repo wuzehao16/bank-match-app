@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import Router from 'next/router'
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';

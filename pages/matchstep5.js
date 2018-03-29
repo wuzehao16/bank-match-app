@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
+import Router from 'next/router'
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
@@ -66,6 +67,7 @@ const Title = styled.div`
   padding: 0 15px;
 `
 const SubContain = styled.div`
+  position: relative;
   background-color: #fff;
   padding: 10px 0 20px;
   border-bottom: 1px solid #f2f2f2;
@@ -117,7 +119,9 @@ const Input = styled.input`
     border-bottom-width: 1px;
     border-left-width: 0px
 `
-let uuid = 0;
+let housePropertyUuid = 0;
+let businessPolicyUuid = 0;
+let carPropertyUuid = 0;
 class MatchStep4 extends React.Component {
   // static async getInitialProps({query}) {
 	// 	return {
@@ -137,15 +141,21 @@ class MatchStep4 extends React.Component {
     });
   };
   handleSubmit = (e) => {
+    const { getFieldsError } = this.props.form;
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        Router.push({
+          pathname: '/matchstep6',
+        })
       }
     });
   }
   hasErrors = (fieldsError) => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
+    return Object.keys(fieldsError).some(field => {
+       return Array.isArray(fieldsError[field])?fieldsError[field][0]:fieldsError[field]
+    });
   }
   removeHouseProperty = (k) => {
     const { form } = this.props;
@@ -166,12 +176,36 @@ class MatchStep4 extends React.Component {
     const { form } = this.props;
     // can use data-binding to get
     const houseProperty = form.getFieldValue('houseProperty');
-    const nextKeys = houseProperty.concat(uuid);
-    uuid++;
+    const nextKeys = houseProperty.concat(housePropertyUuid);
+    housePropertyUuid++;
     // can use data-binding to set
     // important! notify form to detect changes
     form.setFieldsValue({
       houseProperty: nextKeys,
+    });
+  }
+  addBusinessPolicy = () => {
+    const { form } = this.props;
+    // can use data-binding to get
+    const businessPolicy = form.getFieldValue('businessPolicyArr');
+    const nextKeys = businessPolicy.concat(businessPolicyUuid);
+    businessPolicyUuid++;
+    // can use data-binding to set
+    // important! notify form to detect changes
+    form.setFieldsValue({
+      businessPolicyArr: nextKeys,
+    });
+  }
+  addCarProperty = () => {
+    const { form } = this.props;
+    // can use data-binding to get
+    const carProperty = form.getFieldValue('carProperty');
+    const nextKeys = carProperty.concat(carPropertyUuid);
+    carPropertyUuid++;
+    // can use data-binding to set
+    // important! notify form to detect changes
+    form.setFieldsValue({
+      carProperty: nextKeys,
     });
   }
   render () {
@@ -181,21 +215,29 @@ class MatchStep4 extends React.Component {
     // Only show error after a field is touched.
     const isHousePropertyError = isFieldTouched('isHouseProperty') && getFieldError('isHouseProperty');
     const sumHousePropertyError = isFieldTouched('sumHouseProperty') && getFieldError('sumHouseProperty');
+    const sumBusinessPolicyError = isFieldTouched('sumBusinessPolicy') && getFieldError('sumBusinessPolicy');
+    const businessPolicyError = isFieldTouched('businessPolicy') && getFieldError('businessPolicy');
+    const isFamilyCarError = isFieldTouched('isFamilyCar') && getFieldError('isFamilyCar');
+    const sumFamilyCarError = isFieldTouched('sumFamilyCar') && getFieldError('sumFamilyCar');
 
+    // 房产状况
     getFieldDecorator('houseProperty', { initialValue: [] });
     const houseProperty = getFieldValue('houseProperty');
     const housePropertyFormItems = houseProperty.map((k, index) => {
       return (
-        <Sub>
+        <Sub
+          key={k}
+          >
           <DoubleInput>
                 <div>
                   <span>第{k+1}套房产情况</span>
                 </div>
           </DoubleInput>
-          <SubContain>
+          <SubContain
+            >
             <SubContainTitle>名下房产属地</SubContainTitle>
             <FormItem
-              required={false}
+              key={k}
               >
               {getFieldDecorator(`housePropertyDependency[${k}]`, {
               })(
@@ -207,10 +249,12 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
+          <SubContain
+            >
             <SubContainTitle>产权归属</SubContainTitle>
             <FormItem
               required={false}
+              key={k+1}
               >
               {getFieldDecorator(`ownership[${k}]`, {
               })(
@@ -224,8 +268,10 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
+          <SubContain
+            >
               <FormItem
+                key={k+2}
                 required={false}
                 >
                 {getFieldDecorator(`propertyRightRatio[${k}]`, {
@@ -260,6 +306,7 @@ class MatchStep4 extends React.Component {
             <SubContainTitle>房产状态</SubContainTitle>
             <FormItem
               required={false}
+              key={k+4}
               >
               {getFieldDecorator(`propertyStatus[${k}]`, {
               })(
@@ -275,6 +322,7 @@ class MatchStep4 extends React.Component {
             <SubContainTitle>还款方式</SubContainTitle>
             <FormItem
               required={false}
+              key={k+5}
               >
               {getFieldDecorator(`repaymentMethod[${k}]`, {
               })(
@@ -289,6 +337,7 @@ class MatchStep4 extends React.Component {
           <DoubleInput>
             <FormItem
               required={false}
+              key={k+6}
               >
               {getFieldDecorator(`mortgageBalance[${k}]`, {
               })(
@@ -301,6 +350,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
             <FormItem
               required={false}
+              key={k+7}
               >
               {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
               })(
@@ -315,6 +365,7 @@ class MatchStep4 extends React.Component {
           <DoubleInput>
             <FormItem
               required={false}
+              key={k+8}
               >
               {getFieldDecorator(`mortgageTerm[${k}]`, {
               })(
@@ -327,6 +378,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
             <FormItem
               required={false}
+              key={k+9}
               >
               {getFieldDecorator(`returnedMonths[${k}]`, {
               })(
@@ -341,6 +393,7 @@ class MatchStep4 extends React.Component {
           <DoubleInput>
             <FormItem
               required={false}
+              key={k+10}
               >
               {getFieldDecorator(`propertyTotalArea[${k}]`, {
               })(
@@ -353,6 +406,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
             <FormItem
               required={false}
+              key={k+11}
               >
               {getFieldDecorator(`returnedMonths[${k}]`, {
               })(
@@ -364,6 +418,219 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </DoubleInput>
+        </Sub>
+      );
+    });
+
+    // 商业保单
+    getFieldDecorator('businessPolicyArr', { initialValue: [] });
+    const businessPolicy = getFieldValue('businessPolicyArr');
+    const businessPolicyFormItems = businessPolicy.map((k, index) => {
+      return (
+        <Sub
+          key={k}
+          >
+          <DoubleInput>
+                <div>
+                  <span>第{k+1}份保单情况</span>
+                </div>
+          </DoubleInput>
+          <SubContain>
+            <SubContainTitle>保单品牌</SubContainTitle>
+            <FormItem
+              required={false}
+              >
+              {getFieldDecorator(`policyBrand[${k}]`, {
+              })(
+                <RadioGroup  size="small">
+                  <RadioButton value={0}>中国平安</RadioButton>
+                  <RadioButton value={1}>中国人寿</RadioButton>
+                  <RadioButton value={2}>新华保险</RadioButton>
+                  <RadioButton value={3}>泰康人寿</RadioButton>
+                  <RadioButton value={4}>太平保险</RadioButton>
+                  <Br/>
+                  <RadioButton value={5}>民生保险</RadioButton>
+                  <RadioButton value={6}>天安保险</RadioButton>
+                  <RadioButton value={7}>华夏人寿</RadioButton>
+                  <RadioButton value={8}>中邮人寿</RadioButton>
+                  <RadioButton value={9}>友邦保险</RadioButton>
+                  <Br/>
+                  <RadioButton value={10}>安邦人寿</RadioButton>
+                  <RadioButton value={11}>招商信诺</RadioButton>
+                  <RadioButton value={12}>工银安盛</RadioButton>
+                  <RadioButton value={13}>安联保险</RadioButton>
+                  <RadioButton value={14}>中英保险</RadioButton>
+                  <Br/>
+                  <RadioButton value={15}>阳光保险</RadioButton>
+                  <RadioButton value={16}>太平洋保险</RadioButton>
+                  <RadioButton value={17}>中国人民人寿</RadioButton>
+                  <RadioButton value={18}>富德生命人寿</RadioButton>
+                  <RadioButton value={19}>其他</RadioButton>
+                </RadioGroup>
+              )}
+            </FormItem>
+          </SubContain>
+          {
+            getFieldValue(`policyBrand[${k}]`)===19
+            ?           <SubContain>
+                          <FormItem
+                            required={false}
+                            >
+                            {getFieldDecorator(`policyBrand[${k}]`, {
+                            })(
+                              <div style={{verticalAlign:'bottom'}}>
+                                <span>保单品牌</span>
+                                <Input   type="text"style={{width:50}}/>
+                              </div>
+                            )}
+                          </FormItem>
+                      </SubContain>:null
+          }
+          <SubContain>
+            <SubContainTitle>保单缴费方式</SubContainTitle>
+            <FormItem
+              required={false}
+              >
+              {getFieldDecorator(`policyBrandPaymentMethod[${k}]`, {
+              })(
+                <RadioGroup  size="small">
+                  <RadioButton value={0}>年缴</RadioButton>
+                  <RadioButton value={1}>季缴</RadioButton>
+                  <RadioButton value={2}>月缴</RadioButton>
+                  <RadioButton value={3}>趸交</RadioButton>
+                </RadioGroup>
+              )}
+            </FormItem>
+          </SubContain>
+
+          <SubContain>
+            <SubContainTitle>保单缴费时长</SubContainTitle>
+            <FormItem
+              required={false}
+              >
+              {getFieldDecorator(`policyPaymentYears[${k}]`, {
+              })(
+                <RadioGroup  size="small">
+                  <RadioButton value={0}>1年以下</RadioButton>
+                  <RadioButton value={1}>公寓</RadioButton>
+                  <RadioButton value={2}>商铺</RadioButton>
+                  <RadioButton value={3}>写字楼</RadioButton>
+                  <RadioButton value={4}>自建房</RadioButton>
+                  <RadioButton value={5}>厂房</RadioButton>
+                </RadioGroup>
+              )}
+            </FormItem>
+          </SubContain>
+          <SubContain>
+            <FormItem
+              required={false}
+              >
+              {getFieldDecorator(`policyPayment[${k}]`, {
+              })(
+                <div style={{verticalAlign:'bottom'}}>
+                  <span>保单年缴费金额 </span>
+                  <Input   type="number" min={0} style={{width:50}}/>
+                </div>
+              )}
+            </FormItem>
+            <Help><Red>*</Red>月缴或季缴的需折算成年缴填写金额</Help>
+        </SubContain>
+        </Sub>
+      );
+    });
+
+    // 车辆状况
+    getFieldDecorator('carProperty', { initialValue: [] });
+    const carProperty = getFieldValue('carProperty');
+    const carPropertyFormItems = carProperty.map((k, index) => {
+      return (
+        <Sub
+          key={k}
+          >
+          <DoubleInput>
+                <div>
+                  <span>第{k+1}辆汽车状况</span>
+                </div>
+          </DoubleInput>
+          <SubContain>
+            <SubContainTitle>名下房产属地</SubContainTitle>
+            <FormItem
+              required={false}
+              >
+              {getFieldDecorator(`carRegistStatus[${k}]`, {
+              })(
+                <RadioGroup  size="small">
+                  <RadioButton value={0}>绿本在手</RadioButton>
+                  <RadioButton value={1}>银行按揭</RadioButton>
+                  <RadioButton value={2}>信用卡形式按揭</RadioButton>
+                  <RadioButton value={3}>车贷机构抵押</RadioButton>
+                  <Br />
+                  <RadioButton value={4}>汽车金融按揭</RadioButton>
+                </RadioGroup>
+              )}
+            </FormItem>
+          </SubContain>
+          <SubContain>
+              <FormItem
+                required={false}
+                >
+                {getFieldDecorator(`carPotentialPrice[${k}]`, {
+                })(
+                  <div style={{verticalAlign:'bottom'}}>
+                    <span>车辆残值评估</span>
+                    <Input   type="number"style={{width:35}}/>
+                    <span>元</span>
+                  </div>
+                )}
+              </FormItem>
+          </SubContain>
+          {
+            (getFieldValue(`carRegistStatus[${k}]`) === 1||getFieldValue(`carRegistStatus[${k}]`) === 2||getFieldValue(`carRegistStatus[${k}]`) === 3||getFieldValue(`carRegistStatus[${k}]`) === 4)
+            ? <div>
+                      <SubContain>
+                          <FormItem
+                            required={false}
+                            >
+                            {getFieldDecorator(`carLoanBalance[${k}]`, {
+                            })(
+                              <div style={{verticalAlign:'bottom'}}>
+                                <span>车辆贷款余额</span>
+                                <Input   type="number"style={{width:35}}/>
+                                <span>元</span>
+                              </div>
+                            )}
+                          </FormItem>
+                      </SubContain>
+                      <SubContain>
+                          <FormItem
+                            required={false}
+                            >
+                            {getFieldDecorator(`carRepayment[${k}]`, {
+                            })(
+                              <div style={{verticalAlign:'bottom'}}>
+                                <span>车贷月还款金额</span>
+                                <Input   type="number"style={{width:35}}/>
+                                <span>元</span>
+                              </div>
+                            )}
+                          </FormItem>
+                      </SubContain>
+                      <SubContain>
+                          <FormItem
+                            required={false}
+                            >
+                            {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
+                            })(
+                              <div style={{verticalAlign:'bottom'}}>
+                                <span>车贷已还款月份</span>
+                                <Input   type="number"style={{width:35}}/>
+                                <span>个月</span>
+                              </div>
+                            )}
+                          </FormItem>
+                      </SubContain>
+                  </div>:null
+          }
         </Sub>
       );
     });
@@ -384,53 +651,125 @@ class MatchStep4 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
-                  <RadioButton value={0}>有</RadioButton>
-                  <RadioButton value={1}>无</RadioButton>
+                  <RadioButton value={1}>有</RadioButton>
+                  <RadioButton value={0}>无</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
           </Contain>
-          <DoubleInput>
-            <FormItem
-              validateStatus={sumHousePropertyError ? 'error' : ''}
-              help={sumHousePropertyError || ''}
-              >
-              {getFieldDecorator('sumHouseProperty', {
-                rules: [{ required: true}],
-              })(
-                <div style={{verticalAlign:'bottom'}}>
-                  <span>名下房产数量</span>
-                  <input   type="number"style={{width:35}}/>
-                  <span>套</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
-          { housePropertyFormItems }
-          <FormItem>
-            <AddButton  onClick={this.addHouseProperty} >
-              + 新增房产
-            </AddButton>
-          </FormItem>
+          {
+            getFieldValue('isHouseProperty')===1
+            ? <div>
+              <DoubleInput>
+                <FormItem
+                  validateStatus={sumHousePropertyError ? 'error' : ''}
+                  help={sumHousePropertyError || ''}
+                  >
+                  {getFieldDecorator('sumHouseProperty', {
+                    rules: [{ required: true}],
+                  })(
+                    <div style={{verticalAlign:'bottom'}}>
+                      <span>名下房产数量</span>
+                      <input   type="number"style={{width:35}}/>
+                      <span>套</span>
+                    </div>
+                  )}
+                </FormItem>
+              </DoubleInput>
+              { housePropertyFormItems }
+                <AddButton  onClick={this.addHouseProperty} >
+                  +新增房产
+                </AddButton>
+            </div> :null
+          }
         </Wrapper>
         <Title>商业保单</Title>
         <Wrapper>
-          <DoubleInput>
+          <Contain>
+            <p>名下有无商业保单</p>
             <FormItem
-              validateStatus={sumHousePropertyError ? 'error' : ''}
-              help={sumHousePropertyError || ''}
+              validateStatus={businessPolicyError ? 'error' : ''}
+              help={businessPolicyError || ''}
               >
-              {getFieldDecorator('sumHouseProperty', {
+              {getFieldDecorator('businessPolicy', {
                 rules: [{ required: true}],
               })(
-                <div style={{verticalAlign:'bottom'}}>
-                  <span>保单份数</span>
-                  <input   type="number"style={{width:35}}/>
-                  <span>份</span>
-                </div>
+                <RadioGroup  size="small">
+                  <RadioButton value={1}>有</RadioButton>
+                  <RadioButton value={0}>无</RadioButton>
+                </RadioGroup>
               )}
             </FormItem>
-          </DoubleInput>
+          </Contain>
+          {
+            getFieldValue('businessPolicy') === 1
+            ? <div>
+              <DoubleInput>
+                <FormItem
+                  validateStatus={sumBusinessPolicyError ? 'error' : ''}
+                  help={sumBusinessPolicyError || ''}
+                  >
+                  {getFieldDecorator('sumBusinessPolicy', {
+                    rules: [{ required: true}],
+                  })(
+                    <div style={{verticalAlign:'bottom'}}>
+                      <span>保单份数</span>
+                      <input   type="number"style={{width:35}}/>
+                      <span>份</span>
+                    </div>
+                  )}
+                </FormItem>
+              </DoubleInput>
+              {businessPolicyFormItems}
+              <AddButton  onClick={this.addBusinessPolicy} >
+                +新增保单
+              </AddButton>
+            </div>: null
+          }
+        </Wrapper>
+        <Title>车辆状况</Title>
+        <Wrapper>
+          <Contain>
+            <p>名下有无家用汽车</p>
+            <FormItem
+              validateStatus={isFamilyCarError ? 'error' : ''}
+              help={isFamilyCarError || ''}
+              >
+              {getFieldDecorator('isFamilyCar', {
+                rules: [{ required: true}],
+              })(
+                <RadioGroup  size="small">
+                  <RadioButton value={1}>有</RadioButton>
+                  <RadioButton value={0}>无</RadioButton>
+                </RadioGroup>
+              )}
+            </FormItem>
+          </Contain>
+          {
+            getFieldValue('isFamilyCar') ===1
+            ? <div>
+              <DoubleInput>
+                <FormItem
+                  validateStatus={sumFamilyCarError ? 'error' : ''}
+                  help={sumFamilyCarError || ''}
+                  >
+                  {getFieldDecorator('sumFamilyCar', {
+                    rules: [{ required: true}],
+                  })(
+                    <div style={{verticalAlign:'bottom'}}>
+                      <span>名下车辆数量</span>
+                      <input   type="number"style={{width:35}}/>
+                      <span>辆</span>
+                    </div>
+                  )}
+                </FormItem>
+              </DoubleInput>
+              {carPropertyFormItems}
+              <AddButton  onClick={this.addCarProperty} >
+                +新增车产
+              </AddButton>
+            </div>: null
+          }
         </Wrapper>
         <div className='btn'>
           <FormItem>
