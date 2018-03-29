@@ -11,7 +11,9 @@ import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
 import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
 import red from 'material-ui/colors/red';
-
+import {connect} from 'react-redux'
+import {withReduxSaga} from '../redux/store'
+import { saveStep2 } from '../redux/actions'
 const FormItem = Form.Item;
 
 const theme = createMuiTheme({
@@ -77,7 +79,7 @@ const SubContainTitle = styled.div`
 const Br = styled.div`
   height: 10px;
 `
-class MatchStep1 extends React.Component {
+class MatchStep2 extends React.Component {
   // static async getInitialProps({query}) {
 	// 	return {
 	// 		item: await fetch(`/item/${query.id}`)
@@ -100,6 +102,7 @@ class MatchStep1 extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(saveStep2(values))
         Router.push({
           pathname: '/matchstep3',
         })
@@ -619,9 +622,9 @@ class MatchStep1 extends React.Component {
   }
 }
 
-MatchStep1.propTypes = {
+MatchStep2.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-const WrappedMatchStep1 = Form.create()(MatchStep1);
+const WrappedMatchStep2 = Form.create()(MatchStep2);
 
-export default withStyles(styles)(WrappedMatchStep1);
+export default connect(state => state)(withReduxSaga(withStyles(styles)(WrappedMatchStep2)));

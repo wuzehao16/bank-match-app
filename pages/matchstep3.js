@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
+import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
@@ -10,7 +11,8 @@ import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
 import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
 import red from 'material-ui/colors/red';
-
+import {withReduxSaga} from '../redux/store'
+import { saveStep3 } from '../redux/actions'
 const FormItem = Form.Item;
 
 const theme = createMuiTheme({
@@ -97,7 +99,7 @@ const DoubleInput = styled.div`
   display: flex;
   justify-content: space-between;
 `
-class MatchStep1 extends React.Component {
+class MatchStep3 extends React.Component {
   // static async getInitialProps({query}) {
 	// 	return {
 	// 		item: await fetch(`/item/${query.id}`)
@@ -120,6 +122,10 @@ class MatchStep1 extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(saveStep3(values))
+        Router.push({
+          pathname: '/matchstep4',
+        })
       }
     });
   }
@@ -623,9 +629,9 @@ class MatchStep1 extends React.Component {
   }
 }
 
-MatchStep1.propTypes = {
+MatchStep3.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-const WrappedMatchStep1 = Form.create()(MatchStep1);
+const WrappedMatchStep3 = Form.create()(MatchStep3);
 
-export default withStyles(styles)(WrappedMatchStep1);
+export default withReduxSaga(withStyles(styles)(WrappedMatchStep3));

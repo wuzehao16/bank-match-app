@@ -11,7 +11,8 @@ import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
 import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
 import red from 'material-ui/colors/red';
-
+import {withReduxSaga} from '../redux/store'
+import { saveStep1 } from '../redux/actions'
 const FormItem = Form.Item;
 
 const theme = createMuiTheme({
@@ -92,6 +93,7 @@ class MatchStep1 extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(saveStep1(values),)
         Router.push({
           pathname: '/matchstep2',
         })
@@ -106,8 +108,10 @@ class MatchStep1 extends React.Component {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
-    const userNameError = isFieldTouched('amounttype') && getFieldError('amounttype');
-    const passwordError = isFieldTouched('direct') && getFieldError('direct');
+    const nameError = isFieldTouched('name') && getFieldError('name');
+    const loanTypeError = isFieldTouched('loanType') && getFieldError('loanType');
+    const exLoanAmountError = isFieldTouched('exLoanAmount') && getFieldError('exLoanAmount');
+    const cityError = isFieldTouched('city') && getFieldError('city');
     return (
       <MuiThemeProvider theme={theme}>
       <Form onSubmit={this.handleSubmit} className="login-form">
@@ -117,35 +121,54 @@ class MatchStep1 extends React.Component {
 
           <Container>
             <div className={classes.lable}>姓名</div>
-            <TextField
-              id="name"
-              // label="客户名称"
-              className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
-              // margin="normal"
-              placeholder="请输入姓名"
-            />
+            <FormItem
+              validateStatus={nameError ? 'error' : ''}
+              help={nameError || ''}
+              >
+              {getFieldDecorator('name', {
+                rules: [{ required: true}],
+              })(
+                <TextField
+                  id="name"
+                  // label="客户名称"
+                  className={classes.textField}
+                  // value={this.state.name}
+                  // onChange={this.handleChange('name')}
+                  // margin="normal"
+                  placeholder="请输入姓名"
+                />
+              )}
+            </FormItem>
+
           </Container>
           <Container>
             <div className={classes.lable}>期望贷款金额</div>
-            <TextField
-              id="name"
-              // label="客户名称"
-              className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
-              // margin="normal"
-              placeholder="请输入金额"
-            />
+            <FormItem
+              validateStatus={exLoanAmountError ? 'error' : ''}
+              help={exLoanAmountError || ''}
+              >
+              {getFieldDecorator('exLoanAmount', {
+                rules: [{ required: true}],
+              })(
+                <TextField
+                  id="name"
+                  // label="客户名称"
+                  className={classes.textField}
+                  // value={this.state.name}
+                  // onChange={this.handleChange('name')}
+                  // margin="normal"
+                  placeholder="请输入金额"
+                />
+              )}
+            </FormItem>
           </Container>
           <Contain>
             <p>贷款类型</p>
             <FormItem
-              validateStatus={userNameError ? 'error' : ''}
-              help={userNameError || ''}
+              validateStatus={loanTypeError ? 'error' : ''}
+              help={loanTypeError || ''}
               >
-              {getFieldDecorator('amounttype', {
+              {getFieldDecorator('loanType', {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -159,10 +182,10 @@ class MatchStep1 extends React.Component {
           <Contain>
             <p>地区</p>
             <FormItem
-              validateStatus={passwordError ? 'error' : ''}
-              help={passwordError || ''}
+              validateStatus={cityError ? 'error' : ''}
+              help={cityError || ''}
               >
-              {getFieldDecorator('direct', {
+              {getFieldDecorator('city', {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -203,4 +226,4 @@ MatchStep1.propTypes = {
 };
 const WrappedMatchStep1 = Form.create()(MatchStep1);
 
-export default withStyles(styles)(WrappedMatchStep1);
+export default withReduxSaga(withStyles(styles)(WrappedMatchStep1));

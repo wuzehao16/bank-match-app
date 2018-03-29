@@ -13,7 +13,6 @@
     "koa-router": "^7.1.0",
     "material-ui": "^1.0.0-beta.38",
     "next": "latest",
-    "node-fetch": "^2.1.1",
     "prop-types": "latest",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -24,6 +23,10 @@
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
     "next-redux-saga": "1.0.1",
-    "next-redux-wrapper": "1.2.0"
+    "next-redux-wrapper": "1.2.0",
+    "isomorphic-unfetch": "2.0.0"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "2.13.2"
   }
 }

@@ -3,14 +3,16 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
+import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
-import Router from 'next/router'
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
 import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
 import red from 'material-ui/colors/red';
+import {withReduxSaga} from '../redux/store'
+import { saveStep5 } from '../redux/actions'
 
 const FormItem = Form.Item;
 
@@ -146,6 +148,7 @@ class MatchStep4 extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(saveStep5(values))
         Router.push({
           pathname: '/matchstep6',
         })
@@ -805,4 +808,4 @@ MatchStep4.propTypes = {
 };
 const WrappedMatchStep4 = Form.create()(MatchStep4);
 
-export default withStyles(styles)(WrappedMatchStep4);
+export default withReduxSaga(withStyles(styles)(WrappedMatchStep4));
