@@ -18,6 +18,12 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-radio-buttons": "^1.2.1",
-    "styled-components": "^2.1.0"
+    "styled-components": "^2.1.0",
+    "es6-promise": "4.1.1",
+    "react-redux": "5.0.5",
+    "redux": "3.7.2",
+    "redux-saga": "0.15.4",
+    "next-redux-saga": "1.0.1",
+    "next-redux-wrapper": "1.2.0"
   }
 }
