@@ -20,7 +20,6 @@ function * sendData1Saga (action) {
         data:data
       }
     });
-    // const res = yield fetch(`http://192.168.2.100:8611/app/getMatchModeResult?modeJson="${data}"`)
     console.log(res,"res")
   } catch (err) {
     yield put(failure(err))
@@ -30,15 +29,17 @@ function * sendData1Saga (action) {
 function * sendDataSaga (getState) {
   try {
     const data = yield select();
-
-   console.log('state after', state)
+    console.log('state after', data)
     fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
       method: 'post',
-      body: {
-        data:data
-      }
+      mode: 'cors',
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(
+        data
+      )
     });
-    // const res = yield fetch(`http://192.168.2.100:8611/app/getMatchModeResult?modeJson="${data}"`)
     console.log(res,"res")
   } catch (err) {
     yield put(failure(err))
@@ -57,7 +58,7 @@ function * loadDataSaga () {
 
 function * rootSaga () {
   yield all([
-    // takeLatest(actionTypes.LOAD_DATA, loadDataSaga)
+    takeLatest(actionTypes.LOAD_DATA, loadDataSaga),
     takeLatest(actionTypes.SAVE_STEP1, sendData1Saga),
     takeLatest(actionTypes.SAVE_STEP6, sendDataSaga),
   ])

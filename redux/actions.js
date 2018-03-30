@@ -1,10 +1,6 @@
 export const actionTypes = {
-  FAILURE: 'FAILURE',
-  INCREMENT: 'INCREMENT',
   LOAD_DATA: 'LOAD_DATA',
   LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
-  START_CLOCK: 'START_CLOCK',
-  TICK_CLOCK: 'TICK_CLOCK',
   SAVE_STEP1: 'SAVE_STEP1',
   SAVE_STEP2: 'SAVE_STEP2',
   SAVE_STEP3: 'SAVE_STEP3',
@@ -13,16 +9,7 @@ export const actionTypes = {
   SAVE_STEP6: 'SAVE_STEP6',
 }
 
-export function failure (error) {
-  return {
-    type: actionTypes.FAILURE,
-    error
-  }
-}
 
-export function increment () {
-  return {type: actionTypes.INCREMENT}
-}
 
 export function loadData () {
   return {type: actionTypes.LOAD_DATA}
@@ -35,17 +22,6 @@ export function loadDataSuccess (data) {
   }
 }
 
-export function startClock () {
-  return {type: actionTypes.START_CLOCK}
-}
-
-export function tickClock (isServer) {
-  return {
-    type: actionTypes.TICK_CLOCK,
-    light: !isServer,
-    ts: Date.now()
-  }
-}
 // step1
 export function saveStep1 (data) {
   return {
