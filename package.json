@@ -1,5 +1,5 @@
 {
-  "name": "custom-server-koa",
+  "name": "bank-match-app",
   "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
