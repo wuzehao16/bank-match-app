@@ -36,9 +36,9 @@ function * sendDataSaga (getState) {
       headers: new Headers({
           'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(
-        data
-      )
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data)
+      })
     });
     console.log(res,"res")
   } catch (err) {
@@ -59,7 +59,7 @@ function * loadDataSaga () {
 function * rootSaga () {
   yield all([
     takeLatest(actionTypes.LOAD_DATA, loadDataSaga),
-    takeLatest(actionTypes.SAVE_STEP1, sendData1Saga),
+    // takeLatest(actionTypes.SAVE_STEP1, sendData1Saga),
     takeLatest(actionTypes.SAVE_STEP6, sendDataSaga),
   ])
 }
