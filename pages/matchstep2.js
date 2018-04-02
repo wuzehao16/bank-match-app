@@ -627,4 +627,5 @@ MatchStep2.propTypes = {
 };
 const WrappedMatchStep2 = Form.create()(MatchStep2);
 
-export default connect(state => state)(withReduxSaga(withStyles(styles)(WrappedMatchStep2)));
+// export default connect(state => state)(withReduxSaga(withStyles(styles)(WrappedMatchStep2)));
+export default withReduxSaga(withStyles(styles)(WrappedMatchStep2));

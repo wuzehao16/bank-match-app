@@ -172,8 +172,8 @@ class MatchStep1 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
-                  <RadioButton value="a">信用贷款</RadioButton>
-                  <RadioButton value="b">抵押贷款</RadioButton>
+                  <RadioButton value="0">信用贷款</RadioButton>
+                  <RadioButton value="1">抵押贷款</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
@@ -189,12 +189,12 @@ class MatchStep1 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
-                  <RadioButton value="a">深圳</RadioButton>
-                  <RadioButton value="b">广州</RadioButton>
-                  <RadioButton value="c">东莞</RadioButton>
-                  <RadioButton value="d">珠海</RadioButton>
-                  <RadioButton value="e">惠州</RadioButton>
-                  <RadioButton value="f">中山</RadioButton>
+                  <RadioButton value="0">深圳</RadioButton>
+                  <RadioButton value="1">广州</RadioButton>
+                  <RadioButton value="2">东莞</RadioButton>
+                  <RadioButton value="3">珠海</RadioButton>
+                  <RadioButton value="4">惠州</RadioButton>
+                  <RadioButton value="5">中山</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>

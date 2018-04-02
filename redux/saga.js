@@ -12,15 +12,89 @@ es6promise.polyfill()
 // 保存第一步数据
 function * sendData1Saga (action) {
   try {
-    const data = action.data
-    console.log(data,"coming",typeof data)
+    const data = yield select();
     fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
       method: 'post',
-      body: {
-        data:data
-      }
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data),
+        step:1
+      })
     });
-    console.log(res,"res")
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
+// 保存第二步数据
+function * sendData2Saga (action) {
+  try {
+    const data = yield select();
+    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+      method: 'post',
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data),
+        step:2
+      })
+    });
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
+// 保存第三步数据
+function * sendData3Saga (action) {
+  try {
+    const data = yield select();
+    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+      method: 'post',
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data),
+        step:3
+      })
+    });
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
+// 保存第四步数据
+function * sendData4Saga (action) {
+  try {
+    const data = yield select();
+    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+      method: 'post',
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data),
+        step:4
+      })
+    });
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
+// 保存第五步数据
+function * sendData5Saga (action) {
+  try {
+    const data = yield select();
+    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+      method: 'post',
+      headers: new Headers({
+          'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        modeJson: JSON.stringify(data),
+        step:5
+      })
+    });
   } catch (err) {
     yield put(failure(err))
   }
@@ -37,7 +111,8 @@ function * sendDataSaga (getState) {
           'Content-Type': 'application/json'
       }),
       body: JSON.stringify({
-        modeJson: JSON.stringify(data)
+        modeJson: JSON.stringify(data),
+        step:0
       })
     });
     console.log(res,"res")
@@ -59,7 +134,11 @@ function * loadDataSaga () {
 function * rootSaga () {
   yield all([
     takeLatest(actionTypes.LOAD_DATA, loadDataSaga),
-    // takeLatest(actionTypes.SAVE_STEP1, sendData1Saga),
+    takeLatest(actionTypes.SAVE_STEP1, sendData1Saga),
+    takeLatest(actionTypes.SAVE_STEP2, sendData2Saga),
+    takeLatest(actionTypes.SAVE_STEP3, sendData3Saga),
+    takeLatest(actionTypes.SAVE_STEP4, sendData4Saga),
+    takeLatest(actionTypes.SAVE_STEP5, sendData5Saga),
     takeLatest(actionTypes.SAVE_STEP6, sendDataSaga),
   ])
 }
