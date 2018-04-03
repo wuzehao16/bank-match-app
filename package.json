@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production PORT=80 node server.js"
   },
   "dependencies": {
     "@zeit/next-css": "^0.1.5",
