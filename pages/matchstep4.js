@@ -142,7 +142,11 @@ class MatchStep4 extends React.Component {
     const specificWorkTimeError = isFieldTouched('specificWorkTime') && getFieldError('specificWorkTime');
     const threeMonthsAvgSalaryError = isFieldTouched('threeMonthsAvgSalary') && getFieldError('threeMonthsAvgSalary');
     const SixMonthsAvgSalaryError = isFieldTouched('SixMonthsAvgSalary') && getFieldError('SixMonthsAvgSalary');
+    const thisYearMonthsAvgSalaryError = isFieldTouched('thisYearMonthsAvgSalary') && getFieldError('thisYearMonthsAvgSalary');
+    const specificInsuranceBaseError = isFieldTouched('specificInsuranceBase') && getFieldError('specificInsuranceBase');
+    const specificInsurancePaymonthError = isFieldTouched('specificInsurancePaymonth') && getFieldError('specificInsurancePaymonth');
     const isEndowmentInsuranceError = isFieldTouched('isEndowmentInsurance') && getFieldError('isEndowmentInsurance');
+    const lastYearMonthsAvgSalaryError = isFieldTouched('lastYearMonthsAvgSalary') && getFieldError('lastYearMonthsAvgSalary');
     const isInsuranceAdjustmentError = isFieldTouched('isInsuranceAdjustment') && getFieldError('isInsuranceAdjustment');
     const exInsuranceBaseError = isFieldTouched('exInsuranceBase') && getFieldError('exInsuranceBase');
     const specificProvidentFundBaseError = isFieldTouched('specificProvidentFundBase') && getFieldError('specificProvidentFundBase');
@@ -217,10 +221,10 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <FormItem
-              validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
-              help={threeMonthsAvgSalaryError || ''}
+              validateStatus={thisYearMonthsAvgSalaryError ? 'error' : ''}
+              help={thisYearMonthsAvgSalaryError || ''}
               >
-              {getFieldDecorator('threeMonthsAvgSalary', {
+              {getFieldDecorator('thisYearMonthsAvgSalary', {
               })(
                 <div >
                   <span>近12个月税前月均收入</span>
@@ -230,10 +234,10 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
             <FormItem
-              validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
-              help={SixMonthsAvgSalaryError || ''}
+              validateStatus={lastYearMonthsAvgSalaryError ? 'error' : ''}
+              help={lastYearMonthsAvgSalaryError || ''}
               >
-              {getFieldDecorator('SixMonthsAvgSalary', {
+              {getFieldDecorator('lastYearMonthsAvgSalary', {
               })(
                 <div >
                   <span>上一年度税前月均收入</span>
@@ -246,10 +250,10 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <FormItem
-              validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
-              help={threeMonthsAvgSalaryError || ''}
+              validateStatus={specificInsuranceBaseError ? 'error' : ''}
+              help={specificInsuranceBaseError || ''}
               >
-              {getFieldDecorator('threeMonthsAvgSalary', {
+              {getFieldDecorator('specificInsuranceBase', {
               })(
                 <div >
                   <span>社保缴纳基数</span>
@@ -259,10 +263,10 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
             <FormItem
-              validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
-              help={SixMonthsAvgSalaryError || ''}
+              validateStatus={specificInsurancePaymonthError ? 'error' : ''}
+              help={specificInsurancePaymonthError || ''}
               >
-              {getFieldDecorator('SixMonthsAvgSalary', {
+              {getFieldDecorator('specificInsurancePaymonth', {
               })(
                 <div >
                   <span>本单位连续缴纳</span>
