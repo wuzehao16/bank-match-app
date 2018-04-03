@@ -50,20 +50,48 @@ class ProductDetail extends React.PureComponent {
       },
     })
     const json = await res.json()
-    console.log("json",json)
-    return { product: json.data }
+    let product = json.data;
+    //总利息
+    return { product: product }
   }
-
+  componentWillReceiveProps(){
+    console.log(1)
+    this.setState()
+  }
   componentDidMount () {
-    var myChart = echarts.init(document.getElementById('main'));
     const product = this.props.product
     //计算利息和月供
-    console.log(product)
     const productMaxLoad = product.productMaxLoad* 10000;
     const monthlyPayment= (productMaxLoad/product.productTimeLimit)+(productMaxLoad*product.monthlyFeeRate/100);
-    // console.log(monthlyPayment)
     const interest = monthlyPayment * product.productTimeLimit - productMaxLoad;
-    console.log(interest)
+    this.myChart(productMaxLoad,interest)
+
+  }
+  //先息后本和等额本息月供
+  countMonthlyPayment1 = () => {
+    const product = this.props.product
+    return product.productMaxLoad* 10000*product.monthlyFeeRate/100;
+  }
+  //等额本息月供
+  countMonthlyPayment2 = (productTimeLimit) => {
+    const product = this.props.product
+    const productMaxLoad = product.productMaxLoad* 10000;
+    return (productMaxLoad/productTimeLimit)+ productMaxLoad*product.monthlyFeeRate/100;
+  }
+  //总利息
+  countInterest = (productTimeLimit) => {
+    const product = this.props.product
+    return product.productMaxLoad* 10000*product.monthlyFeeRate/100*productTimeLimit;
+  }
+  //手续费
+  countPoundage =  (poundage = 0) => {
+    const product = this.props.product
+    return product.productMaxLoad* 10000* poundage /100;
+  }
+  // 画图
+  myChart (productMaxLoad, interest) {
+    var myChart = echarts.init(document.getElementById('main'));
+
     var option = {
       title : {
           x:'center'
@@ -94,9 +122,10 @@ class ProductDetail extends React.PureComponent {
                   }
               },
               data:[
-                  {value:product.productMaxLoad, name:'贷款金额'},
+                  {value:productMaxLoad, name:'贷款金额'},
                   {value:interest, name:'利息'},
               ],
+              color:['#ff7c70', '#fbc02d'],
               itemStyle: {
                   emphasis: {
                       shadowBlur: 10,
@@ -106,11 +135,17 @@ class ProductDetail extends React.PureComponent {
               }
           }
       ]
-  };
-
+    };
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+  }
+  // changeProductTimeLimit
+  changeProductTimeLimit = (value) =>{
+
+  }
+  changeProductTimeLimit = (value) =>{
+
   }
   render() {
     const product = this.props.product;
@@ -150,11 +185,12 @@ class ProductDetail extends React.PureComponent {
             <div className="info-r">
               <div className="pie-info">
                 <div>贷款<span className="pie-info-detail">{product.productMaxLoad}万/{product.productTimeLimit}期</span></div>
-                <div>利息<span className="pie-info-detail"></span></div>
-                <div>月供<span className="pie-info-detail"></span></div>
-                <div>手续费<span className="pie-info-detail"></span></div>
+                <div>利息<span className="pie-info-detail">{this.countInterest(product.productTimeLimit)}元/每月{product.monthlyFeeRate}%</span></div>
+                <div>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTimeLimit)}元</span></div>
+                <div>手续费<span className="pie-info-detail">{this.countPoundage(product.productPoundage)}元/{product.productPoundage?product.productPoundage:0.00}%</span></div>
               </div>
-
+              <input type="number" min={3} onChange={this.changeProductTimeLimit}  placeholder="输入借款额度(3-50万)"/>
+              <input type="number" min={1} onChange={this.changeProductTimeLimit} placeholder="输入借款期限(12-48月)"/>
             </div>
           </div>
         </Pd>
@@ -244,7 +280,7 @@ class ProductDetail extends React.PureComponent {
                       <Title>申请流程</Title>
                     </TitleContainer>
                     <div className="step">
-                      <Steps progressDot size="small" current={3}>
+                      <Steps progressDot size="small" current={product.applyFlow.split(',').length}>
                         {
                           product.applyFlow.split(',').map(v => {
                             if (v=="") return
@@ -301,10 +337,10 @@ class ProductDetail extends React.PureComponent {
           }
           .pie-info{
             color:#646464;
-            font-size:8px;
+            font-size:12px;
           }
           .pie-info div{
-            height:25px;
+            height:22px;
             line-height:22px;
           }
           .pie-info-detail{

@@ -56,8 +56,16 @@ export default ({ children, title = '众银云测' }) => (
       .ant-radio-button-input{
         opacity:0;
       }
+      ol{
+        -webkit-padding-start: 15px;
+      }
       p{
         font-size:12px;
+      }
+      li{
+        font-size:12px;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
       }
     `}
     </style>
