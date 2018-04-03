@@ -40,11 +40,15 @@ const Box =styled.div`
   background: #fff;
   margin-bottom: 5px;
 `
+const Input = styled.input`
+  border:1px solid #a6a6a6;
+  box-shadow: none;
+`
 class ProductDetail extends React.PureComponent {
-  static async getInitialProps () {
+  static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
 
-    const res = await fetch('http://47.106.70.82:8611/app/getProductInfomationDetails?productId=0007169ec657477e831ef8cee87edff4',{
+    const res = await fetch(`http://47.106.70.82:8611/app/getProductInfomationDetails?productId=${query.productId}`,{
       headers: {
         'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkNzk3OWY0MGQzZmE0ZTc0YTFjNGY0NjU4NmEyNWNjNyIsImlhdCI6MTUyMjYzMzczNCwiZXhwIjoxNTIzMjM4NTM0fQ.qq14ADKebQca0nieYISYJuPVyQHBVtwPb4zhtboJaTq52emgwNogK5JoWeVlq-O1c28USsx1U1WqHXhc7yhN9A'
       },
@@ -54,33 +58,38 @@ class ProductDetail extends React.PureComponent {
     //总利息
     return { product: product }
   }
-  componentWillReceiveProps(){
-    console.log(1)
-    this.setState()
+  state = {
+    productTimeLimit: 1,
+    productMaxLoad: 1,
+    monthlyFeeRate: 1,
   }
   componentDidMount () {
-    const product = this.props.product
     //计算利息和月供
+    this.setState(this.props.product)
+    this.countPie()
+  }
+  //计算饼图信息
+  countPie = () => {
+    const product = this.state;
     const productMaxLoad = product.productMaxLoad* 10000;
     const monthlyPayment= (productMaxLoad/product.productTimeLimit)+(productMaxLoad*product.monthlyFeeRate/100);
     const interest = monthlyPayment * product.productTimeLimit - productMaxLoad;
     this.myChart(productMaxLoad,interest)
-
   }
   //先息后本和等额本息月供
   countMonthlyPayment1 = () => {
-    const product = this.props.product
+    const product = this.state;
     return product.productMaxLoad* 10000*product.monthlyFeeRate/100;
   }
   //等额本息月供
-  countMonthlyPayment2 = (productTimeLimit) => {
-    const product = this.props.product
+  countMonthlyPayment2 = (productTimeLimit = 1) => {
+    const product = this.state;
     const productMaxLoad = product.productMaxLoad* 10000;
     return (productMaxLoad/productTimeLimit)+ productMaxLoad*product.monthlyFeeRate/100;
   }
   //总利息
   countInterest = (productTimeLimit) => {
-    const product = this.props.product
+    const product = this.state;
     return product.productMaxLoad* 10000*product.monthlyFeeRate/100*productTimeLimit;
   }
   //手续费
@@ -141,14 +150,39 @@ class ProductDetail extends React.PureComponent {
     myChart.setOption(option);
   }
   // changeProductTimeLimit
-  changeProductTimeLimit = (value) =>{
-
+  changeLoanAmount = (e) =>{
+    let value = e.target.value ;
+    if (!value) return
+    if (value < 0) {
+      value = 1
+    } else if (value > 100) {
+      value = 100
+    }
+    console.log(value)
+    this.setState({
+      productMaxLoad: value
+    })
+    console.log(this.state)
   }
-  changeProductTimeLimit = (value) =>{
-
+  changeProductTimeLimit = (e) =>{
+    let value = e.target.value ;
+    if (!value) return
+    if (value < 0) {
+      value = 1
+    } else if (value > 48) {
+      value = 48
+    }
+    // this.myChart(productMaxLoad, interest)
+    this.setState({
+      productTimeLimit: value
+    })
+    this.countPie()
   }
   render() {
-    const product = this.props.product;
+    let product = this.props.product;
+    if (this.state.productName) {
+      product = this.state;
+    }
     return (
 
       <Layout>
@@ -189,8 +223,8 @@ class ProductDetail extends React.PureComponent {
                 <div>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTimeLimit)}元</span></div>
                 <div>手续费<span className="pie-info-detail">{this.countPoundage(product.productPoundage)}元/{product.productPoundage?product.productPoundage:0.00}%</span></div>
               </div>
-              <input type="number" min={3} onChange={this.changeProductTimeLimit}  placeholder="输入借款额度(3-50万)"/>
-              <input type="number" min={1} onChange={this.changeProductTimeLimit} placeholder="输入借款期限(12-48月)"/>
+              <Input type="number" min={3} onBlur={this.changeLoanAmount}  placeholder="输入借款额度(3-50万)"/><span className="after">万</span>
+              <Input type="number" min={1}  onBlur={ this.changeProductTimeLimit }  placeholder="输入借款期限(12-48月)"/><span className="after">月</span>
             </div>
           </div>
         </Pd>
@@ -326,6 +360,13 @@ class ProductDetail extends React.PureComponent {
           }
           .info-r{
             padding:27px 0 0 33px;
+            position:relative;
+          }
+          .after {
+            margin-left: -18px;
+            vertical-align: middle;
+            font-size:12px;
+            display: inline-block;
           }
           .pie{
             width:135px;
