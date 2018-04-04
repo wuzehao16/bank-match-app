@@ -6,9 +6,29 @@ const Title = styled.h1`
   color: red;
   font-size: 50px;
 `
+const SomeContext = React.createContext()
 
-export default () => (
-  <Layout>
-    <Title>My page</Title>
-  </Layout>
-)
+class Thing extends React.Component {
+  state = {
+    context: {
+      val: "default",
+      changeVal: this.changeVal
+    }
+  };
+  changeVal = newVal =>{
+    this.setState({
+      context: {
+        val: newVal,
+        changeVal: this.changeVal
+      }
+    })
+  };
+  render() {
+    return (
+      <SomeContext.Provider value={this.state.context}>
+        {this.props.children}
+      </SomeContext.Provider>
+    )
+  }
+}
+export default Thing
