@@ -1,49 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
-import fetch from '../lib/fetch';
-import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
-import red from 'material-ui/colors/red';
 
-const FormItem = Form.Item;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: red,
-    secondary: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  label:{
-    verticalAlign: 'bottom',
-  },
-  btn:{
-    marginTop:'75px',
-    textAlign:'center',
-    color: '#fff',
-  }
-});
 const Container = styled.div`
   padding: 19px 0;
   display: flex;
@@ -121,7 +81,7 @@ class MatchBegin extends React.Component {
     const { classes } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme}>
+      // <MuiThemeProvider theme={theme}>
       <Layout>
         <Wrapper1>
           <Advantage>
@@ -163,77 +123,73 @@ class MatchBegin extends React.Component {
             </Link>
           </div>
         </Wrapper2>
-
+        <style jsx >{`
+          .list li div{
+            height:45px;
+            width:45px;
+            background-size: 100% 100%;
+            margin:0 auto;
+          }
+          .ad1{
+            background:url(/static/match_begin_ad1.jpg);
+          }
+          .ad2{
+            background:url(/static/match_begin_ad2.jpg);
+          }
+          .ad3{
+            background:url(/static/match_begin_ad3.jpg);
+          }
+          .list{
+            list-style:none;
+            margin: 0;
+            padding: 0;
+            display:flex;
+            text-align:center;
+            justify-content: space-around;
+          }
+          .list li p{
+            color: #ee5648;
+            font-size: 13px;
+          }
+          .list li span{
+            font-size: 9px;
+            color:#969696;
+          }
+          .step{
+            margin: 110px 0 0 30%;
+            font-size: 12px;
+          }
+          .step p{
+            margin: 46px 0;
+          }
+          .btn{
+            // margin: 0 auto;
+            margin-left: 10%;
+          }
+          .l,.r{
+            width: 40%;
+            height: 40px;
+            border-radius: 3px;
+            display: inline-block;
+            line-height:40px;
+            font-size:15px;
+            color: #fff;
+            text-align: center;
+          }
+          .l {
+            background-color: #fdc041;
+          }
+          .r {
+            background-color: #ee5648;
+            margin-left:25px;
+          }
+        `}
+        </style>
       </Layout>
-      <style jsx >{`
-        .list li div{
-          height:45px;
-          width:45px;
-          background-size: 100% 100%;
-          margin:0 auto;
-        }
-        .ad1{
-          background:url(/static/match_begin_ad1.jpg);
-        }
-        .ad2{
-          background:url(/static/match_begin_ad2.jpg);
-        }
-        .ad3{
-          background:url(/static/match_begin_ad3.jpg);
-        }
-        .list{
-          list-style:none;
-          margin: 0;
-          padding: 0;
-          display:flex;
-          text-align:center;
-          justify-content: space-around;
-        }
-        .list li p{
-          color: #ee5648;
-          font-size: 13px;
-        }
-        .list li span{
-          font-size: 9px;
-          color:#969696;
-        }
-        .step{
-          margin: 110px 0 0 30%;
-          font-size: 12px;
-        }
-        .step p{
-          margin: 46px 0;
-        }
-        .btn{
-          // margin: 0 auto;
-          margin-left: 10%;
-        }
-        .l,.r{
-          width: 40%;
-          height: 40px;
-          border-radius: 3px;
-          display: inline-block;
-          line-height:40px;
-          font-size:15px;
-          color: #fff;
-          text-align: center;
-        }
-        .l {
-          background-color: #fdc041;
-        }
-        .r {
-          background-color: #ee5648;
-          margin-left:25px;
-        }
-      `}
-      </style>
-      </MuiThemeProvider>
+
     )
   }
 }
 
-MatchBegin.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(MatchBegin);
+export default MatchBegin;
