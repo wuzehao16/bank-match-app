@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/contentLayout';
-
+import 'isomorphic-unfetch'
 const Wrapper = styled.div`
   padding: 15px;
   background: #fff;

@@ -8,7 +8,6 @@ import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
-import fetch from '../lib/fetch'
 import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
 import red from 'material-ui/colors/red';
 import {withReduxSaga} from '../redux/store'
@@ -59,23 +58,7 @@ const Contain = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding-bottom: 20px;
 `
-// const Button = styled.a`
-//   /* This renders the buttons above... Edit me! */
-//   display: inline-block;
-//   border-radius: 5px;
-//   padding: 0.5rem 0;
-//   margin: 0.5rem 1rem;
-//   width: 11rem;
-//   background: transparent;
-//   color: white;
-//   border: 2px solid white;
-// `
 class MatchStep1 extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
 	componentDidMount () {
     this.props.form.validateFields();
   }
