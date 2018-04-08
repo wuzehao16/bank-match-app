@@ -27,48 +27,11 @@ export default ({ children, title = '众银云测' }) => (
       body {
         margin: 0;
       }
-      html{
-        height:100%;
+      .app{
         background-color: #f2f2f2;
       }
-      .ant-radio-button-wrapper{
-        margin-right:5px;
-        background: #f2f2f2;
-        padding: 3px 5px 3px 3px;
-        border-radius:3px;
-        border:1px solid #ebebeb;
-        color:#969696;
-        font-size: 11px;
-      }
-      .ant-radio-button-wrapper input[type="radio"] {
-          opacity: 0;
-          width: 0;
-          height: 0;
-      }
-      .ant-radio-button{
-        display:none;
-      }
-      .ant-radio-button-wrapper span{
-
-      }
-      .ant-form-explain{
-        font-size:10px;
-        color:red;
-      }
-      .ant-radio-button-wrapper-checked{
-        background: #ee5648;
-        color:#fff;
-      }
-      .ant-radio-button-input{
-        opacity:0;
-      }
-      .btn{
-        margin-top: 75px;
-        text-align: center;
-        padding-bottom: 30px;
-      }
       p{
-        font-size:16px;
+        font-size:12px;
       }
     `}
     </style>

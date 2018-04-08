@@ -197,11 +197,6 @@ class MatchStep1 extends React.Component {
       </Layout>
       </Form>
       <style jsx>{`
-        .btn{
-          margin-top: 75px;
-          text-align: center;
-          color: #fff,
-        }
       `}
       </style>
       </MuiThemeProvider>
