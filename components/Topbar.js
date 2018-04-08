@@ -56,6 +56,9 @@ class Topbar extends React.Component {
               text-align: center;
               color:#969696;
             }
+            .hidden{
+              display:none;
+            }
             .p1{
               left:22%;
             }
