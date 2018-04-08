@@ -38,12 +38,12 @@ const Graph = styled.div`
 export default class extends React.Component {
   static async getInitialProps({query}) {
 		return {
-			item: await fetch(`/item/${query.id}`)
+			item: await fetch(`/myIncomes`)
 		}
 	}
   componentDidMount () {
     // 基于准备好的dom，初始化echarts实例
-    console.log(this.props.item)
+    const item = this.props.item
     var myChart = echarts.init(document.getElementById('main'));
 
     // 指定图表的配置项和数据
@@ -63,7 +63,7 @@ export default class extends React.Component {
         },
         xAxis: {
             type : 'category',
-            data: ["2017-11","2017-12","2018-1","2018-2","2018-3","2018-4"],
+            data: item.xaxis,
             axisTick: {
                 alignWithLabel: true
             }
@@ -73,7 +73,7 @@ export default class extends React.Component {
             name: '元',
             type: 'bar',
             barWidth:'40%',
-            data: [200, 400, 600, 800, 600,1000]
+            data: item.yaxis
         }]
     };
 
@@ -81,20 +81,21 @@ export default class extends React.Component {
     myChart.setOption(option);
   }
   render () {
+    const item = this.props.item;
     return (
       <Layout>
         <Title>
           <Name>本月已结算余额(元)</Name>
-          <Balance>2200.00元</Balance>
+          <Balance>{item.mothBalance}元</Balance>
         </Title>
         <Income>
           <div className="price left">
             <div>待结算金额(元)</div>
-            <div>0</div>
+            <div>{item.openAmt}</div>
           </div>
           <div className="price">
-            <div>待结算金额(元)</div>
-            <div>0</div>
+            <div>累计收益(元)</div>
+            <div>{item.sumAmt}</div>
           </div>
         </Income>
         <Graph id="main"></Graph>

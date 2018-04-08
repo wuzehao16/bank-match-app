@@ -63,9 +63,6 @@ class MatchBegin extends React.Component {
 	// 		item: await fetch(`/item/${query.id}`)
 	// 	}
 	// }
-	componentDidMount () {
-
-  }
   state = {
     name: '',
     disabled: 'true',

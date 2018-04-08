@@ -2,13 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Steps, { Step } from 'rmc-steps';
-import es6promise from 'es6-promise'
 import 'isomorphic-unfetch';
 import Layout from '../components/Elayout';
 import '../styles/iconfont.css';
 import stylesheet from '../styles/index.css';
-es6promise.polyfill()
-
+import fetch from '../lib/fetch';
 const Pd = styled.div`
   padding: 0 15px;
   background: #fff;
@@ -48,15 +46,9 @@ class ProductDetail extends React.PureComponent {
   static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
 
-    const res = await fetch(`http://47.106.70.82:8611/app/getProductInfomationDetails?productId=${query.productId}`,{
-      headers: {
-        'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkNzk3OWY0MGQzZmE0ZTc0YTFjNGY0NjU4NmEyNWNjNyIsImlhdCI6MTUyMjYzMzczNCwiZXhwIjoxNTIzMjM4NTM0fQ.qq14ADKebQca0nieYISYJuPVyQHBVtwPb4zhtboJaTq52emgwNogK5JoWeVlq-O1c28USsx1U1WqHXhc7yhN9A'
-      },
-    })
-    const json = await res.json()
-    let product = json.data;
+    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`)
     //总利息
-    return { product: product }
+    return { product: res }
   }
   state = {
     productTimeLimit: 1,

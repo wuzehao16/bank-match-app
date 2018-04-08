@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/contentLayout';
-import 'isomorphic-unfetch'
+import fetch from '../lib/fetch'
 const Wrapper = styled.div`
   padding: 15px;
   background: #fff;
@@ -25,16 +25,9 @@ class Financialnformation extends React.PureComponent {
   static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
 
-    const res = await fetch(`http://47.106.70.82:8611/app/getContentInfomationDetails?contentId=${query.contentId}`,{
-      headers: {
-        'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkNzk3OWY0MGQzZmE0ZTc0YTFjNGY0NjU4NmEyNWNjNyIsImlhdCI6MTUyMjYzMzczNCwiZXhwIjoxNTIzMjM4NTM0fQ.qq14ADKebQca0nieYISYJuPVyQHBVtwPb4zhtboJaTq52emgwNogK5JoWeVlq-O1c28USsx1U1WqHXhc7yhN9A'
-      },
-    })
-    const json = await res.json()
-    console.log(json)
-    let content = json.data;
+    const res = await fetch(`/getContentInfomationDetails?contentId=${query.contentId}`)
     //总利息
-    return { content: content }
+    return { content: res }
   }
   render() {
     const content = this.props.content;
