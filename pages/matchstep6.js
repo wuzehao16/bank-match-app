@@ -158,7 +158,7 @@ class MatchStep4 extends React.Component {
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
         <Topbar position="p3"/>
-        <Title>名下付款状况</Title>
+        <Title>名下负债状况</Title>
         <Wrapper>
           <DoubleInput>
             <FormItem
@@ -169,7 +169,7 @@ class MatchStep4 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <div >
-                  <span>信用类贷款</span>
+                  <span>等额本息贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
                   <span>笔</span>
                 </div>
@@ -182,7 +182,7 @@ class MatchStep4 extends React.Component {
               {getFieldDecorator('sumEqualInterest', {
               })(
                 <span >
-                  <span>信用类贷款</span>
+                  <span>先息后本贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
                   <span>笔,</span>
                 </span>
@@ -193,7 +193,7 @@ class MatchStep4 extends React.Component {
                 <span >
                   <span>信用类贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>笔</span>
+                  <span>笔，</span>
                 </span>
               )}
               {getFieldDecorator('sumAlongLoan', {

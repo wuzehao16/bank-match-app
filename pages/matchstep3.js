@@ -247,9 +247,6 @@ class MatchStep3 extends React.Component {
                 </RadioGroup>
               )}
             </FormItem>
-            <Help>
-              <Red>*</Red>消费金融指有消费金融牌照的机构发放的贷款.
-            </Help>
           </Contain>
           {
             getFieldValue('isParticleLoan') === 1
@@ -289,7 +286,7 @@ class MatchStep3 extends React.Component {
             </FormItem>
           </Contain>
           <Contain>
-            <p>名下贷款/信用卡五级分类是否有关住/次级/可疑/损失 </p>
+            <p>名下贷款/信用卡五级分类是否有关注/次级/可疑/损失 </p>
             <FormItem
               validateStatus={isLoanLossError ? 'error' : ''}
               help={isLoanLossError || ''}

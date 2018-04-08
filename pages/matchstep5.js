@@ -247,7 +247,7 @@ class MatchStep4 extends React.Component {
                 <RadioGroup  size="small">
                   <RadioButton value={0}>深房</RadioButton>
                   <RadioButton value={1}>省内房产</RadioButton>
-                  <RadioButton value={2}>省内房产</RadioButton>
+                  <RadioButton value={2}>省外房产</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
@@ -500,7 +500,7 @@ class MatchStep4 extends React.Component {
                   <RadioButton value={0}>年缴</RadioButton>
                   <RadioButton value={1}>季缴</RadioButton>
                   <RadioButton value={2}>月缴</RadioButton>
-                  <RadioButton value={3}>趸交</RadioButton>
+                  <RadioButton value={3}>趸缴</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
@@ -515,11 +515,9 @@ class MatchStep4 extends React.Component {
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>1年以下</RadioButton>
-                  <RadioButton value={1}>公寓</RadioButton>
-                  <RadioButton value={2}>商铺</RadioButton>
-                  <RadioButton value={3}>写字楼</RadioButton>
-                  <RadioButton value={4}>自建房</RadioButton>
-                  <RadioButton value={5}>厂房</RadioButton>
+                  <RadioButton value={1}>1-2年</RadioButton>
+                  <RadioButton value={2}>2-3年</RadioButton>
+                  <RadioButton value={3}>3年以上</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
@@ -533,6 +531,7 @@ class MatchStep4 extends React.Component {
                 <div style={{verticalAlign:'bottom'}}>
                   <span>保单年缴费金额 </span>
                   <Input   type="number" min={0} style={{width:50}}/>
+                  <span>元</span>
                 </div>
               )}
             </FormItem>
@@ -556,7 +555,7 @@ class MatchStep4 extends React.Component {
                 </div>
           </DoubleInput>
           <SubContain>
-            <SubContainTitle>名下房产属地</SubContainTitle>
+            <SubContainTitle>车辆登记证状态</SubContainTitle>
             <FormItem
               required={false}
               >

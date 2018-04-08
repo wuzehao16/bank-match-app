@@ -262,7 +262,7 @@ class MatchStep2 extends React.Component {
         <Title>工作情况</Title>
         <Wrapper>
           <Contain>
-            <p>职业类别（可多选）</p>
+            <p>职业类别</p>
             <FormItem
               validateStatus={occupationError ? 'error' : ''}
               help={occupationError || ''}
@@ -357,6 +357,7 @@ class MatchStep2 extends React.Component {
                         <RadioButton value={2}>5-6千</RadioButton>
                         <RadioButton value={3}>6-8千</RadioButton>
                         <RadioButton value={4}>8千-1万</RadioButton>
+                        <RadioButton value={5}>1万以上</RadioButton>
                       </RadioGroup>
                     )}
                   </FormItem>
@@ -413,7 +414,7 @@ class MatchStep2 extends React.Component {
                                 <RadioButton value={1}>4-5千</RadioButton>
                                 <RadioButton value={2}>5-6千</RadioButton>
                                 <RadioButton value={3}>6-8千</RadioButton>
-                                <RadioButton value={4}>8千-1万</RadioButton>
+                                <RadioButton value={4}>1万以上</RadioButton>
                               </RadioGroup>
                             )}
                           </FormItem>
@@ -454,7 +455,7 @@ class MatchStep2 extends React.Component {
                               <RadioButton value={1}>4-5千</RadioButton>
                               <RadioButton value={2}>5-6千</RadioButton>
                               <RadioButton value={3}>6-8千</RadioButton>
-                              <RadioButton value={4}>8千-1万</RadioButton>
+                              <RadioButton value={4}>1万以上</RadioButton>
                             </RadioGroup>
                           )}
                         </FormItem>
@@ -480,27 +481,6 @@ class MatchStep2 extends React.Component {
                       </SubContain>
                     </div> :null
                 }
-                <SubContain>
-                  <SubContainTitle>本地营业执照注册时长</SubContainTitle>
-                  <FormItem
-                    validateStatus={licenseRegistTimeError ? 'error' : ''}
-                    help={licenseRegistTimeError || ''}
-                    >
-                    {getFieldDecorator('licenseRegistTime', {
-                      rules: [{ required: true}],
-                    })(
-                      <RadioGroup  size="small">
-                        <RadioButton value={0}>暂未注册</RadioButton>
-                        <RadioButton value={1}>3个月以下</RadioButton>
-                        <RadioButton value={2}>3-6个月</RadioButton>
-                        <RadioButton value={3}>6-12个月</RadioButton>
-                        <Br />
-                        <RadioButton value={4}>12-24个月</RadioButton>
-                        <RadioButton value={5}>24个月以上</RadioButton>
-                      </RadioGroup>
-                    )}
-                  </FormItem>
-                </SubContain>
               </div>:null
           }
           {
@@ -586,6 +566,27 @@ class MatchStep2 extends React.Component {
                      <RadioGroup  size="small">
                        <RadioButton value={1}>是</RadioButton>
                        <RadioButton value={0}>否</RadioButton>
+                     </RadioGroup>
+                   )}
+                 </FormItem>
+               </SubContain>
+               <SubContain>
+                 <SubContainTitle>本地营业执照注册时长</SubContainTitle>
+                 <FormItem
+                   validateStatus={licenseRegistTimeError ? 'error' : ''}
+                   help={licenseRegistTimeError || ''}
+                   >
+                   {getFieldDecorator('licenseRegistTime', {
+                     rules: [{ required: true}],
+                   })(
+                     <RadioGroup  size="small">
+                       <RadioButton value={0}>暂未注册</RadioButton>
+                       <RadioButton value={1}>3个月以下</RadioButton>
+                       <RadioButton value={2}>3-6个月</RadioButton>
+                       <RadioButton value={3}>6-12个月</RadioButton>
+                       <Br />
+                       <RadioButton value={4}>12-24个月</RadioButton>
+                       <RadioButton value={5}>24个月以上</RadioButton>
                      </RadioGroup>
                    )}
                  </FormItem>

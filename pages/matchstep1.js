@@ -116,7 +116,7 @@ class MatchStep1 extends React.Component {
       <MuiThemeProvider theme={theme}>
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-        <Topbar position="p1"/>
+        <Topbar position="hidden"/>
         <Wrapper>
 
           <Container>
@@ -126,7 +126,10 @@ class MatchStep1 extends React.Component {
               help={nameError || ''}
               >
               {getFieldDecorator('name', {
-                rules: [{ required: true}],
+                rules: [{
+                   required: true,
+                   message: '请输入姓名',
+                }],
               })(
                 <TextField
                   id="name"
@@ -148,7 +151,9 @@ class MatchStep1 extends React.Component {
               help={exLoanAmountError || ''}
               >
               {getFieldDecorator('exLoanAmount', {
-                rules: [{ required: true}],
+                rules: [{ required: true,
+                     message: '请输入期望贷款金额',
+                }],
               })(
                 <TextField
                   id="name"
