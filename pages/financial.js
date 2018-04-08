@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../components/layout';
+import Layout from '../components/contentLayout';
 
 const Wrapper = styled.div`
   padding: 15px;
