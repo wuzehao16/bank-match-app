@@ -389,7 +389,7 @@ class MatchStep2 extends React.Component {
                                 <RadioButton value={1}>4-5千</RadioButton>
                                 <RadioButton value={2}>5-6千</RadioButton>
                                 <RadioButton value={3}>6-8千</RadioButton>
-                                <RadioButton value={4}>1万以上</RadioButton>
+                                <RadioButton value={4}>8千以上</RadioButton>
                               </RadioGroup>
                             )}
                           </FormItem>
@@ -430,7 +430,7 @@ class MatchStep2 extends React.Component {
                               <RadioButton value={1}>4-5千</RadioButton>
                               <RadioButton value={2}>5-6千</RadioButton>
                               <RadioButton value={3}>6-8千</RadioButton>
-                              <RadioButton value={4}>1万以上</RadioButton>
+                              <RadioButton value={4}>8千以上</RadioButton>
                             </RadioGroup>
                           )}
                         </FormItem>
