@@ -1,14 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import TextField from 'material-ui/TextField';
 import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
-import fetch from '../lib/fetch'
-import { withStyles } from 'material-ui/styles';
+// import fetch from '../lib/fetch'
 import {withReduxSaga} from '../redux/store'
 import { saveStep3 } from '../redux/actions'
 import withRoot from '../src/withRoot';
@@ -18,22 +16,7 @@ const FormItem = Form.Item;
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  label:{
-    verticalAlign: 'bottom',
-  },
-});
+
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
@@ -614,4 +597,4 @@ class MatchStep3 extends React.Component {
 
 const WrappedMatchStep3 = Form.create()(MatchStep3);
 
-export default withReduxSaga(withRoot(withStyles(styles)(WrappedMatchStep3)));
+export default withReduxSaga(withRoot(WrappedMatchStep3));

@@ -2,18 +2,18 @@
 
 import {delay} from 'redux-saga'
 import {all, call, put, take, takeLatest, select} from 'redux-saga/effects'
-import es6promise from 'es6-promise'
+// import es6promise from 'es6-promise'
 import 'isomorphic-unfetch'
 
 import {actionTypes, failure, loadDataSuccess, tickClock} from './actions'
 
-es6promise.polyfill()
+// es6promise.polyfill()
 
 // 保存第一步数据
 function * sendData1Saga (action) {
   try {
     const data = yield select();
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+    fetch('http://47.106.70.82:8611/app/getMatchModeResult', {
       method: 'post',
       headers: new Headers({
           'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function * sendData1Saga (action) {
 function * sendData2Saga (action) {
   try {
     const data = yield select();
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
+    fetch('http://47.106.70.82:8611/app/getMatchModeResult', {
       method: 'post',
       headers: new Headers({
           'Content-Type': 'application/json'

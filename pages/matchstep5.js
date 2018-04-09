@@ -1,48 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
 import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
-import fetch from '../lib/fetch'
-import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
-import red from 'material-ui/colors/red';
 import {withReduxSaga} from '../redux/store'
 import { saveStep5 } from '../redux/actions'
+import withRoot from '../src/withRoot';
 
 const FormItem = Form.Item;
-
-const theme = createMuiTheme({
-  palette: {
-    primary: red,
-    secondary: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  label:{
-    verticalAlign: 'bottom',
-  },
-});
+
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
@@ -637,7 +608,6 @@ class MatchStep4 extends React.Component {
       );
     });
     return (
-      <MuiThemeProvider theme={theme}>
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
         <Topbar position="p3"/>
@@ -779,7 +749,6 @@ class MatchStep4 extends React.Component {
           </FormItem>
         </div>
       </Layout>
-      </Form>
       <style jsx>{`
         input{
          border-color: #878787;
@@ -792,14 +761,11 @@ class MatchStep4 extends React.Component {
         }
       `}
       </style>
-      </MuiThemeProvider>
+      </Form>
     )
   }
 }
 
-MatchStep4.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 const WrappedMatchStep4 = Form.create()(MatchStep4);
 
-export default withReduxSaga(withStyles(styles)(WrappedMatchStep4));
+export default withReduxSaga(withRoot(WrappedMatchStep4));
