@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/Blanklayout';
-
+import fetch from '../lib/fetch'
 
 const Container = styled.div`
   padding: 19px 0;

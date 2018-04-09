@@ -43,10 +43,10 @@ const Input = styled.input`
   box-shadow: none;
 `
 class ProductDetail extends React.PureComponent {
-  static async getInitialProps ({query}) {
+  static async getInitialProps ({query, req}) {
     // eslint-disable-next-line no-undef
 
-    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`)
+    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`,req.headers['cookie'])
     //总利息
     return { product: res }
   }

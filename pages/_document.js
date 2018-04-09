@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
 
   render () {
     const { pageContext } = this.props;
-
+    console.log(pageContext)
     return (
       <html>
         <Head>

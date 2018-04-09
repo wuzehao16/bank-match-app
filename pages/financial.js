@@ -22,12 +22,15 @@ const I = styled.i`
 
 `
 class Financialnformation extends React.PureComponent {
-  static async getInitialProps ({query}) {
+  static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
 
-    const res = await fetch(`/getContentInfomationDetails?contentId=${query.contentId}`)
+    const res = await fetch(`/getContentInfomationDetails?contentId=${query.contentId}`,req.headers['cookie'])
     //总利息
     return { content: res }
+  }
+  componentDidMount(){
+
   }
   render() {
     const content = this.props.content;

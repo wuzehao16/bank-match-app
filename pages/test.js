@@ -1,23 +1,28 @@
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import React from 'react';
+import styled from 'styled-components';
+import Button from 'material-ui/Button';
 
-export default class extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const StyledButton = styled(Button)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 48px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .30);
+`;
 
-  onRadiochange = value => {
-    console.log(value);
-  };
-
-  render() {
-    return (
-      <div>
-        <RadioGroup horizontal onChange={this.onRadiochange}>
-          <RadioButton value="Male">Male</RadioButton>
-          <RadioButton value="Female">Female</RadioButton>
-        </RadioGroup>
-      </div>
-    );
-  }
+function StyledComponentsButton() {
+  return (
+    <div>
+      <Button>
+        Material-UI
+      </Button>
+      <StyledButton>
+        Styled Components
+      </StyledButton>
+    </div>
+  );
 }
+
+export default StyledComponentsButton;
