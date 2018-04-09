@@ -6,23 +6,15 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
+import {  withStyles } from 'material-ui/styles';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
-import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
-import red from 'material-ui/colors/red';
 import {withReduxSaga} from '../redux/store'
 import { saveStep1 } from '../redux/actions'
+import withRoot from '../src/withRoot';
+
 const FormItem = Form.Item;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: red,
-    secondary: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const styles = theme => ({
@@ -96,7 +88,6 @@ class MatchStep1 extends React.Component {
     const exLoanAmountError = isFieldTouched('exLoanAmount') && getFieldError('exLoanAmount');
     const cityError = isFieldTouched('city') && getFieldError('city');
     return (
-      <MuiThemeProvider theme={theme}>
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
         <Topbar position="hidden"/>
@@ -196,10 +187,6 @@ class MatchStep1 extends React.Component {
         </div>
       </Layout>
       </Form>
-      <style jsx>{`
-      `}
-      </style>
-      </MuiThemeProvider>
     )
   }
 }
@@ -209,4 +196,4 @@ MatchStep1.propTypes = {
 };
 const WrappedMatchStep1 = Form.create()(MatchStep1);
 
-export default withReduxSaga(withStyles(styles)(WrappedMatchStep1));
+export default withReduxSaga(withRoot(withStyles(styles)(WrappedMatchStep1)));

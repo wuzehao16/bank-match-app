@@ -8,22 +8,14 @@ import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
 import fetch from '../lib/fetch'
-import { createMuiTheme, withStyles, MuiThemeProvider } from 'material-ui/styles';
-import red from 'material-ui/colors/red';
+import {  withStyles } from 'material-ui/styles';
 import {connect} from 'react-redux'
 import {withReduxSaga} from '../redux/store'
 import { saveStep2 } from '../redux/actions'
+import withRoot from '../src/withRoot';
+
 const FormItem = Form.Item;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: red,
-    secondary: red,
-  },
-  status: {
-    danger: 'orange',
-  },
-});
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const styles = theme => ({
@@ -139,7 +131,6 @@ class MatchStep2 extends React.Component {
     const isPhoneCallError = isFieldTouched('isPhoneCall') && getFieldError('isPhoneCall');
     const isInvestigateError = isFieldTouched('isInvestigate') && getFieldError('isInvestigate');
     return (
-      <MuiThemeProvider theme={theme}>
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
         <Topbar position="p1"/>
@@ -599,7 +590,6 @@ class MatchStep2 extends React.Component {
           </FormItem>
         </div>
       </Layout>
-      </Form>
       <style jsx>{`
         .btn{
           margin-top: 75px;
@@ -617,15 +607,12 @@ class MatchStep2 extends React.Component {
         }
       `}
       </style>
-      </MuiThemeProvider>
+      </Form>
     )
   }
 }
 
-MatchStep2.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 const WrappedMatchStep2 = Form.create()(MatchStep2);
 
 // export default connect(state => state)(withReduxSaga(withStyles(styles)(WrappedMatchStep2)));
-export default withReduxSaga(withStyles(styles)(WrappedMatchStep2));
+export default withReduxSaga(withRoot(withStyles(styles)(WrappedMatchStep2)));
