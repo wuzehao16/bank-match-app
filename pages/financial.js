@@ -3,6 +3,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/contentLayout';
 import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
+
 const Wrapper = styled.div`
   padding: 15px;
   background: #fff;
@@ -24,8 +26,8 @@ const I = styled.i`
 class Financialnformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-
-    const res = await fetch(`/getContentInfomationDetails?contentId=${query.contentId}`,req.headers['cookie'])
+    const token = getCookie('token', req)
+    const res = await fetch(`/getContentInfomationDetails?contentId=${query.contentId}`, token)
     //总利息
     return { content: res }
   }

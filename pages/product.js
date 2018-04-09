@@ -7,6 +7,7 @@ import Layout from '../components/Elayout';
 import '../styles/iconfont.css';
 import stylesheet from '../styles/index.css';
 import fetch from '../lib/fetch';
+import getCookie from '../lib/getCookie'
 const Pd = styled.div`
   padding: 0 15px;
   background: #fff;
@@ -42,11 +43,12 @@ const Input = styled.input`
   border:1px solid #a6a6a6;
   box-shadow: none;
 `
+
 class ProductDetail extends React.PureComponent {
   static async getInitialProps ({query, req}) {
     // eslint-disable-next-line no-undef
-
-    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`,req.headers['cookie'])
+    const token = getCookie('token',req)
+    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`, token)
     //总利息
     return { product: res }
   }
