@@ -638,7 +638,10 @@ class MatchStep4 extends React.Component {
                   help={sumHousePropertyError || ''}
                   >
                   {getFieldDecorator('sumHouseProperty', {
-                    rules: [{ required: true}],
+                    rules: [{
+                      required: true,
+                      message: '请输入名下房产数量'
+                    }],
                   })(
                     <div style={{verticalAlign:'bottom'}}>
                       <span>名下房产数量</span>
@@ -682,10 +685,13 @@ class MatchStep4 extends React.Component {
                   help={sumBusinessPolicyError || ''}
                   >
                   {getFieldDecorator('sumBusinessPolicy', {
-                    rules: [{ required: true}],
+                    rules: [{
+                      required: true,
+                      message: '请输入名下保单份数'
+                    }],
                   })(
                     <div style={{verticalAlign:'bottom'}}>
-                      <span>保单份数</span>
+                      <span>名下保单份数</span>
                       <input   type="number"style={{width:35}}/>
                       <span>份</span>
                     </div>
@@ -708,7 +714,10 @@ class MatchStep4 extends React.Component {
               help={isFamilyCarError || ''}
               >
               {getFieldDecorator('isFamilyCar', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message: '请输入名下车辆数量'
+                }],
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={1}>有</RadioButton>

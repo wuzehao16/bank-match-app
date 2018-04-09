@@ -151,7 +151,10 @@ class MatchStep4 extends React.Component {
               help={sumCreditLoanError || ''}
               >
               {getFieldDecorator('sumCreditLoan', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message: '请输入等额本息贷款笔数'
+                }],
               })(
                 <div >
                   <span>等额本息贷款</span>
@@ -201,7 +204,10 @@ class MatchStep4 extends React.Component {
                               help={equalInterestTotalBalanceError || ''}
                               >
                               {getFieldDecorator('equalInterestTotalBalance', {
-                                rules: [{ required: true}],
+                                rules: [{
+                                  required: true,
+                                  message: '请输入等额本息类贷款总余额'
+                                }],
                               })(
                                 <span >
                                   <span>等额本息类贷款总余额 </span>
@@ -215,7 +221,10 @@ class MatchStep4 extends React.Component {
                               help={equalInteresMonthPaymentError || ''}
                               >
                               {getFieldDecorator('equalInteresMonthPayment', {
-                                rules: [{ required: true}],
+                                rules: [{
+                                  required: true,
+                                  message: '请输入每月还款总额'
+                                }],
                               })(
                                 <span >
                                   <span>每月还款总额</span>
@@ -298,7 +307,8 @@ class MatchStep4 extends React.Component {
               help={sumCreditCardError || ''}
               >
               {getFieldDecorator('sumCreditCard', {
-                rules: [{ required: true,
+                rules: [{
+                  required: true,
                   message: '请输入信用卡张数'
                 }],
               })(
@@ -319,7 +329,10 @@ class MatchStep4 extends React.Component {
                             help={creditCardTotalLimitError || ''}
                             >
                             {getFieldDecorator('creditCardTotalLimit', {
-                              rules: [{ required: true}],
+                              rules: [{
+                                required: true,
+                                message: '请输入信用卡总额度'
+                              }],
                             })(
                               <span >
                                 <span>信用卡总额度</span>
@@ -335,7 +348,10 @@ class MatchStep4 extends React.Component {
                             help={creditCardUsedLimitError || ''}
                             >
                             {getFieldDecorator('creditCardUsedLimit', {
-                              rules: [{ required: true}],
+                              rules: [{
+                                required: true,
+                                message: '请输入信用卡当月已使用额度'
+                              }],
                             })(
                               <span >
                                 <span>信用卡当月已使用额度</span>
@@ -351,7 +367,10 @@ class MatchStep4 extends React.Component {
                             help={creditCardSixMonthsAvgUsedLimitError || ''}
                             >
                             {getFieldDecorator('creditCardSixMonthsAvgUsedLimit', {
-                              rules: [{ required: true}],
+                              rules: [{
+                                required: true,
+                                message: '请输入信用卡近六个月平均使用额度'
+                              }],
                             })(
                               <span >
                                 <span>信用卡近六个月平均使用额度</span>
@@ -367,10 +386,13 @@ class MatchStep4 extends React.Component {
                             help={sumStagesCreditCardError || ''}
                             >
                             {getFieldDecorator('sumStagesCreditCard', {
-                              rules: [{ required: true}],
+                              rules: [{
+                                required: true,
+                                message: '请输入信用卡办理的分期还款张数'
+                              }],
                             })(
                               <span >
-                                <span>信用卡办理了分期还款张数</span>
+                                <span>信用卡办理的分期还款张数</span>
                                 <input  type="number" min={0}  style={{width:25}}/>
                                 <span>张</span>
                               </span>

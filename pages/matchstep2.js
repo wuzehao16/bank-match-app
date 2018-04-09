@@ -145,7 +145,10 @@ class MatchStep2 extends React.Component {
                             help={specificAgeError || ''}
                             >
                             {getFieldDecorator('specificAge', {
-                              rules: [{ required: true}],
+                              rules: [{
+                                 required: true,
+                                 message:'请输入具体年龄'
+                              }],
                             })(
                               <div >
                                 <span>具体年龄</span>

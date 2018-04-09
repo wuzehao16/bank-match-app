@@ -497,7 +497,10 @@ class MatchStep3 extends React.Component {
               help={sumOneMonthQueriesError || ''}
               >
               {getFieldDecorator('sumOneMonthQueries', {
-                rules: [{ required: true}],
+                rules: [{
+                   required: true,
+                   message:'请输入近1个月查询次数'
+              }],
               })(
                 <div >
                   <span>近1个月查询次数</span>
@@ -511,7 +514,10 @@ class MatchStep3 extends React.Component {
               help={sumTwoMonthsQueriesError || ''}
               >
               {getFieldDecorator('sumTwoMonthsQueries', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入近2个月查询次数'
+                }],
               })(
                 <div >
                   <span>近2个月查询次数</span>
@@ -527,7 +533,10 @@ class MatchStep3 extends React.Component {
               help={sumThreeMonthsQueriesError || ''}
               >
               {getFieldDecorator('sumThreeMonthsQueries', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入近3个月查询次数'
+                }],
               })(
                 <div >
                   <span>近3个月查询次数</span>
@@ -541,7 +550,10 @@ class MatchStep3 extends React.Component {
               help={sumSixMonthsQueriesError || ''}
               >
               {getFieldDecorator('sumSixMonthsQueries', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入近6个月查询次数'
+                }],
               })(
                 <div >
                   <span>近6个月查询次数</span>
@@ -557,7 +569,10 @@ class MatchStep3 extends React.Component {
               help={sumOneYearQueriesError || ''}
               >
               {getFieldDecorator('sumOneYearQueries', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入近12个月查询次数'
+                }],
               })(
                 <div >
                   <span>近12个月查询次数</span>

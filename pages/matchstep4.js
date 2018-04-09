@@ -155,7 +155,10 @@ class MatchStep4 extends React.Component {
               help={unitNameError || ''}
               >
               {getFieldDecorator('unitName', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入单位名称'
+                }],
               })(
                 <div style={{verticalAlign:'bottom'}}>
                   <span>单位名称</span>
@@ -170,7 +173,10 @@ class MatchStep4 extends React.Component {
               help={specificWorkTimeError || ''}
               >
               {getFieldDecorator('specificWorkTime', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入本单位连续上班月份'
+                }],
               })(
                 <div >
                   <span>本单位连续上班</span>
@@ -185,7 +191,11 @@ class MatchStep4 extends React.Component {
               validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
               help={threeMonthsAvgSalaryError || ''}
               >
-              {getFieldDecorator('threeMonthsAvgSalary', {
+              {getFieldDecorator('threeMonthsAvgSalary',  {
+                rules: [{
+                  required: true,
+                  message:'请输入近3个月税前月均收入'
+                }],
               })(
                 <div >
                   <span>近3个月税前月均收入</span>
@@ -199,6 +209,10 @@ class MatchStep4 extends React.Component {
               help={SixMonthsAvgSalaryError || ''}
               >
               {getFieldDecorator('SixMonthsAvgSalary', {
+                rules: [{
+                  required: true,
+                  message:'请输入近6个月税前月均收入'
+                }],
               })(
                 <div >
                   <span>近6个月税前月均收入</span>
@@ -214,6 +228,10 @@ class MatchStep4 extends React.Component {
               help={thisYearMonthsAvgSalaryError || ''}
               >
               {getFieldDecorator('thisYearMonthsAvgSalary', {
+                rules: [{
+                  required: true,
+                  message:'请输入近12个月税前月均收入'
+                }],
               })(
                 <div >
                   <span>近12个月税前月均收入</span>
@@ -227,6 +245,10 @@ class MatchStep4 extends React.Component {
               help={lastYearMonthsAvgSalaryError || ''}
               >
               {getFieldDecorator('lastYearMonthsAvgSalary', {
+                rules: [{
+                  required: true,
+                  message:'上一年度税前月均收入'
+                }],
               })(
                 <div >
                   <span>上一年度税前月均收入</span>
@@ -243,6 +265,10 @@ class MatchStep4 extends React.Component {
               help={specificInsuranceBaseError || ''}
               >
               {getFieldDecorator('specificInsuranceBase', {
+                rules: [{
+                  required: true,
+                  message:'请输入社保缴纳基数'
+                }],
               })(
                 <div >
                   <span>社保缴纳基数</span>
@@ -256,6 +282,10 @@ class MatchStep4 extends React.Component {
               help={specificInsurancePaymonthError || ''}
               >
               {getFieldDecorator('specificInsurancePaymonth', {
+                rules: [{
+                  required: true,
+                  message:'请输入本单位连续缴纳'
+                }],
               })(
                 <div >
                   <span>本单位连续缴纳</span>
@@ -305,7 +335,10 @@ class MatchStep4 extends React.Component {
               help={exInsuranceBaseError || ''}
               >
               {getFieldDecorator('exInsuranceBase', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入调整前社保缴纳基数'
+                }],
               })(
                 <div >
                   <span>调整前社保缴纳基数</span>
@@ -322,6 +355,10 @@ class MatchStep4 extends React.Component {
               help={specificProvidentFundBaseError || ''}
               >
               {getFieldDecorator('specificProvidentFundBase', {
+                rules: [{
+                  required: true,
+                  message:'请输入公积金缴纳基数'
+                }],
               })(
                 <div >
                   <span>公积金缴纳基数</span>
@@ -335,6 +372,10 @@ class MatchStep4 extends React.Component {
               help={specificProvidentFundPaymonthError || ''}
               >
               {getFieldDecorator('specificProvidentFundPaymonth', {
+                rules: [{
+                  required: true,
+                  message:'请输入本单位连续缴纳月份'
+                }],
               })(
                 <div >
                   <span>本单位连续缴纳</span>
@@ -368,7 +409,10 @@ class MatchStep4 extends React.Component {
               help={exProvidentFundBaseError || ''}
               >
               {getFieldDecorator('exProvidentFundBase', {
-                rules: [{ required: true}],
+                rules: [{
+                  required: true,
+                  message:'请输入调整前公积金缴纳基数'
+                }],
               })(
                 <div >
                   <span>调整前公积金缴纳基数</span>
