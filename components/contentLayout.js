@@ -24,6 +24,9 @@ export default ({ children, title = '众银云测' }) => (
       {'I`m here to stay'}
     </footer> */}
     <style jsx global>{`
+      html{
+        font-family: 'PingFangSC','STHeiti','Microsoft YaHei','Helvetica','Arial',sans-serif;
+      }
       body {
         margin: 0;
       }
@@ -34,8 +37,35 @@ export default ({ children, title = '众银云测' }) => (
         margin: 0;
       }
       p{
-        font-size:12px;
         margin: 0;
+        padding: 0;
+        border: 0;
+        margin-top: 16px;
+        color: #333;
+        line-height: 18px;
+        border: none;
+        outline: none;
+        max-height: 100%;
+        word-wrap: break-word;
+        color: #000;
+      }
+      @media screen and (min-width: 320px) {
+        p{
+          font-size: 16px;
+          line-height: 25px;
+        }
+      }
+      @media screen and (min-width: 360px) {
+        p{
+          font-size: 17px;
+          line-height: 28px;
+        }
+      }
+      @media screen and (min-width: 375px) {
+        p{
+          font-size: 17px;
+          line-height: 27px;
+        }
       }
       img{
         width:100%;

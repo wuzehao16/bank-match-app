@@ -10,15 +10,30 @@ const Wrapper = styled.div`
   background: #fff;
 `
 const Title = styled.div`
-  font-size: 16px;
-  color: #3c3c3c;
-  line-height: 30px;
+  color: #000;
+  font-size: 22px;
+  line-height: 1.45;
   font-weight: 600;
-  text-align: center;
+  font-family: 'PingFangSC-Medium';
+  @media(min-width: 375px) {
+    font-size: 24px;
+    line-height: 34px;
+  }
+  @media (min-width:360px) {
+    font-size: 23px;
+    line-height: 31px;
+  }
+  @media (min-width:320px) {
+    font-size: 21px;
+    line-height: 30px;
+  }
 `
 const More = styled.div`
   color:#969696;
   font-size: 12px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
 `
 const I = styled.i`
 
@@ -41,9 +56,9 @@ class Financialnformation extends React.PureComponent {
         <Wrapper>
           <Title>{content.contentTitle}</Title>
           <More>
-            <i className="source"></i><span>{content.source?content.source:'未知来源'}</span>
-            <i className="read"></i><span>{content.readNum}</span>
-            <i className="time"></i><span>{content.releaseTime}</span>
+            <span><i className="source"></i><span>{content.source?content.source:'未知来源'}</span></span>
+            <span><i className="read"></i><span>{content.readNum}</span></span>
+            <span><i className="time"></i><span>{content.releaseTime}</span></span>
           </More>
           <div
             dangerouslySetInnerHTML={{
@@ -66,12 +81,10 @@ class Financialnformation extends React.PureComponent {
             background-image:url(/static/source.png);
           }
           .read{
-            margin-left:30px;
             width:12px;
             background-image:url(/static/read.png);
           }
           .time{
-            margin-left:30px;
             background-image:url(/static/time.png);
           }
         `}

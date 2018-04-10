@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 
-export default ({ children, title = '众银云测' }) => (
+export default ({ children, title = '智能匹配' }) => (
   <div className='app'>
     <Head>
       <title>{ title }</title>
