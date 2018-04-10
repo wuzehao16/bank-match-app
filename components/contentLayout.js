@@ -49,10 +49,10 @@ export default ({ children, title = '众银云测' }) => (
         word-wrap: break-word;
         color: #000;
       }
-      @media screen and (min-width: 320px) {
+      @media screen and (min-width: 375px) {
         p{
-          font-size: 16px;
-          line-height: 25px;
+          font-size: 17px;
+          line-height: 27px;
         }
       }
       @media screen and (min-width: 360px) {
@@ -61,10 +61,10 @@ export default ({ children, title = '众银云测' }) => (
           line-height: 28px;
         }
       }
-      @media screen and (min-width: 375px) {
+      @media screen and (min-width: 320px) {
         p{
-          font-size: 17px;
-          line-height: 27px;
+          font-size: 16px;
+          line-height: 25px;
         }
       }
       img{

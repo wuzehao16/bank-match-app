@@ -36,6 +36,16 @@ const styles = theme => ({
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
+  font-size:16px;
+  @media (min-width:320px) {
+    font-size: 14px;
+  }
+  @media(min-width: 375px) {
+    font-size: 16px;
+  }
+  @media (min-width:360px) {
+    font-size: 16px;
+  }
 `
 const Container = styled.div`
   padding: 19px 0;
@@ -66,7 +76,7 @@ const SubContain = styled.div`
 `
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
-  font-size: 12px;
+  ${'' /* font-size: 16px; */}
 `
 const Br = styled.div`
   height: 10px;
@@ -76,7 +86,7 @@ const Help = styled.div`
   bottom: 1px;
   left: 0px;
   z-index: 10;
-  font-size: 7px;
+  font-size: 8px;
 `
 const Red = styled.span`
   color: #ff2b2b;
@@ -86,7 +96,7 @@ const DoubleInput = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding: 20px 0 20px 0;
   position: relative;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   justify-content: space-between;
 `
@@ -199,11 +209,13 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>近3个月税前月均收入</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
             </FormItem>
+          </DoubleInput>
+          <DoubleInput>
             <FormItem
               validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
               help={SixMonthsAvgSalaryError || ''}
@@ -216,7 +228,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>近6个月税前月均收入</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
@@ -235,11 +247,13 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>近12个月税前月均收入</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
             </FormItem>
+          </DoubleInput>
+          <DoubleInput>
             <FormItem
               validateStatus={lastYearMonthsAvgSalaryError ? 'error' : ''}
               help={lastYearMonthsAvgSalaryError || ''}
@@ -252,7 +266,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>上一年度税前月均收入</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
@@ -272,7 +286,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>社保缴纳基数</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
@@ -342,7 +356,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>调整前社保缴纳基数</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}

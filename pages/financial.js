@@ -15,6 +15,10 @@ const Title = styled.div`
   line-height: 1.45;
   font-weight: 600;
   font-family: 'PingFangSC-Medium';
+  @media (min-width:320px) {
+    font-size: 21px;
+    line-height: 30px;
+  }
   @media(min-width: 375px) {
     font-size: 24px;
     line-height: 34px;
@@ -22,10 +26,6 @@ const Title = styled.div`
   @media (min-width:360px) {
     font-size: 23px;
     line-height: 31px;
-  }
-  @media (min-width:320px) {
-    font-size: 21px;
-    line-height: 30px;
   }
 `
 const More = styled.div`

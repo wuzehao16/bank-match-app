@@ -74,13 +74,22 @@ const DoubleInput = styled.div`
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+  @media (min-width:320px) {
+    font-size: 10px;
+  }
+  @media(min-width: 375px) {
+    font-size: 12px;
+  }
+  @media (min-width:360px) {
+    font-size: 12px;
+  }
 `
 const AddButton = styled.div`
     margin: 10px auto;
     border-radius: 26px;
     border: 1px solid #ee5648;
     color: #ee5648;
-    width: 84px;
+    width: 100px;
     padding: 3px 8px;
 `
 const Input = styled.input`
@@ -317,7 +326,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>本笔抵押贷款余额 </span>
-                  <Input   type="number" min={0} style={{width:40}}/>
+                  <Input   type="number" min={0} style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
@@ -330,7 +339,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>每月还款金额</span>
-                  <Input   type="number" min={0} style={{width:35}}/>
+                  <Input   type="number" min={0} style={{width:45}}/>
                   <span>元</span>
                 </div>
               )}
@@ -551,7 +560,7 @@ class MatchStep4 extends React.Component {
                 })(
                   <div style={{verticalAlign:'bottom'}}>
                     <span>车辆残值评估</span>
-                    <Input   type="number"style={{width:35}}/>
+                    <Input   type="number"style={{width:50}}/>
                     <span>元</span>
                   </div>
                 )}

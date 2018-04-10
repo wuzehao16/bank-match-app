@@ -129,6 +129,7 @@ class MatchStep1 extends React.Component {
                      message: '请输入期望贷款金额',
                 }],
               })(
+                <div>
                 <TextField
                   id="name"
                   // label="客户名称"
@@ -136,8 +137,10 @@ class MatchStep1 extends React.Component {
                   // value={this.state.name}
                   // onChange={this.handleChange('name')}
                   // margin="normal"
-                  placeholder="请输入金额"
+                  placeholder="请输入金额(万元)"
                 />
+                <span></span>
+                </div>
               )}
             </FormItem>
           </Container>
