@@ -261,7 +261,7 @@ class MatchStep4 extends React.Component {
               {getFieldDecorator('lastYearMonthsAvgSalary', {
                 rules: [{
                   required: true,
-                  message:'上一年度税前月均收入'
+                  message:'请输入上一年度税前月均收入'
                 }],
               })(
                 <div >

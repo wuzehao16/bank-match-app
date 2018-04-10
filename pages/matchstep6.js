@@ -153,11 +153,11 @@ class MatchStep4 extends React.Component {
               {getFieldDecorator('sumCreditLoan', {
                 rules: [{
                   required: true,
-                  message: '请输入等额本息贷款笔数'
+                  message: '请输入信用类贷款'
                 }],
               })(
                 <div >
-                  <span>等额本息贷款</span>
+                  <span>信用类贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
                   <span>笔</span>
                 </div>
@@ -170,7 +170,7 @@ class MatchStep4 extends React.Component {
               {getFieldDecorator('sumEqualInterest', {
               })(
                 <span >
-                  <span>先息后本贷款</span>
+                  <span>等额本息类贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
                   <span>笔,</span>
                 </span>
@@ -179,7 +179,7 @@ class MatchStep4 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <span >
-                  <span>信用类贷款</span>
+                  <span>先息后本类贷款</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
                   <span>笔，</span>
                 </span>

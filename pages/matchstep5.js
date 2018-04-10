@@ -391,7 +391,7 @@ class MatchStep4 extends React.Component {
               required={false}
               key={k+11}
               >
-              {getFieldDecorator(`returnedMonths[${k}]`, {
+              {getFieldDecorator(`propertyTotalMarketValue[${k}]`, {
               })(
                 <div >
                   <span>本房产总市值</span>
