@@ -1,0 +1,12 @@
+{
+  "apps" : [{
+    "script"    : "server.js",
+    "instances" : "max",
+    "exec_mode" : "cluster",
+    "watch": true,
+    "env_production": {
+      "PORT": 3000,
+      "NODE_ENV": "production",
+    }
+  }]
+}
