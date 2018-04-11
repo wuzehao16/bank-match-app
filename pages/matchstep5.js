@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Router from 'next/router';
 import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
@@ -101,6 +102,11 @@ const Input = styled.input`
     border-bottom-width: 1px;
     border-left-width: 0px
 `
+const SubTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 let housePropertyUuid = 0;
 let businessPolicyUuid = 0;
 let carPropertyUuid = 0;
@@ -145,16 +151,43 @@ class MatchStep4 extends React.Component {
     // can use data-binding to get
     const houseProperty = form.getFieldValue('houseProperty');
     // We need at least one passenger
-    if (houseProperty.length === 1) {
-      return;
-    }
-
+    // if (houseProperty.length === 1) {
+    //   return;
+    // }
+    housePropertyUuid--;
     // can use data-binding to set
     form.setFieldsValue({
       houseProperty: houseProperty.filter(key => key !== k),
     });
   }
-
+  removeBusinessPolicy = (k) => {
+    const { form } = this.props;
+    // can use data-binding to get
+    const businessPolicy = form.getFieldValue('businessPolicyArr');
+    // We need at least one passenger
+    // if (houseProperty.length === 1) {
+    //   return;
+    // }
+    businessPolicyUuid--;
+    // can use data-binding to set
+    form.setFieldsValue({
+      businessPolicyArr: businessPolicy.filter(key => key !== k),
+    });
+  }
+  removeCarProperty = (k) => {
+    const { form } = this.props;
+    // can use data-binding to get
+    const carProperty = form.getFieldValue('carProperty');
+    // We need at least one passenger
+    // if (houseProperty.length === 1) {
+    //   return;
+    // }
+    carPropertyUuid--;
+    // can use data-binding to set
+    form.setFieldsValue({
+      carProperty: carProperty.filter(key => key !== k),
+    });
+  }
   addHouseProperty = () => {
     const { form } = this.props;
     // can use data-binding to get
@@ -212,9 +245,18 @@ class MatchStep4 extends React.Component {
           key={k}
           >
           <DoubleInput>
-                <div>
+                <SubTitle>
                   <span>第{k+1}套房产情况</span>
-                </div>
+                  {houseProperty.length > 0 ? (
+                  <Icon
+                    color="primary"
+                    disabled={houseProperty.length === 1}
+                    onClick={() => this.removeHouseProperty(k)}
+                  >
+                  remove_circle_outline
+                </Icon>
+                ) : null}
+                </SubTitle>
           </DoubleInput>
           <SubContain
             >
@@ -414,9 +456,18 @@ class MatchStep4 extends React.Component {
           key={k}
           >
           <DoubleInput>
-                <div>
-                  <span>第{k+1}份保单情况</span>
-                </div>
+            <SubTitle>
+              <span>第{k+1}份保单情况</span>
+              {businessPolicy.length > 0 ? (
+              <Icon
+                color="primary"
+                // disabled={businessPolicy.length === 1}
+                onClick={() => this.removeBusinessPolicy(k)}
+              >
+              remove_circle_outline
+            </Icon>
+            ) : null}
+            </SubTitle>
           </DoubleInput>
           <SubContain>
             <SubContainTitle>保单品牌</SubContainTitle>
@@ -530,9 +581,18 @@ class MatchStep4 extends React.Component {
           key={k}
           >
           <DoubleInput>
-                <div>
+                <SubTitle>
                   <span>第{k+1}辆汽车状况</span>
-                </div>
+                  {carProperty.length > 0 ? (
+                  <Icon
+                    color="primary"
+                    // disabled={businessPolicy.length === 1}
+                    onClick={() => this.removeCarProperty(k)}
+                  >
+                  remove_circle_outline
+                </Icon>
+                ) : null}
+                </SubTitle>
           </DoubleInput>
           <SubContain>
             <SubContainTitle>车辆登记证状态</SubContainTitle>

@@ -171,7 +171,7 @@ class MatchStep4 extends React.Component {
               })(
                 <span >
                   <span>等额本息类贷款</span>
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={100} style={{width:25}}/>
                   <span>笔,</span>
                 </span>
               )}
@@ -180,8 +180,8 @@ class MatchStep4 extends React.Component {
               })(
                 <span >
                   <span>先息后本类贷款</span>
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>笔，</span>
+                  <input  type="number" min={0} max={100} style={{width:25}}/>
+                  <span>笔,</span>
                 </span>
               )}
               {getFieldDecorator('sumAlongLoan', {
@@ -189,7 +189,7 @@ class MatchStep4 extends React.Component {
               })(
                 <span >
                   <span>随借随还类</span>
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={100} style={{width:25}}/>
                   <span>笔</span>
                 </span>
               )}
@@ -211,7 +211,7 @@ class MatchStep4 extends React.Component {
                               })(
                                 <span >
                                   <span>等额本息类贷款总余额 </span>
-                                  <input  type="number" min={0}  style={{width:25}}/>
+                                  <input  type="number" min={0}  style={{width:50}}/>
                                   <span>元</span>
                                 </span>
                               )}
@@ -228,7 +228,7 @@ class MatchStep4 extends React.Component {
                               })(
                                 <span >
                                   <span>每月还款总额</span>
-                                  <input  type="number" min={0} style={{width:25}}/>
+                                  <input  type="number" min={0} style={{width:40}}/>
                                   <span>元</span>
                                 </span>
                               )}
@@ -248,7 +248,7 @@ class MatchStep4 extends React.Component {
                               })(
                                 <span >
                                   <span>先息后本类贷款总余额 </span>
-                                  <input  type="number" min={0}  style={{width:25}}/> <span>元</span>
+                                  <input  type="number" min={0}  style={{width:50}}/> <span>元</span>
                                 </span>
                               )}
                             </FormItem>
@@ -261,7 +261,7 @@ class MatchStep4 extends React.Component {
                               })(
                                 <span >
                                   <span>每月还利息</span>
-                                  <input  type="number" min={0} style={{width:25}}/>
+                                  <input  type="number" min={0} style={{width:40}}/>
                                   <span>元</span>
                                 </span>
                               )}
@@ -280,7 +280,7 @@ class MatchStep4 extends React.Component {
                   })(
                     <span >
                       <span>随借随还类贷款总余额 </span>
-                      <input  type="number" min={0}  style={{width:25}}/> <span>元</span>
+                      <input  type="number" min={0}  style={{width:50}}/> <span>元</span>
                     </span>
                   )}
                 </FormItem>
@@ -293,7 +293,7 @@ class MatchStep4 extends React.Component {
                   })(
                     <span >
                       <span>每月还利息</span>
-                      <input  type="number" min={0} style={{width:25}}/>
+                      <input  type="number" min={0} style={{width:40}}/>
                       <span>元</span>
                     </span>
                   )}
@@ -336,7 +336,7 @@ class MatchStep4 extends React.Component {
                             })(
                               <span >
                                 <span>信用卡总额度</span>
-                                <input  type="number" min={0}  style={{width:25}}/>
+                                <input  type="number" min={0}  style={{width:50}}/>
                                 <span>元</span>
                               </span>
                             )}
@@ -355,7 +355,7 @@ class MatchStep4 extends React.Component {
                             })(
                               <span >
                                 <span>信用卡当月已使用额度</span>
-                                <input  type="number" min={0}  style={{width:25}}/>
+                                <input  type="number" min={0}  style={{width:50}}/>
                                 <span>元</span>
                               </span>
                             )}
@@ -374,7 +374,7 @@ class MatchStep4 extends React.Component {
                             })(
                               <span >
                                 <span>信用卡近六个月平均使用额度</span>
-                                <input  type="number" min={0}  style={{width:25}}/>
+                                <input  type="number" min={0}  style={{width:50}}/>
                                 <span>元</span>
                               </span>
                             )}
