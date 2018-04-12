@@ -29,7 +29,7 @@ class Topbar extends React.Component {
         <Layout>
           <Wrapper >
             <div className={this.props.position + ' product'}>
-              匹配产品数<span className="num">12</span>个
+              匹配产品数<span className="num">{this.props.num}</span>个
             </div>
           </Wrapper>
 
