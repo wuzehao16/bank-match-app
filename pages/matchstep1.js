@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import {  withStyles } from 'material-ui/styles';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
 import { saveStep1 } from '../redux/actions'
@@ -51,6 +51,11 @@ const Contain = styled.div`
   padding-bottom: 20px;
 `
 class MatchStep1 extends React.Component {
+  static async getInitialProps({store}) {
+    return {
+      data: store.getState()
+    }
+  }
 	componentDidMount () {
     this.props.form.validateFields();
   }
@@ -75,9 +80,9 @@ class MatchStep1 extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
+    const item = data.matchJson.loanDemand || {};
     // Only show error after a field is touched.
     const nameError = isFieldTouched('name') && getFieldError('name');
     const loanTypeError = isFieldTouched('loanType') && getFieldError('loanType');
@@ -96,6 +101,7 @@ class MatchStep1 extends React.Component {
               help={nameError || ''}
               >
               {getFieldDecorator('name', {
+                initialValue:item.name,
                 rules: [{
                    required: true,
                    message: '请输入姓名',
@@ -121,11 +127,11 @@ class MatchStep1 extends React.Component {
               help={exLoanAmountError || ''}
               >
               {getFieldDecorator('exLoanAmount', {
+                initialValue: item.exLoanAmount,
                 rules: [{ required: true,
                      message: '请输入期望贷款金额',
                 }],
               })(
-                <div>
                 <TextField
                   id="name"
                   // label="客户名称"
@@ -135,8 +141,7 @@ class MatchStep1 extends React.Component {
                   // margin="normal"
                   placeholder="请输入金额(万元)"
                 />
-                <span></span>
-                </div>
+
               )}
             </FormItem>
           </Container>
@@ -147,6 +152,7 @@ class MatchStep1 extends React.Component {
               help={loanTypeError || ''}
               >
               {getFieldDecorator('loanType', {
+                initialValue:item.loanType,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -164,6 +170,7 @@ class MatchStep1 extends React.Component {
               help={cityError || ''}
               >
               {getFieldDecorator('city', {
+                initialValue: item.city,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">

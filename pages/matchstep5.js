@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import { Radio, Form } from 'antd';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
 import { saveStep5 } from '../redux/actions'

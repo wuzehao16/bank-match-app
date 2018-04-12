@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
 import { saveStep6 } from '../redux/actions'

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
 import { saveStep2 } from '../redux/actions'
@@ -53,7 +53,7 @@ const Br = styled.div`
 class MatchStep2 extends React.Component {
   static async getInitialProps({store}) {
 		return {
-			item: store.getState()
+			data: store.getState()
 		}
 	}
 	componentDidMount () {
@@ -80,9 +80,10 @@ class MatchStep2 extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {
-    const { item } = this.props;
-    console.log(item)
+    const { data } = this.props;
+    console.log(data)
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const item = data.matchJson.basicInformation || {};
 
     // Only show error after a field is touched.
     const ageError = isFieldTouched('age') && getFieldError('age');
@@ -110,7 +111,7 @@ class MatchStep2 extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-          <Topbar position="p1" num={item.product?item.product.productNum:0}/>
+          <Topbar position="p1" num={data.product?data.product.productNum:0}/>
         <Title>个人信息</Title>
         <Wrapper>
           <Contain>
@@ -120,6 +121,7 @@ class MatchStep2 extends React.Component {
               help={ageError || ''}
               >
               {getFieldDecorator('age', {
+                initialValue:item.age,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -136,20 +138,21 @@ class MatchStep2 extends React.Component {
             (getFieldValue('age') ===0||getFieldValue('age') ===1||getFieldValue('age') ===3)
               ?           <SubContain>
                           <FormItem
+                            label="具体年龄"
+                            style={{display:"inline-block"}}
                             validateStatus={specificAgeError ? 'error' : ''}
                             help={specificAgeError || ''}
                             >
                             {getFieldDecorator('specificAge', {
+                              initialValue:item.specificAge,
                               rules: [{
                                  required: true,
                                  message:'请输入具体年龄'
                               }],
                             })(
-                              <div >
-                                <span>具体年龄</span>
-                                <input  type="number" min={0} max={100} style={{width:30}}/>
-                                <span>岁</span>
-                              </div>
+                              <span>
+                                具体年龄<input  type="number" min={0} max={100} style={{width:30}}/>岁
+                              </span>
                             )}
                           </FormItem>
                         </SubContain> : null
@@ -162,6 +165,7 @@ class MatchStep2 extends React.Component {
               help={maritalStatusError || ''}
               >
               {getFieldDecorator('maritalStatus', {
+                initialValue:item.maritalStatus,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -182,6 +186,7 @@ class MatchStep2 extends React.Component {
                         help={maritalStatusError || ''}
                         >
                         {getFieldDecorator('isAgreeLoan', {
+                          initialValue:item.isAgreeLoan,
                           rules: [{ required: true}],
                         })(
                           <RadioGroup  size="small">
@@ -199,6 +204,7 @@ class MatchStep2 extends React.Component {
               help={locationError || ''}
               >
               {getFieldDecorator('location', {
+                initialValue:item.location,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -217,6 +223,7 @@ class MatchStep2 extends React.Component {
               help={educationError || ''}
               >
               {getFieldDecorator('education', {
+                initialValue:item.education,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -238,6 +245,7 @@ class MatchStep2 extends React.Component {
               help={occupationError || ''}
               >
               {getFieldDecorator('occupation', {
+                initialValue:item.occupation,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -260,6 +268,7 @@ class MatchStep2 extends React.Component {
                     help={unitPropertyError || ''}
                     >
                     {getFieldDecorator('unitProperty', {
+                      initialValue:item.unitProperty,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -283,6 +292,7 @@ class MatchStep2 extends React.Component {
                     help={salaryDistributionError || ''}
                     >
                     {getFieldDecorator('salaryDistribution', {
+                      initialValue:item.salaryDistribution,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -300,6 +310,7 @@ class MatchStep2 extends React.Component {
                     help={workTimeError || ''}
                     >
                     {getFieldDecorator('workTime', {
+                      initialValue:item.workTime,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -319,6 +330,7 @@ class MatchStep2 extends React.Component {
                     help={monthAvgSalaryError || ''}
                     >
                     {getFieldDecorator('monthAvgSalary', {
+                      initialValue:item.monthAvgSalary,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -339,6 +351,7 @@ class MatchStep2 extends React.Component {
                     help={isInsuranceError || ''}
                     >
                     {getFieldDecorator('isInsurance', {
+                      initialValue:item.isInsurance,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -351,6 +364,26 @@ class MatchStep2 extends React.Component {
                 {
                   getFieldValue('isInsurance') === 1
                     ? <div>
+                      <SubContain>
+                        <SubContainTitle>现单位社保缴纳基数</SubContainTitle>
+                        <FormItem
+                          validateStatus={insuranceBaseError ? 'error' : ''}
+                          help={insuranceBaseError || ''}
+                          >
+                          {getFieldDecorator('insuranceBase', {
+                            initialValue:item.insuranceBase,
+                            rules: [{ required: true}],
+                          })(
+                            <RadioGroup  size="small">
+                              <RadioButton value={0}>4千以下</RadioButton>
+                              <RadioButton value={1}>4-5千</RadioButton>
+                              <RadioButton value={2}>5-6千</RadioButton>
+                              <RadioButton value={3}>6-8千</RadioButton>
+                              <RadioButton value={4}>8千以上</RadioButton>
+                            </RadioGroup>
+                          )}
+                        </FormItem>
+                      </SubContain>
                         <SubContain>
                           <SubContainTitle>现单位社保连续缴纳时长</SubContainTitle>
                           <FormItem
@@ -358,6 +391,7 @@ class MatchStep2 extends React.Component {
                             help={insurancePaymonthError || ''}
                             >
                             {getFieldDecorator('insurancePaymonth', {
+                              initialValue:item.insurancePaymonth,
                               rules: [{ required: true}],
                             })(
                               <RadioGroup  size="small">
@@ -366,25 +400,6 @@ class MatchStep2 extends React.Component {
                                 <RadioButton value={2}>6-12个月</RadioButton>
                                 <RadioButton value={3}>12-24个月</RadioButton>
                                 <RadioButton value={4}>24个月以上</RadioButton>
-                              </RadioGroup>
-                            )}
-                          </FormItem>
-                        </SubContain>
-                        <SubContain>
-                          <SubContainTitle>现单位社保缴纳基数</SubContainTitle>
-                          <FormItem
-                            validateStatus={insuranceBaseError ? 'error' : ''}
-                            help={insuranceBaseError || ''}
-                            >
-                            {getFieldDecorator('insuranceBase', {
-                              rules: [{ required: true}],
-                            })(
-                              <RadioGroup  size="small">
-                                <RadioButton value={0}>4千以下</RadioButton>
-                                <RadioButton value={1}>4-5千</RadioButton>
-                                <RadioButton value={2}>5-6千</RadioButton>
-                                <RadioButton value={3}>6-8千</RadioButton>
-                                <RadioButton value={4}>8千以上</RadioButton>
                               </RadioGroup>
                             )}
                           </FormItem>
@@ -399,6 +414,7 @@ class MatchStep2 extends React.Component {
                     help={isProvidentFundError || ''}
                     >
                     {getFieldDecorator('isProvidentFund', {
+                      initialValue:item.isProvidentFund,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -418,6 +434,7 @@ class MatchStep2 extends React.Component {
                           help={providentFundBaseError || ''}
                           >
                           {getFieldDecorator('providentFundBase', {
+                            initialValue:item.providentFundBase,
                             rules: [{ required: true}],
                           })(
                             <RadioGroup  size="small">
@@ -437,6 +454,7 @@ class MatchStep2 extends React.Component {
                           help={providentFundPaymonthError || ''}
                           >
                           {getFieldDecorator('providentFundPaymonth', {
+                            initialValue:item.providentFundPaymonth,
                             rules: [{ required: true}],
                           })(
                             <RadioGroup  size="small">
@@ -463,6 +481,7 @@ class MatchStep2 extends React.Component {
                    help={invoiceValueError || ''}
                    >
                    {getFieldDecorator('invoiceValue', {
+                     initialValue:item.invoiceValue,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">
@@ -481,6 +500,7 @@ class MatchStep2 extends React.Component {
                    help={shareRatioError || ''}
                    >
                    {getFieldDecorator('shareRatio', {
+                     initialValue:item.shareRatio,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">
@@ -499,6 +519,7 @@ class MatchStep2 extends React.Component {
                    help={isLegalPersonError || ''}
                    >
                    {getFieldDecorator('isLegalPerson', {
+                     initialValue:item.isLegalPerson,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">
@@ -515,6 +536,7 @@ class MatchStep2 extends React.Component {
                    help={isPhoneCallError || ''}
                    >
                    {getFieldDecorator('isPhoneCall', {
+                     initialValue:item.isPhoneCall,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">
@@ -531,6 +553,7 @@ class MatchStep2 extends React.Component {
                    help={isInvestigateError || ''}
                    >
                    {getFieldDecorator('isInvestigate', {
+                     initialValue:item.isInvestigate,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">
@@ -547,6 +570,7 @@ class MatchStep2 extends React.Component {
                    help={licenseRegistTimeError || ''}
                    >
                    {getFieldDecorator('licenseRegistTime', {
+                     initialValue:item.licenseRegistTime,
                      rules: [{ required: true}],
                    })(
                      <RadioGroup  size="small">

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../components/Blanklayout';
+import Layout from '../layout/Blanklayout';
 import fetch from '../lib/fetch'
 
 const Container = styled.div`

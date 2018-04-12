@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 // import fetch from '../lib/fetch'
 import {withReduxSaga} from '../redux/store'
@@ -266,7 +266,7 @@ class MatchStep4 extends React.Component {
                 </div>
               )}
             </FormItem>
-            <Help><Red>*</Red>超过现单位上班时长的税前月均收入无需填写，上一年度税前月均收入指自然年(如2017年)</Help>
+            <Help><Red>*</Red>超过现单位上班时长的税前月均收入则填0，上一年度税前月均收入指自然年(如2017年)</Help>
           </DoubleInput>
           <DoubleInput>
             <FormItem

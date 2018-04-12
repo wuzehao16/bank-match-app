@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
-import Layout from '../components/layout';
+import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 // import fetch from '../lib/fetch'
 import {withReduxSaga} from '../redux/store'

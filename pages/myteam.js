@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import Layout from '../components/layout'
+import Layout from '../layout/layout'
 import fetch from '../lib/fetch'
 const theme = createMuiTheme({
   overrides: {
