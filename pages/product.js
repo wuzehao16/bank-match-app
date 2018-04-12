@@ -40,8 +40,12 @@ const Box =styled.div`
   margin-bottom: 5px;
 `
 const Input = styled.input`
-  border:1px solid #a6a6a6;
+  border:1px solid papayawhip;
   box-shadow: none;
+  color: palevioletred;
+  background: papayawhip;
+  border: none;
+  border-radius: 0px;
 `
 const Square = styled.span`
   background: ${props => {
@@ -417,7 +421,7 @@ class ProductDetail extends React.PureComponent {
             overflow:hidden;
           }
           .more{
-            height:125px;
+            height:100px;
           }
           .more-img{
             height:38px;
