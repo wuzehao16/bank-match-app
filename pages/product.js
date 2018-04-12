@@ -107,7 +107,7 @@ class ProductDetail extends React.PureComponent {
   //总利息
   countInterest = (productTimeMax) => {
     const product = this.state;
-    return product.productMaxLoad* 10000*product.monthlyFeeRate/100*productTimeMax;
+    return product.productLoad* 10000*product.monthlyFeeRate/100*productTimeMax;
   }
   //手续费
   countPoundage =  (poundage = 0) => {
@@ -131,6 +131,9 @@ class ProductDetail extends React.PureComponent {
               type: 'pie',
               radius : '55%',
               center: ['50%', '60%'],
+              tooltip:{
+                position: ['50%', '50%']
+              },
               label: {
                   normal: {
                       show: false
@@ -238,7 +241,7 @@ class ProductDetail extends React.PureComponent {
             <div className="info-r">
               <div className="pie-info">
                 <div><Square primary="#ff7c70"/>贷款<span className="pie-info-detail">{product.productLoad}万/{product.productTime||product.productTimeMax}期</span></div>
-                <div><Square primary="#fbc02d"/>利息<span className="pie-info-detail">{this.countInterest(product.productTimeMax)}元/每月{product.monthlyFeeRate}%</span></div>
+                <div><Square primary="#fbc02d"/>利息<span className="pie-info-detail">{this.countInterest(product.productTime)}元/每月{product.monthlyFeeRate}%</span></div>
                 <div><Square primary="#beb1ff"/>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTimeMax)}元</span></div>
                 <div><Square primary="#00ddb0"/>手续费<span className="pie-info-detail">{this.countPoundage(product.productPoundage)}元/{product.productPoundage?product.productPoundage:0.00}%</span></div>
               </div>
