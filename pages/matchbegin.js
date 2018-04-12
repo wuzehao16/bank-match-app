@@ -72,7 +72,9 @@ class MatchBegin extends React.Component {
       [name]: event.target.value,
     });
   };
-
+  toMatchList = () => {
+    window.webkit.messageHandlers.gotoMatchHistory.postMessage();
+  }
 
   render () {
     const { classes } = this.props;
@@ -112,7 +114,7 @@ class MatchBegin extends React.Component {
             <p>第三步：输出最优产品，获取预估额度</p>
           </div>
           <div className="btn">
-            <div className="l">匹配记录</div>
+            <div className="l" onClick={this.toMatchList}>匹配记录</div>
             <Link href="/matchstep1">
             <div className="r">
                 立即匹配
