@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../components/contentLayout';
+import Layout from '../layout/contentLayout';
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 
