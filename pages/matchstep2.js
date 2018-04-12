@@ -1,12 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Router from 'next/router'
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
-import {connect} from 'react-redux'
 import {withReduxSaga} from '../redux/store'
 import { saveStep2 } from '../redux/actions'
 import withRoot from '../src/withRoot';
@@ -53,11 +51,11 @@ const Br = styled.div`
   height: 10px;
 `
 class MatchStep2 extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
+  static async getInitialProps({store}) {
+		return {
+			item: store.getState()
+		}
+	}
 	componentDidMount () {
     this.props.form.validateFields();
   }
@@ -74,11 +72,7 @@ class MatchStep2 extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.dispatch(saveStep2(values))
-        Router.push({
-          pathname: '/matchstep3',
-        })
       }
     });
   }
@@ -86,7 +80,8 @@ class MatchStep2 extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {
-    const { classes } = this.props;
+    const { item } = this.props;
+    console.log(item)
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
@@ -115,7 +110,7 @@ class MatchStep2 extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-        <Topbar position="p1"/>
+          <Topbar position="p1" num={item.product?item.product.productNum:0}/>
         <Title>个人信息</Title>
         <Wrapper>
           <Contain>
@@ -599,5 +594,5 @@ class MatchStep2 extends React.Component {
 
 const WrappedMatchStep2 = Form.create()(MatchStep2);
 
-// export default connect(state => state)(withReduxSaga(withStyles(styles)(WrappedMatchStep2)));
+// export default connect(state => state)(withReduxSaga(withRoot(WrappedMatchStep2)));
 export default withReduxSaga(withRoot(WrappedMatchStep2));

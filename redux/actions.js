@@ -1,5 +1,6 @@
 export const actionTypes = {
   LOAD_DATA: 'LOAD_DATA',
+  FAILURE:'FAILURE',
   LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
   SAVE_STEP1: 'SAVE_STEP1',
   SAVE_STEP2: 'SAVE_STEP2',
@@ -10,7 +11,12 @@ export const actionTypes = {
 }
 
 
-
+export function failure (error) {
+  return {
+    type: actionTypes.FAILURE,
+    error
+  }
+}
 export function loadData () {
   return {type: actionTypes.LOAD_DATA}
 }

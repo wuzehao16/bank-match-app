@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Router from 'next/router'
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
 import Topbar from '../components/Topbar';
@@ -122,11 +121,7 @@ class MatchStep4 extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.dispatch(saveStep4(values))
-        Router.push({
-          pathname: '/matchstep5',
-        })
       }
     });
   }
@@ -376,7 +371,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>公积金缴纳基数</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}
@@ -430,7 +425,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div >
                   <span>调整前公积金缴纳基数</span>
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:50}}/>
                   <span>元</span>
                 </div>
               )}

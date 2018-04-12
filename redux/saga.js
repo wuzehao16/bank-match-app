@@ -2,27 +2,21 @@
 
 import {delay} from 'redux-saga'
 import {all, call, put, take, takeLatest, select} from 'redux-saga/effects'
-// import es6promise from 'es6-promise'
-import 'isomorphic-unfetch'
+import Router from 'next/router'
+import { add } from '../services/match'
 
 import {actionTypes, failure, loadDataSuccess, tickClock} from './actions'
 
-// es6promise.polyfill()
 
 // 保存第一步数据
 function * sendData1Saga (action) {
   try {
     const data = yield select();
-    fetch('http://47.106.70.82:8611/app/getMatchModeResult', {
-      method: 'post',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:1
-      })
-    });
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    Router.push({
+      pathname: '/matchstep2',
+    })
   } catch (err) {
     yield put(failure(err))
   }
@@ -31,16 +25,11 @@ function * sendData1Saga (action) {
 function * sendData2Saga (action) {
   try {
     const data = yield select();
-    fetch('http://47.106.70.82:8611/app/getMatchModeResult', {
-      method: 'post',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:2
-      })
-    });
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    Router.push({
+      pathname: '/matchstep3',
+    })
   } catch (err) {
     yield put(failure(err))
   }
@@ -49,16 +38,19 @@ function * sendData2Saga (action) {
 function * sendData3Saga (action) {
   try {
     const data = yield select();
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
-      method: 'post',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:3
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    console.log(data)
+    if (data.matchJson.basicInformation.occupation == 0|| data.matchJson.basicInformation.occupation==2) {
+      Router.push({
+        pathname: '/matchstep4',
       })
-    });
+    } else {
+      Router.push({
+        pathname: '/matchstep5',
+      })
+    }
+
   } catch (err) {
     yield put(failure(err))
   }
@@ -67,16 +59,11 @@ function * sendData3Saga (action) {
 function * sendData4Saga (action) {
   try {
     const data = yield select();
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
-      method: 'post',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:4
-      })
-    });
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    Router.push({
+      pathname: '/matchstep5',
+    })
   } catch (err) {
     yield put(failure(err))
   }
@@ -85,37 +72,24 @@ function * sendData4Saga (action) {
 function * sendData5Saga (action) {
   try {
     const data = yield select();
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
-      method: 'post',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:5
-      })
-    });
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    Router.push({
+      pathname: '/matchstep6',
+    })
   } catch (err) {
     yield put(failure(err))
   }
 }
 // 最后保存
-function * sendDataSaga (getState) {
+function * sendDataSaga (action) {
   try {
     const data = yield select();
-    console.log('state after', data)
-    fetch('http://192.168.2.100:8611/app/getMatchModeResult', {
-      method: 'post',
-      mode: 'cors',
-      headers: new Headers({
-          'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        modeJson: JSON.stringify(data),
-        step:0
-      })
-    });
-    console.log(res,"res")
+    const res = yield call(add,data)
+    yield put(loadDataSuccess(res.data))
+    // Router.push({
+    //   pathname: '/matchstep2',
+    // })
   } catch (err) {
     yield put(failure(err))
   }

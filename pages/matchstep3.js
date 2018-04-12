@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Router from 'next/router';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../components/layout';
@@ -96,11 +95,7 @@ class MatchStep3 extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.dispatch(saveStep3(values))
-        Router.push({
-          pathname: '/matchstep4',
-        })
       }
     });
   }
