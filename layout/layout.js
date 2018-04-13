@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
-
+import Nprogress from '../components/Nprogress'
 export default ({ children, title = '智能匹配' }) => (
   <div className='app'>
     <Head>
@@ -17,7 +17,7 @@ export default ({ children, title = '智能匹配' }) => (
         <Link href='/b'><a>Contact</a></Link>
       </nav>
     </header> */}
-
+    <Nprogress />
     { children }
 
     {/* <footer>
