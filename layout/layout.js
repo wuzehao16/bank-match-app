@@ -55,6 +55,7 @@ export default ({ children, title = '智能匹配' }) => (
         font-size:10px;
         color:red;
         position: absolute;
+        width: 200px;
         left: 0px;
         top: 20px;
       }
