@@ -123,12 +123,14 @@ class ProductDetail extends React.PureComponent {
   countMonthlyPayment2 = (productTimeMax = 1) => {
     const product = this.state;
     const productLoad = product.productLoad* 10000;
+    50/24+500000*0.75/100
+    500000/60+500000*0.75/100
     return ((productLoad/productTimeMax)+ productLoad*product.monthlyFeeRate/100).toFixed(2);
   }
   //总利息
   countInterest = (productTimeMax) => {
     const product = this.state;
-    return product.productLoad* 10000*product.monthlyFeeRate/100*productTimeMax;
+    return (product.productLoad* 10000*product.monthlyFeeRate/100*productTimeMax).toFixed(2);
   }
   //手续费
   countPoundage =  (poundage = 0) => {
@@ -263,7 +265,7 @@ class ProductDetail extends React.PureComponent {
               <div className="pie-info">
                 <div><Square primary="#ff7c70"/>贷款<span className="pie-info-detail">{product.productLoad}万/{product.productTime||product.productTimeMax}期</span></div>
                 <div><Square primary="#fbc02d"/>利息<span className="pie-info-detail">{this.countInterest(product.productTime)}元({product.monthlyFeeRate}%/月)</span></div>
-                <div><Square primary="#beb1ff"/>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTimeMax)}元</span></div>
+                <div><Square primary="#beb1ff"/>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTime)}元</span></div>
                 <div><Square primary="#00ddb0"/>手续费<span className="pie-info-detail">{this.countPoundage(product.productPoundage)}元/{product.productPoundage?product.productPoundage:0.00}%</span></div>
               </div>
               <Input type="number" min={3}  onBlur={this.changeLoanAmount}  placeholder={`输入借款额度(1-${product.productMaxLoad}万)`}/><span className="after">万</span>

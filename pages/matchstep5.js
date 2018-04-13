@@ -110,11 +110,11 @@ let housePropertyUuid = 0;
 let businessPolicyUuid = 0;
 let carPropertyUuid = 0;
 class MatchStep4 extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
+  static async getInitialProps({store}) {
+		return {
+			data: store.getState()
+		}
+	}
 	componentDidMount () {
     this.props.form.validateFields();
   }
@@ -220,9 +220,9 @@ class MatchStep4 extends React.Component {
     });
   }
   render () {
-    const { classes } = this.props;
+    const { data } = this.props;
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
+    const item = data.matchJson.assets || {};
     // Only show error after a field is touched.
     const isHousePropertyError = isFieldTouched('isHouseProperty') && getFieldError('isHouseProperty');
     const sumHousePropertyError = isFieldTouched('sumHouseProperty') && getFieldError('sumHouseProperty');
@@ -232,7 +232,7 @@ class MatchStep4 extends React.Component {
     const sumFamilyCarError = isFieldTouched('sumFamilyCar') && getFieldError('sumFamilyCar');
 
     // 房产状况
-    getFieldDecorator('houseProperty', { initialValue: [] });
+    getFieldDecorator('houseProperty', { initialValue: item.houseProperty||[] });
     const houseProperty = getFieldValue('houseProperty');
     const housePropertyFormItems = houseProperty.map((k, index) => {
       return (
@@ -260,6 +260,7 @@ class MatchStep4 extends React.Component {
               key={k}
               >
               {getFieldDecorator(`housePropertyDependency[${k}]`, {
+                // initialValue:item.housePropertyDependency?item.housePropertyDependency[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>深房</RadioButton>
@@ -684,6 +685,7 @@ class MatchStep4 extends React.Component {
               help={isHousePropertyError || ''}
               >
               {getFieldDecorator('isHouseProperty', {
+                initialValue: item.isHouseProperty,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -697,23 +699,26 @@ class MatchStep4 extends React.Component {
             getFieldValue('isHouseProperty')===1
             ? <div>
               <DoubleInput>
-                <FormItem
-                  validateStatus={sumHousePropertyError ? 'error' : ''}
-                  help={sumHousePropertyError || ''}
-                  >
-                  {getFieldDecorator('sumHouseProperty', {
-                    rules: [{
-                      required: true,
-                      message: '请输入名下房产数量'
-                    }],
-                  })(
-                    <div style={{verticalAlign:'bottom'}}>
-                      <span>名下房产数量</span>
+                <div style={{verticalAlign:'bottom'}}>
+                  <span>名下房产数量</span>
+                  <FormItem
+                    style={{display:'inline-block'}}
+                    validateStatus={sumHousePropertyError ? 'error' : ''}
+                    help={sumHousePropertyError || ''}
+                    >
+                    {getFieldDecorator('sumHouseProperty', {
+                      initialValue: item.sumHouseProperty,
+                      rules: [{
+                        required: true,
+                        message: '请输入名下房产数量'
+                      }],
+                    })(
                       <input   type="number"style={{width:35}}/>
-                      <span>套</span>
-                    </div>
-                  )}
-                </FormItem>
+                    )}
+                  </FormItem>
+                  <span>套</span>
+                </div>
+
               </DoubleInput>
               { housePropertyFormItems }
                 <AddButton  onClick={this.addHouseProperty} >
@@ -731,6 +736,7 @@ class MatchStep4 extends React.Component {
               help={businessPolicyError || ''}
               >
               {getFieldDecorator('businessPolicy', {
+                initialValue: item.businessPolicy,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -744,23 +750,25 @@ class MatchStep4 extends React.Component {
             getFieldValue('businessPolicy') === 1
             ? <div>
               <DoubleInput>
-                <FormItem
-                  validateStatus={sumBusinessPolicyError ? 'error' : ''}
-                  help={sumBusinessPolicyError || ''}
-                  >
-                  {getFieldDecorator('sumBusinessPolicy', {
-                    rules: [{
-                      required: true,
-                      message: '请输入名下保单份数'
-                    }],
-                  })(
-                    <div style={{verticalAlign:'bottom'}}>
-                      <span>名下保单份数</span>
+                <div style={{verticalAlign:'bottom'}}>
+                  <span>名下保单份数</span>
+                  <FormItem
+                    style={{display:"inline-block"}}
+                    validateStatus={sumBusinessPolicyError ? 'error' : ''}
+                    help={sumBusinessPolicyError || ''}
+                    >
+                    {getFieldDecorator('sumBusinessPolicy', {
+                      initialValue: item.sumBusinessPolicy,
+                      rules: [{
+                        required: true,
+                        message: '请输入名下保单份数'
+                      }],
+                    })(
                       <input   type="number"style={{width:35}}/>
-                      <span>份</span>
-                    </div>
-                  )}
-                </FormItem>
+                    )}
+                  </FormItem>
+                  <span>份</span>
+                </div>
               </DoubleInput>
               {businessPolicyFormItems}
               <AddButton  onClick={this.addBusinessPolicy} >
@@ -778,6 +786,7 @@ class MatchStep4 extends React.Component {
               help={isFamilyCarError || ''}
               >
               {getFieldDecorator('isFamilyCar', {
+                initialValue: item.isFamilyCar,
                 rules: [{
                   required: true,
                   message: '请输入名下车辆数量'
@@ -794,20 +803,22 @@ class MatchStep4 extends React.Component {
             getFieldValue('isFamilyCar') ===1
             ? <div>
               <DoubleInput>
-                <FormItem
-                  validateStatus={sumFamilyCarError ? 'error' : ''}
-                  help={sumFamilyCarError || ''}
-                  >
-                  {getFieldDecorator('sumFamilyCar', {
-                    rules: [{ required: true}],
-                  })(
-                    <div style={{verticalAlign:'bottom'}}>
-                      <span>名下车辆数量</span>
+                <div style={{verticalAlign:'bottom'}}>
+                  <span>名下车辆数量</span>
+                  <FormItem
+                    style={{display:"inline-block"}}
+                    validateStatus={sumFamilyCarError ? 'error' : ''}
+                    help={sumFamilyCarError || ''}
+                    >
+                    {getFieldDecorator('sumFamilyCar', {
+                      initialValue: item.sumFamilyCar,
+                      rules: [{ required: true}],
+                    })(
                       <input   type="number"style={{width:35}}/>
-                      <span>辆</span>
-                    </div>
-                  )}
-                </FormItem>
+                    )}
+                  </FormItem>
+                  <span>辆</span>
+                </div>
               </DoubleInput>
               {carPropertyFormItems}
               <AddButton  onClick={this.addCarProperty} >

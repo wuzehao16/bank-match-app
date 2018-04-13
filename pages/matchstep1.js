@@ -202,4 +202,4 @@ MatchStep1.propTypes = {
 };
 const WrappedMatchStep1 = Form.create()(MatchStep1);
 
-export default withReduxSaga(withRoot(withStyles(styles)(WrappedMatchStep1)));
+export default withReduxSaga(withStyles(styles)(withRoot(WrappedMatchStep1)));

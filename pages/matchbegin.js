@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Blanklayout';
+import Nprogress from '../components/Nprogress'
 import fetch from '../lib/fetch'
 
 const Container = styled.div`
@@ -82,6 +83,7 @@ class MatchBegin extends React.Component {
     return (
       // <MuiThemeProvider theme={theme}>
       <Layout>
+        <Nprogress/>
         <Wrapper1>
           <Advantage>
             <Title>

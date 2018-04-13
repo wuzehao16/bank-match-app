@@ -74,11 +74,11 @@ const DoubleInput = styled.div`
   justify-content: space-between;
 `
 class MatchStep3 extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
+  static async getInitialProps({store}) {
+		return {
+			data: store.getState()
+		}
+	}
 	componentDidMount () {
     this.props.form.validateFields();
   }
@@ -103,9 +103,9 @@ class MatchStep3 extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {
-    const { classes } = this.props;
+    const { data } = this.props;
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
+    const item = data.matchJson.creditInformation || {};
     // Only show error after a field is touched.
     const recordTimeError = isFieldTouched('recordTime') && getFieldError('recordTime');
     const sumPettyLoanError = isFieldTouched('sumPettyLoan') && getFieldError('sumPettyLoan');
@@ -144,6 +144,7 @@ class MatchStep3 extends React.Component {
               help={recordTimeError || ''}
               >
               {getFieldDecorator('recordTime', {
+                initialValue:item.recordTime,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -164,6 +165,7 @@ class MatchStep3 extends React.Component {
               help={sumPettyLoanError || ''}
               >
               {getFieldDecorator('sumPettyLoan', {
+                initialValue:item.sumPettyLoan,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -186,6 +188,7 @@ class MatchStep3 extends React.Component {
               help={sumConsumerFinanceLoanError || ''}
               >
               {getFieldDecorator('sumConsumerFinanceLoan', {
+                initialValue:item.sumConsumerFinanceLoan,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -208,6 +211,7 @@ class MatchStep3 extends React.Component {
               help={isParticleLoanError || ''}
               >
               {getFieldDecorator('isParticleLoan', {
+                initialValue:item.isParticleLoan,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -226,6 +230,7 @@ class MatchStep3 extends React.Component {
                             help={particleLoanLimitError || ''}
                             >
                             {getFieldDecorator('particleLoanLimit', {
+                              initialValue:item.particleLoanLimit,
                               rules: [{ required: true}],
                             })(
                               <RadioGroup  size="small">
@@ -245,6 +250,7 @@ class MatchStep3 extends React.Component {
               help={isLoanCloseError || ''}
               >
               {getFieldDecorator('isLoanClose', {
+                initialValue:item.isLoanClose,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -261,6 +267,7 @@ class MatchStep3 extends React.Component {
               help={isLoanLossError || ''}
               >
               {getFieldDecorator('isLoanLoss', {
+                initialValue:item.isLoanLoss,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -280,6 +287,7 @@ class MatchStep3 extends React.Component {
               help={isOverdueError || ''}
               >
               {getFieldDecorator('isOverdue', {
+                initialValue:item.isOverdue,
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
@@ -299,6 +307,7 @@ class MatchStep3 extends React.Component {
                     help={overdueCategoryError || ''}
                     >
                     {getFieldDecorator('overdueCategory', {
+                      initialValue:item.overdueCategory,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -316,6 +325,7 @@ class MatchStep3 extends React.Component {
                     help={overdueDaysError || ''}
                     >
                     {getFieldDecorator('overdueDays', {
+                      initialValue:item.overdueDays,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -336,6 +346,7 @@ class MatchStep3 extends React.Component {
                           help={creditCardOverdueMoneyError || ''}
                           >
                           {getFieldDecorator('creditCardOverdueMoney', {
+                            initialValue:item.creditCardOverdueMoney,
                             rules: [{ required: true}],
                           })(
                             <RadioGroup  size="small">
@@ -357,6 +368,7 @@ class MatchStep3 extends React.Component {
                           help={loanOverdueMoneyError || ''}
                           >
                           {getFieldDecorator('loanOverdueMoney', {
+                            initialValue:item.loanOverdueMoney,
                             rules: [{ required: true}],
                           })(
                             <RadioGroup  size="small">
@@ -376,6 +388,7 @@ class MatchStep3 extends React.Component {
                     help={isOverdueBalanceError || ''}
                     >
                     {getFieldDecorator('isOverdueBalance', {
+                      initialValue:item.isOverdueBalance,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -392,6 +405,7 @@ class MatchStep3 extends React.Component {
                     help={isTwoMonthsOverdueError || ''}
                     >
                     {getFieldDecorator('isTwoMonthsOverdue', {
+                      initialValue:item.isTwoMonthsOverdue,
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
@@ -408,6 +422,7 @@ class MatchStep3 extends React.Component {
                       help={isThreeMonthsOverdueError || ''}
                       >
                       {getFieldDecorator('isThreeMonthsOverdue', {
+                        initialValue:item.isThreeMonthsOverdue,
                         rules: [{ required: true}],
                       })(
                         <RadioGroup  size="small">
@@ -424,6 +439,7 @@ class MatchStep3 extends React.Component {
                       help={isSixMonthsOverdueError || ''}
                       >
                       {getFieldDecorator('isSixMonthsOverdue', {
+                        initialValue:item.isSixMonthsOverdue,
                         rules: [{ required: true}],
                       })(
                         <RadioGroup  size="small">
@@ -440,6 +456,7 @@ class MatchStep3 extends React.Component {
                       help={isOneYearOverdueError || ''}
                       >
                       {getFieldDecorator('isOneYearOverdue', {
+                        initialValue:item.isOneYearOverdue,
                         rules: [{ required: true}],
                       })(
                         <RadioGroup  size="small">
@@ -456,6 +473,7 @@ class MatchStep3 extends React.Component {
                       help={isTwoYearsOverdueError || ''}
                       >
                       {getFieldDecorator('isTwoYearsOverdue', {
+                        initialValue:item.isTwoYearsOverdue,
                         rules: [{ required: true}],
                       })(
                         <RadioGroup  size="small">
@@ -472,6 +490,7 @@ class MatchStep3 extends React.Component {
                       help={isFiveYearsOverdueError || ''}
                       >
                       {getFieldDecorator('isFiveYearsOverdue', {
+                        initialValue:item.isFiveYearsOverdue,
                         rules: [{ required: true}],
                       })(
                         <RadioGroup  size="small">
@@ -487,95 +506,105 @@ class MatchStep3 extends React.Component {
         <Title>征信查询情况</Title>
         <Wrapper>
           <DoubleInput>
-            <FormItem
-              validateStatus={sumOneMonthQueriesError ? 'error' : ''}
-              help={sumOneMonthQueriesError || ''}
-              >
-              {getFieldDecorator('sumOneMonthQueries', {
-                rules: [{
-                   required: true,
-                   message:'请输入近1个月查询次数'
-              }],
-              })(
-                <div >
-                  <span>近1个月查询次数</span>
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>次</span>
-                </div>
-              )}
-            </FormItem>
-            <FormItem
-              validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
-              help={sumTwoMonthsQueriesError || ''}
-              >
-              {getFieldDecorator('sumTwoMonthsQueries', {
-                rules: [{
-                  required: true,
-                  message:'请输入近2个月查询次数'
+            <div >
+              <span>近1个月查询次数</span>
+              <FormItem
+                style={{display:"inline-block"}}
+                validateStatus={sumOneMonthQueriesError ? 'error' : ''}
+                help={sumOneMonthQueriesError || ''}
+                >
+                {getFieldDecorator('sumOneMonthQueries', {
+                  initialValue:item.sumOneMonthQueries,
+                  rules: [{
+                     required: true,
+                     message:'请输入近1个月查询次数'
                 }],
-              })(
-                <div >
-                  <span>近2个月查询次数</span>
+                })(
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>次</span>
-                </div>
-              )}
-            </FormItem>
+                )}
+              </FormItem>
+              <span>次</span>
+            </div>
+            <div >
+              <span>近2个月查询次数</span>
+              <FormItem
+                style={{display:"inline-block"}}
+                validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
+                help={sumTwoMonthsQueriesError || ''}
+                >
+                {getFieldDecorator('sumTwoMonthsQueries', {
+                  initialValue:item.sumTwoMonthsQueries,
+                  rules: [{
+                    required: true,
+                    message:'请输入近2个月查询次数'
+                  }],
+                })(
+                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                )}
+              </FormItem>
+              <span>次</span>
+            </div>
           </DoubleInput>
           <DoubleInput>
-            <FormItem
-              validateStatus={sumThreeMonthsQueriesError ? 'error' : ''}
-              help={sumThreeMonthsQueriesError || ''}
-              >
-              {getFieldDecorator('sumThreeMonthsQueries', {
-                rules: [{
-                  required: true,
-                  message:'请输入近3个月查询次数'
-                }],
-              })(
-                <div >
-                  <span>近3个月查询次数</span>
+            <div >
+              <span>近3个月查询次数</span>
+              <FormItem
+                style={{display:"inline-block"}}
+                validateStatus={sumThreeMonthsQueriesError ? 'error' : ''}
+                help={sumThreeMonthsQueriesError || ''}
+                >
+                {getFieldDecorator('sumThreeMonthsQueries', {
+                  initialValue:item.sumThreeMonthsQueries,
+                  rules: [{
+                    required: true,
+                    message:'请输入近3个月查询次数'
+                  }],
+                })(
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>次</span>
-                </div>
-              )}
-            </FormItem>
-            <FormItem
-              validateStatus={sumSixMonthsQueriesError ? 'error' : ''}
-              help={sumSixMonthsQueriesError || ''}
-              >
-              {getFieldDecorator('sumSixMonthsQueries', {
-                rules: [{
-                  required: true,
-                  message:'请输入近6个月查询次数'
-                }],
-              })(
-                <div >
-                  <span>近6个月查询次数</span>
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>次</span>
-                </div>
-              )}
-            </FormItem>
+                )}
+              </FormItem>
+              <span>次</span>
+            </div>
+            <div>
+              <span>近6个月查询次数</span>
+              <FormItem
+                style={{display:"inline-block"}}
+                validateStatus={sumSixMonthsQueriesError ? 'error' : ''}
+                help={sumSixMonthsQueriesError || ''}
+                >
+                {getFieldDecorator('sumSixMonthsQueries', {
+                  initialValue:item.sumSixMonthsQueries,
+                  rules: [{
+                    required: true,
+                    message:'请输入近6个月查询次数'
+                  }],
+                })(
+                    <input  type="number" min={0} max={1000} style={{width:25}}/>
+                )}
+              </FormItem>
+              <span>次</span>
+            </div>
           </DoubleInput>
           <DoubleInput>
+            <div>
+              <span>近12个月查询次数</span>
             <FormItem
+              style={{display:"inline-block"}}
               validateStatus={sumOneYearQueriesError ? 'error' : ''}
               help={sumOneYearQueriesError || ''}
               >
               {getFieldDecorator('sumOneYearQueries', {
+                initialValue:item.sumOneYearQueries,
                 rules: [{
                   required: true,
                   message:'请输入近12个月查询次数'
                 }],
               })(
-                <div >
-                  <span>近12个月查询次数</span>
                   <input  type="number" min={0} max={1000} style={{width:25}}/>
-                  <span>次</span>
-                </div>
               )}
             </FormItem>
+            <span>次</span>
+            </div>
             <Help>
               <Red>*</Red>征信查询次数仅计算贷款审批和信用卡审批的查询之和.
             </Help>

@@ -3,8 +3,8 @@ import {actionTypes} from './actions'
 export const exampleInitialState = {
   matchStep: 0,
   product: null,
+  loading: false,
   matchJson:{
-    placeholderData: null,
     //贷款需求
     loanDemand: null,
     //基本信息
@@ -32,6 +32,16 @@ function reducer (state = exampleInitialState, action) {
       return {
         ...state,
         ...{product: action.data}
+      }
+    case actionTypes.LOADING_START:
+      return {
+        ...state,
+        ...{loading: true}
+      }
+    case actionTypes.LOADING_END:
+      return {
+        ...state,
+        ...{loading: false}
       }
 
       //分界

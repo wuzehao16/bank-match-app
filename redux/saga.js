@@ -13,7 +13,7 @@ function * sendData1Saga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     Router.push({
       pathname: '/matchstep2',
     })
@@ -26,7 +26,7 @@ function * sendData2Saga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     Router.push({
       pathname: '/matchstep3',
     })
@@ -39,7 +39,7 @@ function * sendData3Saga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     console.log(data)
     if (data.matchJson.basicInformation.occupation == 0|| data.matchJson.basicInformation.occupation==2) {
       Router.push({
@@ -60,7 +60,7 @@ function * sendData4Saga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     Router.push({
       pathname: '/matchstep5',
     })
@@ -73,7 +73,7 @@ function * sendData5Saga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     Router.push({
       pathname: '/matchstep6',
     })
