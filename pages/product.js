@@ -125,12 +125,12 @@ class ProductDetail extends React.PureComponent {
     const productLoad = product.productLoad* 10000;
     50/24+500000*0.75/100
     500000/60+500000*0.75/100
-    return ((productLoad/productTimeMax)+ productLoad*product.monthlyFeeRate/100).toFixed(2);
+    return Math.round((productLoad/productTimeMax)+ productLoad*product.monthlyFeeRate/100);
   }
   //总利息
   countInterest = (productTimeMax) => {
     const product = this.state;
-    return (product.productLoad* 10000*product.monthlyFeeRate/100*productTimeMax).toFixed(2);
+    return Math.round(product.productLoad* 10000*product.monthlyFeeRate/100*productTimeMax);
   }
   //手续费
   countPoundage =  (poundage = 0) => {
