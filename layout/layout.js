@@ -54,6 +54,9 @@ export default ({ children, title = '智能匹配' }) => (
       .ant-form-explain{
         font-size:10px;
         color:red;
+        position: absolute;
+        left: 0px;
+        top: 20px;
       }
       .ant-radio-button-wrapper-checked{
         background: #ee5648;

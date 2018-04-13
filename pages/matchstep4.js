@@ -99,6 +99,9 @@ const DoubleInput = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const Relative = styled.div`
+  position: relative;
+`
 class MatchStep4 extends React.Component {
   static async getInitialProps({store}) {
 		return {
@@ -156,7 +159,7 @@ class MatchStep4 extends React.Component {
         <Title>工作收入状况</Title>
         <Wrapper>
           <DoubleInput>
-            <div style={{verticalAlign:'bottom'}}>
+            <div style={{verticalAlign:'bottom',position:'relative'}}>
               <span>单位名称</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -176,7 +179,7 @@ class MatchStep4 extends React.Component {
             </div>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>本单位连续上班</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -190,14 +193,14 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续上班月份'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={1000} style={{width:25,fontSize:16}}/>
                 )}
               </FormItem>
               <span>月</span>
-            </div>
+            </Relative>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>近3个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -215,11 +218,11 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
 
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>近6个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -237,10 +240,10 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>近12个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -258,10 +261,10 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>上一年度税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -279,11 +282,11 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
             <Help><Red>*</Red>超过现单位上班时长的税前月均收入则填0，上一年度税前月均收入指自然年(如2017年)</Help>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>社保缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -301,8 +304,8 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
-            <div >
+            </Relative>
+            <Relative >
               <span>本单位连续缴纳</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -320,7 +323,7 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>月</span>
-            </div>
+            </Relative>
             <Help><Red>*</Red>若无社保则填0</Help>
           </DoubleInput>
           <SubContain>
@@ -359,7 +362,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
-            <div >
+            <Relative >
               <span>调整前社保缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -377,11 +380,11 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
           </SubContain>
           {/* 公积金 */}
           <DoubleInput>
-            <div >
+            <Relative >
               <span>公积金缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -399,8 +402,8 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
-            <div >
+            </Relative>
+            <Relative >
               <span>本单位连续缴纳</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -419,7 +422,7 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>月</span>
-            </div>
+            </Relative>
             <Help><Red>*</Red>若无公积金则填0</Help>
           </DoubleInput>
           <SubContain>
@@ -441,7 +444,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
-            <div >
+            <Relative >
               <span>调整前公积金缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -459,7 +462,7 @@ class MatchStep4 extends React.Component {
                 )}
               </FormItem>
               <span>元</span>
-            </div>
+            </Relative>
           </SubContain>
         </Wrapper>
         <div className='btn'>

@@ -106,6 +106,11 @@ const SubTitle = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+const Relative = styled.div`
+  position: relative;
+`
+
 let housePropertyUuid = 0;
 let businessPolicyUuid = 0;
 let carPropertyUuid = 0;
@@ -699,7 +704,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('isHouseProperty')===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom'}}>
+                <div style={{verticalAlign:'bottom',position:'relative'}}>
                   <span>名下房产数量</span>
                   <FormItem
                     style={{display:'inline-block'}}
@@ -750,7 +755,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('businessPolicy') === 1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom'}}>
+                <div style={{verticalAlign:'bottom',position:'relative'}}>
                   <span>名下保单份数</span>
                   <FormItem
                     style={{display:"inline-block"}}
@@ -789,7 +794,7 @@ class MatchStep4 extends React.Component {
                 initialValue: item.isFamilyCar,
                 rules: [{
                   required: true,
-                  message: '请输入名下车辆数量'
+
                 }],
               })(
                 <RadioGroup  size="small">
@@ -803,7 +808,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('isFamilyCar') ===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom'}}>
+                <div style={{verticalAlign:'bottom',position:'relative'}}>
                   <span>名下车辆数量</span>
                   <FormItem
                     style={{display:"inline-block"}}
@@ -812,7 +817,10 @@ class MatchStep4 extends React.Component {
                     >
                     {getFieldDecorator('sumFamilyCar', {
                       initialValue: item.sumFamilyCar,
-                      rules: [{ required: true}],
+                      rules: [{
+                        required: true,
+                        message: '请输入名下车辆数量'
+                      }],
                     })(
                       <input   type="number"style={{width:35}}/>
                     )}

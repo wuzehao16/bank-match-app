@@ -137,23 +137,27 @@ class MatchStep2 extends React.Component {
           {
             (getFieldValue('age') ===0||getFieldValue('age') ===1||getFieldValue('age') ===3)
               ?           <SubContain>
-                            <span>具体年龄</span>
-                          <FormItem
-                            style={{display:"inline-block"}}
-                            validateStatus={specificAgeError ? 'error' : ''}
-                            help={specificAgeError || ''}
-                            >
-                            {getFieldDecorator('specificAge', {
-                              initialValue:item.specificAge,
-                              rules: [{
-                                 required: true,
-                                 message:'请输入具体年龄'
-                              }],
-                            })(
-                                <input  type="number" min={0} max={100} style={{width:30}}/>
-                            )}
-                          </FormItem>
-                            <span>岁</span>
+                            <div
+                              style={{position:'relative'}}
+                              >
+                              <span>具体年龄</span>
+                            <FormItem
+                              style={{display:"inline-block"}}
+                              validateStatus={specificAgeError ? 'error' : ''}
+                              help={specificAgeError || ''}
+                              >
+                              {getFieldDecorator('specificAge', {
+                                initialValue:item.specificAge,
+                                rules: [{
+                                   required: true,
+                                   message:'请输入具体年龄'
+                                }],
+                              })(
+                                  <input  type="number" min={0} max={100} style={{width:30}}/>
+                              )}
+                            </FormItem>
+                              <span>岁</span>
+                            </div>
                         </SubContain> : null
           }
 

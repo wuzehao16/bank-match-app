@@ -73,6 +73,9 @@ const DoubleInput = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const Relative = styled.div`
+  position: relative;
+`
 class MatchStep3 extends React.Component {
   static async getInitialProps({store}) {
 		return {
@@ -506,7 +509,7 @@ class MatchStep3 extends React.Component {
         <Title>征信查询情况</Title>
         <Wrapper>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>近1个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -524,8 +527,8 @@ class MatchStep3 extends React.Component {
                 )}
               </FormItem>
               <span>次</span>
-            </div>
-            <div >
+            </Relative>
+            <Relative >
               <span>近2个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -543,10 +546,10 @@ class MatchStep3 extends React.Component {
                 )}
               </FormItem>
               <span>次</span>
-            </div>
+            </Relative>
           </DoubleInput>
           <DoubleInput>
-            <div >
+            <Relative >
               <span>近3个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -564,8 +567,8 @@ class MatchStep3 extends React.Component {
                 )}
               </FormItem>
               <span>次</span>
-            </div>
-            <div>
+            </Relative>
+            <Relative>
               <span>近6个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
@@ -583,10 +586,10 @@ class MatchStep3 extends React.Component {
                 )}
               </FormItem>
               <span>次</span>
-            </div>
+            </Relative>
           </DoubleInput>
           <DoubleInput>
-            <div>
+            <Relative>
               <span>近12个月查询次数</span>
             <FormItem
               style={{display:"inline-block"}}
@@ -604,7 +607,7 @@ class MatchStep3 extends React.Component {
               )}
             </FormItem>
             <span>次</span>
-            </div>
+            </Relative>
             <Help>
               <Red>*</Red>征信查询次数仅计算贷款审批和信用卡审批的查询之和.
             </Help>
