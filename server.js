@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const next = require('next')
+const serve = require('koa-static')
 const Router = require('koa-router')
 
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -11,7 +12,6 @@ app.prepare()
 .then(() => {
   const server = new Koa()
   const router = new Router()
-
   router.get('/commission', async ctx => {
     // let data;
     // try {

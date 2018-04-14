@@ -74,7 +74,7 @@ class MatchBegin extends React.Component {
     });
   };
   toMatchList = () => {
-    window.webkit.messageHandlers.gotoMatchHistory.postMessage();
+    window.webkit.messageHandlers.gotoMatchHistory.postMessage({});
   }
 
   render () {
