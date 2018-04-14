@@ -87,6 +87,7 @@ function * sendDataSaga (action) {
     const data = yield select();
     const res = yield call(add,data)
     yield put(loadDataSuccess(res.data))
+    alert(res.data)
     // Router.push({
     //   pathname: '/matchstep2',
     // })
