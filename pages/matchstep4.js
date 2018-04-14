@@ -193,7 +193,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续上班月份'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:25,fontSize:16}}/>
+                  <input  type="number" min={0} max={1000} style={{width:50,fontSize:16}}/>
                 )}
               </FormItem>
               <span>月</span>
