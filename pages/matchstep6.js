@@ -293,10 +293,10 @@ class MatchStep6 extends React.Component {
                   <span>随借随还类贷款总余额 </span>
                   <FormItem
                     style={{display:'inline-block'}}
-                    validateStatus={firstInterestTotalBalanceError ? 'error' : ''}
-                    help={firstInterestTotalBalanceError || ''}
+                    validateStatus={alongLoanTotalBalanceError ? 'error' : ''}
+                    help={alongLoanTotalBalanceError || ''}
                     >
-                    {getFieldDecorator('firstInterestTotalBalance', {
+                    {getFieldDecorator('alongLoanTotalBalance', {
                       rules: [{
                         required: true,
                         message:'请输入随借随还类贷款总余额'
