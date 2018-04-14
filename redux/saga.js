@@ -86,7 +86,7 @@ function * sendDataSaga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    yield put(loadDataSuccess(res.data))
+    // yield put(loadDataSuccess(res.data))
     window.webkit.messageHandlers.getMatchResult.postMessage(res.data)
     // Router.push({
     //   pathname: '/matchstep2',
