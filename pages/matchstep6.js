@@ -93,11 +93,11 @@ const Relative = styled.div`
   position: relative;
 `
 class MatchStep6 extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
+  static async getInitialProps({store}) {
+		return {
+			data: store.getState()
+		}
+	}
 	componentDidMount () {
     this.props.form.validateFields();
   }
@@ -123,7 +123,7 @@ class MatchStep6 extends React.Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {
-    const { classes } = this.props;
+    const { data } = this.props;
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
@@ -145,7 +145,7 @@ class MatchStep6 extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-        <Topbar position="p3"/>
+        <Topbar position="p3" num={data.product?data.product.productNum:0}/>
         <Title>名下负债状况</Title>
         <Wrapper>
           <DoubleInput>

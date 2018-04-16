@@ -19,7 +19,7 @@ class Topbar extends React.Component {
     return (
           <Wrapper >
             <div className={this.props.position + ' product'}>
-              匹配产品数<span className="num">{this.props.num}</span>个
+              匹配产品数<span className="num">{this.props.num || 0}</span>个
             </div>
             <style jsx >{`
               .product{

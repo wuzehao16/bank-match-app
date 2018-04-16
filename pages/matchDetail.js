@@ -2,14 +2,15 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/contentLayout';
-// import fetch from '../lib/fetch'
-import { queryDetail } from '../services/match'
+import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
 
 const Wrapper = styled.div`
   padding: 15px;
   background: #fff;
+  margin-bottom: 15px;
 `
-const Title = styled.div`
+const Name = styled.div`
   color: #000;
   font-size: 22px;
   line-height: 1.45;
@@ -28,68 +29,112 @@ const Title = styled.div`
     line-height: 31px;
   }
 `
-const More = styled.div`
+const Title = styled.div`
+  font-size:14px;
+  padding:0 10px;
+  border-left: 2px solid rgb(238,86,72);
+`
+const Base = styled.div`
   color:#969696;
   font-size: 12px;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
 `
+const More = styled.div`
+  color:rgb(238,86,72);
+  font-size: 14px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+`
+
 const I = styled.i`
 
 `
+const loanType = ['信用贷款','抵押贷款'];
+const city = ['深圳','广州','东莞','珠海','惠州','中山'];
+const age = ['18岁以下','18-24','25-55','55岁以上'];
+const location = ['深户','非深户','港澳台','外籍'];
+const education = [];
+const maritalStatus = [];
 class MatchDetail extends React.PureComponent {
-  static async getInitialProps ({query}) {
+  static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    // const token = getCookie('token', req)
-    console.log(query)
-    const res = await queryDetail(query.matchNo)
+    const token = getCookie('token', req)
+    const res = await fetch(`/selectModelUserDetail?matchNo=${query.matchNo}`, token)
     console.log(res)
     //总利息
-    return { content: res }
+    return { product: res }
   }
   componentDidMount(){
 
   }
   render() {
-    const content = this.props.content;
+    const i = this.props.product;
+    console.log(i,"iiiiiiii")
+    //贷款需求
+    const loanDemand = i.loanDemand || {};
+    //基本信息
+    const basicInformation = i.basicInformation|| {};
+    //征信信息
+    const creditInformation = i.creditInformation|| {};
+    // 工作收入
+    const income = i.income|| {};
+    // 资产状况
+    const assets = i.assets|| {};
+    //资产负债
+    const capitalDebtSituation = i.capitalDebtSituation|| {};
     return (
       <Layout>
         <Wrapper>
-          123
-          {/* <Title>{content.contentTitle}</Title>
+
+           <Name><span>{loanDemand.name}</span></Name>
+          <Base>
+            <span><i className="hj"></i><span>{city[loanDemand.city]}</span></span>
+            <span><i className="shijian"></i><span>{age[basicInformation.age]}</span></span>
+            <span><i className="xueli"></i><span>{education[basicInformation.education]}</span></span>
+            <span><i className="hunyin"></i><span>{maritalStatus[basicInformation.maritalStatus]}</span></span>
+          </Base>
           <More>
-            <span><i className="source"></i><span>{content.source?content.source:'未知来源'}</span></span>
-            <span><i className="read"></i><span>{content.readNum}</span></span>
-            <span><i className="time"></i><span>{content.releaseTime}</span></span>
+            <span><i className="daikuan"></i><span>期望贷款：{loanDemand.exLoanAmount}万</span></span>
+            <span><i className="leixing"></i><span>贷款类型：{loanDemand.loanType}</span></span>
           </More>
-          <div
-            dangerouslySetInnerHTML={{
-                __html: content.content
-            }}>
-          </div> */}
+        </Wrapper>
+        <Wrapper>
+          <Title>基本信息</Title>
         </Wrapper>
         <style jsx>{`
           span{
             margin-left:4px;
           }
           i{
-            height:10px;
-            width:10px;
+            height:12px;
+            width:12px;
             display:inline-block;
             background-size:100% 100%;
           }
-          .source{
+          .hj{
             width:12px;
-            background-image:url(/static/source.png);
+            background-image:url(/static/huji.png);
           }
-          .read{
+          .shijian{
             width:12px;
-            background-image:url(/static/read.png);
+            background-image:url(/static/shijian.png);
           }
-          .time{
-            background-image:url(/static/time.png);
+          .xueli{
+            background-image:url(/static/xueli.png);
           }
+          .hunyin{
+            background-image:url(/static/hunyin.png);
+          }
+          .daikuan{
+            background-image:url(/static/daikuan.png);
+          }
+          .leixing{
+            background-image:url(/static/leixing.png);
+          }
+
         `}
         </style>
       </Layout>
