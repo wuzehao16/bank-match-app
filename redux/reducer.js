@@ -31,7 +31,7 @@ function reducer (state = exampleInitialState, action) {
     case actionTypes.LOAD_DATA_SUCCESS:
       return {
         ...state,
-        ...{product: action.data}
+        ...action.data
       }
     case actionTypes.LOADING_START:
       return {

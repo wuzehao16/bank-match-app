@@ -155,7 +155,7 @@ class MatchStep4 extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-        <Topbar position="p3" num={data.product?data.product.productNum:0}/>
+        <Topbar position="p3" num={data.productNum?data.productNum:0}/>
         <Title>工作收入状况</Title>
         <Wrapper>
           <DoubleInput>

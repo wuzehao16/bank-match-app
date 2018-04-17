@@ -74,11 +74,26 @@ const InfoRight = styled.div`
     font-size: 13px;
   }
 `
+const Notice = styled.div`
+  color:#969696;
+  font-size:8px;
+  @media (min-width:320px) {
+    width:140px;
+  }
+  @media(min-width: 360px) {
+    width:160px;
+  }
+  @media (min-width:375px) {
+    width:165px;
+  }
+
+
+`
 class ProductDetail extends React.PureComponent {
   static async getInitialProps ({query, req}) {
     // eslint-disable-next-line no-undef
-    const token = getCookie('token',req)
-    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`, token)
+    // const token = getCookie('token',req)
+    const res = await fetch(`/getProductInfomationDetails?productId=${query.productId}`)
     //总利息
     res.productTimeMin = res.productTimeLimit.split("-")[0];
     res.productTimeMax = res.productTimeLimit.split("-")[1];
@@ -259,7 +274,7 @@ class ProductDetail extends React.PureComponent {
           <div className="info">
             <div>
               <div className="pie" id="main"></div>
-              <div className="notice">{product.productNotice}</div>
+              <Notice>{product.productNotice}</Notice>
             </div>
             <InfoRight>
               <div className="pie-info">
@@ -382,8 +397,11 @@ class ProductDetail extends React.PureComponent {
             border-bottom:1px solid #f2f2f2;
           }
           .title-container{
-            width:10=0px;
-            padding-left:45px;
+            width: 185px;
+            padding-left:5px;
+            text-overflow: ellipsis;
+            text-align:center;
+            white-space:nowrap;
           }
           .title{
             color:#3c3c3c;
@@ -396,7 +414,7 @@ class ProductDetail extends React.PureComponent {
           .logo{
             width:100px;
             height:35px;
-            margin-left:60px;
+            margin-left:20px;
             background: #000;
           }
           .info{
@@ -412,10 +430,6 @@ class ProductDetail extends React.PureComponent {
           .pie{
             width:135px;
             height:135px;
-          }
-          .notice{
-            color:#969696;
-            font-size:8px;
           }
           .pie-info{
             color:#646464;

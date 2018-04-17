@@ -111,7 +111,7 @@ class MatchStep2 extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout>
-          <Topbar position="p1" num={data.product?data.product.productNum:0}/>
+          <Topbar position="p1" num={data.productNum?data.productNum:0}/>
         <Title>个人信息</Title>
         <Wrapper>
           <Contain>

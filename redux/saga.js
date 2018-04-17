@@ -25,6 +25,7 @@ function * sendData1Saga (action) {
 function * sendData2Saga (action) {
   try {
     const data = yield select();
+    console.log(data,"这是第二步的")
     const res = yield call(add,data)
     yield put(loadDataSuccess(res.data))
     Router.push({

@@ -14,6 +14,7 @@ export const actionTypes = {
 
 
 export function failure (error) {
+  console.log(error,"error")
   return {
     type: actionTypes.FAILURE,
     error
