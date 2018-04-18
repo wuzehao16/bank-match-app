@@ -18,8 +18,8 @@ export async function update(params) {
 }
 
 export async function add(params) {
-  return request('http://47.106.70.82:8611/app/getMatchModeResult', {
-   // return request('http://192.168.2.100:8611/app/getMatchModeResult', {
+  // return request('http://47.106.70.82:8611/app/getMatchModeResult', {
+   return request('http://192.168.2.100:8611/app/getMatchModeResult', {
     method: 'POST',
     body: {
       ...params,

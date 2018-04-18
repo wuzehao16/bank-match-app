@@ -2,7 +2,6 @@ import {actionTypes} from './actions'
 
 export const exampleInitialState = {
   matchStep: 0,
-  product: null,
   loading: false,
   matchJson:{
     //贷款需求
@@ -47,6 +46,7 @@ function reducer (state = exampleInitialState, action) {
       //分界
     case actionTypes.SAVE_STEP1:
       return {
+        ...state,
         matchStep: 1,
         matchJson:{
           ...state.matchJson,
@@ -55,6 +55,7 @@ function reducer (state = exampleInitialState, action) {
       }
     case actionTypes.SAVE_STEP2:
       return {
+        ...state,
         matchStep: 2,
         matchJson:{
           ...state.matchJson,
@@ -63,6 +64,7 @@ function reducer (state = exampleInitialState, action) {
       }
     case actionTypes.SAVE_STEP3:
       return {
+        ...state,
         matchStep: 3,
         matchJson:{
           ...state.matchJson,
@@ -71,6 +73,7 @@ function reducer (state = exampleInitialState, action) {
       }
     case actionTypes.SAVE_STEP4:
       return {
+        ...state,
         matchStep: 4,
         matchJson:{
           ...state.matchJson,
@@ -79,6 +82,7 @@ function reducer (state = exampleInitialState, action) {
       }
     case actionTypes.SAVE_STEP5:
       return {
+        ...state,
         matchStep: 5,
         matchJson:{
           ...state.matchJson,
@@ -87,6 +91,7 @@ function reducer (state = exampleInitialState, action) {
       }
     case actionTypes.SAVE_STEP6:
       return {
+        ...state,
         matchStep: 0,
         matchJson:{
           ...state.matchJson,
