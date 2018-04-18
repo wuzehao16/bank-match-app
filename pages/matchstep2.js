@@ -37,6 +37,11 @@ const Title = styled.div`
   color: #969696;
   padding: 0 15px;
 `
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
+`
 const SubContain = styled.div`
   background-color: #fff;
   padding: 10px 13px 20px;
@@ -230,10 +235,10 @@ class MatchStep2 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
-                  <RadioButton value={0}>全日制本科及以上</RadioButton>
+                  <RadioButton value={0}>本科及以上</RadioButton>
                   <RadioButton value={1}>全日制大专</RadioButton>
                   <RadioButton value={2}>高中及以下</RadioButton>
-                  <RadioButton value={3}>其他(自考/函授)</RadioButton>
+                  <RadioButton value={3}>自考/函授</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
@@ -254,7 +259,7 @@ class MatchStep2 extends React.Component {
                 <RadioGroup  size="small">
                   <RadioButton value={0}>工薪族</RadioButton>
                   <RadioButton value={1}>企业主</RadioButton>
-                  <RadioButton value={2}>工薪族和企业主</RadioButton>
+                  <RadioButton value={2}>工薪/企业主</RadioButton>
                   <RadioButton value={3}>自由职业</RadioButton>
                 </RadioGroup>
               )}
@@ -275,7 +280,7 @@ class MatchStep2 extends React.Component {
                       rules: [{ required: true}],
                     })(
                       <RadioGroup  size="small">
-                        <RadioButton value={0}>教师医生(公立)</RadioButton>
+                        <RadioButton value={0}>公立教师医生</RadioButton>
                         <RadioButton value={1}>公务员</RadioButton>
                         <RadioButton value={2}>事业单位</RadioButton>
                         <RadioButton value={3}>高新企业</RadioButton>
@@ -593,7 +598,7 @@ class MatchStep2 extends React.Component {
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <Button variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</Button>
+              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
@@ -601,7 +606,7 @@ class MatchStep2 extends React.Component {
         .btn{
           margin-top: 75px;
           text-align: center;
-          color: #fff,
+          color: #fff;
         }
         input{
          border-color: #878787;

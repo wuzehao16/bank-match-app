@@ -79,11 +79,11 @@ const maritalStatus = ['已婚', '未婚', '离异', '丧偶'];
 
 const location = ['深户', '非深户', '港澳台', '外籍'];
 
-const education = ['全日制本科及以上', '全日制大专', ' 高中以下', '其他（自考/函授）'];
+const education = ['本科及以上', '全日制大专', ' 高中以下', '自考/函授'];
 
-const occupation = ['工薪族', '企业主', '工薪族和企业主', '自由职业'];
+const occupation = ['工薪族', '企业主', '工薪/企业主', '自由职业'];
 
-const unitProperty = ['教师医生（公立）', '公务员', '事业单位', '高新企业', '主板上市公司', '普通公司', '上市公司', '世界500强'];
+const unitProperty = ['公立教师/医生', '公务员', '事业单位', '高新企业', '主板上市公司', '普通公司', '上市公司', '世界500强'];
 
 const salaryDistribution = ['扣税代发', '固定转账', '现金发放'];
 
@@ -123,7 +123,7 @@ const isLoanLoss = ['无', '有'];
 
 const isOverdue = ['无', '有'];
 
-const overdueCategory = ['信用卡逾期', '贷款逾期', '信用卡和贷款逾期'];
+const overdueCategory = ['信用卡逾期', '贷款逾期', '信用卡/贷款逾期'];
 
 const overdueDays = ['3天以下', '3-7天', '8-15天', '15天以上'];
 
@@ -168,7 +168,7 @@ const policyBrandPaymentMethod = ['年缴', '季缴', '月缴', '趸缴'];
 
 const policyPaymentYears = ['1年以下', '1-2年', '2-3年', '3年以上'];
 
-const carRegistStatus = ['绿本在手', '银行按揭', '信用卡形式按揭', '车贷机构抵押', '汽车金融按揭'];
+const carRegistStatus = ['绿本在手', '银行按揭', '信用卡按揭', '车贷机构抵押', '汽车金融按揭'];
 class MatchDetail extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef

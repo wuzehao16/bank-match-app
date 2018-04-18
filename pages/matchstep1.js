@@ -50,6 +50,12 @@ const Contain = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding-bottom: 20px;
 `
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
+`
+
 class MatchStep1 extends React.Component {
   static async getInitialProps({store}) {
     return {
@@ -188,7 +194,7 @@ class MatchStep1 extends React.Component {
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <Button variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</Button>
+              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
