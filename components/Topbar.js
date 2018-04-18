@@ -14,10 +14,19 @@ class Topbar extends React.Component {
 	// 		item: await fetch(`/item/${query.id}`)
 	// 	}
 	// }
+  componentWillReceiveProps(nextProps){
 
+         //当路由切换时
+         if(this.props.location !== nextProps.location){
+             window.scrollTo(0,0)
+         }
+     }
+     componentDidMount() {
+       window.scrollTo(0,0)
+     }
   render () {
     return (
-          <Wrapper >
+          <Wrapper>
             <div className={this.props.position + ' product'}>
               匹配产品数<span className="num">{this.props.num || 0}</span>个
             </div>

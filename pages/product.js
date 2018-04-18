@@ -166,6 +166,7 @@ class ProductDetail extends React.PureComponent {
       },
       series : [
           {
+              name:'利息占比',
               type: 'pie',
               radius : '55%',
               center: ['50%', '60%'],
