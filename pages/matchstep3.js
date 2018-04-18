@@ -136,7 +136,7 @@ class MatchStep3 extends React.Component {
     const sumOneYearQueriesError = isFieldTouched('sumOneYearQueries') && getFieldError('sumOneYearQueries');
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-      <Layout>
+      <Layout title="智能匹配">
         <Topbar position="p2" num={data.productNum?data.productNum:0}/>
         <Title>征信基本情况</Title>
         <Wrapper>

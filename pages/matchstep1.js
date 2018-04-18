@@ -90,7 +90,7 @@ class MatchStep1 extends React.Component {
     const cityError = isFieldTouched('city') && getFieldError('city');
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-      <Layout>
+      <Layout title="智能匹配">
         <Topbar position="hidden"/>
         <Wrapper>
 

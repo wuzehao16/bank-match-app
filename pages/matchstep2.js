@@ -110,7 +110,7 @@ class MatchStep2 extends React.Component {
     const isInvestigateError = isFieldTouched('isInvestigate') && getFieldError('isInvestigate');
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-      <Layout>
+      <Layout title="智能匹配">
           <Topbar position="p1" num={data.productNum?data.productNum:0}/>
         <Title>个人信息</Title>
         <Wrapper>

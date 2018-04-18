@@ -11,7 +11,6 @@ class MyDocument extends Document {
     return (
       <html lang="cn" dir="ltr">
         <Head>
-          {/* <title>众银云测</title> */}
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta

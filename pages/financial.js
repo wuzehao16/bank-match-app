@@ -52,7 +52,7 @@ class Financialnformation extends React.PureComponent {
   render() {
     const content = this.props.content;
     return (
-      <Layout>
+      <Layout title="金融资讯">
         <Wrapper>
           <Title>{content.contentTitle}</Title>
           <More>

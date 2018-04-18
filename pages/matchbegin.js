@@ -82,7 +82,7 @@ class MatchBegin extends React.Component {
 
     return (
       // <MuiThemeProvider theme={theme}>
-      <Layout>
+      <Layout title="智能匹配">
         <Nprogress/>
         <Wrapper1>
           <Advantage>

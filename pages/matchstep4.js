@@ -154,7 +154,7 @@ class MatchStep4 extends React.Component {
     const exProvidentFundBaseError = isFieldTouched('exProvidentFundBase') && getFieldError('exProvidentFundBase');
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-      <Layout>
+      <Layout title="智能匹配">
         <Topbar position="p3" num={data.productNum?data.productNum:0}/>
         <Title>工作收入状况</Title>
         <Wrapper>

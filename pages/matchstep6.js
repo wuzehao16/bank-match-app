@@ -144,7 +144,7 @@ class MatchStep6 extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-      <Layout>
+      <Layout title="智能匹配">
         <Topbar position="p3" num={data.productNum?data.productNum:0}/>
         <Title>名下负债状况</Title>
         <Wrapper>

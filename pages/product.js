@@ -245,7 +245,7 @@ class ProductDetail extends React.PureComponent {
     }
     return (
 
-      <Layout>
+      <Layout title="产品详情">
         <Pd>
           <div className="head">
             <div className="title-container">
