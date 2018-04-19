@@ -66,11 +66,11 @@ const InfoRight = styled.div`
     font-size: 11px;
   }
   @media(min-width: 360px) {
-    padding: 27px 0 0 30px;
+    padding: 27px 0 0 23px;
     font-size: 12px;
   }
   @media (min-width:375px) {
-    padding: 27px 0 0 25px;
+    padding: 27px 0 0 24px;
     font-size: 13px;
   }
 `
@@ -84,7 +84,7 @@ const Notice = styled.div`
     width:160px;
   }
   @media (min-width:375px) {
-    width:165px;
+    width:160px;
   }
 
 

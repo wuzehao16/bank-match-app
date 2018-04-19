@@ -20,13 +20,13 @@ const Name = styled.div`
     font-size: 21px;
     line-height: 30px;
   }
-  @media(min-width: 375px) {
-    font-size: 24px;
-    line-height: 34px;
-  }
   @media (min-width:360px) {
     font-size: 23px;
     line-height: 31px;
+  }
+  @media(min-width: 375px) {
+    font-size: 24px;
+    line-height: 34px;
   }
 `
 const Title = styled.div`
@@ -290,7 +290,6 @@ class MatchDetail extends React.PureComponent {
           {
             (basicInformation.occupation == 1 || basicInformation.occupation ==2)
               ? <div>
-                <Li><L>征信记录时长：</L><R>{recordTime[basicInformation.recordTime]}</R></Li>
                 <Li><L>企业一年开票金额：</L><R>{licenseRegistTime[basicInformation.licenseRegistTime]}</R></Li>
                 <Li><L>股份占比：</L><R>{shareRatio[basicInformation.shareRatio]}</R></Li>
                 <Li><L>是否法人：</L><R>{basicInformation.isLegalPerson==1?'是':'否'}</R></Li>
