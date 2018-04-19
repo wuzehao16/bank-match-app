@@ -32,13 +32,18 @@ export default ({ children, title = '智能匹配' }) => (
         background-color: #f2f2f2;
       }
       .ant-radio-button-wrapper{
-        margin-right:5px;
+        margin-right: 5px;
+        margin-bottom: 10px;
         background: #f2f2f2;
-        padding: 3px 5px 3px 3px;
-        border-radius:3px;
-        border:1px solid #ebebeb;
-        color:#969696;
-        font-size: 11px;
+        border-radius: 4px;
+        border: 1px solid #ebebeb;
+        color: #969696;
+        font-size: 13px;
+        width: 80px;
+        height: 28px;
+        display: inline-block;
+        line-height: 26px;
+        text-align: center;
       }
       .ant-radio-button-wrapper input[type="radio"] {
           opacity: 0;
@@ -73,6 +78,7 @@ export default ({ children, title = '智能匹配' }) => (
       }
       p{
         font-size:16px;
+        color: #3c3c3c;
       }
     `}
     </style>

@@ -31,7 +31,7 @@ const Contain = styled.div`
   background-color: #fff;
   padding-top: 1px;
   border-bottom: 1px solid #f2f2f2;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   position: relative;
   font-size: 12px;
 `
@@ -59,7 +59,7 @@ const Help = styled.div`
   bottom: 1px;
   left: 0px;
   z-index: 10;
-  font-size: 7px;
+  font-size: 10px;
 `
 const Red = styled.span`
   color: #ff2b2b;
@@ -76,6 +76,12 @@ const DoubleInput = styled.div`
 const Relative = styled.div`
   position: relative;
 `
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
+`
+
 class MatchStep3 extends React.Component {
   static async getInitialProps({store}) {
 		return {
@@ -316,7 +322,6 @@ class MatchStep3 extends React.Component {
                       <RadioGroup  size="small">
                         <RadioButton value={0}>信用卡逾期</RadioButton>
                         <RadioButton value={1}>贷款逾期</RadioButton>
-                        <RadioButton value={2}>信用卡和贷款逾期</RadioButton>
                       </RadioGroup>
                     )}
                   </FormItem>
@@ -615,7 +620,7 @@ class MatchStep3 extends React.Component {
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <Button variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</Button>
+              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>

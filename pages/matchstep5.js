@@ -61,7 +61,7 @@ const Help = styled.div`
   bottom: 1px;
   left: 0px;
   z-index: 10;
-  font-size: 7px;
+  font-size: 10px;
 `
 const Red = styled.span`
   color: #ff2b2b;
@@ -109,6 +109,12 @@ const SubTitle = styled.div`
 
 const Relative = styled.div`
   position: relative;
+`
+
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
 `
 
 let housePropertyUuid = 0;
@@ -605,7 +611,7 @@ class MatchStep4 extends React.Component {
                 <RadioGroup  size="small">
                   <RadioButton value={0}>绿本在手</RadioButton>
                   <RadioButton value={1}>银行按揭</RadioButton>
-                  <RadioButton value={2}>信用卡形式按揭</RadioButton>
+                  <RadioButton value={2}>信用卡按揭</RadioButton>
                   <RadioButton value={3}>车贷机构抵押</RadioButton>
                   <Br />
                   <RadioButton value={4}>汽车金融按揭</RadioButton>

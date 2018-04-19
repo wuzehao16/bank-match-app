@@ -72,7 +72,7 @@ const Help = styled.div`
   bottom: 1px;
   left: 0px;
   z-index: 10;
-  font-size: 7px;
+  font-size: 10px;
 `
 const Red = styled.span`
   color: #ff2b2b;
@@ -91,6 +91,11 @@ const Sub = styled.div`
 `
 const Relative = styled.div`
   position: relative;
+`
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
 `
 class MatchStep6 extends React.Component {
   static async getInitialProps({store}) {
