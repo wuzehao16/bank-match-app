@@ -62,20 +62,22 @@ const Contain = styled.div`
   font-size: 12px;
 `
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   line-height: 35px;
   color: #969696;
   padding: 0 15px;
 `
 const SubContain = styled.div`
+  color：#646464;
   background-color: #fff;
   padding: 10px 13px 20px;
   border-bottom: 1px solid #f2f2f2;
-  font-size: 12px;
+  font-size: 16px;
 `
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
-  ${'' /* font-size: 16px; */}
+  font-size: 16px;
+  color：#646464;
 `
 const Br = styled.div`
   height: 10px;
@@ -95,7 +97,8 @@ const DoubleInput = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding: 20px 0 20px 0;
   position: relative;
-  font-size: 14px;
+  font-size: 16px;
+  color：#646464;
   display: flex;
   justify-content: space-between;
 `
@@ -166,7 +169,7 @@ class MatchStep4 extends React.Component {
         <Wrapper>
           <DoubleInput>
             <div style={{verticalAlign:'bottom',position:'relative'}}>
-              <span>单位名称</span>
+              <span className="title">单位名称</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={unitNameError ? 'error' : ''}
@@ -186,7 +189,7 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>本单位连续上班</span>
+              <span className="title">本单位连续上班</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={specificWorkTimeError ? 'error' : ''}
@@ -199,7 +202,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续上班月份'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:50,fontSize:16}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60}}/>
                 )}
               </FormItem>
               <span>月</span>
@@ -207,7 +210,7 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>近3个月税前月均收入</span>
+              <span className="title">近3个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
@@ -220,7 +223,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入近3个月税前月均收入'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
@@ -229,7 +232,7 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>近6个月税前月均收入</span>
+              <span className="title">近6个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
@@ -242,7 +245,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入近6个月税前月均收入'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
@@ -250,7 +253,7 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>近12个月税前月均收入</span>
+              <span className="title">近12个月税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={thisYearMonthsAvgSalaryError ? 'error' : ''}
@@ -263,15 +266,15 @@ class MatchStep4 extends React.Component {
                     message:'请输入近12个月税前月均收入'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
             </Relative>
           </DoubleInput>
-          <DoubleInput>
-            <Relative >
-              <span>上一年度税前月均收入</span>
+          <DoubleInput style = {{padding: '20px 0 40px 0'}}>
+            <Relative>
+              <span className="title">上一年度税前月均收入</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={lastYearMonthsAvgSalaryError ? 'error' : ''}
@@ -284,7 +287,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入上一年度税前月均收入'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
@@ -293,7 +296,7 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>社保缴纳基数</span>
+              <span className="title">社保缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={specificInsuranceBaseError ? 'error' : ''}
@@ -306,13 +309,15 @@ class MatchStep4 extends React.Component {
                     message:'请输入社保缴纳基数'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
             </Relative>
+          </DoubleInput>
+          <DoubleInput  style = {{padding: '20px 0 30px 0'}}>
             <Relative >
-              <span>本单位连续缴纳</span>
+              <span className="title">本单位连续缴纳</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={specificInsurancePaymonthError ? 'error' : ''}
@@ -325,7 +330,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续缴纳'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>月</span>
@@ -333,7 +338,7 @@ class MatchStep4 extends React.Component {
             <Help><Red>*</Red>若无社保则填0</Help>
           </DoubleInput>
           <SubContain>
-            <SubContainTitle>有无养老保险</SubContainTitle>
+            <SubContainTitle style={{color:'#646464'}}>有无养老保险</SubContainTitle>
             <FormItem
               validateStatus={isEndowmentInsuranceError ? 'error' : ''}
               help={isEndowmentInsuranceError || ''}
@@ -350,7 +355,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
-            <SubContainTitle>本单位有无社保基数调整</SubContainTitle>
+            <SubContainTitle  style={{color:'#646464'}}>本单位有无社保基数调整</SubContainTitle>
             <FormItem
               validateStatus={isInsuranceAdjustmentError ? 'error' : ''}
               help={isInsuranceAdjustmentError || ''}
@@ -367,31 +372,34 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
-            <Relative >
-              <span>调整前社保缴纳基数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={exInsuranceBaseError ? 'error' : ''}
-                help={exInsuranceBaseError || ''}
-                >
-                {getFieldDecorator('exInsuranceBase', {
-                  initialValue:item.exInsuranceBase,
-                  rules: [{
-                    required: true,
-                    message:'请输入调整前社保缴纳基数'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:50}}/>
-                )}
-              </FormItem>
-              <span>元</span>
-            </Relative>
-          </SubContain>
+          {
+            (getFieldValue('isInsuranceAdjustment') == 1 || getFieldValue('isInsuranceAdjustment') == 2)
+              ? <SubContain style={{color:'#646464'}}>
+                  <Relative>
+                    <span>调整前社保缴纳基数</span>
+                    <FormItem
+                      style={{display:"inline-block"}}
+                      validateStatus={exInsuranceBaseError ? 'error' : ''}
+                      help={exInsuranceBaseError || ''}
+                      >
+                      {getFieldDecorator('exInsuranceBase', {
+                        initialValue:item.exInsuranceBase,
+                        rules: [{
+                          required: true,
+                          message:'请输入调整前社保缴纳基数'
+                        }],
+                      })(
+                        <input  type="number" min={0}  style={{width:60}}/>
+                      )}
+                    </FormItem>
+                    <span>元</span>
+                  </Relative>
+                </SubContain>: null
+          }
           {/* 公积金 */}
           <DoubleInput>
-            <Relative >
-              <span>公积金缴纳基数</span>
+            <Relative>
+              <span className="title">公积金缴纳基数</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={specificProvidentFundBaseError ? 'error' : ''}
@@ -404,13 +412,15 @@ class MatchStep4 extends React.Component {
                     message:'请输入公积金缴纳基数'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:50}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
                 )}
               </FormItem>
               <span>元</span>
             </Relative>
+          </DoubleInput>
+          <DoubleInput style = {{padding: '20px 0 30px 0'}}>
             <Relative >
-              <span>本单位连续缴纳</span>
+              <span className="title">本单位连续缴纳</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={specificProvidentFundPaymonthError ? 'error' : ''}
@@ -423,7 +433,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续缴纳月份'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:25}}/>
+                  <input  type="number" min={0}  style={{width:60}}/>
 
                 )}
               </FormItem>
@@ -432,7 +442,7 @@ class MatchStep4 extends React.Component {
             <Help><Red>*</Red>若无公积金则填0</Help>
           </DoubleInput>
           <SubContain>
-            <SubContainTitle>本单位有无公积金基数调整</SubContainTitle>
+            <SubContainTitle  style={{color:'#646464'}}>本单位有无公积金基数调整</SubContainTitle>
             <FormItem
               validateStatus={isProvidentFundAdjustmentError ? 'error' : ''}
               help={isProvidentFundAdjustmentError || ''}
@@ -449,27 +459,30 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
-            <Relative >
-              <span>调整前公积金缴纳基数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={exProvidentFundBaseError ? 'error' : ''}
-                help={exProvidentFundBaseError || ''}
-                >
-                {getFieldDecorator('exProvidentFundBase', {
-                  initialValue:item.exProvidentFundBase,
-                  rules: [{
-                    required: true,
-                    message:'请输入调整前公积金缴纳基数'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:50}}/>
-                )}
-              </FormItem>
-              <span>元</span>
-            </Relative>
-          </SubContain>
+          {
+            (getFieldValue('isProvidentFundAdjustment') == 1 || getFieldValue('isProvidentFundAdjustment') == 1)
+              ? <SubContain>
+                  <Relative style={{color:'#646464'}}>
+                    <span>调整前公积金缴纳基数</span>
+                    <FormItem
+                      style={{display:"inline-block"}}
+                      validateStatus={exProvidentFundBaseError ? 'error' : ''}
+                      help={exProvidentFundBaseError || ''}
+                      >
+                      {getFieldDecorator('exProvidentFundBase', {
+                        initialValue:item.exProvidentFundBase,
+                        rules: [{
+                          required: true,
+                          message:'请输入调整前公积金缴纳基数'
+                        }],
+                      })(
+                        <input  type="number" min={0}  style={{width:60}}/>
+                      )}
+                    </FormItem>
+                    <span>元</span>
+                  </Relative>
+                </SubContain>: null
+          }
         </Wrapper>
         <div className='btn'>
           <FormItem>
@@ -485,7 +498,11 @@ class MatchStep4 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         font-size: 16px;
+        }
+        .title{
+          color: #3c3c3c;
         }
       `}
       </style>
