@@ -460,7 +460,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           {
-            (getFieldValue('isProvidentFundAdjustment') == 1 || getFieldValue('isProvidentFundAdjustment') == 1)
+            (getFieldValue('isProvidentFundAdjustment') == 1 || getFieldValue('isProvidentFundAdjustment') == 2)
               ? <SubContain>
                   <Relative style={{color:'#646464'}}>
                     <span>调整前公积金缴纳基数</span>
