@@ -157,7 +157,7 @@ class MatchStep6 extends React.Component {
         <Topbar position="p3" num={data.productNum?data.productNum:0}/>
         <Title>名下负债状况</Title>
         <Wrapper>
-          <DoubleInput>
+          <DoubleInput> 
             <Relative>
               <span className="title">信用类贷款</span>
               <FormItem
@@ -177,192 +177,197 @@ class MatchStep6 extends React.Component {
               <span>笔</span>
             </Relative>
           </DoubleInput>
-          <DoubleInput>
-            <FormItem>
-              {getFieldDecorator('sumEqualInterest', {
-              })(
-                <span >
-                  <span className="title">等额本息类贷款</span>
-                  <input  type="number" min={0} max={100} style={{width:60}}/>
-                  <span>笔</span>
-                </span>
-              )}
-            </FormItem>  
-          </DoubleInput>
-          <Sub>
-            {
-                getFieldValue("sumEqualInterest") > 0
-                ? <div>
-                    <DoubleInput>
-                      <Relative>
-                        <span>等额本息类贷款总余额 </span>
-                        <FormItem
-                          style={{display:'inline-block'}}
-                          validateStatus={equalInterestTotalBalanceError ? 'error' : ''}
-                          help={equalInterestTotalBalanceError || ''}
-                          >
-                          {getFieldDecorator('equalInterestTotalBalance', {
-                            rules: [{
-                              required: true,
-                              message: '请输入等额本息类贷款总余额'
-                            }],
-                          })(
-                              <input  type="number" min={0}  style={{width:60}}/>
-                          )}
-                        </FormItem>
-                        <span>元</span>
-                      </Relative>
-                    </DoubleInput>
-                    <DoubleInput>  
-                      <Relative>
-                        <span>每月还款总额</span>
-                        <FormItem
-                          style={{display:'inline-block'}}
-                          validateStatus={equalInteresMonthPaymentError ? 'error' : ''}
-                          help={equalInteresMonthPaymentError || ''}
-                          >
-                          {getFieldDecorator('equalInteresMonthPayment', {
-                            rules: [{
-                              required: true,
-                              message: '请输入每月还款总额'
-                            }],
-                          })(
-                            <input  type="number" min={0} style={{width:60}}/>
-                          )}
-                        </FormItem>
-                        <span>元</span>
-                      </Relative>
-                    </DoubleInput>
-                  </div>:null
-              }
-            </Sub>  
-          <DoubleInput>
-            <FormItem
-              validateStatus={sumEqualInterestError ? 'error' : ''}
-              help={sumEqualInterestError || ''}
-            >
-              {getFieldDecorator('sumFirstInterest', {
-
-                rules: [{ required: true}],
-              })(
-                <span >
-                  <span className="title">先息后本类贷款</span>
-                  <input  type="number" min={0} max={100} style={{width:60}}/>
-                  <span>笔</span>
-                </span>
-              )}
-            </FormItem>  
-          </DoubleInput>
-          <Sub>
-            {
-              getFieldValue('sumFirstInterest') > 0
-              ? <div>       
-                  <DoubleInput>
-                    <Relative>
-                      <span>先息后本类贷款总余额 </span>
-                      <FormItem
-                        style={{display:'inline-block'}}
-                        validateStatus={firstInterestTotalBalanceError ? 'error' : ''}
-                        help={firstInterestTotalBalanceError || ''}
-                        >
-                        {getFieldDecorator('firstInterestTotalBalance', {
-                          rules: [{
-                            required: true,
-                            message:'请输入随借随还类贷款总余额'
-                          }],
-                        })(
-                            <input  type="number" min={0}  style={{width:60}}/>
-                        )}
-                      </FormItem>
-                      <span>元</span>
-                    </Relative>
-                  </DoubleInput>
-                  <DoubleInput>
-                    <Relative>
-                      <span>每月还利息</span>
-                      <FormItem
-                        style={{display:'inline-block'}}
-                        validateStatus={firstInterestMonthPaymentError ? 'error' : ''}
-                        help={firstInterestMonthPaymentError || ''}
-                        >
-                        {getFieldDecorator('firstInterestMonthPayment', {
-                          rules: [{
-                            required: true,
-                            message:'每月还利息'
-                          }],
-                        })(
-                            <input  type="number" min={0} style={{width:60}}/>
-                        )}
-                      </FormItem>
-                      <span>元</span>
-                    </Relative>
-                  </DoubleInput>
-                </div>:null
-            }
-          </Sub>
-          <DoubleInput>
-          <FormItem
-            validateStatus={sumEqualInterestError ? 'error' : ''}
-            help={sumEqualInterestError || ''}
-          >  
-              {getFieldDecorator('sumAlongLoan', {
-                rules: [{ required: true}],
-              })(
-                <span >
-                  <span className="title">随借随还类</span>
-                  <input  type="number" min={0} max={100} style={{width:60}}/>
-                  <span>笔</span>
-                </span>
-              )}
-            </FormItem>
-          </DoubleInput>
-          <Sub>
-            {
-              getFieldValue('sumAlongLoan') > 0
-              ? <div>
-                  <DoubleInput>
-                  <Relative>
-                    <span>随借随还类贷款总余额 </span>
-                    <FormItem
-                      style={{display:'inline-block'}}
-                      validateStatus={alongLoanTotalBalanceError ? 'error' : ''}
-                      help={alongLoanTotalBalanceError || ''}
-                      >
-                      {getFieldDecorator('alongLoanTotalBalance', {
-                        rules: [{
-                          required: true,
-                          message:'请输入随借随还类贷款总余额'
-                        }],
-                      })(
-                          <input  type="number" min={0}  style={{width:60}}/>
-                      )}
-                    </FormItem>
-                    <span>元</span>
-                  </Relative>
-                  </DoubleInput>
-                  <DoubleInput>
-                  <Relative>
-                    <span>每月还利息</span>
-                    <FormItem
-                      style={{display:'inline-block'}}
-                      validateStatus={alongLoanMonthPaymentError ? 'error' : ''}
-                      help={alongLoanMonthPaymentError || ''}
-                      >
-                      {getFieldDecorator('alongLoanMonthPayment', {
-                        rules: [{
-                          required: true,
-                          message:'请输入每月还利息'
-                        }],
-                      })(
-                          <input  type="number" min={0} style={{width:60}}/>
-                      )}
-                    </FormItem>
-                    <span>元</span>
-                  </Relative>
+          {
+            getFieldValue('sumCreditLoan') >0 ?
+              <div>
+                <DoubleInput>
+                  <FormItem>
+                    {getFieldDecorator('sumEqualInterest', {
+                    })(
+                      <span >
+                        <span className="title">等额本息类贷款</span>
+                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <span>笔</span>
+                      </span>
+                    )}
+                  </FormItem>  
                 </DoubleInput>
+                <Sub>
+                  {
+                      getFieldValue("sumEqualInterest") > 0
+                      ? <div>
+                          <DoubleInput>
+                            <Relative>
+                              <span>等额本息类贷款总余额 </span>
+                              <FormItem
+                                style={{display:'inline-block'}}
+                                validateStatus={equalInterestTotalBalanceError ? 'error' : ''}
+                                help={equalInterestTotalBalanceError || ''}
+                                >
+                                {getFieldDecorator('equalInterestTotalBalance', {
+                                  rules: [{
+                                    required: true,
+                                    message: '请输入等额本息类贷款总余额'
+                                  }],
+                                })(
+                                    <input  type="number" min={0}  style={{width:60}}/>
+                                )}
+                              </FormItem>
+                              <span>元</span>
+                            </Relative>
+                          </DoubleInput>
+                          <DoubleInput>  
+                            <Relative>
+                              <span>每月还款总额</span>
+                              <FormItem
+                                style={{display:'inline-block'}}
+                                validateStatus={equalInteresMonthPaymentError ? 'error' : ''}
+                                help={equalInteresMonthPaymentError || ''}
+                                >
+                                {getFieldDecorator('equalInteresMonthPayment', {
+                                  rules: [{
+                                    required: true,
+                                    message: '请输入每月还款总额'
+                                  }],
+                                })(
+                                  <input  type="number" min={0} style={{width:60}}/>
+                                )}
+                              </FormItem>
+                              <span>元</span>
+                            </Relative>
+                          </DoubleInput>
+                        </div>:null
+                    }
+                  </Sub>  
+                <DoubleInput>
+                  <FormItem
+                    validateStatus={sumEqualInterestError ? 'error' : ''}
+                    help={sumEqualInterestError || ''}
+                  >
+                    {getFieldDecorator('sumFirstInterest', {
+
+                      rules: [{ required: true}],
+                    })(
+                      <span >
+                        <span className="title">先息后本类贷款</span>
+                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <span>笔</span>
+                      </span>
+                    )}
+                  </FormItem>  
+                </DoubleInput>
+                <Sub>
+                  {
+                    getFieldValue('sumFirstInterest') > 0
+                    ? <div>       
+                        <DoubleInput>
+                          <Relative>
+                            <span>先息后本类贷款总余额 </span>
+                            <FormItem
+                              style={{display:'inline-block'}}
+                              validateStatus={firstInterestTotalBalanceError ? 'error' : ''}
+                              help={firstInterestTotalBalanceError || ''}
+                              >
+                              {getFieldDecorator('firstInterestTotalBalance', {
+                                rules: [{
+                                  required: true,
+                                  message:'请输入随借随还类贷款总余额'
+                                }],
+                              })(
+                                  <input  type="number" min={0}  style={{width:60}}/>
+                              )}
+                            </FormItem>
+                            <span>元</span>
+                          </Relative>
+                        </DoubleInput>
+                        <DoubleInput>
+                          <Relative>
+                            <span>每月还利息</span>
+                            <FormItem
+                              style={{display:'inline-block'}}
+                              validateStatus={firstInterestMonthPaymentError ? 'error' : ''}
+                              help={firstInterestMonthPaymentError || ''}
+                              >
+                              {getFieldDecorator('firstInterestMonthPayment', {
+                                rules: [{
+                                  required: true,
+                                  message:'每月还利息'
+                                }],
+                              })(
+                                  <input  type="number" min={0} style={{width:60}}/>
+                              )}
+                            </FormItem>
+                            <span>元</span>
+                          </Relative>
+                        </DoubleInput>
+                      </div>:null
+                  }
+                </Sub>
+                <DoubleInput>
+                <FormItem
+                  validateStatus={sumEqualInterestError ? 'error' : ''}
+                  help={sumEqualInterestError || ''}
+                >  
+                    {getFieldDecorator('sumAlongLoan', {
+                      rules: [{ required: true}],
+                    })(
+                      <span >
+                        <span className="title">随借随还类</span>
+                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <span>笔</span>
+                      </span>
+                    )}
+                  </FormItem>
+                </DoubleInput>
+                <Sub>
+                  {
+                    getFieldValue('sumAlongLoan') > 0
+                    ? <div>
+                        <DoubleInput>
+                        <Relative>
+                          <span>随借随还类贷款总余额 </span>
+                          <FormItem
+                            style={{display:'inline-block'}}
+                            validateStatus={alongLoanTotalBalanceError ? 'error' : ''}
+                            help={alongLoanTotalBalanceError || ''}
+                            >
+                            {getFieldDecorator('alongLoanTotalBalance', {
+                              rules: [{
+                                required: true,
+                                message:'请输入随借随还类贷款总余额'
+                              }],
+                            })(
+                                <input  type="number" min={0}  style={{width:60}}/>
+                            )}
+                          </FormItem>
+                          <span>元</span>
+                        </Relative>
+                        </DoubleInput>
+                        <DoubleInput>
+                        <Relative>
+                          <span>每月还利息</span>
+                          <FormItem
+                            style={{display:'inline-block'}}
+                            validateStatus={alongLoanMonthPaymentError ? 'error' : ''}
+                            help={alongLoanMonthPaymentError || ''}
+                            >
+                            {getFieldDecorator('alongLoanMonthPayment', {
+                              rules: [{
+                                required: true,
+                                message:'请输入每月还利息'
+                              }],
+                            })(
+                                <input  type="number" min={0} style={{width:60}}/>
+                            )}
+                          </FormItem>
+                          <span>元</span>
+                        </Relative>
+                      </DoubleInput>
+                    </div>: null
+                  }
+                </Sub>
               </div>: null
-            }
-          </Sub>
+          }
           <DoubleInput>
             <Relative>
               <span className="title">信用卡</span>
