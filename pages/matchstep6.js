@@ -171,7 +171,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用类贷款'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>笔</span>
@@ -186,7 +186,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">等额本息类贷款</span>
-                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -210,7 +210,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入等额本息类贷款总余额'
                                   }],
                                 })(
-                                    <input  type="number" min={0}  style={{width:60}}/>
+                                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -230,7 +230,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入每月还款总额'
                                   }],
                                 })(
-                                  <input  type="number" min={0} style={{width:60}}/>
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -250,7 +250,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">先息后本类贷款</span>
-                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -274,7 +274,7 @@ class MatchStep6 extends React.Component {
                                   message:'请输入随借随还类贷款总余额'
                                 }],
                               })(
-                                  <input  type="number" min={0}  style={{width:60}}/>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -294,7 +294,7 @@ class MatchStep6 extends React.Component {
                                   message:'每月还利息'
                                 }],
                               })(
-                                  <input  type="number" min={0} style={{width:60}}/>
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -313,7 +313,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">随借随还类</span>
-                        <input  type="number" min={0} max={100} style={{width:60}}/>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -337,7 +337,7 @@ class MatchStep6 extends React.Component {
                                 message:'请输入随借随还类贷款总余额'
                               }],
                             })(
-                                <input  type="number" min={0}  style={{width:60}}/>
+                                <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>元</span>
@@ -357,7 +357,7 @@ class MatchStep6 extends React.Component {
                                 message:'请输入每月还利息'
                               }],
                             })(
-                                <input  type="number" min={0} style={{width:60}}/>
+                                <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>元</span>
@@ -382,7 +382,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用卡张数'
                   }],
                 })(
-                    <input  type="number" min={0}  style={{width:60}}/>
+                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>张</span>
@@ -406,7 +406,7 @@ class MatchStep6 extends React.Component {
                               })(
                                 <span >
                                   <span>信用卡总额度</span>
-                                  <input  type="number" min={0}  style={{width:60}}/>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                   <span>元</span>
                                 </span>
                               )}
@@ -427,7 +427,7 @@ class MatchStep6 extends React.Component {
                             })(
                               <span >
                                 <span>信用卡当月已使用额度</span>
-                                <input  type="number" min={0}  style={{width:60}}/>
+                                <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                 <span>元</span>
                               </span>
                             )}
@@ -448,7 +448,7 @@ class MatchStep6 extends React.Component {
                               })(
                                 <span >
                                   <span>信用卡近六个月平均使用额度</span>
-                                  <input  type="number" min={0}  style={{width:60}}/>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                   <span>元</span>
                                 </span>
                               )}
@@ -469,7 +469,7 @@ class MatchStep6 extends React.Component {
                               })(
                                 <span >
                                   <span>信用卡办理的分期还款张数</span>
-                                  <input  type="number" min={0}  style={{width:60}}/>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                   <span>张</span>
                                 </span>
                               )}

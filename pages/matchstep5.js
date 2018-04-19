@@ -314,7 +314,7 @@ class MatchStep4 extends React.Component {
                 })(
                   <div style={{verticalAlign:'bottom',color: '#646464'}}>
                     <span>产权占比</span>
-                    <Input   type="number"style={{width:60}}/>
+                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                     <span>%</span>
                   </div>
                 )}
@@ -354,86 +354,91 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
-            <SubContainTitle style={{color: '#646464'}}>还款方式</SubContainTitle>
-            <FormItem
-              required={false}
-              key={k+5}
-              >
-              {getFieldDecorator(`repaymentMethod[${k}]`, {
-              })(
-                <RadioGroup  size="small">
-                  <RadioButton value={0}>等额本息</RadioButton>
-                  <RadioButton value={1}>先息后本</RadioButton>
-                  <RadioButton value={2}>随借随还</RadioButton>
-                </RadioGroup>
-              )}
-            </FormItem>
-          </SubContain>
-          <DoubleInput>
-            <FormItem
-              required={false}
-              key={k+6}
-              style={{color:'#646464'}}
-              >
-              {getFieldDecorator(`mortgageBalance[${k}]`, {
-              })(
-                <div>
-                  <span>本笔抵押贷款余额 </span>
-                  <Input type="number" min={0} style={{width:60}}/>
-                  <span>元</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
-          <DoubleInput>
-            <FormItem
-              required={false}
-              key={k+7}
-              style={{color:'#646464'}}
-              >
-              {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
-              })(
-                <div>
-                  <span>每月还款金额</span>
-                  <Input type="number" min={0} style={{width:60}}/>
-                  <span>元</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
-          <DoubleInput>
-            <FormItem
-              required={false}
-              key={k+8}
-              style={{color:'#646464'}}
-              >
-              {getFieldDecorator(`mortgageTerm[${k}]`, {
-              })(
-                <div>
-                  <span>本笔抵押贷款期限 </span>
-                  <Input type="number" min={0} style={{width:60}}/>
-                  <span>月</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
-          <DoubleInput>  
-            <FormItem
-              required={false}
-              key={k+9}
-              style={{color:'#646464'}}
-              >
-              {getFieldDecorator(`returnedMonths[${k}]`, {
-              })(
-                <div>
-                  <span>已还月份数</span>
-                  <Input type="number" min={0} style={{width:60}}/>
-                  <span>月</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
+          {
+            getFieldValue(`propertyStatus[${k}]`) == 0 ?
+              null :<div>
+                <SubContain>
+                  <SubContainTitle style={{color: '#646464'}}>还款方式</SubContainTitle>
+                  <FormItem
+                    required={false}
+                    key={k+5}
+                    >
+                    {getFieldDecorator(`repaymentMethod[${k}]`, {
+                    })(
+                      <RadioGroup  size="small">
+                        <RadioButton value={0}>等额本息</RadioButton>
+                        <RadioButton value={1}>先息后本</RadioButton>
+                        <RadioButton value={2}>随借随还</RadioButton>
+                      </RadioGroup>
+                    )}
+                  </FormItem>
+                </SubContain>
+                <DoubleInput>
+                  <FormItem
+                    required={false}
+                    key={k+6}
+                    style={{color:'#646464'}}
+                    >
+                    {getFieldDecorator(`mortgageBalance[${k}]`, {
+                    })(
+                      <div>
+                        <span>本笔抵押贷款余额 </span>
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                        <span>元</span>
+                      </div>
+                    )}
+                  </FormItem>
+                </DoubleInput>
+                <DoubleInput>
+                  <FormItem
+                    required={false}
+                    key={k+7}
+                    style={{color:'#646464'}}
+                    >
+                    {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
+                    })(
+                      <div>
+                        <span>每月还款金额</span>
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                        <span>元</span>
+                      </div>
+                    )}
+                  </FormItem>
+                </DoubleInput>
+                <DoubleInput>
+                  <FormItem
+                    required={false}
+                    key={k+8}
+                    style={{color:'#646464'}}
+                    >
+                    {getFieldDecorator(`mortgageTerm[${k}]`, {
+                    })(
+                      <div>
+                        <span>本笔抵押贷款期限 </span>
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                        <span>月</span>
+                      </div>
+                    )}
+                  </FormItem>
+                </DoubleInput>
+                <DoubleInput>  
+                  <FormItem
+                    required={false}
+                    key={k+9}
+                    style={{color:'#646464'}}
+                    >
+                    {getFieldDecorator(`returnedMonths[${k}]`, {
+                    })(
+                      <div>
+                        <span>已还月份数</span>
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                        <span>月</span>
+                      </div>
+                    )}
+                  </FormItem>
+                </DoubleInput>
+              </div>
+          }
           <DoubleInput>
             <FormItem
               required={false}
@@ -444,7 +449,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div>
                   <span>本房产总面积</span>
-                  <Input type="number" min={0} style={{width:60}}/>
+                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                   <span>平</span>
                 </div>
               )}
@@ -460,7 +465,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div>
                   <span>本房产总市值</span>
-                  <Input type="number" min={0} style={{width:60}}/>
+                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                   <span>元</span>
                 </div>
               )}
@@ -534,7 +539,7 @@ class MatchStep4 extends React.Component {
                             })(
                               <div style={{verticalAlign:'bottom'}}>
                                 <span>保单品牌</span>
-                                <Input   type="text"style={{width:60}}/>
+                                <Input   type="text"style={{width:60,fontSize:'16px'}}/>
                               </div>
                             )}
                           </FormItem>
@@ -582,7 +587,7 @@ class MatchStep4 extends React.Component {
               })(
                 <div style={{verticalAlign:'bottom'}}>
                   <span>保单年缴费金额 </span>
-                  <Input   type="number" min={0} style={{width:60}}/>
+                  <Input   type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                   <span>元</span>
                 </div>
               )}
@@ -641,7 +646,7 @@ class MatchStep4 extends React.Component {
                 })(
                   <div style={{verticalAlign:'bottom'}}>
                     <span>车辆残值评估</span>
-                    <Input   type="number"style={{width:60}}/>
+                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                     <span>元</span>
                   </div>
                 )}
@@ -653,12 +658,13 @@ class MatchStep4 extends React.Component {
                       <SubContain>
                           <FormItem
                             required={false}
+                            style={{color:'#646464'}}
                             >
                             {getFieldDecorator(`carLoanBalance[${k}]`, {
                             })(
                               <div style={{verticalAlign:'bottom'}}>
                                 <span>车辆贷款余额</span>
-                                <Input   type="number"style={{width:60}}/>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                                 <span>元</span>
                               </div>
                             )}
@@ -667,12 +673,13 @@ class MatchStep4 extends React.Component {
                       <SubContain>
                           <FormItem
                             required={false}
+                            style={{color:'#646464'}}
                             >
                             {getFieldDecorator(`carRepayment[${k}]`, {
                             })(
                               <div style={{verticalAlign:'bottom'}}>
                                 <span>车贷月还款金额</span>
-                                <Input   type="number"style={{width:60}}/>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                                 <span>元</span>
                               </div>
                             )}
@@ -681,12 +688,13 @@ class MatchStep4 extends React.Component {
                       <SubContain>
                           <FormItem
                             required={false}
+                            style={{color:'#646464'}}
                             >
                             {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
                             })(
                               <div style={{verticalAlign:'bottom'}}>
                                 <span>车贷已还款月份</span>
-                                <Input   type="number"style={{width:60}}/>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                                 <span>个月</span>
                               </div>
                             )}
@@ -738,7 +746,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下房产数量'
                       }],
                     })(
-                      <input   type="number"style={{width:60}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>套</span>
@@ -789,7 +797,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下保单份数'
                       }],
                     })(
-                      <input   type="number"style={{width:60}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>份</span>
@@ -842,7 +850,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下车辆数量'
                       }],
                     })(
-                      <input type="number"style={{width:60}}/>
+                      <input type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>辆</span>
@@ -869,7 +877,8 @@ class MatchStep4 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         font-size:16px;
         }
         .second-level{
           color: #646464;
