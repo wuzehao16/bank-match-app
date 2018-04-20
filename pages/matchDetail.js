@@ -174,12 +174,8 @@ class MatchDetail extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const res = await fetch(`/selectModelUserDetail?matchNo=${query.matchNo}`, token)
-    console.log(res)
-    //总利息
+    // console.log(res)
     return { product: res }
-  }
-  componentDidMount(){
-
   }
   render() {
     const i = this.props.product;
