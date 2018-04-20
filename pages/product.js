@@ -251,7 +251,7 @@ class ProductDetail extends React.PureComponent {
           <div className="head">
             <div className="title-container">
               <div className="title">{product.productName}</div>
-              <div className="sub-title">{product.productRecommend.slice(0,9)}</div>
+              <div className="sub-title">{product.productRecommend}</div>
             </div>
             <div>
               <div className="logo">
