@@ -15,7 +15,7 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 const Wrapper = styled.div`
-  padding: 0 15px;
+  padding: 0 15px 3px 15px;
   background: #fff;
 `
 const Container = styled.div`
@@ -34,24 +34,26 @@ const Contain = styled.div`
   font-size: 12px;
 `
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   line-height: 35px;
   color: #969696;
   padding: 0 15px;
 `
 const SubContain = styled.div`
+  color：#646464;
   position: relative;
   background-color: #fff;
   padding: 10px 0 20px;
   border-bottom: 1px solid #f2f2f2;
-  font-size: 12px;
+  font-size: 16x;
 `
 const Sub = styled.div`
-  padding: 0 13px;
+  padding: 0 0 0 5px;
 `
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
-  font-size: 12px;
+  font-size: 16px;
+  color：#646464;
 `
 const Br = styled.div`
   height: 10px;
@@ -71,17 +73,18 @@ const DoubleInput = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding: 20px 0 20px 0;
   position: relative;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
+  font-size: 16px;
+  color：#646464;
+  ${'' /* display: flex;
+  justify-content: space-between; */}
   @media (min-width:320px) {
-    font-size: 10px;
+    font-size: 12px;
   }
   @media(min-width: 375px) {
-    font-size: 12px;
+    font-size: 16px;
   }
   @media (min-width:360px) {
-    font-size: 12px;
+    font-size: 16px;
   }
 `
 const AddButton = styled.div`
@@ -105,6 +108,7 @@ const SubTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #3c3c3c;
 `
 
 const Relative = styled.div`
@@ -266,12 +270,12 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <SubContain
             >
-            <SubContainTitle>名下房产属地</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>名下房产属地</SubContainTitle>
             <FormItem
               key={k}
               >
               {getFieldDecorator(`housePropertyDependency[${k}]`, {
-                initialValue:item.housePropertyDependency?item.housePropertyDependency[k]:""
+                initialValue:item.housePropertyDependency?item.housePropertyDependency[k]:"",
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>深房</RadioButton>
@@ -283,7 +287,7 @@ class MatchStep4 extends React.Component {
           </SubContain>
           <SubContain
             >
-            <SubContainTitle>产权归属</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>产权归属</SubContainTitle>
             <FormItem
               required={false}
               key={k+1}
@@ -314,13 +318,13 @@ class MatchStep4 extends React.Component {
                 {getFieldDecorator(`propertyRightRatio[${k}]`, {
                   initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
                 })(
-                    <Input   type="number"style={{width:35}}/>
+                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
                 <span>%</span>
           </SubContain>
           <SubContain>
-            <SubContainTitle>房产类型</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>房产类型</SubContainTitle>
             <FormItem
               required={false}
               >
@@ -339,7 +343,7 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
-            <SubContainTitle>房产状态</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>房产状态</SubContainTitle>
             <FormItem
               required={false}
               key={k+4}
@@ -355,129 +359,143 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
-            <SubContainTitle>还款方式</SubContainTitle>
-            <FormItem
-              required={false}
-              key={k+5}
-              >
-              {getFieldDecorator(`repaymentMethod[${k}]`, {
-                initialValue:item.repaymentMethod?item.repaymentMethod[k]:""
-              })(
-                <RadioGroup  size="small">
-                  <RadioButton value={0}>等额本息</RadioButton>
-                  <RadioButton value={1}>先息后本</RadioButton>
-                  <RadioButton value={2}>随借随还</RadioButton>
-                </RadioGroup>
-              )}
-            </FormItem>
-          </SubContain>
-          <DoubleInput>
-            <span>本笔抵押贷款余额 </span>
-            <FormItem
-              style={{
-                display:"inline-block"
-              }}
-              required={false}
-              key={k+6}
-              >
-              {getFieldDecorator(`mortgageBalance[${k}]`, {
-                initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
-              })(
-                  <Input   type="number" min={0} style={{width:50}}/>
-              )}
-            </FormItem>
-            <span>元</span>
-            <span>每月还款金额</span>
-            <FormItem
-              style={{
-                display:"inline-block"
-              }}
-              required={false}
-              key={k+7}
-              >
-              {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
-                initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
-              })(
-                  <Input   type="number" min={0} style={{width:45}}/>
-              )}
-            </FormItem>
-            <span>元</span>
-          </DoubleInput>
-          <DoubleInput>
-            <FormItem
-              style={{
-                display:"inline-block"
-              }}
-              required={false}
-              key={k+8}
-              >
-              {getFieldDecorator(`mortgageTerm[${k}]`, {
-              })(
-                <div >
+          {
+            getFieldValue(`propertyStatus[${k}]`) == 0 ?
+              null :<div>
+                <SubContain>
+                  <SubContainTitle style={{color: '#646464'}}>还款方式</SubContainTitle>
+                  <FormItem
+                    required={false}
+                    key={k+5}
+                    >
+                    {getFieldDecorator(`repaymentMethod[${k}]`, {
+                      initialValue:item.repaymentMethod?item.repaymentMethod[k]:""
+                    })(
+                      <RadioGroup  size="small">
+                        <RadioButton value={0}>等额本息</RadioButton>
+                        <RadioButton value={1}>先息后本</RadioButton>
+                        <RadioButton value={2}>随借随还</RadioButton>
+                      </RadioGroup>
+                    )}
+                  </FormItem>
+                </SubContain>
+                <DoubleInput>
+                  <span>本笔抵押贷款余额 </span>
+                  <FormItem
+                    required={false}
+                    key={k+6}
+                    style={{
+                      display:"inline-block",
+                      color:'#646464'
+                    }}
+                    >
+                    {getFieldDecorator(`mortgageBalance[${k}]`, {
+                      initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
+                    })(
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                    )}
+                  </FormItem>
+                  <span>元</span>
+                </DoubleInput>
+                <DoubleInput>
+                  <span>每月还款金额</span>
+                  <FormItem
+                    required={false}
+                    key={k+7}
+                    style={{
+                      display:"inline-block",
+                      color:'#646464'
+                    }}
+                    >
+                    {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
+                      initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
+                    })(
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                    )}
+                  </FormItem>
+                  <span>元</span>
+                </DoubleInput>
+                <DoubleInput>
                   <span>本笔抵押贷款期限 </span>
-                  <Input   type="number" min={0} style={{width:40}}/>
+                  <FormItem
+                    required={false}
+                    key={k+8}
+                    style={{
+                      display:"inline-block",
+                      color:'#646464'
+                    }}
+                    >
+                    {getFieldDecorator(`mortgageTerm[${k}]`, {
+                      initialValue:item.mortgageTerm?item.mortgageTerm[k]:""
+
+                    })(
+                      <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                    )}
+                  </FormItem>
                   <span>月</span>
-                </div>
-              )}
-            </FormItem>
-            <FormItem
-              style={{
-                display:"inline-block"
-              }}
-              required={false}
-              key={k+9}
-              >
-              {getFieldDecorator(`returnedMonths[${k}]`, {
-              })(
-                <div >
+                </DoubleInput>
+                <DoubleInput>
                   <span>已还月份数</span>
-                  <Input   type="number" min={0} style={{width:35}}/>
+                  <FormItem
+                    required={false}
+                    key={k+9}
+                    style={{
+                      display:"inline-block",
+                      color:'#646464'
+                    }}
+                    >
+                    {getFieldDecorator(`returnedMonths[${k}]`, {
+                      initialValue:item.returnedMonths?item.returnedMonths[k]:""
+                    })(
+                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                    )}
+                  </FormItem>
                   <span>月</span>
-                </div>
-              )}
-            </FormItem>
-          </DoubleInput>
+                </DoubleInput>
+              </div>
+          }
           <DoubleInput>
+            <span>本房产总面积</span>
             <FormItem
-              style={{
-                display:"inline-block"
-              }}
               required={false}
               key={k+10}
+              style={{
+                display:"inline-block",
+                color:'#646464'
+              }}
               >
               {getFieldDecorator(`propertyTotalArea[${k}]`, {
+                initialValue:item.propertyTotalArea?item.propertyTotalArea[k]:""
               })(
-                <div >
-                  <span>本房产总面积</span>
-                  <Input   type="number" min={0} style={{width:40}}/>
-                  <span>平</span>
-                </div>
+                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
               )}
             </FormItem>
+            <span>平</span>
+          </DoubleInput>
+          <DoubleInput>
+            <span>本房产总市值</span>
             <FormItem
-              style={{
-                display:"inline-block"
-              }}
               required={false}
               key={k+11}
+              style={{
+                display:"inline-block",
+                color:'#646464'
+              }}
               >
               {getFieldDecorator(`propertyTotalMarketValue[${k}]`, {
+                initialValue:item.propertyTotalMarketValue?item.propertyTotalMarketValue[k]:""
               })(
-                <div >
-                  <span>本房产总市值</span>
-                  <Input   type="number" min={0} style={{width:35}}/>
-                  <span>万元</span>
-                </div>
+                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
               )}
             </FormItem>
+            <span>元</span>
           </DoubleInput>
         </Sub>
       );
     });
 
     // 商业保单
-    getFieldDecorator('businessPolicyArr', { initialValue: [] });
+    getFieldDecorator('businessPolicyArr', { initialValue: item.businessPolicyArr||[] } );
     const businessPolicy = getFieldValue('businessPolicyArr');
     const businessPolicyFormItems = businessPolicy.map((k, index) => {
       return (
@@ -499,11 +517,12 @@ class MatchStep4 extends React.Component {
             </SubTitle>
           </DoubleInput>
           <SubContain>
-            <SubContainTitle>保单品牌</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>保单品牌</SubContainTitle>
             <FormItem
               required={false}
               >
               {getFieldDecorator(`policyBrand[${k}]`, {
+                initialValue:item.policyBrand?item.policyBrand[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>中国平安</RadioButton>
@@ -511,19 +530,16 @@ class MatchStep4 extends React.Component {
                   <RadioButton value={2}>新华保险</RadioButton>
                   <RadioButton value={3}>泰康人寿</RadioButton>
                   <RadioButton value={4}>太平保险</RadioButton>
-                  <Br/>
                   <RadioButton value={5}>民生保险</RadioButton>
                   <RadioButton value={6}>天安保险</RadioButton>
                   <RadioButton value={7}>华夏人寿</RadioButton>
                   <RadioButton value={8}>中邮人寿</RadioButton>
                   <RadioButton value={9}>友邦保险</RadioButton>
-                  <Br/>
                   <RadioButton value={10}>安邦人寿</RadioButton>
                   <RadioButton value={11}>招商信诺</RadioButton>
                   <RadioButton value={12}>工银安盛</RadioButton>
                   <RadioButton value={13}>安联保险</RadioButton>
                   <RadioButton value={14}>中英保险</RadioButton>
-                  <Br/>
                   <RadioButton value={15}>阳光保险</RadioButton>
                   <RadioButton value={16}>太平洋保险</RadioButton>
                   <RadioButton value={17}>中国人民人寿</RadioButton>
@@ -536,25 +552,26 @@ class MatchStep4 extends React.Component {
           {
             getFieldValue(`policyBrand[${k}]`)===19
             ?           <SubContain>
+                          <span>保单品牌</span>
                           <FormItem
+                            style={{display:'inline-block'}}
                             required={false}
                             >
-                            {getFieldDecorator(`policyBrand[${k}]`, {
+                            {getFieldDecorator(`otherPolicyBrand[${k}]`, {
+                              initialValue:item.otherPolicyBrand?item.otherPolicyBrand[k]:""
                             })(
-                              <div style={{verticalAlign:'bottom'}}>
-                                <span>保单品牌</span>
-                                <Input   type="text"style={{width:50}}/>
-                              </div>
+                                <Input   type="text"style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                       </SubContain>:null
           }
           <SubContain>
-            <SubContainTitle>保单缴费方式</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>保单缴费方式</SubContainTitle>
             <FormItem
               required={false}
               >
               {getFieldDecorator(`policyBrandPaymentMethod[${k}]`, {
+                initialValue:item.policyBrandPaymentMethod?item.policyBrandPaymentMethod[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>年缴</RadioButton>
@@ -567,11 +584,12 @@ class MatchStep4 extends React.Component {
           </SubContain>
 
           <SubContain>
-            <SubContainTitle>保单缴费时长</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>保单缴费时长</SubContainTitle>
             <FormItem
               required={false}
               >
               {getFieldDecorator(`policyPaymentYears[${k}]`, {
+                initialValue:item.policyPaymentYears?item.policyPaymentYears[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>1年以下</RadioButton>
@@ -583,18 +601,19 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
+              <span>保单年缴费金额 </span>
             <FormItem
               required={false}
+              style={{color:'#646464',display:'inline-block'}}
               >
               {getFieldDecorator(`policyPayment[${k}]`, {
+                initialValue:item.policyPayment?item.policyPayment[k]:""
               })(
-                <div style={{verticalAlign:'bottom'}}>
-                  <span>保单年缴费金额 </span>
-                  <Input   type="number" min={0} style={{width:50}}/>
-                  <span>元</span>
-                </div>
+
+                  <Input   type="number" min={0} style={{width:60,fontSize:'16px'}}/>
               )}
             </FormItem>
+            <span>元</span>
             <Help><Red>*</Red>月缴或季缴的需折算成年缴填写金额</Help>
         </SubContain>
         </Sub>
@@ -602,7 +621,7 @@ class MatchStep4 extends React.Component {
     });
 
     // 车辆状况
-    getFieldDecorator('carProperty', { initialValue: [] });
+    getFieldDecorator('carProperty', { initialValue: item.carProperty||[] } );
     const carProperty = getFieldValue('carProperty');
     const carPropertyFormItems = carProperty.map((k, index) => {
       return (
@@ -624,81 +643,83 @@ class MatchStep4 extends React.Component {
                 </SubTitle>
           </DoubleInput>
           <SubContain>
-            <SubContainTitle>车辆登记证状态</SubContainTitle>
+            <SubContainTitle style={{color: '#646464'}}>车辆登记证状态</SubContainTitle>
             <FormItem
               required={false}
               >
               {getFieldDecorator(`carRegistStatus[${k}]`, {
+                initialValue:item.carRegistStatus?item.carRegistStatus[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>绿本在手</RadioButton>
                   <RadioButton value={1}>银行按揭</RadioButton>
                   <RadioButton value={2}>信用卡按揭</RadioButton>
                   <RadioButton value={3}>车贷机构抵押</RadioButton>
-                  <Br />
                   <RadioButton value={4}>汽车金融按揭</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
           </SubContain>
           <SubContain>
+            <span>车辆残值评估</span>
               <FormItem
                 required={false}
+                style={{color:'#646464',display:'inline-block'}}
                 >
                 {getFieldDecorator(`carPotentialPrice[${k}]`, {
+                  initialValue:item.carPotentialPrice?item.carPotentialPrice[k]:""
                 })(
-                  <div style={{verticalAlign:'bottom'}}>
-                    <span>车辆残值评估</span>
-                    <Input   type="number"style={{width:50}}/>
-                    <span>元</span>
-                  </div>
+                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
+              <span>元</span>
           </SubContain>
           {
             (getFieldValue(`carRegistStatus[${k}]`) === 1||getFieldValue(`carRegistStatus[${k}]`) === 2||getFieldValue(`carRegistStatus[${k}]`) === 3||getFieldValue(`carRegistStatus[${k}]`) === 4)
             ? <div>
                       <SubContain>
+                        <span>车辆贷款余额</span>
+
                           <FormItem
                             required={false}
+                            style={{color:'#646464',display:'inline-block'}}
                             >
                             {getFieldDecorator(`carLoanBalance[${k}]`, {
+                              initialValue:item.carLoanBalance?item.carLoanBalance[k]:""
                             })(
-                              <div style={{verticalAlign:'bottom'}}>
-                                <span>车辆贷款余额</span>
-                                <Input   type="number"style={{width:35}}/>
-                                <span>元</span>
-                              </div>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
+                          <span>元</span>
+
                       </SubContain>
                       <SubContain>
+                        <span>车贷月还款金额</span>
                           <FormItem
                             required={false}
+                            style={{color:'#646464',display:'inline-block'}}
                             >
                             {getFieldDecorator(`carRepayment[${k}]`, {
+                              initialValue:item.carRepayment?item.carRepayment[k]:""
                             })(
-                              <div style={{verticalAlign:'bottom'}}>
-                                <span>车贷月还款金额</span>
-                                <Input   type="number"style={{width:35}}/>
-                                <span>元</span>
-                              </div>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
+                          <span>元</span>
                       </SubContain>
                       <SubContain>
+                        <span>车贷已还款月份</span>
                           <FormItem
                             required={false}
+                            style={{color:'#646464',display:'inline-block'}}
                             >
                             {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
+                              initialValue:item.carrRepaymentMonths?item.carrRepaymentMonths[k]:""
                             })(
-                              <div style={{verticalAlign:'bottom'}}>
-                                <span>车贷已还款月份</span>
-                                <Input   type="number"style={{width:35}}/>
-                                <span>个月</span>
-                              </div>
+                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
+                          <span>个月</span>
                       </SubContain>
                   </div>:null
           }
@@ -732,7 +753,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('isHouseProperty')===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative'}}>
+                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
                   <span>名下房产数量</span>
                   <FormItem
                     style={{display:'inline-block'}}
@@ -746,7 +767,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下房产数量'
                       }],
                     })(
-                      <input   type="number"style={{width:35}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>套</span>
@@ -755,7 +776,7 @@ class MatchStep4 extends React.Component {
               </DoubleInput>
               { housePropertyFormItems }
                 <AddButton  onClick={this.addHouseProperty} >
-                  +新增房产
+                  + 新增房产
                 </AddButton>
             </div> :null
           }
@@ -783,7 +804,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('businessPolicy') === 1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative'}}>
+                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
                   <span>名下保单份数</span>
                   <FormItem
                     style={{display:"inline-block"}}
@@ -797,7 +818,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下保单份数'
                       }],
                     })(
-                      <input   type="number"style={{width:35}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>份</span>
@@ -805,7 +826,7 @@ class MatchStep4 extends React.Component {
               </DoubleInput>
               {businessPolicyFormItems}
               <AddButton  onClick={this.addBusinessPolicy} >
-                +新增保单
+                + 新增保单
               </AddButton>
             </div>: null
           }
@@ -836,7 +857,7 @@ class MatchStep4 extends React.Component {
             getFieldValue('isFamilyCar') ===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative'}}>
+                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
                   <span>名下车辆数量</span>
                   <FormItem
                     style={{display:"inline-block"}}
@@ -850,7 +871,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下车辆数量'
                       }],
                     })(
-                      <input   type="number"style={{width:35}}/>
+                      <input type="number"style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>辆</span>
@@ -858,14 +879,14 @@ class MatchStep4 extends React.Component {
               </DoubleInput>
               {carPropertyFormItems}
               <AddButton  onClick={this.addCarProperty} >
-                +新增车产
+                + 新增车产
               </AddButton>
             </div>: null
           }
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <Button variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</Button>
+              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
@@ -877,7 +898,11 @@ class MatchStep4 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         font-size:16px;
+        }
+        .second-level{
+          color: #646464;
         }
       `}
       </style>

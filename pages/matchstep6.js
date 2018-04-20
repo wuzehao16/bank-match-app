@@ -49,20 +49,22 @@ const Contain = styled.div`
   font-size: 12px;
 `
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   line-height: 35px;
   color: #969696;
   padding: 0 15px;
 `
 const SubContain = styled.div`
+  color：#646464;
   background-color: #fff;
   padding: 10px 13px 20px;
   border-bottom: 1px solid #f2f2f2;
-  font-size: 12px;
+  font-size: 16px;
 `
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
-  font-size: 12px;
+  font-size: 16px;
+  color：#646464;
 `
 const Br = styled.div`
   height: 10px;
@@ -82,12 +84,14 @@ const DoubleInput = styled.div`
   border-bottom: 1px solid #f2f2f2;
   padding: 20px 0 20px 0;
   position: relative;
-  font-size: 12px;
+  font-size: 15px;
+  color：#646464;
   display: flex;
   justify-content: space-between;
 `
 const Sub = styled.div`
   padding: 0 13px;
+  color: #646464;
 `
 const Relative = styled.div`
   position: relative;
@@ -153,9 +157,9 @@ class MatchStep6 extends React.Component {
         <Topbar position="p3" num={data.productNum?data.productNum:0}/>
         <Title>名下负债状况</Title>
         <Wrapper>
-          <DoubleInput>
+          <DoubleInput> 
             <Relative>
-              <span>信用类贷款</span>
+              <span className="title">信用类贷款</span>
               <FormItem
                 style={{display:'inline-block'}}
                 validateStatus={sumCreditLoanError ? 'error' : ''}
@@ -167,49 +171,32 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用类贷款'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
-
               <span>笔</span>
             </Relative>
-
           </DoubleInput>
-          <DoubleInput>
-            <FormItem
-              >
-              {getFieldDecorator('sumEqualInterest', {
-              })(
-                <span >
-                  <span>等额本息类贷款</span>
-                  <input  type="number" min={0} max={100} style={{width:25}}/>
-                  <span>笔,</span>
-                </span>
-              )}
-              {getFieldDecorator('sumFirstInterest', {
-                rules: [{ required: true}],
-              })(
-                <span >
-                  <span>先息后本类贷款</span>
-                  <input  type="number" min={0} max={100} style={{width:25}}/>
-                  <span>笔,</span>
-                </span>
-              )}
-              {getFieldDecorator('sumAlongLoan', {
-                rules: [{ required: true}],
-              })(
-                <span >
-                  <span>随借随还类</span>
-                  <input  type="number" min={0} max={100} style={{width:25}}/>
-                  <span>笔</span>
-                </span>
-              )}
-            </FormItem>
-          </DoubleInput>
-          <Sub>
-            {
-              getFieldValue("sumEqualInterest") > 0
-              ?            <DoubleInput>
+          {
+            getFieldValue('sumCreditLoan') >0 ?
+              <div>
+                <DoubleInput>
+                  <FormItem>
+                    {getFieldDecorator('sumEqualInterest', {
+                    })(
+                      <span >
+                        <span className="title">等额本息类贷款</span>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <span>笔</span>
+                      </span>
+                    )}
+                  </FormItem>  
+                </DoubleInput>
+                <Sub>
+                  {
+                      getFieldValue("sumEqualInterest") > 0
+                      ? <div>
+                          <DoubleInput>
                             <Relative>
                               <span>等额本息类贷款总余额 </span>
                               <FormItem
@@ -223,11 +210,13 @@ class MatchStep6 extends React.Component {
                                     message: '请输入等额本息类贷款总余额'
                                   }],
                                 })(
-                                    <input  type="number" min={0}  style={{width:50}}/>
+                                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
                             </Relative>
+                          </DoubleInput>
+                          <DoubleInput>  
                             <Relative>
                               <span>每月还款总额</span>
                               <FormItem
@@ -241,102 +230,147 @@ class MatchStep6 extends React.Component {
                                     message: '请输入每月还款总额'
                                   }],
                                 })(
-                                  <input  type="number" min={0} style={{width:40}}/>
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
                             </Relative>
-
-                          </DoubleInput>:null
-
-            }
-            {
-              getFieldValue('sumFirstInterest') > 0
-              ?            <DoubleInput>
-                            <Relative>
-                              <span>先息后本类贷款总余额 </span>
-                              <FormItem
-                                style={{display:'inline-block'}}
-                                validateStatus={firstInterestTotalBalanceError ? 'error' : ''}
-                                help={firstInterestTotalBalanceError || ''}
-                                >
-                                {getFieldDecorator('firstInterestTotalBalance', {
-                                  rules: [{
-                                    required: true,
-                                    message:'请输入随借随还类贷款总余额'
-                                  }],
-                                })(
-                                    <input  type="number" min={0}  style={{width:50}}/>
-                                )}
-                              </FormItem>
-                              <span>元</span>
-                            </Relative>
-                            <Relative>
-                              <span>每月还利息</span>
-                              <FormItem
-                                style={{display:'inline-block'}}
-                                validateStatus={firstInterestMonthPaymentError ? 'error' : ''}
-                                help={firstInterestMonthPaymentError || ''}
-                                >
-                                {getFieldDecorator('firstInterestMonthPayment', {
-                                  rules: [{
-                                    required: true,
-                                    message:'每月还利息'
-                                  }],
-                                })(
-                                    <input  type="number" min={0} style={{width:40}}/>
-                                )}
-                              </FormItem>
-                              <span>元</span>
-                            </Relative>
-                          </DoubleInput>:null
-            }
-            {
-              getFieldValue('sumAlongLoan') > 0
-              ? <DoubleInput>
-                <Relative>
-                  <span>随借随还类贷款总余额 </span>
+                          </DoubleInput>
+                        </div>:null
+                    }
+                  </Sub>  
+                <DoubleInput>
                   <FormItem
-                    style={{display:'inline-block'}}
-                    validateStatus={alongLoanTotalBalanceError ? 'error' : ''}
-                    help={alongLoanTotalBalanceError || ''}
-                    >
-                    {getFieldDecorator('alongLoanTotalBalance', {
-                      rules: [{
-                        required: true,
-                        message:'请输入随借随还类贷款总余额'
-                      }],
+                    validateStatus={sumEqualInterestError ? 'error' : ''}
+                    help={sumEqualInterestError || ''}
+                  >
+                    {getFieldDecorator('sumFirstInterest', {
+
+                      rules: [{ required: true}],
                     })(
-                        <input  type="number" min={0}  style={{width:50}}/>
+                      <span >
+                        <span className="title">先息后本类贷款</span>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <span>笔</span>
+                      </span>
+                    )}
+                  </FormItem>  
+                </DoubleInput>
+                <Sub>
+                  {
+                    getFieldValue('sumFirstInterest') > 0
+                    ? <div>       
+                        <DoubleInput>
+                          <Relative>
+                            <span>先息后本类贷款总余额 </span>
+                            <FormItem
+                              style={{display:'inline-block'}}
+                              validateStatus={firstInterestTotalBalanceError ? 'error' : ''}
+                              help={firstInterestTotalBalanceError || ''}
+                              >
+                              {getFieldDecorator('firstInterestTotalBalance', {
+                                rules: [{
+                                  required: true,
+                                  message:'请输入随借随还类贷款总余额'
+                                }],
+                              })(
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                              )}
+                            </FormItem>
+                            <span>元</span>
+                          </Relative>
+                        </DoubleInput>
+                        <DoubleInput>
+                          <Relative>
+                            <span>每月还利息</span>
+                            <FormItem
+                              style={{display:'inline-block'}}
+                              validateStatus={firstInterestMonthPaymentError ? 'error' : ''}
+                              help={firstInterestMonthPaymentError || ''}
+                              >
+                              {getFieldDecorator('firstInterestMonthPayment', {
+                                rules: [{
+                                  required: true,
+                                  message:'每月还利息'
+                                }],
+                              })(
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                              )}
+                            </FormItem>
+                            <span>元</span>
+                          </Relative>
+                        </DoubleInput>
+                      </div>:null
+                  }
+                </Sub>
+                <DoubleInput>
+                <FormItem
+                  validateStatus={sumEqualInterestError ? 'error' : ''}
+                  help={sumEqualInterestError || ''}
+                >  
+                    {getFieldDecorator('sumAlongLoan', {
+                      rules: [{ required: true}],
+                    })(
+                      <span >
+                        <span className="title">随借随还类</span>
+                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <span>笔</span>
+                      </span>
                     )}
                   </FormItem>
-                  <span>元</span>
-                </Relative>
-                <Relative>
-                  <span>每月还利息</span>
-                  <FormItem
-                    style={{display:'inline-block'}}
-                    validateStatus={alongLoanMonthPaymentError ? 'error' : ''}
-                    help={alongLoanMonthPaymentError || ''}
-                    >
-                    {getFieldDecorator('alongLoanMonthPayment', {
-                      rules: [{
-                        required: true,
-                        message:'请输入每月还利息'
-                      }],
-                    })(
-                        <input  type="number" min={0} style={{width:40}}/>
-                    )}
-                  </FormItem>
-                  <span>元</span>
-                </Relative>
-
-              </DoubleInput>: null
-            }
-          </Sub>
+                </DoubleInput>
+                <Sub>
+                  {
+                    getFieldValue('sumAlongLoan') > 0
+                    ? <div>
+                        <DoubleInput>
+                        <Relative>
+                          <span>随借随还类贷款总余额 </span>
+                          <FormItem
+                            style={{display:'inline-block'}}
+                            validateStatus={alongLoanTotalBalanceError ? 'error' : ''}
+                            help={alongLoanTotalBalanceError || ''}
+                            >
+                            {getFieldDecorator('alongLoanTotalBalance', {
+                              rules: [{
+                                required: true,
+                                message:'请输入随借随还类贷款总余额'
+                              }],
+                            })(
+                                <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                            )}
+                          </FormItem>
+                          <span>元</span>
+                        </Relative>
+                        </DoubleInput>
+                        <DoubleInput>
+                        <Relative>
+                          <span>每月还利息</span>
+                          <FormItem
+                            style={{display:'inline-block'}}
+                            validateStatus={alongLoanMonthPaymentError ? 'error' : ''}
+                            help={alongLoanMonthPaymentError || ''}
+                            >
+                            {getFieldDecorator('alongLoanMonthPayment', {
+                              rules: [{
+                                required: true,
+                                message:'请输入每月还利息'
+                              }],
+                            })(
+                                <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                            )}
+                          </FormItem>
+                          <span>元</span>
+                        </Relative>
+                      </DoubleInput>
+                    </div>: null
+                  }
+                </Sub>
+              </div>: null
+          }
           <DoubleInput>
             <Relative>
-              <span>信用卡 </span>
+              <span className="title">信用卡</span>
               <FormItem
                 style={{display:'inline-block'}}
                 validateStatus={sumCreditCardError ? 'error' : ''}
@@ -348,7 +382,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用卡张数'
                   }],
                 })(
-                    <input  type="number" min={0}  style={{width:25}}/>
+                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>张</span>
@@ -359,25 +393,28 @@ class MatchStep6 extends React.Component {
             getFieldValue('sumCreditCard') > 0
             ?          <Sub>
                         <DoubleInput>
-                          <FormItem
-                            validateStatus={creditCardTotalLimitError ? 'error' : ''}
-                            help={creditCardTotalLimitError || ''}
-                            >
-                            {getFieldDecorator('creditCardTotalLimit', {
-                              rules: [{
-                                required: true,
-                                message: '请输入信用卡总额度'
-                              }],
-                            })(
-                              <span >
-                                <span>信用卡总额度</span>
-                                <input  type="number" min={0}  style={{width:50}}/>
-                                <span>元</span>
-                              </span>
-                            )}
-                          </FormItem>
+                          <Relative>  
+                            <FormItem
+                              validateStatus={creditCardTotalLimitError ? 'error' : ''}
+                              help={creditCardTotalLimitError || ''}
+                              >
+                              {getFieldDecorator('creditCardTotalLimit', {
+                                rules: [{
+                                  required: true,
+                                  message: '请输入信用卡总额度'
+                                }],
+                              })(
+                                <span >
+                                  <span>信用卡总额度</span>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <span>元</span>
+                                </span>
+                              )}
+                            </FormItem>
+                          </Relative>
                         </DoubleInput>
                         <DoubleInput>
+                          <Relative> 
                           <FormItem
                             validateStatus={creditCardUsedLimitError ? 'error' : ''}
                             help={creditCardUsedLimitError || ''}
@@ -390,56 +427,61 @@ class MatchStep6 extends React.Component {
                             })(
                               <span >
                                 <span>信用卡当月已使用额度</span>
-                                <input  type="number" min={0}  style={{width:50}}/>
+                                <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                 <span>元</span>
                               </span>
                             )}
                           </FormItem>
+                          </Relative>
                         </DoubleInput>
                         <DoubleInput>
-                          <FormItem
-                            validateStatus={creditCardSixMonthsAvgUsedLimitError ? 'error' : ''}
-                            help={creditCardSixMonthsAvgUsedLimitError || ''}
-                            >
-                            {getFieldDecorator('creditCardSixMonthsAvgUsedLimit', {
-                              rules: [{
-                                required: true,
-                                message: '请输入信用卡近六个月平均使用额度'
-                              }],
-                            })(
-                              <span >
-                                <span>信用卡近六个月平均使用额度</span>
-                                <input  type="number" min={0}  style={{width:50}}/>
-                                <span>元</span>
-                              </span>
-                            )}
-                          </FormItem>
+                          <Relative> 
+                            <FormItem
+                              validateStatus={creditCardSixMonthsAvgUsedLimitError ? 'error' : ''}
+                              help={creditCardSixMonthsAvgUsedLimitError || ''}
+                              >
+                              {getFieldDecorator('creditCardSixMonthsAvgUsedLimit', {
+                                rules: [{
+                                  required: true,
+                                  message: '请输入信用卡近六个月平均使用额度'
+                                }],
+                              })(
+                                <span >
+                                  <span>信用卡近六个月平均使用额度</span>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <span>元</span>
+                                </span>
+                              )}
+                            </FormItem>
+                          </Relative> 
                         </DoubleInput>
                         <DoubleInput>
-                          <FormItem
-                            validateStatus={sumStagesCreditCardError ? 'error' : ''}
-                            help={sumStagesCreditCardError || ''}
-                            >
-                            {getFieldDecorator('sumStagesCreditCard', {
-                              rules: [{
-                                required: true,
-                                message: '请输入信用卡办理的分期还款张数'
-                              }],
-                            })(
-                              <span >
-                                <span>信用卡办理的分期还款张数</span>
-                                <input  type="number" min={0}  style={{width:25}}/>
-                                <span>张</span>
-                              </span>
-                            )}
-                          </FormItem>
+                         <Relative> 
+                            <FormItem
+                              validateStatus={sumStagesCreditCardError ? 'error' : ''}
+                              help={sumStagesCreditCardError || ''}
+                              >
+                              {getFieldDecorator('sumStagesCreditCard', {
+                                rules: [{
+                                  required: true,
+                                  message: '请输入信用卡办理的分期还款张数'
+                                }],
+                              })(
+                                <span >
+                                  <span>信用卡办理的分期还款张数</span>
+                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <span>张</span>
+                                </span>
+                              )}
+                            </FormItem>
+                          </Relative> 
                         </DoubleInput>
                       </Sub> : null
           }
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <Button variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</Button>
+              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
@@ -451,7 +493,11 @@ class MatchStep6 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         text-align: center;
+        }
+        .title{
+          color: #3c3c3c;
         }
       `}
       </style>

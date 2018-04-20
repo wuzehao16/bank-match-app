@@ -31,25 +31,27 @@ const Contain = styled.div`
   background-color: #fff;
   padding-top: 1px;
   border-bottom: 1px solid #f2f2f2;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   position: relative;
   font-size: 12px;
 `
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   line-height: 35px;
   color: #969696;
   padding: 0 15px;
 `
 const SubContain = styled.div`
+  color：#646464;
   background-color: #fff;
   padding: 10px 13px 20px;
   border-bottom: 1px solid #f2f2f2;
-  font-size: 12px;
+  font-size: 16px;
 `
 const SubContainTitle = styled.div`
+  color：#646464;
   padding-bottom: 10px;
-  font-size: 12px;
+  font-size: 16px;
 `
 const Br = styled.div`
   height: 10px;
@@ -67,9 +69,10 @@ const Red = styled.span`
 const DoubleInput = styled.div`
   background-color: #fff;
   border-bottom: 1px solid #f2f2f2;
-  padding: 20px 30px 20px 0;
+  padding: 20px 0 30px 0;
   position: relative;
-  font-size: 12px;
+  font-size: 16px;
+  color：#646464;
   display: flex;
   justify-content: space-between;
 `
@@ -233,7 +236,7 @@ class MatchStep3 extends React.Component {
           {
             getFieldValue('isParticleLoan') === 1
               ?           <SubContain>
-                          <SubContainTitle>使用额度</SubContainTitle>
+                          <SubContainTitle style={{color: '#646464'}}>使用额度</SubContainTitle>
                           <FormItem
                             validateStatus={particleLoanLimitError ? 'error' : ''}
                             help={particleLoanLimitError || ''}
@@ -310,7 +313,7 @@ class MatchStep3 extends React.Component {
             getFieldValue('isOverdue') ===1
               ? <div>
                 <SubContain>
-                  <SubContainTitle>当前逾期类别</SubContainTitle>
+                  <SubContainTitle style={{color: '#646464'}}>当前逾期类别</SubContainTitle>
                   <FormItem
                     validateStatus={overdueCategoryError ? 'error' : ''}
                     help={overdueCategoryError || ''}
@@ -327,7 +330,7 @@ class MatchStep3 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>当前逾期天数</SubContainTitle>
+                  <SubContainTitle style={{color: '#646464'}}>当前逾期天数</SubContainTitle>
                   <FormItem
                     validateStatus={overdueDaysError ? 'error' : ''}
                     help={overdueDaysError || ''}
@@ -348,7 +351,7 @@ class MatchStep3 extends React.Component {
                 {
                   (getFieldValue('overdueCategory') ===0 || getFieldValue('overdueCategory')===2)
                     ?  <SubContain>
-                        <SubContainTitle>当前信用卡逾期金额</SubContainTitle>
+                        <SubContainTitle style={{color: '#646464'}}>当前信用卡逾期金额</SubContainTitle>
                         <FormItem
                           validateStatus={creditCardOverdueMoneyError ? 'error' : ''}
                           help={creditCardOverdueMoneyError || ''}
@@ -370,7 +373,7 @@ class MatchStep3 extends React.Component {
                 {
                   (getFieldValue('overdueCategory') ===1 || getFieldValue('overdueCategory')===2)
                     ?  <SubContain>
-                        <SubContainTitle>当前贷款逾期金额</SubContainTitle>
+                        <SubContainTitle style={{color: '#646464'}}>当前贷款逾期金额</SubContainTitle>
                         <FormItem
                           validateStatus={loanOverdueMoneyError ? 'error' : ''}
                           help={loanOverdueMoneyError || ''}
@@ -390,7 +393,7 @@ class MatchStep3 extends React.Component {
                       </SubContain> : null
                 }
                 <SubContain>
-                  <SubContainTitle>当前逾期是否已经结清</SubContainTitle>
+                  <SubContainTitle style={{color: '#646464'}}>当前逾期是否已经结清</SubContainTitle>
                   <FormItem
                     validateStatus={isOverdueBalanceError ? 'error' : ''}
                     help={isOverdueBalanceError || ''}
@@ -407,7 +410,7 @@ class MatchStep3 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>近2个月内逾期的情况</SubContainTitle>
+                  <SubContainTitle style={{color: '#646464'}}>近2个月内逾期的情况</SubContainTitle>
                   <FormItem
                     validateStatus={isTwoMonthsOverdueError ? 'error' : ''}
                     help={isTwoMonthsOverdueError || ''}
@@ -424,7 +427,7 @@ class MatchStep3 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                    <SubContainTitle>近3个月内逾期的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近3个月内逾期的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isThreeMonthsOverdueError ? 'error' : ''}
                       help={isThreeMonthsOverdueError || ''}
@@ -441,7 +444,7 @@ class MatchStep3 extends React.Component {
                     </FormItem>
                   </SubContain>
                 <SubContain>
-                    <SubContainTitle>近6个月内是否有逾期30天以上的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近6个月内是否有逾期30天以上的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isSixMonthsOverdueError ? 'error' : ''}
                       help={isSixMonthsOverdueError || ''}
@@ -458,7 +461,7 @@ class MatchStep3 extends React.Component {
                     </FormItem>
                   </SubContain>
                 <SubContain>
-                    <SubContainTitle>近1年内是否有逾期60天以上的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近1年内是否有逾期60天以上的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isOneYearOverdueError ? 'error' : ''}
                       help={isOneYearOverdueError || ''}
@@ -475,7 +478,7 @@ class MatchStep3 extends React.Component {
                     </FormItem>
                   </SubContain>
                 <SubContain>
-                    <SubContainTitle>近2年内是否有逾期90天以上的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近2年内是否有逾期90天以上的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isTwoYearsOverdueError ? 'error' : ''}
                       help={isTwoYearsOverdueError || ''}
@@ -492,7 +495,7 @@ class MatchStep3 extends React.Component {
                     </FormItem>
                   </SubContain>
                 <SubContain>
-                    <SubContainTitle>近5年内是否有逾期120天以上的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近5年内是否有逾期120天以上的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isFiveYearsOverdueError ? 'error' : ''}
                       help={isFiveYearsOverdueError || ''}
@@ -515,7 +518,7 @@ class MatchStep3 extends React.Component {
         <Wrapper>
           <DoubleInput>
             <Relative >
-              <span>近1个月查询次数</span>
+              <span style={{color: '#3c3c3c'}}>近1个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={sumOneMonthQueriesError ? 'error' : ''}
@@ -528,26 +531,7 @@ class MatchStep3 extends React.Component {
                      message:'请输入近1个月查询次数'
                 }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
-                )}
-              </FormItem>
-              <span>次</span>
-            </Relative>
-            <Relative >
-              <span>近2个月查询次数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
-                help={sumTwoMonthsQueriesError || ''}
-                >
-                {getFieldDecorator('sumTwoMonthsQueries', {
-                  initialValue:item.sumTwoMonthsQueries,
-                  rules: [{
-                    required: true,
-                    message:'请输入近2个月查询次数'
-                  }],
-                })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
@@ -555,7 +539,28 @@ class MatchStep3 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative >
-              <span>近3个月查询次数</span>
+                <span style={{color: '#3c3c3c'}}>近2个月查询次数</span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
+                  help={sumTwoMonthsQueriesError || ''}
+                  >
+                  {getFieldDecorator('sumTwoMonthsQueries', {
+                    initialValue:item.sumTwoMonthsQueries,
+                    rules: [{
+                      required: true,
+                      message:'请输入近2个月查询次数'
+                    }],
+                  })(
+                    <input  type="number" min={0} max={1000} style={{width:60}}/>
+                  )}
+                </FormItem>
+                <span>次</span>
+              </Relative>
+          </DoubleInput>
+          <DoubleInput>
+            <Relative >
+              <span style={{color: '#3c3c3c'}}>近3个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={sumThreeMonthsQueriesError ? 'error' : ''}
@@ -568,13 +573,15 @@ class MatchStep3 extends React.Component {
                     message:'请输入近3个月查询次数'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
             </Relative>
+          </DoubleInput>
+          <DoubleInput>
             <Relative>
-              <span>近6个月查询次数</span>
+              <span style={{color: '#3c3c3c'}}>近6个月查询次数</span>
               <FormItem
                 style={{display:"inline-block"}}
                 validateStatus={sumSixMonthsQueriesError ? 'error' : ''}
@@ -587,7 +594,7 @@ class MatchStep3 extends React.Component {
                     message:'请输入近6个月查询次数'
                   }],
                 })(
-                    <input  type="number" min={0} max={1000} style={{width:25}}/>
+                    <input  type="number" min={0} max={1000} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
@@ -595,7 +602,7 @@ class MatchStep3 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <Relative>
-              <span>近12个月查询次数</span>
+              <span style={{color: '#3c3c3c'}}>近12个月查询次数</span>
             <FormItem
               style={{display:"inline-block"}}
               validateStatus={sumOneYearQueriesError ? 'error' : ''}
@@ -608,7 +615,7 @@ class MatchStep3 extends React.Component {
                   message:'请输入近12个月查询次数'
                 }],
               })(
-                  <input  type="number" min={0} max={1000} style={{width:25}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60}}/>
               )}
             </FormItem>
             <span>次</span>
@@ -632,7 +639,8 @@ class MatchStep3 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         font-size: 16px;
         }
       `}
       </style>

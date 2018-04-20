@@ -32,7 +32,7 @@ const Contain = styled.div`
   padding-bottom: 20px;
 `
 const Title = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   line-height: 35px;
   color: #969696;
   padding: 0 15px;
@@ -43,14 +43,16 @@ const NextButton = styled(Button)`
   border-radius: 4px;
 `
 const SubContain = styled.div`
+  color：#646464;
   background-color: #fff;
-  padding: 10px 13px 20px;
+  padding: 10px 0px 20px 5px;
   border-bottom: 1px solid #f2f2f2;
-  font-size: 12px;
+  font-size: 16px;
 `
 const SubContainTitle = styled.div`
+  color：#646464;
   padding-bottom: 10px;
-  font-size: 12px;
+  font-size: 16px;
 `
 const Br = styled.div`
   height: 10px;
@@ -143,7 +145,7 @@ class MatchStep2 extends React.Component {
             (getFieldValue('age') ===0||getFieldValue('age') ===1||getFieldValue('age') ===3)
               ?           <SubContain>
                             <div
-                              style={{position:'relative'}}
+                              style={{position:'relative',color:'#646464'}}
                               >
                               <span>具体年龄</span>
                             <FormItem
@@ -158,7 +160,7 @@ class MatchStep2 extends React.Component {
                                    message:'请输入具体年龄'
                                 }],
                               })(
-                                  <input  type="number" min={0} max={100} style={{width:30}}/>
+                                  <input  type="number" min={0} max={100} style={{width:60}}/>
                               )}
                             </FormItem>
                               <span>岁</span>
@@ -188,7 +190,7 @@ class MatchStep2 extends React.Component {
           {
             getFieldValue('maritalStatus') === 0
               ?     <SubContain>
-                      <SubContainTitle>配偶是否同意贷款</SubContainTitle>
+                      <SubContainTitle style={{color:'#646464'}}>配偶是否同意贷款</SubContainTitle>
                       <FormItem
                         validateStatus={maritalStatusError ? 'error' : ''}
                         help={maritalStatusError || ''}
@@ -264,12 +266,11 @@ class MatchStep2 extends React.Component {
                 </RadioGroup>
               )}
             </FormItem>
-
           </Contain>
           {
             (getFieldValue("occupation") ===0||getFieldValue("occupation") ===2)
             ?  <div>
-                <SubContain>
+                <SubContain style={{color:'#646464'}}>
                   <SubContainTitle>单位性质</SubContainTitle>
                   <FormItem
                     validateStatus={unitPropertyError ? 'error' : ''}
@@ -284,7 +285,6 @@ class MatchStep2 extends React.Component {
                         <RadioButton value={1}>公务员</RadioButton>
                         <RadioButton value={2}>事业单位</RadioButton>
                         <RadioButton value={3}>高新企业</RadioButton>
-                        <Br />
                         <RadioButton value={4}>主板上市公司</RadioButton>
                         <RadioButton value={5}>普通企业</RadioButton>
                         <RadioButton value={6}>上市公司</RadioButton>
@@ -294,7 +294,7 @@ class MatchStep2 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>工资发放方式</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>工资发放方式</SubContainTitle>
                   <FormItem
                     validateStatus={salaryDistributionError ? 'error' : ''}
                     help={salaryDistributionError || ''}
@@ -312,7 +312,7 @@ class MatchStep2 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>现单位上班时长</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>现单位上班时长</SubContainTitle>
                   <FormItem
                     validateStatus={workTimeError ? 'error' : ''}
                     help={workTimeError || ''}
@@ -332,7 +332,7 @@ class MatchStep2 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>现单位月均工资</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>现单位月均工资</SubContainTitle>
                   <FormItem
                     validateStatus={monthAvgSalaryError ? 'error' : ''}
                     help={monthAvgSalaryError || ''}
@@ -353,7 +353,7 @@ class MatchStep2 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle>社保有无缴纳</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>社保有无缴纳</SubContainTitle>
                   <FormItem
                     validateStatus={isInsuranceError ? 'error' : ''}
                     help={isInsuranceError || ''}
@@ -373,7 +373,7 @@ class MatchStep2 extends React.Component {
                   getFieldValue('isInsurance') === 1
                     ? <div>
                       <SubContain>
-                        <SubContainTitle>现单位社保缴纳基数</SubContainTitle>
+                        <SubContainTitle style={{color:'#646464'}}>现单位社保缴纳基数</SubContainTitle>
                         <FormItem
                           validateStatus={insuranceBaseError ? 'error' : ''}
                           help={insuranceBaseError || ''}
@@ -393,7 +393,7 @@ class MatchStep2 extends React.Component {
                         </FormItem>
                       </SubContain>
                         <SubContain>
-                          <SubContainTitle>现单位社保连续缴纳时长</SubContainTitle>
+                          <SubContainTitle style={{color:'#646464'}}>现单位社保连续缴纳时长</SubContainTitle>
                           <FormItem
                             validateStatus={insurancePaymonthError ? 'error' : ''}
                             help={insurancePaymonthError || ''}
@@ -416,7 +416,7 @@ class MatchStep2 extends React.Component {
                 }
 
                 <SubContain>
-                  <SubContainTitle>公积金有无缴纳</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>公积金有无缴纳</SubContainTitle>
                   <FormItem
                     validateStatus={isProvidentFundError ? 'error' : ''}
                     help={isProvidentFundError || ''}
@@ -436,7 +436,7 @@ class MatchStep2 extends React.Component {
                   getFieldValue('isProvidentFund') === 1
                     ? <div>
                       <SubContain>
-                        <SubContainTitle>现单位公积金缴纳基数</SubContainTitle>
+                        <SubContainTitle style={{color:'#646464'}}>现单位公积金缴纳基数</SubContainTitle>
                         <FormItem
                           validateStatus={providentFundBaseError ? 'error' : ''}
                           help={providentFundBaseError || ''}
@@ -456,7 +456,7 @@ class MatchStep2 extends React.Component {
                         </FormItem>
                       </SubContain>
                       <SubContain>
-                        <SubContainTitle>现单位公积金连续缴纳时长</SubContainTitle>
+                        <SubContainTitle style={{color:'#646464'}}>现单位公积金连续缴纳时长</SubContainTitle>
                         <FormItem
                           validateStatus={providentFundPaymonthError ? 'error' : ''}
                           help={providentFundPaymonthError || ''}
@@ -483,7 +483,7 @@ class MatchStep2 extends React.Component {
             (getFieldValue("occupation")===1||getFieldValue("occupation") ===2)
             ?  <div>
                 <SubContain>
-                  <SubContainTitle>企业一年开票金额</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>企业一年开票金额</SubContainTitle>
                  <FormItem
                    validateStatus={invoiceValueError ? 'error' : ''}
                    help={invoiceValueError || ''}
@@ -502,7 +502,7 @@ class MatchStep2 extends React.Component {
                  </FormItem>
                </SubContain>
                 <SubContain>
-                  <SubContainTitle>股份占比</SubContainTitle>
+                  <SubContainTitle style={{color:'#646464'}}>股份占比</SubContainTitle>
                  <FormItem
                    validateStatus={shareRatioError ? 'error' : ''}
                    help={shareRatioError || ''}
@@ -521,7 +521,7 @@ class MatchStep2 extends React.Component {
                  </FormItem>
                </SubContain>
                <SubContain>
-                 <SubContainTitle>是否法人</SubContainTitle>
+                 <SubContainTitle style={{color:'#646464'}}>是否法人</SubContainTitle>
                  <FormItem
                    validateStatus={isLegalPersonError ? 'error' : ''}
                    help={isLegalPersonError || ''}
@@ -538,7 +538,7 @@ class MatchStep2 extends React.Component {
                  </FormItem>
                </SubContain>
                <SubContain>
-                 <SubContainTitle>单位座机是否能正常接听</SubContainTitle>
+                 <SubContainTitle style={{color:'#646464'}}>单位座机是否能正常接听</SubContainTitle>
                  <FormItem
                    validateStatus={isPhoneCallError ? 'error' : ''}
                    help={isPhoneCallError || ''}
@@ -555,7 +555,7 @@ class MatchStep2 extends React.Component {
                  </FormItem>
                </SubContain>
                <SubContain>
-                 <SubContainTitle>公司是否方便实地考察</SubContainTitle>
+                 <SubContainTitle style={{color:'#646464'}}>公司是否方便实地考察</SubContainTitle>
                  <FormItem
                    validateStatus={isInvestigateError ? 'error' : ''}
                    help={isInvestigateError || ''}
@@ -572,7 +572,7 @@ class MatchStep2 extends React.Component {
                  </FormItem>
                </SubContain>
                <SubContain>
-                 <SubContainTitle>本地营业执照注册时长</SubContainTitle>
+                 <SubContainTitle style={{color:'#646464'}}>本地营业执照注册时长</SubContainTitle>
                  <FormItem
                    validateStatus={licenseRegistTimeError ? 'error' : ''}
                    help={licenseRegistTimeError || ''}
@@ -586,7 +586,6 @@ class MatchStep2 extends React.Component {
                        <RadioButton value={1}>3个月以下</RadioButton>
                        <RadioButton value={2}>3-6个月</RadioButton>
                        <RadioButton value={3}>6-12个月</RadioButton>
-                       <Br />
                        <RadioButton value={4}>12-24个月</RadioButton>
                        <RadioButton value={5}>24个月以上</RadioButton>
                      </RadioGroup>
@@ -615,7 +614,11 @@ class MatchStep2 extends React.Component {
          border-top-width: 0px;
          border-right-width: 0px;
          border-bottom-width: 1px;
-         border-left-width: 0px
+         border-left-width: 0px;
+         font-size: 16px;
+        }
+        .second-level{
+          color: #646464;
         }
       `}
       </style>
