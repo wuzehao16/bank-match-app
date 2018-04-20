@@ -271,7 +271,7 @@ class MatchStep4 extends React.Component {
               key={k}
               >
               {getFieldDecorator(`housePropertyDependency[${k}]`, {
-                // initialValue:item.housePropertyDependency?item.housePropertyDependency[k]:""
+                initialValue:item.housePropertyDependency?item.housePropertyDependency[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>深房</RadioButton>
@@ -289,6 +289,7 @@ class MatchStep4 extends React.Component {
               key={k+1}
               >
               {getFieldDecorator(`ownership[${k}]`, {
+                initialValue:item.ownership?item.ownership[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>本人</RadioButton>
@@ -302,19 +303,21 @@ class MatchStep4 extends React.Component {
           </SubContain>
           <SubContain
             >
+                <span>产权占比</span>
               <FormItem
+                style={{
+                  display:"inline-block"
+                }}
                 key={k+2}
                 required={false}
                 >
                 {getFieldDecorator(`propertyRightRatio[${k}]`, {
+                  initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
                 })(
-                  <div style={{verticalAlign:'bottom'}}>
-                    <span>产权占比</span>
                     <Input   type="number"style={{width:35}}/>
-                    <span>%</span>
-                  </div>
                 )}
               </FormItem>
+                <span>%</span>
           </SubContain>
           <SubContain>
             <SubContainTitle>房产类型</SubContainTitle>
@@ -322,6 +325,7 @@ class MatchStep4 extends React.Component {
               required={false}
               >
               {getFieldDecorator(`propertyType[${k}]`, {
+                initialValue:item.propertyType?item.propertyType[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>住宅</RadioButton>
@@ -341,6 +345,7 @@ class MatchStep4 extends React.Component {
               key={k+4}
               >
               {getFieldDecorator(`propertyStatus[${k}]`, {
+                initialValue:item.propertyStatus?item.propertyStatus[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>红本在手</RadioButton>
@@ -357,6 +362,7 @@ class MatchStep4 extends React.Component {
               key={k+5}
               >
               {getFieldDecorator(`repaymentMethod[${k}]`, {
+                initialValue:item.repaymentMethod?item.repaymentMethod[k]:""
               })(
                 <RadioGroup  size="small">
                   <RadioButton value={0}>等额本息</RadioButton>
@@ -367,35 +373,42 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <DoubleInput>
+            <span>本笔抵押贷款余额 </span>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+6}
               >
               {getFieldDecorator(`mortgageBalance[${k}]`, {
+                initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
               })(
-                <div >
-                  <span>本笔抵押贷款余额 </span>
                   <Input   type="number" min={0} style={{width:50}}/>
-                  <span>元</span>
-                </div>
               )}
             </FormItem>
+            <span>元</span>
+            <span>每月还款金额</span>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+7}
               >
               {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
+                initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
               })(
-                <div >
-                  <span>每月还款金额</span>
                   <Input   type="number" min={0} style={{width:45}}/>
-                  <span>元</span>
-                </div>
               )}
             </FormItem>
+            <span>元</span>
           </DoubleInput>
           <DoubleInput>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+8}
               >
@@ -409,6 +422,9 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+9}
               >
@@ -424,6 +440,9 @@ class MatchStep4 extends React.Component {
           </DoubleInput>
           <DoubleInput>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+10}
               >
@@ -437,6 +456,9 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
             <FormItem
+              style={{
+                display:"inline-block"
+              }}
               required={false}
               key={k+11}
               >
