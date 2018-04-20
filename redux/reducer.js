@@ -44,6 +44,14 @@ function reducer (state = exampleInitialState, action) {
       }
 
       //分界
+    case actionTypes.SAVE_MODEL:
+      return {
+        ...state,
+        matchJson:{
+          ...state.matchJson,
+          ...action.data
+        }
+      }
     case actionTypes.SAVE_STEP1:
       return {
         ...state,

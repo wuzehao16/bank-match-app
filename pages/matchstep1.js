@@ -10,9 +10,10 @@ import {  withStyles } from 'material-ui/styles';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
-import { saveStep1 } from '../redux/actions'
+import { saveStep1, saveModel } from '../redux/actions'
 import withRoot from '../src/withRoot';
-
+import fetch from '../lib/fetch';
+import getCookie from '../lib/getCookie'
 const FormItem = Form.Item;
 
 const RadioButton = Radio.Button;
@@ -57,12 +58,21 @@ const NextButton = styled(Button)`
 `
 
 class MatchStep1 extends React.Component {
-  static async getInitialProps({store}) {
+  static async getInitialProps ({store,query,req}) {
+    // eslint-disable-next-line no-undef
+    if (query.matchNo && req) {
+      const token = getCookie('token', req)
+      const res = await fetch(`/selectModelUserDetail?matchNo=${query.matchNo}`, token)
+      console.log(res.json())
+      //总利息
+      return { data: {matchJson:res} }
+    }
     return {
       data: store.getState()
     }
   }
 	componentDidMount () {
+    this.props.dispatch(saveModel(this.props.data.matchJson))
     this.props.form.validateFields();
   }
   state = {

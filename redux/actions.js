@@ -4,6 +4,7 @@ export const actionTypes = {
   LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
   LOADING_START:'LOADING_START',
   LOADING_END:'LOADING_END',
+  SAVE_MODEL: 'SAVE_MODEL',
   SAVE_STEP1: 'SAVE_STEP1',
   SAVE_STEP2: 'SAVE_STEP2',
   SAVE_STEP3: 'SAVE_STEP3',
@@ -38,6 +39,13 @@ export function loadDataSuccess (data) {
 }
 
 // step1
+export function saveModel (data) {
+  return {
+    type: actionTypes.SAVE_MODEL,
+    data
+  }
+}
+
 export function saveStep1 (data) {
   return {
     type: actionTypes.SAVE_STEP1,
