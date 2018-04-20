@@ -43,14 +43,14 @@ const NextButton = styled(Button)`
   border-radius: 4px;
 `
 const SubContain = styled.div`
-  color：#646464;
+  color: #646464;
   background-color: #fff;
   padding: 10px 0px 20px 5px;
   border-bottom: 1px solid #f2f2f2;
   font-size: 16px;
 `
 const SubContainTitle = styled.div`
-  color：#646464;
+  color: #646464;
   padding-bottom: 10px;
   font-size: 16px;
 `

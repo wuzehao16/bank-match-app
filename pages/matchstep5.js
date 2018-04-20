@@ -40,7 +40,7 @@ const Title = styled.div`
   padding: 0 15px;
 `
 const SubContain = styled.div`
-  color：#646464;
+  color: #646464;
   position: relative;
   background-color: #fff;
   padding: 10px 0 20px;
@@ -53,7 +53,7 @@ const Sub = styled.div`
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
   font-size: 16px;
-  color：#646464;
+  color: #646464;
 `
 const Br = styled.div`
   height: 10px;
@@ -74,7 +74,7 @@ const DoubleInput = styled.div`
   padding: 20px 0 20px 0;
   position: relative;
   font-size: 16px;
-  color：#646464;
+  color: #646464;
   display: flex;
   justify-content: space-between;
   @media (min-width:320px) {

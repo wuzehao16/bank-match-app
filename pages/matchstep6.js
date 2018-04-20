@@ -55,7 +55,7 @@ const Title = styled.div`
   padding: 0 15px;
 `
 const SubContain = styled.div`
-  color：#646464;
+  color: #646464;
   background-color: #fff;
   padding: 10px 13px 20px;
   border-bottom: 1px solid #f2f2f2;
@@ -64,7 +64,7 @@ const SubContain = styled.div`
 const SubContainTitle = styled.div`
   padding-bottom: 10px;
   font-size: 16px;
-  color：#646464;
+  color: #646464;
 `
 const Br = styled.div`
   height: 10px;
@@ -85,7 +85,7 @@ const DoubleInput = styled.div`
   padding: 20px 0 20px 0;
   position: relative;
   font-size: 15px;
-  color：#646464;
+  color: #646464;
   display: flex;
   justify-content: space-between;
 `
@@ -464,11 +464,11 @@ class MatchStep6 extends React.Component {
                               {getFieldDecorator('sumStagesCreditCard', {
                                 rules: [{
                                   required: true,
-                                  message: '请输入信用卡办理的分期还款张数'
+                                  message: '请输入信用卡办理分期还款的张数'
                                 }],
                               })(
                                 <span >
-                                  <span>信用卡办理的分期还款张数</span>
+                                  <span>信用卡办理分期还款的张数</span>
                                   <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                                   <span>张</span>
                                 </span>

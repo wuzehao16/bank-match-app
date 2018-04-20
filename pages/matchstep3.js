@@ -42,14 +42,14 @@ const Title = styled.div`
   padding: 0 15px;
 `
 const SubContain = styled.div`
-  color：#646464;
+  color: #646464;
   background-color: #fff;
   padding: 10px 13px 20px;
   border-bottom: 1px solid #f2f2f2;
   font-size: 16px;
 `
 const SubContainTitle = styled.div`
-  color：#646464;
+  color: #646464;
   padding-bottom: 10px;
   font-size: 16px;
 `
@@ -72,7 +72,7 @@ const DoubleInput = styled.div`
   padding: 20px 0 30px 0;
   position: relative;
   font-size: 16px;
-  color：#646464;
+  color: #646464;
   display: flex;
   justify-content: space-between;
 `
