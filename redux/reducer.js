@@ -47,10 +47,7 @@ function reducer (state = exampleInitialState, action) {
     case actionTypes.SAVE_MODEL:
       return {
         ...state,
-        matchJson:{
-          ...state.matchJson,
-          ...action.data
-        }
+        ...action.data
       }
     case actionTypes.SAVE_STEP1:
       return {

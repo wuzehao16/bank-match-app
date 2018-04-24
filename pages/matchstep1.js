@@ -65,14 +65,14 @@ class MatchStep1 extends React.Component {
       const res = await fetch(`/selectModelUserDetail?matchNo=${query.matchNo}`, token)
       // console.log(res.json())
       //总利息
-      return { data: {matchJson:res} }
+      return { data: {matchJson:res,matchNo:query.matchNo} }
     }
     return {
       data: store.getState()
     }
   }
 	componentDidMount () {
-    this.props.dispatch(saveModel(this.props.data.matchJson))
+    this.props.dispatch(saveModel(this.props.data))
     this.props.form.validateFields();
   }
   state = {

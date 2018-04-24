@@ -245,7 +245,7 @@ class MatchDetail extends React.PureComponent {
 
            <Name><span>{loanDemand.name}</span></Name>
           <Base>
-            <span><i className="hj"></i><span>{city[loanDemand.city]}</span></span>
+            <span><i className="hj"></i><span>{location[basicInformation.location]}</span></span>
             <span><i className="shijian"></i><span>{age[basicInformation.age]}</span></span>
             <span><i className="xueli"></i><span>{education[basicInformation.education]}</span></span>
             <span><i className="hunyin"></i><span>{maritalStatus[basicInformation.maritalStatus]}</span></span>
