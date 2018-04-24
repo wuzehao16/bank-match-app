@@ -1,30 +1,91 @@
+import React from 'react'
 import Link from 'next/link'
-import Head from 'next/head'
+import styled from 'styled-components'
+import Layout from '../layout/contentLayout';
+import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
 
-export default ({ children, title = '问题详情' }) => (
-  <div className='helpdetail'>
-    <Head>
-      <title>{ title }</title>
-      <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' />
-      {/* <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script> */}
-      {/* <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script> */}
-    </Head>
-    <article>
-      <div>
-        <p></p>
-      </div>
-    </article>
-    {/* <footer>
-      {'I`m here to stay'}
-    </footer> */}
-    <style jsx global>{`
-      * {margin:0; padding:0}
-      body,html {
-        width: 100%;
-        height: 100%;
-      }
-    `}
-    </style>
-  </div>
-)
+const Wrapper = styled.div`
+  padding: 15px;
+  background: #fff;
+`
+const Title = styled.div`
+  color: #3c3c3c;
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 600;
+  font-family: 'PingFangSC-Medium';
+  @media (min-width:320px) {
+    font-size: 21px;
+    line-height: 30px;
+  }
+  @media(min-width: 375px) {
+    font-size: 24px;
+    line-height: 34px;
+  }
+  @media (min-width:360px) {
+    font-size: 23px;
+    line-height: 31px;
+  }
+`
+const More = styled.div`
+  color:#969696;
+  font-size: 12px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+`
+const Content = styled.div`
+  p{
+    color:#646464;
+  }
+`
+class HelpDetail extends React.PureComponent {
+  static async getInitialProps ({query}) {
+    return { content: query }
+  }
+  componentDidMount(){
+
+  }
+  render() {
+    console.log(this.props)
+    const content = this.props.content;
+    return (
+      <Layout title="帮助中心">
+        <Wrapper>
+          {/* <Title>{content.contentTitle}</Title> */}
+          <Content
+            dangerouslySetInnerHTML={{
+                __html: content.content
+            }}>
+          </Content>
+        </Wrapper>
+        <style jsx>{`
+          span{
+            margin-left:4px;
+          }
+          i{
+            height:10px;
+            width:10px;
+            display:inline-block;
+            background-size:100% 100%;
+          }
+          .source{
+            width:12px;
+            background-image:url(/static/source.png);
+          }
+          .read{
+            width:12px;
+            background-image:url(/static/read.png);
+          }
+          .time{
+            background-image:url(/static/time.png);
+          }
+        `}
+        </style>
+      </Layout>
+    )
+  }
+}
+
+export default HelpDetail;
