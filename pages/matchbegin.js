@@ -61,7 +61,7 @@ const Wrapper2 = styled.div`
     height: 190px;
   }
   @media (min-width: 375px){
-    height: 254px;
+    height: 235px;
   }
   @media (min-width: 414px){
     height: 275px;
@@ -85,7 +85,7 @@ const Step = styled.div`
   @media(min-width: 375px) {
     margin: 100px 0 0 30%;
     p{
-      margin: 45px 0;
+      margin: 35px 0;
     }
   }
   @media (min-width: 414px){
