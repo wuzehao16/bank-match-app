@@ -133,6 +133,9 @@ class MatchStep4 extends React.Component {
 	}
 	componentDidMount () {
     this.props.form.validateFields();
+    // this.addHouseProperty();
+    // this.addBusinessPolicy();
+    // this.addCarProperty();
   }
   state = {
     name: '',
@@ -203,6 +206,9 @@ class MatchStep4 extends React.Component {
     const { form } = this.props;
     // can use data-binding to get
     const houseProperty = form.getFieldValue('houseProperty');
+    const total = form.getFieldValue('sumHouseProperty');
+    //小于总量
+    if(!total || houseProperty.length>= total) return
     const nextKeys = houseProperty.concat(housePropertyUuid);
     housePropertyUuid++;
     // can use data-binding to set
@@ -215,6 +221,8 @@ class MatchStep4 extends React.Component {
     const { form } = this.props;
     // can use data-binding to get
     const businessPolicy = form.getFieldValue('businessPolicyArr');
+    const total = form.getFieldValue('sumBusinessPolicy');
+    if(!total || businessPolicy.length>= total) return
     const nextKeys = businessPolicy.concat(businessPolicyUuid);
     businessPolicyUuid++;
     // can use data-binding to set
@@ -227,6 +235,8 @@ class MatchStep4 extends React.Component {
     const { form } = this.props;
     // can use data-binding to get
     const carProperty = form.getFieldValue('carProperty');
+    const total = form.getFieldValue('sumFamilyCar');
+    if(!total || carProperty.length>= total) return
     const nextKeys = carProperty.concat(carPropertyUuid);
     carPropertyUuid++;
     // can use data-binding to set
@@ -234,6 +244,21 @@ class MatchStep4 extends React.Component {
     form.setFieldsValue({
       carProperty: nextKeys,
     });
+  }
+  showHouse = (v) =>{
+    if(v.target.value>0) {
+      this.addHouseProperty();
+    }
+  }
+  showBusiness = (v) =>{
+    if(v.target.value>0) {
+      this.addBusinessPolicy();
+    }
+  }
+  showCar = (v) =>{
+    if(v.target.value>0) {
+      this.addCarProperty();
+    }
   }
   render () {
     const { data } = this.props;
@@ -768,7 +793,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下房产数量'
                       }],
                     })(
-                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showHouse}/>
                     )}
                   </FormItem>
                   <span>套</span>
@@ -819,7 +844,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下保单份数'
                       }],
                     })(
-                      <input   type="number"style={{width:60,fontSize:'16px'}}/>
+                      <input   type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showBusiness}/>
                     )}
                   </FormItem>
                   <span>份</span>
@@ -872,7 +897,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下车辆数量'
                       }],
                     })(
-                      <input type="number"style={{width:60,fontSize:'16px'}}/>
+                      <input type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showCar}/>
                     )}
                   </FormItem>
                   <span>辆</span>
