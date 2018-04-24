@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   background: #fff;
 `
 const Title = styled.div`
-  color: #000;
+  color: #3c3c3c;
   font-size: 22px;
   line-height: 1.45;
   font-weight: 600;
@@ -35,8 +35,10 @@ const More = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const I = styled.i`
-
+const Content = styled.div`
+  p{
+    color:#646464;
+  }
 `
 class Financialnformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
@@ -60,11 +62,11 @@ class Financialnformation extends React.PureComponent {
             <span><i className="read"></i><span>{content.readNum}</span></span>
             <span><i className="time"></i><span>{content.releaseTime}</span></span>
           </More>
-          <div
+          <Content
             dangerouslySetInnerHTML={{
                 __html: content.content
             }}>
-          </div>
+          </Content>
         </Wrapper>
         <style jsx>{`
           span{
