@@ -255,7 +255,7 @@ class ProductDetail extends React.PureComponent {
             </div>
             <div>
               <div className="logo">
-                <img src={product.manageLogoId} alt="" width={100} height={35}/>
+                <img src={product.manageLogoId}/>
               </div>
             </div>
           </div>
@@ -416,7 +416,11 @@ class ProductDetail extends React.PureComponent {
             width:100px;
             height:35px;
             margin-left:20px;
-            background: #000;
+            background: #fff;
+          }
+          .logo img{
+              max-width:100%;
+              max-height:100%;
           }
           .info{
             height:170px;
