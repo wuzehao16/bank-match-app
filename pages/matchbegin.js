@@ -57,6 +57,43 @@ const Wrapper2 = styled.div`
   height: 275px;
   z-index: -1;
   width: 100%;
+  @media (min-width:320px) {
+    height: 190px;
+  }
+  @media (min-width: 375px){
+    height: 254px;
+  }
+  @media (min-width: 414px){
+    height: 275px;
+  }
+`
+const Step = styled.div`
+  margin: 110px 0 0 30%;
+  font-size: 12px;
+  p{
+    margin: 46px 0;
+  }
+  @media (min-width:320px) {
+    margin: 72px 0 0 30%;
+    p{
+      margin: 28px 0;
+    }
+  }
+  @media (min-width:360px) {
+    margin: 90px 0 0 30%;
+  }
+  @media(min-width: 375px) {
+    margin: 100px 0 0 30%;
+    p{
+      margin: 45px 0;
+    }
+  }
+  @media (min-width: 414px){
+    margin: 110px 0 0 30%;
+    p{
+      margin: 46px 0;
+    }
+  }
 `
 class MatchBegin extends React.Component {
   // static async getInitialProps({query}) {
@@ -110,11 +147,11 @@ class MatchBegin extends React.Component {
           </Advantage>
         </Wrapper1>
         <Wrapper2>
-          <div className="step">
+          <Step>
             <p>第一步：点选基本信息，匹配是否准入</p>
             <p>第二步：填写收入数据，计算负债情况</p>
             <p>第三步：输出最优产品，获取预估额度</p>
-          </div>
+          </Step>
           <div className="btn">
             <div className="l" onClick={this.toMatchList}>匹配记录</div>
             <Link href="/matchstep1">
@@ -155,13 +192,6 @@ class MatchBegin extends React.Component {
           .list li span{
             font-size: 9px;
             color:#969696;
-          }
-          .step{
-            margin: 110px 0 0 30%;
-            font-size: 12px;
-          }
-          .step p{
-            margin: 46px 0;
           }
           .btn{
             // margin: 0 auto;
