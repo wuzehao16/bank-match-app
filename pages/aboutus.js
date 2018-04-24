@@ -45,7 +45,7 @@ class AboutUs extends React.PureComponent {
             <h2 style={{color:'#646464',fontSize:'9px',textAlign:'center',marginTop:5}}>V1.0.0</h2>
           </div>
           <div className = "description" style={{width: '100%',padding:'50px 20px'}}>
-            <p style={{fontSize:'12px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过只能工具更高效的开展工作，解决行业痛点!</p>
+            <p style={{fontSize:'14px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过只能工具更高效的开展工作，解决行业痛点!</p>
           </div>
           <ul style={ulStyles}>
             <Link href='/wechat'>
@@ -110,7 +110,7 @@ class AboutUs extends React.PureComponent {
         }
         body {
           background: url('/static/aboutus-background.jpg') bottom center no-repeat #f2f2f2;
-          background-size: 375px 300px;
+          background-size: 400px 300px;
         }
       `}
       </style>
