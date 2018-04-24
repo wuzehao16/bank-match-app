@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Layout from '../layout/contentLayout';
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
-import Icon from 'material-ui/Icon'
 
 const iconStyles = {
   color: 'red',
@@ -41,7 +40,7 @@ class ListItem extends React.Component {
 class HelpInformation extends React.PureComponent {
   static async getInitialProps ({req}) {
     const token = getCookie('token', req)
-    const res = await fetch(`/47.106.70.82:8611/app/getHelpList`, token)
+    const res = await fetch(`/getHelpList`, token)
     console.log(res);
     return { contents: res }
   }

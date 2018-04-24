@@ -3,10 +3,10 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Blanklayout';
 
-class ProductDetail extends React.PureComponent {
+class ContactUs extends React.PureComponent {
   render() {
     return (
-      <Layout title="官方微信">
+      <Layout title="联系客服">
         <section>
           <p>1.保存二维码</p>
           <img src='/static/wechat.png' style={{width:125,height:125}}/>
@@ -64,4 +64,4 @@ class ProductDetail extends React.PureComponent {
   }
 }
 
-export default ProductDetail;
+export default ContactUs;
