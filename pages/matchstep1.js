@@ -63,7 +63,7 @@ class MatchStep1 extends React.Component {
     if (query.matchNo && req) {
       const token = getCookie('token', req)
       const res = await fetch(`/selectModelUserDetail?matchNo=${query.matchNo}`, token)
-      console.log(res.json())
+      // console.log(res.json())
       //总利息
       return { data: {matchJson:res} }
     }
