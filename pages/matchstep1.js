@@ -111,7 +111,7 @@ class MatchStep1 extends React.Component {
         <Wrapper>
 
           <Container>
-            <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px'}}>姓名</div>
+            <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>姓名</div>
             <FormItem
               validateStatus={nameError ? 'error' : ''}
               help={nameError || ''}
@@ -137,7 +137,7 @@ class MatchStep1 extends React.Component {
 
           </Container>
           <Container>
-            <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px'}}>期望贷款金额</div>
+            <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>期望贷款金额</div>
             <FormItem
               validateStatus={exLoanAmountError ? 'error' : ''}
               help={exLoanAmountError || ''}
