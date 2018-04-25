@@ -5,7 +5,7 @@ import {all, call, put, take, takeLatest, select} from 'redux-saga/effects'
 import Router from 'next/router'
 import { add } from '../services/match'
 
-import {actionTypes, failure, loadDataSuccess, tickClock} from './actions'
+import {actionTypes, failure, loadDataSuccess, tickClock,cleanData} from './actions'
 
 
 // 保存第一步数据
@@ -87,7 +87,7 @@ function * sendDataSaga (action) {
   try {
     const data = yield select();
     const res = yield call(add,data)
-    // yield put(loadDataSuccess(res.data))
+    yield put(cleanData())
     window.webkit.messageHandlers.getMatchResult.postMessage(res.data)
     // Router.push({
     //   pathname: '/matchstep2',

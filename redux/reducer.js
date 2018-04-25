@@ -32,6 +32,25 @@ function reducer (state = exampleInitialState, action) {
         ...state,
         ...action.data
       }
+    case actionTypes.CLEAN_DATA:
+      return {
+        matchStep: 0,
+        loading: false,
+        matchJson:{
+          //贷款需求
+          loanDemand: null,
+          //基本信息
+          basicInformation: null,
+          //征信信息
+          creditInformation: null,
+          // 工作收入
+          income: null,
+          // 资产状况
+          assets: null,
+          //资产负债
+          capitalDebtSituation: null,
+        }
+      }
     case actionTypes.LOADING_START:
       return {
         ...state,
