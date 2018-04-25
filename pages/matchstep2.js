@@ -597,7 +597,7 @@ class MatchStep2 extends React.Component {
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
+              <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
