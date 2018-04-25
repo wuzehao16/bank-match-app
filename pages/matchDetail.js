@@ -262,7 +262,7 @@ class MatchDetail extends React.PureComponent {
             <span><i className="hunyin"></i><span>{maritalStatus[basicInformation.maritalStatus]}</span></span>
           </Base>
           <More>
-            <span><i className="daikuan"></i><span>期望贷款：{loanDemand.exLoanAmount}万</span></span>
+            <span><i className="daikuan"></i><span>期望贷款：{loanDemand.exLoanAmount}元</span></span>
             <span><i className="leixing"></i><span>贷款类型：{loanType[loanDemand.loanType]}</span></span>
           </More>
         </Wrapper>
