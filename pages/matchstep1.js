@@ -190,12 +190,12 @@ class MatchStep1 extends React.Component {
                 rules: [{ required: true}],
               })(
                 <RadioGroup  size="small">
-                  <RadioButton value="0">深圳</RadioButton>
-                  <RadioButton value="1">广州</RadioButton>
-                  <RadioButton value="2">东莞</RadioButton>
-                  <RadioButton value="3">珠海</RadioButton>
-                  <RadioButton value="4">惠州</RadioButton>
-                  <RadioButton value="5">中山</RadioButton>
+                  <RadioButton value="20">深圳</RadioButton>
+                  <RadioButton value="30">广州</RadioButton>
+                  <RadioButton value="50">东莞</RadioButton>
+                  <RadioButton value="40">珠海</RadioButton>
+                  <RadioButton value="60">惠州</RadioButton>
+                  <RadioButton value="70">中山</RadioButton>
                 </RadioGroup>
               )}
             </FormItem>
