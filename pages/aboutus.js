@@ -24,8 +24,13 @@ const liStyles = {
   color: '#646464',
   lineHeight: '45px',
   position: 'relative',
-  paddingLeft: '16px'
+  paddingLeft: '16px',
+  display:'flex',
+  justifyContent:'space-between',
+  alignItems: 'center'
+
 }
+
 const footerStyles = {
   width: '100%',
   textAlign: 'center',
@@ -51,13 +56,13 @@ class AboutUs extends React.PureComponent {
             <Link href='/wechat'>
               <li style={liStyles}>
                 官方微信
-                <i class="material-icons" style={iconStyles}>chevron right</i>
+                <Icon>chevron_right</Icon>
               </li>
             </Link>
             <Link href='/servicecontract'>
               <li style={liStyles}>
               服务协议
-              <i class="material-icons" style={iconStyles}>chevron right</i>
+              <Icon>chevron_right</Icon>
               </li>
             </Link>
           </ul>
@@ -65,7 +70,7 @@ class AboutUs extends React.PureComponent {
               <p style={{fontSize:'12px',color: '#969696'}}>众银云测，用户的智能顾问</p>
               <p style={{fontSize:'12px',color: '#969696'}}>Copyright2018深圳市众银云测技术有限公司 版权所有</p>
           </footer>
-        </div>  
+        </div>
       <style jsx global>{`
         html, body, div, span, object,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -75,8 +80,8 @@ class AboutUs extends React.PureComponent {
         b, u, i, dl, dt, dd, ol, ul, li,
         fieldset, form, label, legend,
         table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, embed, 
-        figure, figcaption, footer, header, hgroup, 
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
         menu, nav, output, ruby, section, summary,
         time, mark, audio, video {
           margin: 0;
@@ -102,7 +107,7 @@ class AboutUs extends React.PureComponent {
         }
         html {
           height:100%;
-          
+
         }
         div,img,ul {
           margin: 0;

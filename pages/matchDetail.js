@@ -203,11 +203,17 @@ class MatchDetail extends React.PureComponent {
           <Li><L>产权占比（%）：</L><R>{assets.propertyRightRatio[index]}</R></Li>
           <Li><L>房产类型：</L><R>{propertyType[assets.propertyType[index]]}</R></Li>
           <Li><L>房产状态：</L><R>{propertyStatus[assets.propertyStatus[index]]}</R></Li>
-          <Li><L>还款方式：</L><R>{repaymentMethod[assets.repaymentMethod[index]]}</R></Li>
-          <Li><L>本笔抵押贷款余额（元）：</L><R>{assets.mortgageBalance[index]}</R></Li>
-          <Li><L>每月还款金额（元）</L><R>{assets.mortgageMonthRepayment[index]}</R></Li>
-          <Li><L>本笔抵押贷款期限（月）：</L><R>{assets.mortgageMonthRepayment[index]}</R></Li>
-          <Li><L>已还月份数（月）：</L><R>{assets.returnedMonths[index]}</R></Li>
+          {
+            assets.propertyStatus[index] !=0
+            ? <div>
+              <Li><L>还款方式：</L><R>{assets.repaymentMethod?repaymentMethod[assets.repaymentMethod[index]]:''}</R></Li>
+              <Li><L>本笔抵押贷款余额（元）：</L><R>{assets.mortgageBalance?assets.mortgageBalance[index]:''}</R></Li>
+              <Li><L>每月还款金额（元）</L><R>{assets.mortgageMonthRepayment?assets.mortgageMonthRepayment[index]:''}</R></Li>
+              <Li><L>本笔抵押贷款期限（月）：</L><R>{assets.mortgageMonthRepayment?assets.mortgageMonthRepayment[index]:''}</R></Li>
+              <Li><L>已还月份数（月）：</L><R>{assets.returnedMonths?assets.returnedMonths[index]:''}</R></Li>
+              </div>:null
+          }
+
           <Li><L>本房产总面积（平）：</L><R>{assets.propertyTotalArea[index]}</R></Li>
           <Li><L>本房产总市值（万元）：</L><R>{assets.propertyTotalMarketValue[index]}</R></Li>
         </div>
@@ -219,10 +225,15 @@ class MatchDetail extends React.PureComponent {
         <div key={index}>
           <SubTitle>辆车{index+1}:</SubTitle>
           <Li><L>车辆登记状态：</L><R>{carRegistStatus[assets.carRegistStatus[index]]}</R></Li>
-          <Li><L>车辆贷款余额：</L><R>{assets.carLoanBalance?assets.carLoanBalance[index]:''}</R></Li>
           <Li><L>车辆残值评估价格（元）：</L><R>{assets.carPotentialPrice?assets.carPotentialPrice[index]:''}</R></Li>
-          <Li><L>车贷还款金额（元）：</L><R>{assets.carRepayment?assets.carRepayment[index]:''}</R></Li>
-          <Li><L>车贷还款月份（月）：</L><R>{assets.carrRepaymentMonths?assets.carrRepaymentMonths[index]:''}</R></Li>
+          {
+            assets.carRegistStatus[index] != 0
+            ? <div>
+              <Li><L>车辆贷款余额：</L><R>{assets.carLoanBalance?assets.carLoanBalance[index]:''}</R></Li>
+              <Li><L>车贷还款金额（元）：</L><R>{assets.carRepayment?assets.carRepayment[index]:''}</R></Li>
+              <Li><L>车贷还款月份（月）：</L><R>{assets.carrRepaymentMonths?assets.carrRepaymentMonths[index]:''}</R></Li>
+            </div> :null
+          }
         </div>
       )
     })
@@ -251,7 +262,7 @@ class MatchDetail extends React.PureComponent {
             <span><i className="hunyin"></i><span>{maritalStatus[basicInformation.maritalStatus]}</span></span>
           </Base>
           <More>
-            <span><i className="daikuan"></i><span>期望贷款：{loanDemand.exLoanAmount}万</span></span>
+            <span><i className="daikuan"></i><span>期望贷款：{loanDemand.exLoanAmount}元</span></span>
             <span><i className="leixing"></i><span>贷款类型：{loanType[loanDemand.loanType]}</span></span>
           </More>
         </Wrapper>
@@ -364,18 +375,7 @@ class MatchDetail extends React.PureComponent {
               ?<div>
                 <Li><L>名下房产数量（套）：</L><R>{assets.sumHouseProperty}</R></Li>
                 {/* 循环 */}
-                {/* <Li><L>名下房产属地：</L><R>{housePropertyDependency[assets.housePropertyDependency]}</R></Li>
-                <Li><L>产权归属：</L><R>{ownership[assets.ownership]}</R></Li>
-                <Li><L>产权占比（%）：</L><R>{assets.propertyRightRatio}</R></Li>
-                <Li><L>房产类型：</L><R>{propertyType[assets.propertyType]}</R></Li>
-                <Li><L>房产状态：</L><R>{propertyStatus[assets.propertyStatus]}</R></Li>
-                <Li><L>还款方式：</L><R>{repaymentMethod[assets.repaymentMethod]}</R></Li>
-                <Li><L>本笔抵押贷款余额（元）：</L><R>{assets.mortgageBalance}</R></Li>
-                <Li><L>每月还款金额（元）</L><R>{assets.mortgageMonthRepayment}</R></Li>
-                <Li><L>本笔抵押贷款期限（月）：</L><R>{assets.mortgageMonthRepayment}</R></Li>
-                <Li><L>已还月份数（月）：</L><R>{assets.returnedMonths}</R></Li>
-                <Li><L>本房产总面积（平）：</L><R>{assets.propertyTotalArea}</R></Li>
-                <Li><L>本房产总市值（万元）：</L><R>{assets.propertyTotalMarketValue}</R></Li> */}
+
                 {House}
                 <Divide></Divide>
               </div> :null
@@ -404,34 +404,39 @@ class MatchDetail extends React.PureComponent {
         <Wrapper>
           <Title>资产负债</Title>
           <Li><L>信用类贷款（笔）：</L><R>{capitalDebtSituation.sumCreditLoan}</R></Li>
+          {
+            capitalDebtSituation.sumPettyLoan >0
+            ? <div>
+              <Li><L>等额本息类（笔）：</L><R>{capitalDebtSituation.sumEqualInterest}</R></Li>
+              {
+                capitalDebtSituation.sumEqualInterest > 0
+                  ? <div>
+                    <Li><L>等额本息类贷款总余额（元）：</L><R>{capitalDebtSituation.equalInterestTotalBalance}</R></Li>
+                    <Li><L>等额本息每月还款总额（元）：</L><R>{capitalDebtSituation.equalInteresMonthPayment}</R></Li>
+                  </div>:null
+              }
+              <Li><L>先息后本类（笔）：</L><R>{capitalDebtSituation.sumFirstInterest}</R></Li>
+              {
+                capitalDebtSituation.sumEqualInterest > 0
+                  ? <div>
+                    <Li><L>先息后本类贷款总余额（元）：</L><R>{capitalDebtSituation.firstInterestTotalBalance}</R></Li>
+                    <Li><L>先息后本每月还利息（元）：</L><R>{capitalDebtSituation.firstInterestMonthPayment}</R></Li>
+                  </div>:null
+              }
+              <Li><L>随借随还类（笔）：</L><R>{capitalDebtSituation.sumAlongLoan}</R></Li>
+              {
+                capitalDebtSituation.sumAlongLoan > 0
+                  ? <div>
+                    <Li><L>随借随还类贷款总余额（元）：</L><R>{capitalDebtSituation.alongLoanTotalBalance}</R></Li>
+                    <Li><L>随借随还每月还利息（元）:</L><R>{capitalDebtSituation.alongLoanMonthPayment}</R></Li>
+                  </div>:null
+              }
+            </div>:null
+          }
 
-          <Li><L>等额本息类（笔）：</L><R>{capitalDebtSituation.sumEqualInterest}</R></Li>
-          {
-            capitalDebtSituation.sumEqualInterest > 0
-              ? <div>
-                <Li><L>等额本息类贷款总余额（元）：</L><R>{capitalDebtSituation.equalInterestTotalBalance}</R></Li>
-                <Li><L>等额本息每月还款总额（元）：</L><R>{capitalDebtSituation.equalInteresMonthPayment}</R></Li>
-              </div>:null
-          }
-          <Li><L>先息后本类（笔）：</L><R>{capitalDebtSituation.sumFirstInterest}</R></Li>
-          {
-            capitalDebtSituation.sumEqualInterest > 0
-              ? <div>
-                <Li><L>先息后本类贷款总余额（元）：</L><R>{capitalDebtSituation.firstInterestTotalBalance}</R></Li>
-                <Li><L>先息后本每月还利息（元）：</L><R>{capitalDebtSituation.firstInterestMonthPayment}</R></Li>
-              </div>:null
-          }
-          <Li><L>随借随还类（笔）：</L><R>{capitalDebtSituation.sumAlongLoan}</R></Li>
-          {
-            capitalDebtSituation.sumEqualInterest > 0
-              ? <div>
-                <Li><L>随借随还类贷款总余额（元）：</L><R>{capitalDebtSituation.alongLoanTotalBalance}</R></Li>
-                <Li><L>随借随还每月还利息（元）:</L><R>{capitalDebtSituation.alongLoanMonthPayment}</R></Li>
-              </div>:null
-          }
           <Li><L>信用卡（笔）：</L><R>{capitalDebtSituation.sumCreditCard}</R></Li>
           {
-            capitalDebtSituation.sumEqualInterest > 0
+            capitalDebtSituation.sumCreditCard > 0
               ? <div>
                 <Li><L>信用卡总额度（元）：</L><R>{capitalDebtSituation.creditCardTotalLimit}</R></Li>
                 <Li><L>信用卡当月已使用额度（元）:</L><R>{capitalDebtSituation.creditCardUsedLimit}</R></Li>

@@ -34,7 +34,7 @@ class HelpInformation extends React.PureComponent {
      <Link href={{ pathname: '/helpdetail', query: { content: item.content } }}>
       <Li key={item.channelId}>
         <span>{item.contentTitle}</span>
-        <Icon>chevron right</Icon>
+        <Icon>chevron_right</Icon>
       </Li>
     </Link>
 

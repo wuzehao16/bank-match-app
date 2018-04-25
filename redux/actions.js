@@ -4,6 +4,7 @@ export const actionTypes = {
   LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
   LOADING_START:'LOADING_START',
   LOADING_END:'LOADING_END',
+  CLEAN_DATA: 'CLEAN_DATA',
   SAVE_MODEL: 'SAVE_MODEL',
   SAVE_STEP1: 'SAVE_STEP1',
   SAVE_STEP2: 'SAVE_STEP2',
@@ -23,6 +24,9 @@ export function failure (error) {
 }
 export function loadData () {
   return {type: actionTypes.LOAD_DATA}
+}
+export function cleanData () {
+  return {type: actionTypes.CLEAN_DATA}
 }
 export function loadingStart () {
   return {type: actionTypes.LOADING_START}
