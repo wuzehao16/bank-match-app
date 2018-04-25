@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { Radio, Form } from 'antd';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import {  withStyles } from 'material-ui/styles';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
@@ -28,7 +29,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 150,
   },
   label:{
     verticalAlign: 'bottom',
@@ -40,6 +41,7 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
   padding: 19px 0;
+  position: relative;
   display: flex;
   justify-content: space-between;
   background-color: #fff;
@@ -109,7 +111,6 @@ class MatchStep1 extends React.Component {
       <Layout title="智能匹配">
         <Topbar position="hidden"/>
         <Wrapper>
-
           <Container>
             <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>姓名</div>
             <FormItem
@@ -118,18 +119,16 @@ class MatchStep1 extends React.Component {
               >
               {getFieldDecorator('name', {
                 initialValue:item.name,
-                rules: [{
-                   required: true,
-                   message: '请输入姓名',
-                }],
+                // rules: [{
+                //    required: true,
+                //    message: '请输入姓名',
+                // }],
               })(
                 <TextField
+                  required
                   id="name"
-                  // label="客户名称"
                   className={classes.textField}
-                  // value={this.state.name}
-                  // onChange={this.handleChange('name')}
-                  // margin="normal"
+                  // label="客户名称"
                   placeholder="请输入姓名"
                 />
               )}
@@ -139,23 +138,25 @@ class MatchStep1 extends React.Component {
           <Container>
             <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>期望贷款金额</div>
             <FormItem
+              style={{position:'relative'}}
               validateStatus={exLoanAmountError ? 'error' : ''}
               help={exLoanAmountError || ''}
               >
               {getFieldDecorator('exLoanAmount', {
                 initialValue: item.exLoanAmount,
-                rules: [{ required: true,
-                     message: '请输入期望贷款金额',
-                }],
+                // rules: [{ required: true,
+                //      message: '请输入期望贷款金额',
+                // }],
               })(
                 <TextField
-                  id="name"
-                  // label="客户名称"
-                  className={classes.textField}
-                  // value={this.state.name}
-                  // onChange={this.handleChange('name')}
-                  // margin="normal"
-                  placeholder="请输入金额(万元)"
+                  required
+                  // label="期望贷款金额"
+                   className={classes.textField}
+                  InputProps={{
+                    type:'number',
+                    endAdornment: <InputAdornment position="end">元</InputAdornment>,
+                  }}
+                  placeholder="请输入金额"
                 />
 
               )}
@@ -204,7 +205,7 @@ class MatchStep1 extends React.Component {
         </Wrapper>
         <div className='btn'>
           <FormItem>
-              <NextButton variant="raised" color="primary" type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
+              <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
@@ -218,4 +219,4 @@ MatchStep1.propTypes = {
 };
 const WrappedMatchStep1 = Form.create()(MatchStep1);
 
-export default withReduxSaga(withStyles(styles)(withRoot(WrappedMatchStep1)));
+export default withReduxSaga(withRoot(withStyles(styles)(WrappedMatchStep1)));
