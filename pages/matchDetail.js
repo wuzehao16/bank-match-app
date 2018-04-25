@@ -385,7 +385,7 @@ class MatchDetail extends React.PureComponent {
           {
             assets.businessPolicy == 1
               ?<div>
-                <Li><L>保单份数（份）：</L><R>{assets.sumHouseProperty}</R></Li>
+                <Li><L>保单份数（份）：</L><R>{assets.sumBusinessPolicy}</R></Li>
                 {/* 循环 */}
                 {policy}
                 <Divide></Divide>
@@ -395,7 +395,7 @@ class MatchDetail extends React.PureComponent {
           {
             assets.isHouseProperty == 1
               ?<div>
-                <Li><L>名下车辆数（辆）：</L><R>{assets.sumHouseProperty}</R></Li>
+                <Li><L>名下车辆数（辆）：</L><R>{assets.sumFamilyCar}</R></Li>
                 {/* 循环 */}
                 {Car}
               </div> :null
