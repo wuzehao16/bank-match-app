@@ -31,8 +31,8 @@ class HelpInformation extends React.PureComponent {
     const contents = this.props.data[0].contents;
     console.log(contents)
     const listItems = contents.map((item) =>
-     <Link href={{ pathname: '/helpdetail', query: { content: item.content } }}>
-      <Li key={item.channelId}>
+     <Link href={{ pathname: '/helpdetail', query: { content: item.content } }} key={item.contentId}>
+      <Li >
         <span>{item.contentTitle}</span>
         <Icon>chevron_right</Icon>
       </Li>
