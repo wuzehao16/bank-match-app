@@ -130,9 +130,9 @@ class MatchStep1 extends React.Component {
                   className={classes.textField}
                   inputProps={{
                     maxlength: '10',
-                    // type:"number"
+                    pattern:'[\u4e00-\u9fa5|a-zA-Z]*',
+                    title:"请输入中文或英文字符"
                   }}
-                  // label="客户名称"
                   placeholder="请输入姓名"
                 />
               )}

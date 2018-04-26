@@ -119,15 +119,11 @@ class Calculator extends React.Component {
   handleChange = (event, value) => {
     this.state.loandata = {dataList:[]};    
     this.setState({ cal:{loanmethod: value,repaymentMethod:0,CommercialPrincipal:'',months:'',commercialRate:'',accumulationRate:'',publicPrincipal:''}});
-    console.log('切换',this.state)
-    // this.setState({ cal:{loanmethod: value,repaymentMethod:0 }});
   };
 
   handleChangeIndex = index => {
     this.state.loandata = {dataList:[]};
     this.setState({ cal:{loanmethod: index,repaymentMethod:0,CommercialPrincipal:'',months:'',commercialRate:'',accumulationRate:'',publicPrincipal:''}});
-    console.log('切换',this.state)
-    // this.setState({ cal:{loanmethod: index,repaymentMethod:0 }});
   };
 
   handleValueChange = name =>event =>{

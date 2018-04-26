@@ -182,7 +182,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入单位名称'
                   }],
                 })(
-                  <input placeholder="请填写社保缴纳单位或工资代发单位"  maxlength={20} type="text"style={{width:280,border:'none'}}/>
+                  <input placeholder="请填写社保缴纳单位或工资代发单位"  pattern="[\u4e00-\u9fa5|a-zA-Z]\(\)\（\）*" title="请输入正确的公司名称" type='string' maxlength={20} type="text"style={{width:280,border:'none'}}/>
                 )}
               </FormItem>
             </div>
