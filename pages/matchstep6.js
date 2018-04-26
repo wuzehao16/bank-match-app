@@ -171,7 +171,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用类贷款'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
+                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>笔</span>
@@ -186,7 +186,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">等额本息类贷款</span>
-                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -250,7 +250,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">先息后本类贷款</span>
-                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -274,7 +274,7 @@ class MatchStep6 extends React.Component {
                                   message:'请输入随借随还类贷款总余额'
                                 }],
                               })(
-                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -313,7 +313,7 @@ class MatchStep6 extends React.Component {
                     })(
                       <span >
                         <span className="title">随借随还类</span>
-                        <input  type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                         <span>笔</span>
                       </span>
                     )}
@@ -337,7 +337,7 @@ class MatchStep6 extends React.Component {
                                 message:'请输入随借随还类贷款总余额'
                               }],
                             })(
-                                <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>元</span>
@@ -382,7 +382,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用卡张数'
                   }],
                 })(
-                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                    <input  type="number" min={getFieldValue('sumStagesCreditCard')}  style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>张</span>
@@ -469,7 +469,7 @@ class MatchStep6 extends React.Component {
                               })(
                                 <span >
                                   <span>信用卡办理分期还款的张数</span>
-                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
                                   <span>张</span>
                                 </span>
                               )}
@@ -479,7 +479,7 @@ class MatchStep6 extends React.Component {
                       </Sub> : null
           }
         </Wrapper>
-        <div className='btn'>
+        <div className='btn' style={{marginTop:30}}>
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>

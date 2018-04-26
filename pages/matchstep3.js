@@ -149,7 +149,7 @@ class MatchStep3 extends React.Component {
         <Topbar position="p2" num={data.productNum?data.productNum:0}/>
         <Title>征信基本情况</Title>
         <Wrapper>
-          <Contain>
+          <Contain style={{paddingBottom:30}}>
             <p>征信记录时长</p>
             <FormItem
               validateStatus={recordTimeError ? 'error' : ''}
@@ -531,7 +531,7 @@ class MatchStep3 extends React.Component {
                      message:'请输入近1个月查询次数'
                 }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
+                  <input  type="number" min={0} max={99} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
@@ -552,7 +552,7 @@ class MatchStep3 extends React.Component {
                       message:'请输入近2个月查询次数'
                     }],
                   })(
-                    <input  type="number" min={0} max={1000} style={{width:60}}/>
+                    <input  type="number" min={0} max={99} style={{width:60}}/>
                   )}
                 </FormItem>
                 <span>次</span>
@@ -573,7 +573,7 @@ class MatchStep3 extends React.Component {
                     message:'请输入近3个月查询次数'
                   }],
                 })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
+                  <input  type="number" min={0} max={99} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
@@ -594,7 +594,7 @@ class MatchStep3 extends React.Component {
                     message:'请输入近6个月查询次数'
                   }],
                 })(
-                    <input  type="number" min={0} max={1000} style={{width:60}}/>
+                    <input  type="number" min={0} max={99} style={{width:60}}/>
                 )}
               </FormItem>
               <span>次</span>
@@ -615,7 +615,7 @@ class MatchStep3 extends React.Component {
                   message:'请输入近12个月查询次数'
                 }],
               })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
+                  <input  type="number" min={0} max={99} style={{width:60}}/>
               )}
             </FormItem>
             <span>次</span>
@@ -625,7 +625,7 @@ class MatchStep3 extends React.Component {
             </Help>
           </DoubleInput>
         </Wrapper>
-        <div className='btn'>
+        <div className='btn' style={{marginTop:30}}>
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>

@@ -603,7 +603,7 @@ class MatchStep2 extends React.Component {
       </Layout>
       <style jsx>{`
         .btn{
-          margin-top: 75px;
+          margin-top: 30px;
           text-align: center;
           color: #fff;
         }

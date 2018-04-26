@@ -41,7 +41,6 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
   padding: 19px 0;
-  position: relative;
   display: flex;
   justify-content: space-between;
   background-color: #fff;
@@ -114,20 +113,25 @@ class MatchStep1 extends React.Component {
           <Container>
             <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>姓名</div>
             <FormItem
+              style={{position:'relative'}}
               validateStatus={nameError ? 'error' : ''}
               help={nameError || ''}
               >
               {getFieldDecorator('name', {
                 initialValue:item.name,
-                // rules: [{
-                //    required: true,
-                //    message: '请输入姓名',
-                // }],
+                rules: [{
+                   required: true,
+                   message: '请输入姓名',
+                }],
               })(
                 <TextField
                   required
                   id="name"
                   className={classes.textField}
+                  inputProps={{
+                    maxlength: '10',
+                    // type:"number"
+                  }}
                   // label="客户名称"
                   placeholder="请输入姓名"
                 />
@@ -144,17 +148,21 @@ class MatchStep1 extends React.Component {
               >
               {getFieldDecorator('exLoanAmount', {
                 initialValue: item.exLoanAmount,
-                // rules: [{ required: true,
-                //      message: '请输入期望贷款金额',
-                // }],
+                rules: [{ required: true,
+                     message: '请输入期望贷款金额',
+                }],
               })(
                 <TextField
                   required
                   // label="期望贷款金额"
                    className={classes.textField}
                   InputProps={{
+                    endAdornment: <InputAdornment position="end">元</InputAdornment>
+                  }}
+                  inputProps={{
                     type:'number',
-                    endAdornment: <InputAdornment position="end">元</InputAdornment>,
+                    min: 1,
+                    max: 99999999
                   }}
                   placeholder="请输入金额"
                 />
@@ -200,10 +208,9 @@ class MatchStep1 extends React.Component {
                 </RadioGroup>
               )}
             </FormItem>
-
           </Contain>
         </Wrapper>
-        <div className='btn'>
+        <div className='btn' style={{marginTop:0,paddingTop:30,background:'#f2f2f2'}}>
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
