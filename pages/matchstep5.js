@@ -344,7 +344,7 @@ class MatchStep4 extends React.Component {
                 {getFieldDecorator(`propertyRightRatio[${k}]`, {
                   initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
                 })(
-                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
+                    <Input type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
                 <span>%</span>
@@ -455,7 +455,7 @@ class MatchStep4 extends React.Component {
                       initialValue:item.mortgageTerm?item.mortgageTerm[k]:""
 
                     })(
-                      <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                      <Input type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>月</span>
@@ -473,7 +473,7 @@ class MatchStep4 extends React.Component {
                     {getFieldDecorator(`returnedMonths[${k}]`, {
                       initialValue:item.returnedMonths?item.returnedMonths[k]:""
                     })(
-                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                        <Input type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>月</span>
@@ -586,7 +586,7 @@ class MatchStep4 extends React.Component {
                             {getFieldDecorator(`otherPolicyBrand[${k}]`, {
                               initialValue:item.otherPolicyBrand?item.otherPolicyBrand[k]:""
                             })(
-                                <Input   type="text"style={{width:60,fontSize:'16px'}}/>
+                                <Input maxlength={20} type="text"style={{width:200,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                       </SubContain>:null
@@ -636,7 +636,7 @@ class MatchStep4 extends React.Component {
                 initialValue:item.policyPayment?item.policyPayment[k]:""
               })(
 
-                  <Input   type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                  <Input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
               )}
             </FormItem>
             <span>元</span>
@@ -695,7 +695,7 @@ class MatchStep4 extends React.Component {
                 {getFieldDecorator(`carPotentialPrice[${k}]`, {
                   initialValue:item.carPotentialPrice?item.carPotentialPrice[k]:""
                 })(
-                    <Input   type="number"style={{width:60,fontSize:'16px'}}/>
+                    <Input min={0}type="number"style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>元</span>
@@ -713,7 +713,7 @@ class MatchStep4 extends React.Component {
                             {getFieldDecorator(`carLoanBalance[${k}]`, {
                               initialValue:item.carLoanBalance?item.carLoanBalance[k]:""
                             })(
-                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
+                                <Input min={0} type="number"style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>元</span>
@@ -728,7 +728,7 @@ class MatchStep4 extends React.Component {
                             {getFieldDecorator(`carRepayment[${k}]`, {
                               initialValue:item.carRepayment?item.carRepayment[k]:""
                             })(
-                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
+                                <Input type="number"  min={0} style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>元</span>
@@ -742,7 +742,7 @@ class MatchStep4 extends React.Component {
                             {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
                               initialValue:item.carrRepaymentMonths?item.carrRepaymentMonths[k]:""
                             })(
-                                <Input   type="number"style={{width:60,fontSize:'16px'}}/>
+                                <Input   type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                           <span>个月</span>
@@ -793,7 +793,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下房产数量'
                       }],
                     })(
-                      <input   type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showHouse}/>
+                      <input   type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showHouse}/>
                     )}
                   </FormItem>
                   <span>套</span>
@@ -844,7 +844,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下保单份数'
                       }],
                     })(
-                      <input   type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showBusiness}/>
+                      <input   type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showBusiness}/>
                     )}
                   </FormItem>
                   <span>份</span>
@@ -897,7 +897,7 @@ class MatchStep4 extends React.Component {
                         message: '请输入名下车辆数量'
                       }],
                     })(
-                      <input type="number"style={{width:60,fontSize:'16px'}} onBlur={this.showCar}/>
+                      <input type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showCar}/>
                     )}
                   </FormItem>
                   <span>辆</span>
@@ -910,7 +910,7 @@ class MatchStep4 extends React.Component {
             </div>: null
           }
         </Wrapper>
-        <div className='btn'>
+        <div className='btn' style={{marginTop:30}}>
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>

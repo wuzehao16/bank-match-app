@@ -62,7 +62,7 @@ export default ({ children, title = '智能匹配' }) => (
         position: absolute;
         width: 200px;
         left: 0px;
-        top: 20px;
+        top: 25px;
       }
       .ant-radio-button-wrapper-checked{
         background: #ee5648;

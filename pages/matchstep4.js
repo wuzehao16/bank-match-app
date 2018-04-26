@@ -182,7 +182,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入单位名称'
                   }],
                 })(
-                  <input placeholder="请填写社保缴纳单位或工资代发单位"  type="text"style={{width:280,border:'none'}}/>
+                  <input placeholder="请填写社保缴纳单位或工资代发单位"  pattern="[\u4e00-\u9fa5|a-zA-Z]\(\)\（\）*" title="请输入正确的公司名称" type='string' maxlength={20} type="text"style={{width:280,border:'none'}}/>
                 )}
               </FormItem>
             </div>
@@ -272,7 +272,7 @@ class MatchStep4 extends React.Component {
               <span>元</span>
             </Relative>
           </DoubleInput>
-          <DoubleInput style = {{padding: '20px 0 40px 0'}}>
+          <DoubleInput style = {{padding: '20px 0 50px 0'}}>
             <Relative>
               <span className="title">上一年度税前月均收入</span>
               <FormItem
@@ -330,7 +330,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续缴纳'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:60}}/>
+                  <input  type="number" min={0} max={1000} style={{width:60}}/>
                 )}
               </FormItem>
               <span>月</span>
@@ -354,48 +354,55 @@ class MatchStep4 extends React.Component {
               )}
             </FormItem>
           </SubContain>
-          <SubContain>
-            <SubContainTitle  style={{color:'#646464'}}>本单位有无社保基数调整</SubContainTitle>
-            <FormItem
-              validateStatus={isInsuranceAdjustmentError ? 'error' : ''}
-              help={isInsuranceAdjustmentError || ''}
-              >
-              {getFieldDecorator('isInsuranceAdjustment', {
-                initialValue:item.isInsuranceAdjustment,
-                rules: [{ required: true}],
-              })(
-                <RadioGroup  size="small">
-                  <RadioButton value={0}>无</RadioButton>
-                  <RadioButton value={1}>半年内有</RadioButton>
-                  <RadioButton value={2}>一年内有</RadioButton>
-                </RadioGroup>
-              )}
-            </FormItem>
-          </SubContain>
           {
-            (getFieldValue('isInsuranceAdjustment') == 1 || getFieldValue('isInsuranceAdjustment') == 2)
-              ? <SubContain style={{color:'#646464'}}>
-                  <Relative>
-                    <span>调整前社保缴纳基数</span>
-                    <FormItem
-                      style={{display:"inline-block"}}
-                      validateStatus={exInsuranceBaseError ? 'error' : ''}
-                      help={exInsuranceBaseError || ''}
-                      >
-                      {getFieldDecorator('exInsuranceBase', {
-                        initialValue:item.exInsuranceBase,
-                        rules: [{
-                          required: true,
-                          message:'请输入调整前社保缴纳基数'
-                        }],
-                      })(
-                        <input  type="number" min={0}  style={{width:60}}/>
-                      )}
-                    </FormItem>
-                    <span>元</span>
-                  </Relative>
-                </SubContain>: null
+            getFieldValue('isEndowmentInsurance')==1?
+              <div>
+                <SubContain>
+                  <SubContainTitle  style={{color:'#646464'}}>本单位有无社保基数调整</SubContainTitle>
+                  <FormItem
+                    validateStatus={isInsuranceAdjustmentError ? 'error' : ''}
+                    help={isInsuranceAdjustmentError || ''}
+                    >
+                    {getFieldDecorator('isInsuranceAdjustment', {
+                      initialValue:item.isInsuranceAdjustment,
+                      rules: [{ required: true}],
+                    })(
+                      <RadioGroup  size="small">
+                        <RadioButton value={0}>无</RadioButton>
+                        <RadioButton value={1}>半年内有</RadioButton>
+                        <RadioButton value={2}>一年内有</RadioButton>
+                      </RadioGroup>
+                    )}
+                  </FormItem>
+                </SubContain>
+                {
+                  (getFieldValue('isInsuranceAdjustment') == 1 || getFieldValue('isInsuranceAdjustment') == 2)
+                    ? <SubContain style={{color:'#646464'}}>
+                        <Relative>
+                          <span>调整前社保缴纳基数</span>
+                          <FormItem
+                            style={{display:"inline-block"}}
+                            validateStatus={exInsuranceBaseError ? 'error' : ''}
+                            help={exInsuranceBaseError || ''}
+                            >
+                            {getFieldDecorator('exInsuranceBase', {
+                              initialValue:item.exInsuranceBase,
+                              rules: [{
+                                required: true,
+                                message:'请输入调整前社保缴纳基数'
+                              }],
+                            })(
+                              <input  type="number" min={0}  style={{width:60}}/>
+                            )}
+                          </FormItem>
+                          <span>元</span>
+                        </Relative>
+                      </SubContain>: null
+                }
+              </div>
+            :null
           }
+          
           {/* 公积金 */}
           <DoubleInput>
             <Relative>
@@ -433,7 +440,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入本单位连续缴纳月份'
                   }],
                 })(
-                  <input  type="number" min={0}  style={{width:60}}/>
+                  <input  type="number" min={0}  max={1000} style={{width:60}}/>
 
                 )}
               </FormItem>
@@ -484,7 +491,7 @@ class MatchStep4 extends React.Component {
                 </SubContain>: null
           }
         </Wrapper>
-        <div className='btn'>
+        <div className='btn' style={{marginTop:30}}>
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
