@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import Button from 'material-ui/Button';
 import Layout from '../layout/Blanklayout';
 import Nprogress from '../components/Nprogress'
 import fetch from '../lib/fetch'
+import withRoot from '../src/withRoot';
 
 const Container = styled.div`
   padding: 19px 0;
@@ -95,6 +97,11 @@ const Step = styled.div`
     }
   }
 `
+const NextButton = styled(Button)`
+  width: 180px;
+  height: 36px;
+  border-radius: 4px;
+`
 class MatchBegin extends React.Component {
   // static async getInitialProps({query}) {
 	// 	return {
@@ -110,9 +117,9 @@ class MatchBegin extends React.Component {
       [name]: event.target.value,
     });
   };
-  toMatchList = () => {
-    window.webkit.messageHandlers.gotoMatchHistory.postMessage({});
-  }
+  // toMatchList = () => {
+  //   window.webkit.messageHandlers.gotoMatchHistory.postMessage({});
+  // }
 
   render () {
     const { classes } = this.props;
@@ -153,11 +160,11 @@ class MatchBegin extends React.Component {
             <p>第三步：输出最优产品，获取预估额度</p>
           </Step>
           <div className="btn">
-            <div className="l" onClick={this.toMatchList}>匹配记录</div>
+            {/* <div className="l" onClick={this.toMatchList}>匹配记录</div> */}
             <Link href="/matchstep1">
-            <div className="r">
+            <NextButton variant="raised" color="primary">
                 立即匹配
-            </div>
+            </NextButton>
             </Link>
           </div>
         </Wrapper2>
@@ -194,26 +201,9 @@ class MatchBegin extends React.Component {
             color:#969696;
           }
           .btn{
-            // margin: 0 auto;
-            margin-left: 10%;
+            text-align:center;
           }
-          .l,.r{
-            width: 40%;
-            height: 40px;
-            border-radius: 3px;
-            display: inline-block;
-            line-height:40px;
-            font-size:15px;
-            color: #fff;
-            text-align: center;
-          }
-          .l {
-            background-color: #fdc041;
-          }
-          .r {
-            background-color: #ee5648;
-            margin-left:25px;
-          }
+
         `}
         </style>
       </Layout>
@@ -223,4 +213,4 @@ class MatchBegin extends React.Component {
 }
 
 
-export default MatchBegin;
+export default withRoot(MatchBegin);
