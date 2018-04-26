@@ -119,10 +119,6 @@ class MatchStep1 extends React.Component {
               >
               {getFieldDecorator('name', {
                 initialValue:item.name,
-                rules: [{
-                   required: true,
-                   message: '请输入姓名',
-                }],
               })(
                 <TextField
                   required
@@ -148,9 +144,6 @@ class MatchStep1 extends React.Component {
               >
               {getFieldDecorator('exLoanAmount', {
                 initialValue: item.exLoanAmount,
-                rules: [{ required: true,
-                     message: '请输入期望贷款金额',
-                }],
               })(
                 <TextField
                   required
