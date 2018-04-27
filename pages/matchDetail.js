@@ -230,8 +230,8 @@ class MatchDetail extends React.PureComponent {
             assets.carRegistStatus[index] != 0
             ? <div>
               <Li><L>车辆贷款余额：</L><R>{assets.carLoanBalance?assets.carLoanBalance[index]:''}</R></Li>
-              <Li><L>车贷还款金额（元）：</L><R>{assets.carRepayment?assets.carRepayment[index]:''}</R></Li>
-              <Li><L>车贷还款月份（月）：</L><R>{assets.carrRepaymentMonths?assets.carrRepaymentMonths[index]:''}</R></Li>
+              <Li><L>车贷月还款金额（元）：</L><R>{assets.carRepayment?assets.carRepayment[index]:''}</R></Li>
+              <Li><L>车贷已还款月份（月）：</L><R>{assets.carrRepaymentMonths?assets.carrRepaymentMonths[index]:''}</R></Li>
             </div> :null
           }
         </div>
