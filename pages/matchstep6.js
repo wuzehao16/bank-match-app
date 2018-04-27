@@ -396,7 +396,7 @@ class MatchStep6 extends React.Component {
                     message: '请输入信用卡张数'
                   }],
                 })(
-                    <input  type="number" min={getFieldValue('sumStagesCreditCard')}  style={{width:60,fontSize:'16px'}}/>
+                    <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
                 )}
               </FormItem>
               <span>张</span>
@@ -486,7 +486,7 @@ class MatchStep6 extends React.Component {
                                   message: '请输入信用卡办理分期还款的张数'
                                 }],
                               })(
-                                  <input  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                  <input  type="number" min={0} max={getFieldValue('sumCreditCard')}  style={{width:60,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                               <span>张</span>
