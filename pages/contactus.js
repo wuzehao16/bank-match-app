@@ -14,7 +14,7 @@ class ContactUs extends React.PureComponent {
         </section>
         <section style={{height:204}}>
           <p>2、用微信“扫一扫”添加关注公众号</p>
-          <img src='/static/followwechat.png' style={{width:228,height:125}}/>
+          <img src='/static/followwechat.png' style={{width:228,height:125,'-webkit-touch-callout':'default'}}/>
         </section>
         <style jsx global>{`
           body,html {

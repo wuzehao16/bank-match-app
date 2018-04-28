@@ -74,18 +74,18 @@ class Reimbursement extends React.Component {
   constructor(props){
     super(props);
   }
-  
+
   render() {
     // console.log(Object.keys(this.props.content.dataList));
     return (
       <tbody>
-        {this.props.content.dataList.map(item => 
+        {this.props.content.dataList.map(item =>
           <tr key={item.month}>
            <td>{item.month}</td>
            <td>{item.mreprincipal}</td>
            <td>{item.minterest}</td>
            <td>{item.resPrincipal}</td>
-          </tr>        
+          </tr>
         )}
       </tbody>
     )
@@ -117,7 +117,7 @@ class Calculator extends React.Component {
   };
 
   handleChange = (event, value) => {
-    this.state.loandata = {dataList:[]};    
+    this.state.loandata = {dataList:[]};
     this.setState({ cal:{loanmethod: value,repaymentMethod:0,CommercialPrincipal:'',months:'',commercialRate:'',accumulationRate:'',publicPrincipal:''}});
   };
 
@@ -130,7 +130,7 @@ class Calculator extends React.Component {
     this.setState({
       cal:{
         ...this.state.cal,
-      [name]: event.target.value,        
+      [name]: event.target.value,
       }
     });
     console.log(this.state);
@@ -160,6 +160,9 @@ class Calculator extends React.Component {
       console.log(loandata);
     });
   }
+  changeMethod = (v) =>{
+    console.log(v)
+  }
   render() {
     const { classes, theme } = this.props;
     console.log(this.state)
@@ -184,7 +187,7 @@ class Calculator extends React.Component {
             onChangeIndex={this.handleChangeIndex}
           >
             <TabContainer dir={theme.direction}>
-              <form className="inputList">
+              <form className="inputList" onSubmit={this.submit}>
                   <div className="forminput">
                     <label>商贷金额</label>
                     <div className="inputright">
@@ -208,8 +211,8 @@ class Calculator extends React.Component {
                   </div>
                   {/* <div className={this.state.illegal?'illegal':'legal'} style={{textAlign:'center',fontSize:14,height:20,margin:'10px 0',color:'red'}}>请输入大于0的数值</div> */}
                 <div style={{display:'flex'}}>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type="submit"   onClick={this.submit.bind(this,{repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false}  type='submit' onClick={this.submit.bind(this,{repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
+                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type="submit"   onClick={this.changeMethod({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
+                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false}  type='submit' onClick={this.changeMethod({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
                 </div>
               </form>
               {
@@ -267,7 +270,7 @@ class Calculator extends React.Component {
                 <div style={{display:'flex'}}>
                   <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type='submit' onClick={this.submit({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
                   <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false} type='submit' onClick={this.submit({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
-                </div>  
+                </div>
               </form>
               {
                 this.state.loandata.dataList.length > 0 ?
@@ -427,7 +430,7 @@ class Calculator extends React.Component {
             .details {
               background:#fff;
               padding:10px 0 20px;
-              
+
             }
             .calculatorresult {
               padding:0 17px;
@@ -481,7 +484,7 @@ class Calculator extends React.Component {
             }
           `}
           </style>
-      </Layout>  
+      </Layout>
     );
   }
 }
