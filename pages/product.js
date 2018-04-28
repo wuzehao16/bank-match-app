@@ -70,6 +70,10 @@ const InfoRight = styled.div`
     font-size: 12px;
   }
   @media (min-width:375px) {
+    padding: 27px 0 0 4px;
+    font-size: 13px;
+  }
+  @media (min-width:414px) {
     padding: 27px 0 0 24px;
     font-size: 13px;
   }

@@ -651,6 +651,7 @@ class MatchStep3 extends React.Component {
          border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
+         padding-right: 5px;
         }
       `}
       </style>
