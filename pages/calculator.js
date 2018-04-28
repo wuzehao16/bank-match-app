@@ -8,7 +8,7 @@ import Input from 'material-ui/Input'
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import withRoot from '../src/withRoot';
-import { Radio, Form } from 'antd';
+import { Form } from 'antd';
 import TextField from 'material-ui/TextField';
 import {calculatorfetch} from '../services/calculatorfetch'
 import styled from 'styled-components'
@@ -106,15 +106,18 @@ const styles = theme => ({
 });
 
 class Calculator extends React.Component {
-  state = {
-    loandata:{
-      dataList:[]
-    },
-    cal:{
-      loanmethod: 0,
-      repaymentMethod: 0
-    }
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      loandata:{
+        dataList:[]
+      },
+      cal:{
+        loanmethod: 0,
+        repaymentMethod: 0
+      }
+    };
+  }
 
   handleChange = (event, value) => {
     this.state.loandata = {dataList:[]};    
@@ -136,16 +139,15 @@ class Calculator extends React.Component {
     console.log(this.state);
   }
 
-  submit = data => event =>{
-    // e.preventDefault();
-    event.preventDefault();
+  submit = data => e => {
+    e.preventDefault();
     this.setState({
       cal:{
         ...this.state.cal,
         ...data
       }
     });
-    // console.log(this.state);
+
     calculatorfetch(
       {
       ...this.state.cal,
@@ -162,6 +164,7 @@ class Calculator extends React.Component {
   }
   render() {
     const { classes, theme } = this.props;
+    const {getFieldDecorator} = this.props.form;
     console.log(this.state)
     return (
       <Layout title = '房贷计算器' className={classes.root}>
@@ -184,11 +187,11 @@ class Calculator extends React.Component {
             onChangeIndex={this.handleChangeIndex}
           >
             <TabContainer dir={theme.direction}>
-              <form className="inputList">
+              <form className="inputList" >
                   <div className="forminput">
                     <label>商贷金额</label>
                     <div className="inputright">
-                      <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
+                      <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/> 
                       <span>万元</span>
                     </div>
                   </div>
@@ -206,10 +209,9 @@ class Calculator extends React.Component {
                       <span>%</span>
                     </div>
                   </div>
-                  {/* <div className={this.state.illegal?'illegal':'legal'} style={{textAlign:'center',fontSize:14,height:20,margin:'10px 0',color:'red'}}>请输入大于0的数值</div> */}
                 <div style={{display:'flex'}}>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type="submit"   onClick={this.submit.bind(this,{repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false}  type='submit' onClick={this.submit.bind(this,{repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
+                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} onClick={this.submit({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
+                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false}  onClick={this.submit({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
                 </div>
               </form>
               {
@@ -240,28 +242,26 @@ class Calculator extends React.Component {
               }
             </TabContainer>
             <TabContainer dir={theme.direction}>
-              <form onSubmit={this.submit} className="inputList">
-                <div>
-                  <div className="forminput">
-                    <label>公积金贷款金额</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
-                      <span>万元</span>
-                    </div>
+              <form  className="inputList">
+                <div className="forminput">
+                  <label>公积金贷款金额</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
+                    <span>万元</span>
                   </div>
-                  <div className="forminput">
-                    <label>公积金贷款期限</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款期限"  type="number" required  min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
-                      <span>月</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>公积金贷款期限</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款期限"  type="number" required  min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
+                    <span>月</span>
                   </div>
-                  <div className="forminput">
-                    <label>公积金贷款利率</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款利率"  step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
-                      <span>%</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>公积金贷款利率</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款利率"  step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
+                    <span>%</span>
                   </div>
                 </div>
                 <div style={{display:'flex'}}>
@@ -291,48 +291,45 @@ class Calculator extends React.Component {
                           <Reimbursement content={this.state.loandata}/>
                         </table>
                       </div>
-
                     </div>
                   </div>: null
               }
             </TabContainer>
             <TabContainer dir={theme.direction}>
-              <form onSubmit={this.submit} className="inputList">
-                <div>
-                  <div className="forminput">
-                    <label>商贷金额</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款金额"  type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
-                      <span>万元</span>
-                    </div>
+              <form  className="inputList">
+                <div className="forminput">
+                  <label>商贷金额</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款金额"  type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
+                    <span>万元</span>
                   </div>
-                  <div className="forminput">
-                    <label>商业贷款利率</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
-                      <span>%</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>商业贷款利率</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
+                    <span>%</span>
                   </div>
-                  <div className="forminput">
-                    <label>公积金贷款金额</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款金额"  type="number" required  min={0}  value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
-                      <span>万元</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>公积金贷款金额</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款金额"  type="number" required  min={0}  value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
+                    <span>万元</span>
                   </div>
-                  <div className="forminput">
-                    <label>公积金贷款利率</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
-                      <span>%</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>公积金贷款利率</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
+                    <span>%</span>
                   </div>
-                  <div className="forminput">
-                    <label>贷款期限</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款期限"  type="number" required  min={0}  value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
-                      <span>月</span>
-                    </div>
+                </div>
+                <div className="forminput">
+                  <label>贷款期限</label>
+                  <div className="inputright">
+                    <input placeholder="请输入贷款期限"  type="number" required  min={0}  value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
+                    <span>月</span>
                   </div>
                 </div>
                 <div style={{display:'flex'}}>
@@ -418,12 +415,6 @@ class Calculator extends React.Component {
               text-align:right;
               margin-right:10px
             }
-            // .illegal {
-            //   display: block;
-            // }
-            // .legal {
-            //   display: none;
-            // }
             .details {
               background:#fff;
               padding:10px 0 20px;
@@ -490,5 +481,6 @@ Calculator.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
+const CalculatorForm = Form.create()(Calculator)
 
-export default withRoot(withStyles(styles, { withTheme: true })(Calculator));
+export default withRoot(withStyles(styles, { withTheme: true })(CalculatorForm));
