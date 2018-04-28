@@ -51,7 +51,7 @@ class HelpDetail extends React.PureComponent {
     console.log(this.props)
     const content = this.props.content;
     return (
-      <Layout title="帮助中心">
+      <Layout title="常见问题">
         <Wrapper>
           {/* <Title>{content.contentTitle}</Title> */}
           <Content
