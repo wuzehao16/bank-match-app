@@ -175,7 +175,7 @@ class MatchStep6 extends React.Component {
                       message: '请输入信用类贷款'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                    <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>笔</span>
@@ -195,7 +195,7 @@ class MatchStep6 extends React.Component {
                         {getFieldDecorator('sumEqualInterest', {
                           initialValue:item.sumEqualInterest,
                         })(
-                            <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                         )}
                       </FormItem>
                       <span>笔</span>
@@ -222,7 +222,7 @@ class MatchStep6 extends React.Component {
                                       message: '请输入等额本息类贷款总余额'
                                     }],
                                   })(
-                                      <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                      <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                                   )}
                                 </FormItem>
                                 <span>元</span>
@@ -245,7 +245,7 @@ class MatchStep6 extends React.Component {
                                       message: '请输入每月还款总额'
                                     }],
                                   })(
-                                    <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                                   )}
                                 </FormItem>
                                 <span>元</span>
@@ -270,7 +270,7 @@ class MatchStep6 extends React.Component {
                           rules: [{ required: true}],
                         })(
 
-                            <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
 
                         )}
                       </FormItem>
@@ -299,7 +299,7 @@ class MatchStep6 extends React.Component {
                                     message:'请输入随借随还类贷款总余额'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -322,7 +322,7 @@ class MatchStep6 extends React.Component {
                                     message:'每月还利息'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -345,7 +345,7 @@ class MatchStep6 extends React.Component {
                           initialValue:item.sumAlongLoan,
                           rules: [{ required: true}],
                         })(
-                            <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                         )}
                       </FormItem>
                       <span>笔</span>
@@ -372,7 +372,7 @@ class MatchStep6 extends React.Component {
                                   message:'请输入随借随还类贷款总余额'
                                 }],
                               })(
-                                  <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                                  <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -395,7 +395,7 @@ class MatchStep6 extends React.Component {
                                   message:'请输入每月还利息'
                                 }],
                               })(
-                                  <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                                  <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -423,7 +423,7 @@ class MatchStep6 extends React.Component {
                       message: '请输入信用卡张数'
                     }],
                   })(
-                      <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                      <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>张</span>
@@ -450,7 +450,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入信用卡总额度'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -473,7 +473,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入信用卡当月已使用额度'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -496,7 +496,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入信用卡近六个月平均使用额度'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0}  style={{width:60,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -519,7 +519,7 @@ class MatchStep6 extends React.Component {
                                    message: '请输入信用卡办理分期还款的张数'
                                  }],
                                })(
-                                   <input placeholder="请输入"  type="number" min={0} max={getFieldValue('sumCreditCard')}  style={{width:60,fontSize:'16px'}}/>
+                                   <input placeholder="请输入"  type="number" min={0} max={getFieldValue('sumCreditCard')}  style={{width:100,fontSize:'16px'}}/>
                                )}
                              </FormItem>
                              <span>张</span>
@@ -544,7 +544,7 @@ class MatchStep6 extends React.Component {
          border-right-width: 0px;
          border-bottom-width: 0px;
          border-left-width: 0px;
-         text-align: center;
+         text-align: right;
         }
         .title{
           color: #3c3c3c;

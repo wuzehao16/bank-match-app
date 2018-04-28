@@ -129,10 +129,20 @@ const Two = styled.div`
   justify-content: space-between;
 `
 const One = styled.div`
-  vertical-align:bottom;
   position:relative;
   display:flex;
   justify-content: space-between;
+  input{
+   border-color: #878787;
+   border-style: solid;
+   border-radius:0;
+   border-top-width: 0px;
+   border-right-width: 0px;
+   border-bottom-width: 0px;
+   border-left-width: 0px;
+   font-size:16px;
+   text-align: right;
+  }
 `
 let housePropertyUuid = 0;
 let businessPolicyUuid = 0;
@@ -358,7 +368,7 @@ class MatchStep4 extends React.Component {
                     {getFieldDecorator(`propertyRightRatio[${k}]`, {
                       initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
                     })(
-                        <input placeholder="请输入" type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
+                        <input placeholder="请输入" type="number" min={0} max={100} style={{width:100,fontSize:'16px'}}/>
                     )}
                   </FormItem>
                   <span>%</span>
@@ -436,7 +446,7 @@ class MatchStep4 extends React.Component {
                           {getFieldDecorator(`mortgageBalance[${k}]`, {
                             initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
                           })(
-                            <input placeholder="请输入" type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                           )}
                         </FormItem>
                         <span>元</span>
@@ -459,7 +469,7 @@ class MatchStep4 extends React.Component {
                           {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
                             initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
                           })(
-                            <input placeholder="请输入" type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                           )}
                         </FormItem>
                         <span>元</span>
@@ -482,7 +492,7 @@ class MatchStep4 extends React.Component {
                           initialValue:item.mortgageTerm?item.mortgageTerm[k]:""
 
                         })(
-                          <input placeholder="请输入" type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
+                          <input placeholder="请输入" type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
                         )}
                       </FormItem>
                       <span>月</span>
@@ -504,7 +514,7 @@ class MatchStep4 extends React.Component {
                         {getFieldDecorator(`returnedMonths[${k}]`, {
                           initialValue:item.returnedMonths?item.returnedMonths[k]:""
                         })(
-                            <input placeholder="请输入" type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
+                            <input placeholder="请输入" type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
                         )}
                       </FormItem>
                       <span>月</span>
@@ -528,7 +538,7 @@ class MatchStep4 extends React.Component {
                   {getFieldDecorator(`propertyTotalArea[${k}]`, {
                     initialValue:item.propertyTotalArea?item.propertyTotalArea[k]:""
                   })(
-                      <input placeholder="请输入" type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                      <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>平</span>
@@ -550,7 +560,7 @@ class MatchStep4 extends React.Component {
                   {getFieldDecorator(`propertyTotalMarketValue[${k}]`, {
                     initialValue:item.propertyTotalMarketValue?item.propertyTotalMarketValue[k]:""
                   })(
-                      <input placeholder="请输入" type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                      <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -679,7 +689,7 @@ class MatchStep4 extends React.Component {
                     initialValue:item.policyPayment?item.policyPayment[k]:""
                   })(
 
-                      <input placeholder="请输入"  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
+                      <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -742,7 +752,7 @@ class MatchStep4 extends React.Component {
                   {getFieldDecorator(`carPotentialPrice[${k}]`, {
                     initialValue:item.carPotentialPrice?item.carPotentialPrice[k]:""
                   })(
-                      <input placeholder="请输入" min={0}type="number"style={{width:60,fontSize:'16px'}}/>
+                      <input placeholder="请输入" min={0}type="number"style={{width:100,fontSize:'16px'}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -765,7 +775,7 @@ class MatchStep4 extends React.Component {
                                 {getFieldDecorator(`carLoanBalance[${k}]`, {
                                   initialValue:item.carLoanBalance?item.carLoanBalance[k]:""
                                 })(
-                                  <input placeholder="请输入" min={0} type="number"style={{width:60,fontSize:'16px'}}/>
+                                  <input placeholder="请输入" min={0} type="number"style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -785,7 +795,7 @@ class MatchStep4 extends React.Component {
                                 {getFieldDecorator(`carRepayment[${k}]`, {
                                   initialValue:item.carRepayment?item.carRepayment[k]:""
                                 })(
-                                  <input placeholder="请输入" type="number"  min={0} style={{width:60,fontSize:'16px'}}/>
+                                  <input placeholder="请输入" type="number"  min={0} style={{width:100,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
@@ -803,7 +813,7 @@ class MatchStep4 extends React.Component {
                               {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
                                 initialValue:item.carrRepaymentMonths?item.carrRepaymentMonths[k]:""
                               })(
-                                  <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
+                                  <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
                               )}
                             </FormItem>
                             <span>月</span>
@@ -857,7 +867,7 @@ class MatchStep4 extends React.Component {
                           message: '请输入名下房产数量'
                         }],
                       })(
-                        <input placeholder="请输入"   type="number" min={0} style={{width:60,fontSize:'16px'}} />
+                        <input placeholder="请输入"   type="number" min={0} style={{width:100,fontSize:'16px'}} />
                       )}
                     </FormItem>
                     <span>套</span>
@@ -910,7 +920,7 @@ class MatchStep4 extends React.Component {
                           message: '请输入名下保单份数'
                         }],
                       })(
-                        <input placeholder="请输入"   type="number" min={0} style={{width:60,fontSize:'16px'}} />
+                        <input placeholder="请输入"   type="number" min={0} style={{width:100,fontSize:'16px'}} />
                       )}
                     </FormItem>
                     <span>份</span>
@@ -965,7 +975,7 @@ class MatchStep4 extends React.Component {
                           message: '请输入名下车辆数量'
                         }],
                       })(
-                        <input placeholder="请输入" type="number" min={0} style={{width:60,fontSize:'16px'}} />
+                        <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}} />
                       )}
                     </FormItem>
                     <span>辆</span>

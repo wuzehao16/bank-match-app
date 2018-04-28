@@ -205,7 +205,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入本单位连续上班月份'
                     }],
                   })(
-                    <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:60}}/>
+                    <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>月</span>
@@ -228,7 +228,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入近3个月税前月均收入'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -252,7 +252,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入近6个月税前月均收入'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -275,7 +275,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入近12个月税前月均收入'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -298,7 +298,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入上一年度税前月均收入'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -322,7 +322,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入社保缴纳基数'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -345,7 +345,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入本单位连续缴纳'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0} max={1000} style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0} max={1000} style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>月</span>
@@ -409,7 +409,7 @@ class MatchStep4 extends React.Component {
                                   message:'请输入调整前社保缴纳基数'
                                 }],
                               })(
-                                <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                                <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                               )}
                             </FormItem>
                             <span>元</span>
@@ -438,7 +438,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入公积金缴纳基数'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                   )}
                 </FormItem>
                 <span>元</span>
@@ -461,7 +461,7 @@ class MatchStep4 extends React.Component {
                       message:'请输入本单位连续缴纳月份'
                     }],
                   })(
-                    <input placeholder="请输入"  type="number" min={0}  max={1000} style={{width:60}}/>
+                    <input placeholder="请输入"  type="number" min={0}  max={1000} style={{width:100}}/>
 
                   )}
                 </FormItem>
@@ -506,7 +506,7 @@ class MatchStep4 extends React.Component {
                             message:'请输入调整前公积金缴纳基数'
                           }],
                         })(
-                          <input placeholder="请输入"  type="number" min={0}  style={{width:60}}/>
+                          <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
                         )}
                       </FormItem>
                       <span>元</span>
@@ -531,6 +531,7 @@ class MatchStep4 extends React.Component {
          border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
+         text-align: right;
         }
         .title{
           color: #3c3c3c;
