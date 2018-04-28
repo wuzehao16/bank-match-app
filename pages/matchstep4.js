@@ -99,8 +99,8 @@ const DoubleInput = styled.div`
   position: relative;
   font-size: 16px;
   color: #646464;
-  display: flex;
-  justify-content: space-between;
+  ${'' /* display: flex;
+  justify-content: space-between; */}
 `
 const NextButton = styled(Button)`
   width: 180px;
@@ -110,6 +110,8 @@ const NextButton = styled(Button)`
 
 const Relative = styled.div`
   position: relative;
+  display: flex;
+  justify-content: space-between;
 `
 class MatchStep4 extends React.Component {
   static async getInitialProps({store}) {
@@ -182,7 +184,7 @@ class MatchStep4 extends React.Component {
                     message:'请输入单位名称'
                   }],
                 })(
-                  <input placeholder="请填写社保缴纳单位或工资代发单位"  pattern='[\u4e00-\u9fa5|a-zA-Z]*' title="请输入正确的公司名称" type='string' maxlength={20} type="text"style={{width:280,border:'none'}}/>
+                  <input placeholder="请输入" placeholder="请填写社保缴纳单位或工资代发单位"  pattern='[\u4e00-\u9fa5|a-zA-Z]*' title="请输入正确的公司名称" type='string' maxlength={20} type="text"style={{width:280,border:'none'}}/>
                 )}
               </FormItem>
             </div>
@@ -190,150 +192,164 @@ class MatchStep4 extends React.Component {
           <DoubleInput>
             <Relative >
               <span className="title">本单位连续上班</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={specificWorkTimeError ? 'error' : ''}
-                help={specificWorkTimeError || ''}
-                >
-                {getFieldDecorator('specificWorkTime', {
-                  initialValue:item.specificWorkTime,
-                  rules: [{
-                    required: true,
-                    message:'请输入本单位连续上班月份'
-                  }],
-                })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>月</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={specificWorkTimeError ? 'error' : ''}
+                  help={specificWorkTimeError || ''}
+                  >
+                  {getFieldDecorator('specificWorkTime', {
+                    initialValue:item.specificWorkTime,
+                    rules: [{
+                      required: true,
+                      message:'请输入本单位连续上班月份'
+                    }],
+                  })(
+                    <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>月</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative >
               <span className="title">近3个月税前月均收入</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
-                help={threeMonthsAvgSalaryError || ''}
-                >
-                {getFieldDecorator('threeMonthsAvgSalary',  {
-                  initialValue:item.threeMonthsAvgSalary,
-                  rules: [{
-                    required: true,
-                    message:'请输入近3个月税前月均收入'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={threeMonthsAvgSalaryError ? 'error' : ''}
+                  help={threeMonthsAvgSalaryError || ''}
+                  >
+                  {getFieldDecorator('threeMonthsAvgSalary',  {
+                    initialValue:item.threeMonthsAvgSalary,
+                    rules: [{
+                      required: true,
+                      message:'请输入近3个月税前月均收入'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
 
           </DoubleInput>
           <DoubleInput>
             <Relative >
               <span className="title">近6个月税前月均收入</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
-                help={SixMonthsAvgSalaryError || ''}
-                >
-                {getFieldDecorator('SixMonthsAvgSalary', {
-                  initialValue:item.SixMonthsAvgSalary,
-                  rules: [{
-                    required: true,
-                    message:'请输入近6个月税前月均收入'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={SixMonthsAvgSalaryError ? 'error' : ''}
+                  help={SixMonthsAvgSalaryError || ''}
+                  >
+                  {getFieldDecorator('SixMonthsAvgSalary', {
+                    initialValue:item.SixMonthsAvgSalary,
+                    rules: [{
+                      required: true,
+                      message:'请输入近6个月税前月均收入'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative >
               <span className="title">近12个月税前月均收入</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={thisYearMonthsAvgSalaryError ? 'error' : ''}
-                help={thisYearMonthsAvgSalaryError || ''}
-                >
-                {getFieldDecorator('thisYearMonthsAvgSalary', {
-                  initialValue:item.thisYearMonthsAvgSalary,
-                  rules: [{
-                    required: true,
-                    message:'请输入近12个月税前月均收入'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={thisYearMonthsAvgSalaryError ? 'error' : ''}
+                  help={thisYearMonthsAvgSalaryError || ''}
+                  >
+                  {getFieldDecorator('thisYearMonthsAvgSalary', {
+                    initialValue:item.thisYearMonthsAvgSalary,
+                    rules: [{
+                      required: true,
+                      message:'请输入近12个月税前月均收入'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput style = {{padding: '20px 0 50px 0'}}>
             <Relative>
               <span className="title">上一年度税前月均收入</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={lastYearMonthsAvgSalaryError ? 'error' : ''}
-                help={lastYearMonthsAvgSalaryError || ''}
-                >
-                {getFieldDecorator('lastYearMonthsAvgSalary', {
-                  initialValue:item.lastYearMonthsAvgSalary,
-                  rules: [{
-                    required: true,
-                    message:'请输入上一年度税前月均收入'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={lastYearMonthsAvgSalaryError ? 'error' : ''}
+                  help={lastYearMonthsAvgSalaryError || ''}
+                  >
+                  {getFieldDecorator('lastYearMonthsAvgSalary', {
+                    initialValue:item.lastYearMonthsAvgSalary,
+                    rules: [{
+                      required: true,
+                      message:'请输入上一年度税前月均收入'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
             <Help><Red>*</Red>超过现单位上班时长的税前月均收入则填0，上一年度税前月均收入指自然年(如2017年)</Help>
           </DoubleInput>
           <DoubleInput>
             <Relative >
               <span className="title">社保缴纳基数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={specificInsuranceBaseError ? 'error' : ''}
-                help={specificInsuranceBaseError || ''}
-                >
-                {getFieldDecorator('specificInsuranceBase', {
-                  initialValue:item.specificInsuranceBase,
-                  rules: [{
-                    required: true,
-                    message:'请输入社保缴纳基数'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={specificInsuranceBaseError ? 'error' : ''}
+                  help={specificInsuranceBaseError || ''}
+                  >
+                  {getFieldDecorator('specificInsuranceBase', {
+                    initialValue:item.specificInsuranceBase,
+                    rules: [{
+                      required: true,
+                      message:'请输入社保缴纳基数'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput  style = {{padding: '20px 0 30px 0'}}>
             <Relative >
               <span className="title">本单位连续缴纳</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={specificInsurancePaymonthError ? 'error' : ''}
-                help={specificInsurancePaymonthError || ''}
-                >
-                {getFieldDecorator('specificInsurancePaymonth', {
-                  initialValue:item.specificInsurancePaymonth,
-                  rules: [{
-                    required: true,
-                    message:'请输入本单位连续缴纳'
-                  }],
-                })(
-                  <input  type="number" min={0} max={1000} style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>月</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={specificInsurancePaymonthError ? 'error' : ''}
+                  help={specificInsurancePaymonthError || ''}
+                  >
+                  {getFieldDecorator('specificInsurancePaymonth', {
+                    initialValue:item.specificInsurancePaymonth,
+                    rules: [{
+                      required: true,
+                      message:'请输入本单位连续缴纳'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0} max={1000} style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>月</span>
+              </span>
             </Relative>
             <Help><Red>*</Red>若无社保则填0</Help>
           </DoubleInput>
@@ -380,22 +396,24 @@ class MatchStep4 extends React.Component {
                     ? <SubContain style={{color:'#646464'}}>
                         <Relative>
                           <span>调整前社保缴纳基数</span>
-                          <FormItem
-                            style={{display:"inline-block"}}
-                            validateStatus={exInsuranceBaseError ? 'error' : ''}
-                            help={exInsuranceBaseError || ''}
-                            >
-                            {getFieldDecorator('exInsuranceBase', {
-                              initialValue:item.exInsuranceBase,
-                              rules: [{
-                                required: true,
-                                message:'请输入调整前社保缴纳基数'
-                              }],
-                            })(
-                              <input  type="number" min={0}  style={{width:60}}/>
-                            )}
-                          </FormItem>
-                          <span>元</span>
+                          <span>
+                            <FormItem
+                              style={{display:"inline-block"}}
+                              validateStatus={exInsuranceBaseError ? 'error' : ''}
+                              help={exInsuranceBaseError || ''}
+                              >
+                              {getFieldDecorator('exInsuranceBase', {
+                                initialValue:item.exInsuranceBase,
+                                rules: [{
+                                  required: true,
+                                  message:'请输入调整前社保缴纳基数'
+                                }],
+                              })(
+                                <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                              )}
+                            </FormItem>
+                            <span>元</span>
+                          </span>
                         </Relative>
                       </SubContain>: null
                 }
@@ -407,44 +425,48 @@ class MatchStep4 extends React.Component {
           <DoubleInput>
             <Relative>
               <span className="title">公积金缴纳基数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={specificProvidentFundBaseError ? 'error' : ''}
-                help={specificProvidentFundBaseError || ''}
-                >
-                {getFieldDecorator('specificProvidentFundBase', {
-                  initialValue:item.specificProvidentFundBase,
-                  rules: [{
-                    required: true,
-                    message:'请输入公积金缴纳基数'
-                  }],
-                })(
-                  <input  type="number" min={0}  style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={specificProvidentFundBaseError ? 'error' : ''}
+                  help={specificProvidentFundBaseError || ''}
+                  >
+                  {getFieldDecorator('specificProvidentFundBase', {
+                    initialValue:item.specificProvidentFundBase,
+                    rules: [{
+                      required: true,
+                      message:'请输入公积金缴纳基数'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput style = {{padding: '20px 0 30px 0'}}>
             <Relative >
               <span className="title">本单位连续缴纳</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={specificProvidentFundPaymonthError ? 'error' : ''}
-                help={specificProvidentFundPaymonthError || ''}
-                >
-                {getFieldDecorator('specificProvidentFundPaymonth', {
-                  initialValue:item.specificProvidentFundPaymonth,
-                  rules: [{
-                    required: true,
-                    message:'请输入本单位连续缴纳月份'
-                  }],
-                })(
-                  <input  type="number" min={0}  max={1000} style={{width:60}}/>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={specificProvidentFundPaymonthError ? 'error' : ''}
+                  help={specificProvidentFundPaymonthError || ''}
+                  >
+                  {getFieldDecorator('specificProvidentFundPaymonth', {
+                    initialValue:item.specificProvidentFundPaymonth,
+                    rules: [{
+                      required: true,
+                      message:'请输入本单位连续缴纳月份'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0}  max={1000} style={{width:100}}/>
 
-                )}
-              </FormItem>
-              <span>月</span>
+                  )}
+                </FormItem>
+                <span>月</span>
+              </span>
             </Relative>
             <Help><Red>*</Red>若无公积金则填0</Help>
           </DoubleInput>
@@ -471,22 +493,24 @@ class MatchStep4 extends React.Component {
               ? <SubContain>
                   <Relative style={{color:'#646464'}}>
                     <span>调整前公积金缴纳基数</span>
-                    <FormItem
-                      style={{display:"inline-block"}}
-                      validateStatus={exProvidentFundBaseError ? 'error' : ''}
-                      help={exProvidentFundBaseError || ''}
-                      >
-                      {getFieldDecorator('exProvidentFundBase', {
-                        initialValue:item.exProvidentFundBase,
-                        rules: [{
-                          required: true,
-                          message:'请输入调整前公积金缴纳基数'
-                        }],
-                      })(
-                        <input  type="number" min={0}  style={{width:60}}/>
-                      )}
-                    </FormItem>
-                    <span>元</span>
+                    <span>
+                      <FormItem
+                        style={{display:"inline-block"}}
+                        validateStatus={exProvidentFundBaseError ? 'error' : ''}
+                        help={exProvidentFundBaseError || ''}
+                        >
+                        {getFieldDecorator('exProvidentFundBase', {
+                          initialValue:item.exProvidentFundBase,
+                          rules: [{
+                            required: true,
+                            message:'请输入调整前公积金缴纳基数'
+                          }],
+                        })(
+                          <input placeholder="请输入"  type="number" min={0}  style={{width:100}}/>
+                        )}
+                      </FormItem>
+                      <span>元</span>
+                    </span>
                   </Relative>
                 </SubContain>: null
           }
@@ -504,9 +528,10 @@ class MatchStep4 extends React.Component {
          border-radius:0;
          border-top-width: 0px;
          border-right-width: 0px;
-         border-bottom-width: 1px;
+         border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
+         text-align: right;
         }
         .title{
           color: #3c3c3c;

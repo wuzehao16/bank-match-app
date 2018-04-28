@@ -50,7 +50,7 @@ class AboutUs extends React.PureComponent {
             <h2 style={{color:'#646464',fontSize:'9px',textAlign:'center',marginTop:5}}>V1.0.0</h2>
           </div>
           <div className = "description" style={{width: '100%',padding:'50px 20px'}}>
-            <p style={{fontSize:'14px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过只能工具更高效的开展工作，解决行业痛点!</p>
+            <p style={{fontSize:'14px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过智能工具更高效的开展工作，解决行业痛点!</p>
           </div>
           <ul style={ulStyles}>
             <Link href='/wechat'>
@@ -68,7 +68,7 @@ class AboutUs extends React.PureComponent {
           </ul>
           <footer style={footerStyles}>
               <p style={{fontSize:'12px',color: '#969696'}}>众银云测，用户的智能顾问</p>
-              <p style={{fontSize:'12px',color: '#969696'}}>Copyright2018深圳市众银云测技术有限公司 版权所有</p>
+              <p style={{fontSize:'12px',color: '#969696'}}>Copyright2018深圳市众银云测信息技术有限公司 版权所有</p>
           </footer>
         </div>
       <style jsx global>{`

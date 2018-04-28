@@ -121,7 +121,29 @@ const NextButton = styled(Button)`
   height: 36px;
   border-radius: 4px;
 `
-
+const Two = styled.div`
+  vertical-align:bottom;
+  position:relative;
+  color: #3c3c3c;
+  display:flex;
+  justify-content: space-between;
+`
+const One = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: space-between;
+  input{
+   border-color: #878787;
+   border-style: solid;
+   border-radius:0;
+   border-top-width: 0px;
+   border-right-width: 0px;
+   border-bottom-width: 0px;
+   border-left-width: 0px;
+   font-size:16px;
+   text-align: right;
+  }
+`
 let housePropertyUuid = 0;
 let businessPolicyUuid = 0;
 let carPropertyUuid = 0;
@@ -245,21 +267,21 @@ class MatchStep4 extends React.Component {
       carProperty: nextKeys,
     });
   }
-  showHouse = (v) =>{
-    if(v.target.value>0) {
-      this.addHouseProperty();
-    }
-  }
-  showBusiness = (v) =>{
-    if(v.target.value>0) {
-      this.addBusinessPolicy();
-    }
-  }
-  showCar = (v) =>{
-    if(v.target.value>0) {
-      this.addCarProperty();
-    }
-  }
+  // showHouse = (v) =>{
+  //   if(v.target.value>0) {
+  //     this.addHouseProperty();
+  //   }
+  // }
+  // showBusiness = (v) =>{
+  //   if(v.target.value>0) {
+  //     this.addBusinessPolicy();
+  //   }
+  // }
+  // showCar = (v) =>{
+  //   if(v.target.value>0) {
+  //     this.addCarProperty();
+  //   }
+  // }
   render () {
     const { data } = this.props;
     const { getFieldDecorator, getFieldValue, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -333,21 +355,25 @@ class MatchStep4 extends React.Component {
           </SubContain>
           <SubContain
             >
+              <One>
                 <span>产权占比</span>
-              <FormItem
-                style={{
-                  display:"inline-block"
-                }}
-                key={k+2}
-                required={false}
-                >
-                {getFieldDecorator(`propertyRightRatio[${k}]`, {
-                  initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
-                })(
-                    <Input type="number" min={0} max={100} style={{width:60,fontSize:'16px'}}/>
-                )}
-              </FormItem>
-                <span>%</span>
+                <span>
+                  <FormItem
+                    style={{
+                      display:"inline-block"
+                    }}
+                    key={k+2}
+                    required={false}
+                    >
+                    {getFieldDecorator(`propertyRightRatio[${k}]`, {
+                      initialValue:item.propertyRightRatio?item.propertyRightRatio[k]:""
+                    })(
+                        <input placeholder="请输入" type="number" min={0} max={100} style={{width:100,fontSize:'16px'}}/>
+                    )}
+                  </FormItem>
+                  <span>%</span>
+                </span>
+              </One>
           </SubContain>
           <SubContain>
             <SubContainTitle style={{color: '#646464'}}>房产类型</SubContainTitle>
@@ -406,115 +432,140 @@ class MatchStep4 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <DoubleInput>
-                  <span>本笔抵押贷款余额 </span>
-                  <FormItem
-                    required={false}
-                    key={k+6}
-                    style={{
-                      display:"inline-block",
-                      color:'#646464'
-                    }}
-                    >
-                    {getFieldDecorator(`mortgageBalance[${k}]`, {
-                      initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
-                    })(
-                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
-                    )}
-                  </FormItem>
-                  <span>元</span>
-                </DoubleInput>
-                <DoubleInput>
-                  <span>每月还款金额</span>
-                  <FormItem
-                    required={false}
-                    key={k+7}
-                    style={{
-                      display:"inline-block",
-                      color:'#646464'
-                    }}
-                    >
-                    {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
-                      initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
-                    })(
-                        <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
-                    )}
-                  </FormItem>
-                  <span>元</span>
-                </DoubleInput>
-                <DoubleInput>
-                  <span>本笔抵押贷款期限 </span>
-                  <FormItem
-                    required={false}
-                    key={k+8}
-                    style={{
-                      display:"inline-block",
-                      color:'#646464'
-                    }}
-                    >
-                    {getFieldDecorator(`mortgageTerm[${k}]`, {
-                      initialValue:item.mortgageTerm?item.mortgageTerm[k]:""
+                  <One>
+                    <span>本笔抵押贷款余额 </span>
+                    <span>
+                      <FormItem
+                        required={false}
+                        key={k+6}
+                        style={{
+                          display:"inline-block",
+                          color:'#646464'
+                        }}
+                        >
+                          {getFieldDecorator(`mortgageBalance[${k}]`, {
+                            initialValue:item.mortgageBalance?item.mortgageBalance[k]:""
+                          })(
+                            <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
+                          )}
+                        </FormItem>
+                        <span>元</span>
+                    </span>
+                  </One>
 
-                    })(
-                      <Input type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
-                    )}
-                  </FormItem>
-                  <span>月</span>
                 </DoubleInput>
                 <DoubleInput>
-                  <span>已还月份数</span>
-                  <FormItem
-                    required={false}
-                    key={k+9}
-                    style={{
-                      display:"inline-block",
-                      color:'#646464'
-                    }}
-                    >
-                    {getFieldDecorator(`returnedMonths[${k}]`, {
-                      initialValue:item.returnedMonths?item.returnedMonths[k]:""
-                    })(
-                        <Input type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
-                    )}
-                  </FormItem>
-                  <span>月</span>
+                  <One>
+                    <span>每月还款金额</span>
+                    <span>
+                      <FormItem
+                        required={false}
+                        key={k+7}
+                        style={{
+                          display:"inline-block",
+                          color:'#646464'
+                        }}
+                        >
+                          {getFieldDecorator(`mortgageMonthRepayment[${k}]`, {
+                            initialValue:item.mortgageMonthRepayment?item.mortgageMonthRepayment[k]:""
+                          })(
+                            <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
+                          )}
+                        </FormItem>
+                        <span>元</span>
+                    </span>
+                  </One>
+                </DoubleInput>
+                <DoubleInput>
+                  <One>
+                    <span>本笔抵押贷款期限 </span>
+                    <span>
+                      <FormItem
+                        required={false}
+                        key={k+8}
+                        style={{
+                          display:"inline-block",
+                          color:'#646464'
+                        }}
+                        >
+                        {getFieldDecorator(`mortgageTerm[${k}]`, {
+                          initialValue:item.mortgageTerm?item.mortgageTerm[k]:""
+
+                        })(
+                          <input placeholder="请输入" type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
+                        )}
+                      </FormItem>
+                      <span>月</span>
+                    </span>
+                  </One>
+                </DoubleInput>
+                <DoubleInput>
+                  <One>
+                    <span>已还月份数</span>
+                    <span>
+                      <FormItem
+                        required={false}
+                        key={k+9}
+                        style={{
+                          display:"inline-block",
+                          color:'#646464'
+                        }}
+                        >
+                        {getFieldDecorator(`returnedMonths[${k}]`, {
+                          initialValue:item.returnedMonths?item.returnedMonths[k]:""
+                        })(
+                            <input placeholder="请输入" type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
+                        )}
+                      </FormItem>
+                      <span>月</span>
+                    </span>
+                  </One>
                 </DoubleInput>
               </div>
           }
           <DoubleInput>
-            <span>本房产总面积</span>
-            <FormItem
-              required={false}
-              key={k+10}
-              style={{
-                display:"inline-block",
-                color:'#646464'
-              }}
-              >
-              {getFieldDecorator(`propertyTotalArea[${k}]`, {
-                initialValue:item.propertyTotalArea?item.propertyTotalArea[k]:""
-              })(
-                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
-              )}
-            </FormItem>
-            <span>平</span>
+            <One>
+              <span>本房产总面积</span>
+              <span>
+                <FormItem
+                  required={false}
+                  key={k+10}
+                  style={{
+                    display:"inline-block",
+                    color:'#646464'
+                  }}
+                  >
+                  {getFieldDecorator(`propertyTotalArea[${k}]`, {
+                    initialValue:item.propertyTotalArea?item.propertyTotalArea[k]:""
+                  })(
+                      <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
+                  )}
+                </FormItem>
+                <span>平</span>
+              </span>
+            </One>
           </DoubleInput>
           <DoubleInput>
-            <span>本房产总市值</span>
-            <FormItem
-              required={false}
-              key={k+11}
-              style={{
-                display:"inline-block",
-                color:'#646464'
-              }}
-              >
-              {getFieldDecorator(`propertyTotalMarketValue[${k}]`, {
-                initialValue:item.propertyTotalMarketValue?item.propertyTotalMarketValue[k]:""
-              })(
-                  <Input type="number" min={0} style={{width:60,fontSize:'16px'}}/>
-              )}
-            </FormItem>
-            <span>元</span>
+            <One>
+              <span>本房产总市值</span>
+              <span>
+                <FormItem
+                  required={false}
+                  key={k+11}
+                  style={{
+                    display:"inline-block",
+                    color:'#646464'
+                  }}
+                  >
+                  {getFieldDecorator(`propertyTotalMarketValue[${k}]`, {
+                    initialValue:item.propertyTotalMarketValue?item.propertyTotalMarketValue[k]:""
+                  })(
+                      <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
+            </One>
           </DoubleInput>
         </Sub>
       );
@@ -586,7 +637,7 @@ class MatchStep4 extends React.Component {
                             {getFieldDecorator(`otherPolicyBrand[${k}]`, {
                               initialValue:item.otherPolicyBrand?item.otherPolicyBrand[k]:""
                             })(
-                                <Input maxlength={20} type="text"style={{width:200,fontSize:'16px'}}/>
+                                <input placeholder="请输入" maxlength={20} type="text"style={{width:200,fontSize:'16px'}}/>
                             )}
                           </FormItem>
                       </SubContain>:null
@@ -627,19 +678,23 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
+            <One >
               <span>保单年缴费金额 </span>
-            <FormItem
-              required={false}
-              style={{color:'#646464',display:'inline-block'}}
-              >
-              {getFieldDecorator(`policyPayment[${k}]`, {
-                initialValue:item.policyPayment?item.policyPayment[k]:""
-              })(
+              <span>
+                <FormItem
+                  required={false}
+                  style={{color:'#646464',display:'inline-block'}}
+                  >
+                  {getFieldDecorator(`policyPayment[${k}]`, {
+                    initialValue:item.policyPayment?item.policyPayment[k]:""
+                  })(
 
-                  <Input  type="number" min={0} style={{width:60,fontSize:'16px'}}/>
-              )}
-            </FormItem>
-            <span>元</span>
+                      <input placeholder="请输入"  type="number" min={0} style={{width:100,fontSize:'16px'}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
+            </One>
             <Help><Red>*</Red>月缴或季缴的需折算成年缴填写金额</Help>
         </SubContain>
         </Sub>
@@ -687,65 +742,83 @@ class MatchStep4 extends React.Component {
             </FormItem>
           </SubContain>
           <SubContain>
-            <span>车辆残值评估</span>
-              <FormItem
-                required={false}
-                style={{color:'#646464',display:'inline-block'}}
-                >
-                {getFieldDecorator(`carPotentialPrice[${k}]`, {
-                  initialValue:item.carPotentialPrice?item.carPotentialPrice[k]:""
-                })(
-                    <Input min={0}type="number"style={{width:60,fontSize:'16px'}}/>
-                )}
-              </FormItem>
-              <span>元</span>
+            <One>
+              <span>车辆残值评估</span>
+              <span>
+                <FormItem
+                  required={false}
+                  style={{color:'#646464',display:'inline-block'}}
+                  >
+                  {getFieldDecorator(`carPotentialPrice[${k}]`, {
+                    initialValue:item.carPotentialPrice?item.carPotentialPrice[k]:""
+                  })(
+                      <input placeholder="请输入" min={0}type="number"style={{width:100,fontSize:'16px'}}/>
+                  )}
+                </FormItem>
+                <span>元</span>
+              </span>
+
+            </One>
           </SubContain>
           {
             (getFieldValue(`carRegistStatus[${k}]`) === 1||getFieldValue(`carRegistStatus[${k}]`) === 2||getFieldValue(`carRegistStatus[${k}]`) === 3||getFieldValue(`carRegistStatus[${k}]`) === 4)
             ? <div>
                       <SubContain>
-                        <span>车辆贷款余额</span>
+                        <One>
+                          <span>车辆贷款余额</span>
+                          <span>
 
-                          <FormItem
-                            required={false}
-                            style={{color:'#646464',display:'inline-block'}}
-                            >
-                            {getFieldDecorator(`carLoanBalance[${k}]`, {
-                              initialValue:item.carLoanBalance?item.carLoanBalance[k]:""
-                            })(
-                                <Input min={0} type="number"style={{width:60,fontSize:'16px'}}/>
-                            )}
-                          </FormItem>
-                          <span>元</span>
+                            <FormItem
+                              required={false}
+                              style={{color:'#646464',display:'inline-block'}}
+                              >
+                                {getFieldDecorator(`carLoanBalance[${k}]`, {
+                                  initialValue:item.carLoanBalance?item.carLoanBalance[k]:""
+                                })(
+                                  <input placeholder="请输入" min={0} type="number"style={{width:100,fontSize:'16px'}}/>
+                                )}
+                              </FormItem>
+                              <span>元</span>
+                          </span>
+                        </One>
+
 
                       </SubContain>
                       <SubContain>
-                        <span>车贷月还款金额</span>
-                          <FormItem
-                            required={false}
-                            style={{color:'#646464',display:'inline-block'}}
-                            >
-                            {getFieldDecorator(`carRepayment[${k}]`, {
-                              initialValue:item.carRepayment?item.carRepayment[k]:""
-                            })(
-                                <Input type="number"  min={0} style={{width:60,fontSize:'16px'}}/>
-                            )}
-                          </FormItem>
-                          <span>元</span>
+                        <One>
+                          <span>车贷月还款金额</span>
+                          <span>
+                            <FormItem
+                              required={false}
+                              style={{color:'#646464',display:'inline-block'}}
+                              >
+                                {getFieldDecorator(`carRepayment[${k}]`, {
+                                  initialValue:item.carRepayment?item.carRepayment[k]:""
+                                })(
+                                  <input placeholder="请输入" type="number"  min={0} style={{width:100,fontSize:'16px'}}/>
+                                )}
+                              </FormItem>
+                              <span>元</span>
+                          </span>
+                        </One>
                       </SubContain>
                       <SubContain>
-                        <span>车贷已还款月份</span>
-                          <FormItem
-                            required={false}
-                            style={{color:'#646464',display:'inline-block'}}
-                            >
-                            {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
-                              initialValue:item.carrRepaymentMonths?item.carrRepaymentMonths[k]:""
-                            })(
-                                <Input   type="number" min={0} max={1000} style={{width:60,fontSize:'16px'}}/>
-                            )}
-                          </FormItem>
-                          <span>个月</span>
+                        <One>
+                          <span>车贷已还款月份</span>
+                          <span>
+                            <FormItem
+                              required={false}
+                              style={{color:'#646464',display:'inline-block'}}
+                              >
+                              {getFieldDecorator(`carrRepaymentMonths[${k}]`, {
+                                initialValue:item.carrRepaymentMonths?item.carrRepaymentMonths[k]:""
+                              })(
+                                  <input placeholder="请输入"   type="number" min={0} max={1000} style={{width:100,fontSize:'16px'}}/>
+                              )}
+                            </FormItem>
+                            <span>月</span>
+                          </span>
+                        </One>
                       </SubContain>
                   </div>:null
           }
@@ -779,25 +852,27 @@ class MatchStep4 extends React.Component {
             getFieldValue('isHouseProperty')===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
+                <Two>
                   <span>名下房产数量</span>
-                  <FormItem
-                    style={{display:'inline-block'}}
-                    validateStatus={sumHousePropertyError ? 'error' : ''}
-                    help={sumHousePropertyError || ''}
-                    >
-                    {getFieldDecorator('sumHouseProperty', {
-                      initialValue: item.sumHouseProperty,
-                      rules: [{
-                        required: true,
-                        message: '请输入名下房产数量'
-                      }],
-                    })(
-                      <input   type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showHouse}/>
-                    )}
-                  </FormItem>
-                  <span>套</span>
-                </div>
+                  <span>
+                    <FormItem
+                      style={{display:'inline-block'}}
+                      validateStatus={sumHousePropertyError ? 'error' : ''}
+                      help={sumHousePropertyError || ''}
+                      >
+                      {getFieldDecorator('sumHouseProperty', {
+                        initialValue: item.sumHouseProperty,
+                        rules: [{
+                          required: true,
+                          message: '请输入名下房产数量'
+                        }],
+                      })(
+                        <input placeholder="请输入"   type="number" min={0} style={{width:100,fontSize:'16px'}} />
+                      )}
+                    </FormItem>
+                    <span>套</span>
+                  </span>
+                </Two>
 
               </DoubleInput>
               { housePropertyFormItems }
@@ -830,25 +905,27 @@ class MatchStep4 extends React.Component {
             getFieldValue('businessPolicy') === 1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
+                <Two>
                   <span>名下保单份数</span>
-                  <FormItem
-                    style={{display:"inline-block"}}
-                    validateStatus={sumBusinessPolicyError ? 'error' : ''}
-                    help={sumBusinessPolicyError || ''}
-                    >
-                    {getFieldDecorator('sumBusinessPolicy', {
-                      initialValue: item.sumBusinessPolicy,
-                      rules: [{
-                        required: true,
-                        message: '请输入名下保单份数'
-                      }],
-                    })(
-                      <input   type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showBusiness}/>
-                    )}
-                  </FormItem>
-                  <span>份</span>
-                </div>
+                  <span>
+                    <FormItem
+                      style={{display:"inline-block"}}
+                      validateStatus={sumBusinessPolicyError ? 'error' : ''}
+                      help={sumBusinessPolicyError || ''}
+                      >
+                      {getFieldDecorator('sumBusinessPolicy', {
+                        initialValue: item.sumBusinessPolicy,
+                        rules: [{
+                          required: true,
+                          message: '请输入名下保单份数'
+                        }],
+                      })(
+                        <input placeholder="请输入"   type="number" min={0} style={{width:100,fontSize:'16px'}} />
+                      )}
+                    </FormItem>
+                    <span>份</span>
+                  </span>
+                </Two>
               </DoubleInput>
               {businessPolicyFormItems}
               <AddButton  onClick={this.addBusinessPolicy} >
@@ -883,25 +960,27 @@ class MatchStep4 extends React.Component {
             getFieldValue('isFamilyCar') ===1
             ? <div>
               <DoubleInput>
-                <div style={{verticalAlign:'bottom',position:'relative',color: '#3c3c3c'}}>
+                <Two>
                   <span>名下车辆数量</span>
-                  <FormItem
-                    style={{display:"inline-block"}}
-                    validateStatus={sumFamilyCarError ? 'error' : ''}
-                    help={sumFamilyCarError || ''}
-                    >
-                    {getFieldDecorator('sumFamilyCar', {
-                      initialValue: item.sumFamilyCar,
-                      rules: [{
-                        required: true,
-                        message: '请输入名下车辆数量'
-                      }],
-                    })(
-                      <input type="number" min={0} style={{width:60,fontSize:'16px'}} onBlur={this.showCar}/>
-                    )}
-                  </FormItem>
-                  <span>辆</span>
-                </div>
+                  <span>
+                    <FormItem
+                      style={{display:"inline-block"}}
+                      validateStatus={sumFamilyCarError ? 'error' : ''}
+                      help={sumFamilyCarError || ''}
+                      >
+                      {getFieldDecorator('sumFamilyCar', {
+                        initialValue: item.sumFamilyCar,
+                        rules: [{
+                          required: true,
+                          message: '请输入名下车辆数量'
+                        }],
+                      })(
+                        <input placeholder="请输入" type="number" min={0} style={{width:100,fontSize:'16px'}} />
+                      )}
+                    </FormItem>
+                    <span>辆</span>
+                  </span>
+                </Two>
               </DoubleInput>
               {carPropertyFormItems}
               <AddButton  onClick={this.addCarProperty} >
@@ -923,7 +1002,7 @@ class MatchStep4 extends React.Component {
          border-radius:0;
          border-top-width: 0px;
          border-right-width: 0px;
-         border-bottom-width: 1px;
+         border-bottom-width: 0px;
          border-left-width: 0px;
          font-size:16px;
         }

@@ -94,7 +94,7 @@ class Wanted extends React.PureComponent {
             margin="normal"
             placeholder="请输入您的邮箱"
           />
-          <Button color="primary"  className={classes.button} type="submit">
+          <Button color="primary"  variant="raised"  className={classes.button} type="submit">
              提交
            </Button>
         </form>

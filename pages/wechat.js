@@ -10,7 +10,7 @@ class ProductDetail extends React.PureComponent {
         <section>
           <p>1.保存二维码</p>
           <img src='/static/wechat.png' style={{width:125,height:125}}/>
-          <div className="button">保存二维码</div>
+          {/* <div className="button">保存二维码</div> */}
         </section>
         <section style={{height:204}}>
           <p>2、用微信“扫一扫”添加关注公众号</p>

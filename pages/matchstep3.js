@@ -73,11 +73,11 @@ const DoubleInput = styled.div`
   position: relative;
   font-size: 16px;
   color: #646464;
-  display: flex;
-  justify-content: space-between;
 `
 const Relative = styled.div`
   position: relative;
+  display: flex;
+  justify-content: space-between;
 `
 const NextButton = styled(Button)`
   width: 180px;
@@ -519,106 +519,116 @@ class MatchStep3 extends React.Component {
           <DoubleInput>
             <Relative >
               <span style={{color: '#3c3c3c'}}>近1个月查询次数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={sumOneMonthQueriesError ? 'error' : ''}
-                help={sumOneMonthQueriesError || ''}
-                >
-                {getFieldDecorator('sumOneMonthQueries', {
-                  initialValue:item.sumOneMonthQueries,
-                  rules: [{
-                     required: true,
-                     message:'请输入近1个月查询次数'
-                }],
-                })(
-                  <input  type="number" min={0} max={99} style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>次</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={sumOneMonthQueriesError ? 'error' : ''}
+                  help={sumOneMonthQueriesError || ''}
+                  >
+                  {getFieldDecorator('sumOneMonthQueries', {
+                    initialValue:item.sumOneMonthQueries,
+                    rules: [{
+                       required: true,
+                       message:'请输入近1个月查询次数'
+                  }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0} max={99} style={{width:60}}/>
+                  )}
+                </FormItem>
+                <span>次</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative >
                 <span style={{color: '#3c3c3c'}}>近2个月查询次数</span>
-                <FormItem
-                  style={{display:"inline-block"}}
-                  validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
-                  help={sumTwoMonthsQueriesError || ''}
-                  >
-                  {getFieldDecorator('sumTwoMonthsQueries', {
-                    initialValue:item.sumTwoMonthsQueries,
-                    rules: [{
-                      required: true,
-                      message:'请输入近2个月查询次数'
-                    }],
-                  })(
-                    <input  type="number" min={0} max={99} style={{width:60}}/>
-                  )}
-                </FormItem>
-                <span>次</span>
+                <span>
+                  <FormItem
+                    style={{display:"inline-block"}}
+                    validateStatus={sumTwoMonthsQueriesError ? 'error' : ''}
+                    help={sumTwoMonthsQueriesError || ''}
+                    >
+                    {getFieldDecorator('sumTwoMonthsQueries', {
+                      initialValue:item.sumTwoMonthsQueries,
+                      rules: [{
+                        required: true,
+                        message:'请输入近2个月查询次数'
+                      }],
+                    })(
+                      <input placeholder="请输入"  type="number" min={0} max={99} style={{width:60}}/>
+                    )}
+                  </FormItem>
+                  <span>次</span>
+                </span>
               </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative >
               <span style={{color: '#3c3c3c'}}>近3个月查询次数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={sumThreeMonthsQueriesError ? 'error' : ''}
-                help={sumThreeMonthsQueriesError || ''}
-                >
-                {getFieldDecorator('sumThreeMonthsQueries', {
-                  initialValue:item.sumThreeMonthsQueries,
-                  rules: [{
-                    required: true,
-                    message:'请输入近3个月查询次数'
-                  }],
-                })(
-                  <input  type="number" min={0} max={99} style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>次</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={sumThreeMonthsQueriesError ? 'error' : ''}
+                  help={sumThreeMonthsQueriesError || ''}
+                  >
+                  {getFieldDecorator('sumThreeMonthsQueries', {
+                    initialValue:item.sumThreeMonthsQueries,
+                    rules: [{
+                      required: true,
+                      message:'请输入近3个月查询次数'
+                    }],
+                  })(
+                    <input placeholder="请输入"  type="number" min={0} max={99} style={{width:60}}/>
+                  )}
+                </FormItem>
+                <span>次</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative>
               <span style={{color: '#3c3c3c'}}>近6个月查询次数</span>
-              <FormItem
-                style={{display:"inline-block"}}
-                validateStatus={sumSixMonthsQueriesError ? 'error' : ''}
-                help={sumSixMonthsQueriesError || ''}
-                >
-                {getFieldDecorator('sumSixMonthsQueries', {
-                  initialValue:item.sumSixMonthsQueries,
-                  rules: [{
-                    required: true,
-                    message:'请输入近6个月查询次数'
-                  }],
-                })(
-                    <input  type="number" min={0} max={99} style={{width:60}}/>
-                )}
-              </FormItem>
-              <span>次</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={sumSixMonthsQueriesError ? 'error' : ''}
+                  help={sumSixMonthsQueriesError || ''}
+                  >
+                  {getFieldDecorator('sumSixMonthsQueries', {
+                    initialValue:item.sumSixMonthsQueries,
+                    rules: [{
+                      required: true,
+                      message:'请输入近6个月查询次数'
+                    }],
+                  })(
+                      <input placeholder="请输入"  type="number" min={0} max={99} style={{width:60}}/>
+                  )}
+                </FormItem>
+                <span>次</span>
+              </span>
             </Relative>
           </DoubleInput>
           <DoubleInput>
             <Relative>
               <span style={{color: '#3c3c3c'}}>近12个月查询次数</span>
-            <FormItem
-              style={{display:"inline-block"}}
-              validateStatus={sumOneYearQueriesError ? 'error' : ''}
-              help={sumOneYearQueriesError || ''}
-              >
-              {getFieldDecorator('sumOneYearQueries', {
-                initialValue:item.sumOneYearQueries,
-                rules: [{
-                  required: true,
-                  message:'请输入近12个月查询次数'
-                }],
-              })(
-                  <input  type="number" min={0} max={99} style={{width:60}}/>
-              )}
-            </FormItem>
-            <span>次</span>
+              <span>
+                <FormItem
+                  style={{display:"inline-block"}}
+                  validateStatus={sumOneYearQueriesError ? 'error' : ''}
+                  help={sumOneYearQueriesError || ''}
+                  >
+                  {getFieldDecorator('sumOneYearQueries', {
+                    initialValue:item.sumOneYearQueries,
+                    rules: [{
+                      required: true,
+                      message:'请输入近12个月查询次数'
+                    }],
+                  })(
+                      <input placeholder="请输入"  type="number" min={0} max={99} style={{width:60}}/>
+                  )}
+                </FormItem>
+                <span>次</span>
+              </span>
             </Relative>
             <Help>
               <Red>*</Red>征信查询次数仅计算贷款审批和信用卡审批的查询之和.
@@ -638,7 +648,7 @@ class MatchStep3 extends React.Component {
          border-radius:0;
          border-top-width: 0px;
          border-right-width: 0px;
-         border-bottom-width: 1px;
+         border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
         }
