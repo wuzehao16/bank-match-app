@@ -53,6 +53,7 @@ class Financialnformation extends React.PureComponent {
   }
   render() {
     const content = this.props.content;
+    var result = /^http:\/\//.test(content.content);
     return (
       <Layout title="金融资讯">
         <Wrapper>
@@ -62,11 +63,17 @@ class Financialnformation extends React.PureComponent {
             <span><i className="read"></i><span>{content.readNum}</span></span>
             <span><i className="time"></i><span>{content.releaseTime}</span></span>
           </More>
-          <Content
-            dangerouslySetInnerHTML={{
-                __html: content.content
-            }}>
-          </Content>
+          {
+            result
+              ?  <Content>
+                <video poster={content.contentPic}  width="100%" src={content.content} controls="controls"></video>
+                </Content>
+              : <Content
+                  dangerouslySetInnerHTML={{
+                      __html: content.content
+                  }}>
+                </Content>
+          }
         </Wrapper>
         <style jsx>{`
           span{
