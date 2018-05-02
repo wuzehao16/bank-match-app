@@ -257,7 +257,7 @@ class ProductDetail extends React.PureComponent {
               <div className="title">{product.productName}</div>
               <div className="sub-title">{product.productRecommend}</div>
             </div>
-            <div>
+            <div style={{width:'50%'}}>
               <div className="logo">
                 <img src={product.manageLogoId}/>
               </div>
@@ -402,7 +402,7 @@ class ProductDetail extends React.PureComponent {
             border-bottom:1px solid #f2f2f2;
           }
           .title-container{
-            width: 185px;
+            width: 50%;
             padding-left:5px;
             text-overflow: ellipsis;
             text-align:center;
@@ -417,9 +417,9 @@ class ProductDetail extends React.PureComponent {
             color:#646464;
           }
           .logo{
-            width:100px;
-            height:35px;
-            margin-left:20px;
+            width: 100%;
+            height: 35px;
+            margin-left: 25%;
             background: #fff;
           }
           .logo img{
