@@ -40,7 +40,7 @@ class HelpInformation extends React.PureComponent {
 
     );
     return (
-      <Layout title="帮助中心">
+      <Layout title="常见问题">
           <Ul>
             {listItems}
           </Ul>

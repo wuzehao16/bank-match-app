@@ -18,19 +18,31 @@ const ulStyles = {
   width:'100%'
 }
 const liStyles = {
-  width:'100%',
-  fontSize:'13px',
-  height: '45px',
-  color: '#646464',
-  lineHeight: '45px',
-  position: 'relative',
-  paddingLeft: '16px',
+
   display:'flex',
   justifyContent:'space-between',
   alignItems: 'center'
 
 }
-
+const Ul = styled.ul`
+  margin: 0;
+  padding: 0;
+  background-color: '#fff';
+  width:'100%';
+  height: 200px;
+  list-style-type: none;
+`
+// 设置高度大于某值后link无效
+const Li = styled.li`
+  background: #fff;
+  border-bottom: 1px solid #f2f2f2;
+  ${'' /* line-height: 50px; */}
+  ${'' /* height: 50px; */}
+  padding:8px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
 const footerStyles = {
   width: '100%',
   textAlign: 'center',
@@ -52,20 +64,20 @@ class AboutUs extends React.PureComponent {
           <div className = "description" style={{width: '100%',padding:'50px 20px'}}>
             <p style={{fontSize:'14px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过智能工具更高效的开展工作，解决行业痛点!</p>
           </div>
-          <ul style={ulStyles}>
+          <Ul>
             <Link href='/wechat'>
-              <li style={liStyles}>
-                官方微信
+              <Li >
+                <span>官方微信</span>
                 <Icon>chevron_right</Icon>
-              </li>
+              </Li>
             </Link>
-            <Link href='/servicecontract'>
-              <li style={liStyles}>
-              服务协议
+            <Link href={{ pathname: '/servicecontract' }} >
+              <Li>
+              <span>服务协议</span>
               <Icon>chevron_right</Icon>
-              </li>
+            </Li>
             </Link>
-          </ul>
+          </Ul>
           <footer style={footerStyles}>
               <p style={{fontSize:'12px',color: '#969696'}}>众银云测，用户的智能顾问</p>
               <p style={{fontSize:'12px',color: '#969696'}}>Copyright2018深圳市众银云测信息技术有限公司 版权所有</p>

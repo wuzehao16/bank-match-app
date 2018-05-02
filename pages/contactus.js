@@ -8,7 +8,7 @@ class ContactUs extends React.PureComponent {
     return (
       <Layout title="联系客服">
         <section>
-          <p>1.保存二维码</p>
+          <p>1.长按保存二维码</p>
           <img src='/static/wechat.png' style={{width:125,height:125}}/>
           {/* <div className="button">保存二维码</div> */}
         </section>
