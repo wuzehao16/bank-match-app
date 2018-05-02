@@ -161,7 +161,7 @@ class MatchBegin extends React.Component {
           </Step>
           <div className="btn">
             {/* <div className="l" onClick={this.toMatchList}>匹配记录</div> */}
-            <Link href="/matchstep1">
+            <Link prefetch href="/matchstep1">
             <NextButton variant="raised" color="primary">
                 立即匹配
             </NextButton>
