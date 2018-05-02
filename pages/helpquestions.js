@@ -15,6 +15,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   background: #fff;
   border-bottom: 1px solid #f2f2f2;
+  color: #646464;
   line-height: 50px;
   height: 50px;
   padding:0 15px;

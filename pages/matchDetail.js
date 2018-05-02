@@ -311,7 +311,7 @@ class MatchDetail extends React.PureComponent {
           <Li><L>征信记录时长：</L><R>{recordTime[creditInformation.recordTime]}</R></Li>
           <Li><L>名下上征信小额贷款笔数：</L><R>{sumPettyLoan[creditInformation.sumPettyLoan]}</R></Li>
           <Li><L>名下上征信消费金融类贷款笔数：</L><R>{sumConsumerFinanceLoan[creditInformation.sumConsumerFinanceLoan]}</R></Li>
-          <Li><L>是否使用过微粒贷：</L><R>{creditInformation.isParticleLoan==1?'是':'否'}</R></Li>
+          <Li><L>是否使用过微粒贷：</L><R>{creditInformation.isParticleLoan==1?'是':(creditInformation.isParticleLoan==0?'否':'')}</R></Li>
 
           {
             creditInformation.isParticleLoan == 1
