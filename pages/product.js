@@ -402,7 +402,7 @@ class ProductDetail extends React.PureComponent {
             border-bottom:1px solid #f2f2f2;
           }
           .title-container{
-            width: 50%;
+            width: 45%;
             padding-left:5px;
             text-overflow: ellipsis;
             text-align:center;
@@ -417,7 +417,7 @@ class ProductDetail extends React.PureComponent {
             color:#646464;
           }
           .logo{
-            width: 100%;
+            width: 90%;
             height: 35px;
             margin-left: 25%;
             background: #fff;
