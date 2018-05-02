@@ -410,7 +410,7 @@ class MatchStep3 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                  <SubContainTitle style={{color: '#646464'}}>近2个月内逾期的情况</SubContainTitle>
+                  <SubContainTitle style={{color: '#646464'}}>近2个月内是否有逾期的情况</SubContainTitle>
                   <FormItem
                     validateStatus={isTwoMonthsOverdueError ? 'error' : ''}
                     help={isTwoMonthsOverdueError || ''}
@@ -427,7 +427,7 @@ class MatchStep3 extends React.Component {
                   </FormItem>
                 </SubContain>
                 <SubContain>
-                    <SubContainTitle style={{color: '#646464'}}>近3个月内逾期的情况</SubContainTitle>
+                    <SubContainTitle style={{color: '#646464'}}>近3个月内是否有逾期的情况</SubContainTitle>
                     <FormItem
                       validateStatus={isThreeMonthsOverdueError ? 'error' : ''}
                       help={isThreeMonthsOverdueError || ''}
