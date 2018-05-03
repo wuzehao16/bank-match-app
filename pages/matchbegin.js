@@ -24,7 +24,7 @@ const Wrapper1 = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background: url(/static/match_bg.jpg);
+  background: url(/static/match_bg.webp);
   background-size: 100% 100%;
   height: 269px;
   width: 100%;
@@ -54,7 +54,7 @@ const Wrapper2 = styled.div`
   position: absolute;
   top: 269px;
   left: 0;
-  background: url(/static/match_bg1.jpg);
+  background: url(/static/match_bg1.webp);
   background-size: 100% 100%;
   height: 275px;
   z-index: -1;
@@ -63,7 +63,7 @@ const Wrapper2 = styled.div`
     height: 190px;
   }
   @media (min-width: 375px){
-    height: 235px;
+    height: 238px;
   }
   @media (min-width: 414px){
     height: 275px;
@@ -198,7 +198,7 @@ class MatchBegin extends React.Component {
           }
           .list li span{
             font-size: 9px;
-            color:#969696;
+            color:#3c3c3c;
           }
           .btn{
             text-align:center;

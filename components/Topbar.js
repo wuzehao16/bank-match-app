@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   height: 80px;
-  background: url(/static/topbar.jpg);
+  background: url(/static/topbar.webp);
   background-size: 100% 100%;
 `
 class Topbar extends React.Component {
