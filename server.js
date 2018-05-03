@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const next = require('next')
 const Router = require('koa-router')
-
+const gzip =  require('./middleware/gzip')
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -37,7 +37,7 @@ app.prepare()
     await handle(ctx.req, ctx.res)
     ctx.respond = false
   })
-
+  server.use(gzip({ threshold: 1024 }))
   server.use(async (ctx, next) => {
     ctx.res.statusCode = 200
     await next()
