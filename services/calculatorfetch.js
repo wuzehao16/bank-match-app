@@ -4,8 +4,7 @@ import qs from 'qs';
 
 export async function calculatorfetch(params) {
   var str = qs.stringify(params);
-  return request(`https://api.ibankmatch.com:8620/app/calculateEqualPrincipalAndInterest?${str}`, {
-   // return request('http://192.168.2.100:8611/app/getMatchModeResult', {
+  return request(`/app/calculateEqualPrincipalAndInterest?${str}`, {
     method: 'GET'
   });
 }
