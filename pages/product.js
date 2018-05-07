@@ -14,10 +14,9 @@ const Pd = styled.div`
   margin-bottom: 5px;
 `
 const Label= styled.span`
-  color: #969696;
-  background: #f2f2f2;
+  color: #ee5648;
   font-size: 8px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #ee5648;;
   padding: 2px 4px;
   margin: 7px 12px 7px 0;
   display: inline-block;
@@ -62,11 +61,11 @@ const InfoRight = styled.div`
   position:relative;
   font-size: 12px;
   @media (min-width:320px) {
-    padding: 27px 0 0 22px;
+    padding: 27px 0 0 2px;
     font-size: 11px;
   }
   @media(min-width: 360px) {
-    padding: 27px 0 0 23px;
+    padding: 27px 0 0 2px;
     font-size: 12px;
   }
   @media (min-width:375px) {
