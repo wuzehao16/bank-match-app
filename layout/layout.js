@@ -48,7 +48,7 @@ export default ({ children, title = '智能匹配' }) => (
       @media screen and (min-width: 320px){
         .ant-radio-button-wrapper{
           margin-right: 4px;
-          font-size: 11px;
+          font-size: 10px;
           width: 68px;
           height: 28px;
         }
@@ -57,7 +57,7 @@ export default ({ children, title = '智能匹配' }) => (
         .ant-radio-button-wrapper{
           margin-right: 4px;
           font-size: 12px;
-          width: 78px;
+          width: 77px;
           height: 28px;
         }
       }
