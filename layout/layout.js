@@ -45,6 +45,32 @@ export default ({ children, title = '智能匹配' }) => (
         line-height: 26px;
         text-align: center;
       }
+      @media screen and (min-width: 320px){
+        .ant-radio-button-wrapper{
+          margin-right: 4px;
+          font-size: 11px;
+          width: 68px;
+          height: 28px;
+        }
+      }
+      @media screen and (min-width: 360px){
+        .ant-radio-button-wrapper{
+          margin-right: 4px;
+          font-size: 12px;
+          width: 78px;
+          height: 28px;
+        }
+      }
+      @media screen and (min-width: 375px){
+        .ant-radio-button-wrapper{
+          margin-right: 5px;
+          margin-bottom: 10px;
+          width: 80px;
+          font-size: 13px;
+          height: 28px;
+          line-height: 26px;
+        }
+      }
       .ant-radio-button-wrapper input[type="radio"] {
           opacity: 0;
           width: 0;
