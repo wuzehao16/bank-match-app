@@ -24,7 +24,7 @@ const Wrapper1 = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background: url(/static/match_bg.webp);
+  background: url(/static/match_bg.jpg);
   background-size: 100% 100%;
   height: 269px;
   width: 100%;
@@ -54,7 +54,7 @@ const Wrapper2 = styled.div`
   position: absolute;
   top: 269px;
   left: 0;
-  background: url(/static/match_bg1.webp);
+  background: url(/static/match_bg1.jpg);
   background-size: 100% 100%;
   height: 275px;
   z-index: -1;
