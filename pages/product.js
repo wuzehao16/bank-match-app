@@ -177,9 +177,17 @@ class ProductDetail extends React.PureComponent {
                 position: ['50%', '50%']
               },
               label: {
-                  normal: {
-                      show: false
-                  },
+                normal:{
+                    show:true,
+                    position:'inner', //标签的位置
+                    textStyle : {
+                        fontWeight : 300 ,
+                        fontSize : 8    //文字的字体大小
+                    },
+                    formatter:'{d}%'
+
+
+                },
                   emphasis: {
                       show: false
                   }
