@@ -13,8 +13,14 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Snackbar from 'material-ui/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from "material-ui/Dialog";
 import Layout from '../layout/Blanklayout';
 import withRoot from '../src/withRoot';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
 import { getCaptcha, register } from '../services/invatation'
 import SimpleSnackbar from '../components/Snackbars'
 const styles = theme => ({
@@ -28,12 +34,21 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '100%',
   },
+  card: {
+    minWidth: 275,
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
   menu: {
     width: 200,
   },
   button:{
     width: '40%',
     margin: '50px auto',
+  },
+  dialogButton:{
+    margin:'0 auto',
   }
 });
 const GetCaptcha = styled(Button)`
@@ -44,10 +59,14 @@ const GetCaptcha = styled(Button)`
   height: 20px;
   ${'' /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .30); */}
 `;
+const Title = styled.div`
+  text-align: center;
+  margin-top: 10px;
+`
 class Wanted extends React.PureComponent {
   static async getInitialProps ({ query }) {
     // eslint-disable-next-line no-undef
-    return { userId: query.userId }
+    return { query: query }
   }
   state = {
     phone:'',
@@ -55,11 +74,13 @@ class Wanted extends React.PureComponent {
     count: 0,
     showPassword: false,
     open: false,
-    error:''
+    error:'',
+    dialogOpen:false
   }
   componentDidMount () {
     this.setState({
-      userId: this.props.userId
+      userId: this.props.query.userId,
+      userName: this.props.query.userName
     })
   }
   handleChange = name => event =>{
@@ -72,19 +93,24 @@ class Wanted extends React.PureComponent {
     if (regex.test(this.state.phone)) {
     } else {
       this.setState({
-        error:'请输入正确的手机号码！'
+        error:'请输入正确的手机号码！',
+        open:true
       });
       console.log("zq")
-      this.setState({
-        open:true
-      })
       return
     }
     getCaptcha({
       method:2,
       phone:this.state.phone,
     }).then(res => {
-      console.log(res)
+      if(res.code ==0){
+
+      } else{
+        this.setState({
+          error:res.msg,
+          open:true
+        });
+      }
     })
     let count = 59;
     this.setState({ count });
@@ -102,6 +128,9 @@ class Wanted extends React.PureComponent {
   handleClick = () => {
     this.setState({ open: true });
   };
+  handleDialogClick = () => {
+    this.setState({ dialogOpen: true });
+  };
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -110,11 +139,23 @@ class Wanted extends React.PureComponent {
 
     this.setState({ open: false });
   };
+  handleDialogClose = (event, reason) => {
+    this.setState({ dialogOpen: false });
+  };
   submit = e =>{
     e.preventDefault();
     console.log(this.state)
     register(this.state).then(res => {
-      console.log(res)
+      if(res.code ==0){
+        this.handleDialogClick();
+
+      } else{
+
+        this.setState({
+          error:res.msg,
+          open:true
+        });
+      }
     })
   }
   render() {
@@ -122,12 +163,17 @@ class Wanted extends React.PureComponent {
     const { count } = this.state;
     return (
       <Layout title="邀请好友">
+        <Card className={classes.card}>
+        <Title>您的好友 {this.state.userName}</Title>
+        <Title>诚挚邀请您成为正式经纪人</Title>
         <form className={classes.container} onSubmit={this.submit} autoComplete="off">
+
           <FormControl
             required
              >
             <InputLabel htmlFor="adornment-phone">手机</InputLabel>
             <Input
+              type="number"
               id="adornment-phone"
               value={this.state.phone}
               onChange={this.handleChange('phone')}
@@ -161,6 +207,7 @@ class Wanted extends React.PureComponent {
              >
             <InputLabel htmlFor="adornment-checkCode">验证码</InputLabel>
             <Input
+              type="number"
               id="adornment-checkCode"
               value={this.state.checkCode}
               onChange={this.handleChange('checkCode')}
@@ -181,14 +228,36 @@ class Wanted extends React.PureComponent {
              提交
            </Button>
         </form>
+        </Card>
         <div>
+          {/* 弹框 */}
+          <Dialog
+            open={this.state.dialogOpen}
+            onClose={this.handleDialogClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText style={{textAlign:'center'}} id="alert-dialog-description">
+                恭喜你注册成功，请直接下载APP吧
+                现在下载APP，全渠道产品等你
+                <div>还有更多惊喜等你</div>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button className={classes.dialogButton} onClick={this.handleDialogClose} color="primary" autoFocus>
+                下载APP
+              </Button>
+            </DialogActions>
+          </Dialog>
+          {/* snackbar */}
           <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'left',
             }}
             open={this.state.open}
-            autoHideDuration={6000}
+            autoHideDuration={3000}
             onClose={this.handleClose}
             ContentProps={{
               'aria-describedby': 'message-id',
