@@ -37,8 +37,8 @@ class Download extends React.PureComponent {
         <Wrapper>
           <img src="/static/logo.png" style={{width:120,height:120,display:'block',margin:'60px auto 15px'}}/>
           <h1 style={{color:'#646464',fontSize:'24px',textAlign:'center',marginTop:'50px'}}>众银云测</h1>
-          <Divider style={{marginTop:'30px'}}/>
-          <h2 style={{color:'#646464',fontSize:'16px',textAlign:'center',marginTop:30}}>V1.0.0</h2>
+          <Divider style={{marginTop:'30px',width:'200px',margin: '30px auto'}}/>
+          <h2 style={{color:'#cacaca',fontSize:'16px',textAlign:'center',marginTop:30}}>V1.0.0</h2>
 
           <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href="itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist">
           <Button className={classes.button}>下载</Button>
