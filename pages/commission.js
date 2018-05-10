@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
 
 const Title = styled.div`
   height: 136px;
@@ -36,11 +37,13 @@ const Graph = styled.div`
 `
 
 export default class extends React.Component {
-  static async getInitialProps({query}) {
-		return {
-			item: await fetch(`/myIncomes`)
-		}
-	}
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
+    const res = await await fetch(`/myIncomes`,token)
+    return { item: res }
+  }
+
   componentDidMount () {
     // 基于准备好的dom，初始化echarts实例
     const item = this.props.item
@@ -82,11 +85,12 @@ export default class extends React.Component {
   }
   render () {
     const item = this.props.item;
+    console.log(item)
     return (
       <Layout>
         <Title>
           <Name>本月已结算余额(元)</Name>
-          <Balance>{item.mothBalance}元</Balance>
+          <Balance>{item.mothBalance || 0}元</Balance>
         </Title>
         <Income>
           <div className="price left">

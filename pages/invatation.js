@@ -142,6 +142,11 @@ class Wanted extends React.PureComponent {
   handleDialogClose = (event, reason) => {
     this.setState({ dialogOpen: false });
   };
+  toDownload = () => {
+    Router.push({
+      pathname:'/download',
+    })
+  }
   submit = e =>{
     e.preventDefault();
     console.log(this.state)
@@ -245,7 +250,7 @@ class Wanted extends React.PureComponent {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button className={classes.dialogButton} onClick={this.handleDialogClose} color="primary" autoFocus>
+              <Button className={classes.dialogButton} onClick={this.toDownload} color="primary" autoFocus>
                 下载APP
               </Button>
             </DialogActions>
