@@ -12,13 +12,6 @@ app.prepare()
   const server = new Koa()
   const router = new Router()
   router.get('/commission', async ctx => {
-    // let data;
-    // try {
-    //   data = await fetchCommission()
-    //   console.log(data)
-    // } catch (e) {
-    //   console.log(e)
-    // }
     await app.render(ctx.req, ctx.res, '/commission', ctx.query)
     ctx.respond = false
   })
