@@ -33,6 +33,7 @@
     "react-swipeable-views": "^0.12.13",
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
+    "rmc-pull-to-refresh": "^1.0.7",
     "rmc-steps": "^1.0.0",
     "styled-components": "^2.1.0"
   },

@@ -85,7 +85,6 @@ export default class extends React.Component {
   }
   render () {
     const item = this.props.item;
-    console.log(item)
     return (
       <Layout>
         <Title>
