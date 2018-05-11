@@ -496,7 +496,7 @@ class MatchStep6 extends React.Component {
                                     message: '请输入信用卡近六个月平均使用额度'
                                   }],
                                 })(
-                                    <input placeholder="请输入"  type="number" min={0}  style={{width:100,fontSize:'16px'}}/>
+                                    <input placeholder="请输入"  type="number" min={0}  style={{width:80,fontSize:'16px'}}/>
                                 )}
                               </FormItem>
                               <span>元</span>
