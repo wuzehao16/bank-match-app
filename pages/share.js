@@ -32,12 +32,13 @@ class Share extends React.PureComponent {
     const token = getCookie('token', req)
     // const res =  await fetch(`/qrcode`,token)
     // console.log(res)
-    return { item: {} }
+    return { token: token }
   }
   render() {
     return (
-      <Layout>
+      <Layout title="邀请好友">
         <Wrapper>
+          <img style={{marginTop:'53px'}} src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='200' width='200'/>
           <ul>
             <li>1、  将二维码图片分享至微信好友、朋友圈、QQ好友、QQ空间、新浪微博，也可保存图片通过其他渠道分享，二维码在活动期间内有效；</li>
             <li>2、  好友通过扫描您分享的二维码，下载众银云测APP并成功注册众银云测后将成为您的队友；</li>
@@ -51,7 +52,7 @@ class Share extends React.PureComponent {
           ul{
             margin:0;
             padding:0;
-            margin-top:100%;
+            margin-top:45%;
             list-style: none;
             color:#fff;
             text-align:left;
