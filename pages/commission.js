@@ -75,7 +75,7 @@ export default class extends React.Component {
         series: [{
             name: '元',
             type: 'bar',
-            barWidth:'40%',
+            barWidth:'20%',
             data: item.yaxis
         }]
     };

@@ -34,11 +34,17 @@ class Share extends React.PureComponent {
     // console.log(res)
     return { token: token }
   }
+  handleClick = () => {
+    if(typeof window !== 'undefined'){
+      navigator.userAgent.match(/iPhone|iPad|iPod/i) ? window.webkit.messageHandlers.inviteFriends.postMessage({})
+      : ''
+    }
+  }
   render() {
     return (
       <Layout title="邀请好友">
         <Wrapper>
-          <img style={{marginTop:'53px'}} src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='200' width='200'/>
+          <img  src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='45%' width='60%'/>
           <ul>
             <li>1、  将二维码图片分享至微信好友、朋友圈、QQ好友、QQ空间、新浪微博，也可保存图片通过其他渠道分享，二维码在活动期间内有效；</li>
             <li>2、  好友通过扫描您分享的二维码，下载众银云测APP并成功注册众银云测后将成为您的队友；</li>
@@ -46,13 +52,13 @@ class Share extends React.PureComponent {
             <li>4、活动时间：2018-6-01 00:00至2018-6-30 24:00；</li>
             <li>5、本次活动为众银云测发起，最终解释权将归众银云测所有。</li>
           </ul>
-          <Btn>马上赚钱</Btn>
+          <Btn onClick={this.handleClick}>马上赚钱</Btn>
         </Wrapper>
         <style jsx>{`
           ul{
             margin:0;
             padding:0;
-            margin-top:45%;
+            margin-top:30%;
             list-style: none;
             color:#fff;
             text-align:left;
