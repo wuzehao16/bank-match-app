@@ -45,16 +45,21 @@ export default class extends React.Component {
     console.log(res)
     return { i: res }
   }
-  state = {
-    value: 0,
-    checkedA: true,
-    timeSlotIncome:0,
-    newSum:0,
-    xaxis:[],
-    ypaxis:[],
-    yvaxis:[],
-    type:'1' //1 收益 2 队员
-  };
+  constructor (props) {
+    super(props);
+    const {   xaxis, ypaxis, yvaxis, newSum, timeSlotIncome } = this.props.i.sevenDays;
+    this.state = {
+      value: 0,
+      checkedA: true,
+      timeSlotIncome: timeSlotIncome,
+      newSum: newSum,
+      xaxis: xaxis,
+      ypaxis: ypaxis,
+      yvaxis: yvaxis,
+      type:'1' //1 收益 2 队员
+    };
+  }
+
 
   handleChange = (event, value) => {
     const { i } = this.props;
@@ -63,7 +68,7 @@ export default class extends React.Component {
       timeSlotIncome:i[value].timeSlotIncome,
       xaxis:i[value].xaxis,
       ypaxis:i[value].ypaxis,
-      ypaxis:i[value].ypaxis,
+      yvaxis:i[value].yvaxis,
     })
   };
   componentDidMount () {
@@ -105,7 +110,7 @@ export default class extends React.Component {
         series: [{
             name: '元',
             type: 'bar',
-            barWidth:'40%',
+            barWidth:'20%',
             data: y
         }]
     };
@@ -120,6 +125,7 @@ export default class extends React.Component {
     const { classes } = this.props;
     const { value, timeSlotIncome, newSum, xaxis, ypaxis, yvaxis, type } = this.state;
     const { i } = this.props;
+    console.log(i)
     return (
       <Layout>
         <Income>
@@ -129,7 +135,7 @@ export default class extends React.Component {
           </div>
           <div className="price">
             <div>待结算金额(元)</div>
-            <div>0</div>
+            <div>{ i.sumincomes }</div>
           </div>
         </Income>
           <BottomNavigation
