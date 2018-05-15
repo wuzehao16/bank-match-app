@@ -127,7 +127,7 @@ export default class extends React.Component {
     const { i } = this.props;
     console.log(i)
     return (
-      <Layout>
+      <Layout title="我的团队">
         <Income>
           <div className="price left">
             <div>当前队员数</div>

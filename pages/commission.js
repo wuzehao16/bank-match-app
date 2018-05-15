@@ -86,7 +86,7 @@ export default class extends React.Component {
   render () {
     const item = this.props.item;
     return (
-      <Layout>
+      <Layout title="我的佣金">
         <Title>
           <Name>本月已结算余额(元)</Name>
           <Balance>{item.mothBalance || 0}元</Balance>

@@ -59,86 +59,7 @@ export default class extends React.Component {
     const res = await fetch(`/getIncomesList`, token)
     console.log(res, "res")
     return {
-      res: {
-        "code": 0,
-        "msg": "ok",
-        "data": [
-          {
-            "ftime": "2018年03月",
-            "settledAmount": 200.92,
-            "waitAmount": 100.25,
-            "totalAmount": 301.17,
-            "incomeDateList": [
-              {
-                "name": "黄金会员",
-                "time": "2018-03-20 10:33:01",
-                "amt": 100.25
-              }, {
-                "name": "大宇宙",
-                "time": "2018-03-20 10:35:00",
-                "amt": 200.92
-              }
-            ]
-          }, {
-            "ftime": "2018年02月",
-            "settledAmount": 400.33,
-            "waitAmount": 0,
-            "totalAmount": 400.33,
-            "incomeDateList": [
-              {
-                "name": "jack",
-                "time": "2018-02-01 10:35:04",
-                "amt": 400.33
-              }
-            ]
-          }, {
-            "ftime": "2018年01月",
-            "settledAmount": 0,
-            "waitAmount": 300,
-            "totalAmount": 300,
-            "incomeDateList": [
-              {
-                "name": "jack",
-                "time": "2018-01-23 16:14:16",
-                "amt": 300
-              }
-            ]
-          }, {
-            "ftime": "2017年12月",
-            "settledAmount": 1200.12,
-            "waitAmount": 0,
-            "totalAmount": 1200.12,
-            "incomeDateList": [
-              {
-                "name": "jack",
-                "time": "2017-12-01 16:14:59",
-                "amt": 1200.12
-              }, {
-                "name": "钻石会员",
-                "time": "2017-12-15 16:15:31",
-                "amt": 1232.23
-              }
-            ]
-          }, {
-            "ftime": "2017年12月",
-            "settledAmount": 1200.12,
-            "waitAmount": 0,
-            "totalAmount": 1200.12,
-            "incomeDateList": [
-              {
-                "name": "jack",
-                "time": "2017-12-01 16:14:59",
-                "amt": 1200.12
-              }, {
-                "name": "钻石会员",
-                "time": "2017-12-15 16:15:31",
-                "amt": 1232.23
-              }
-            ]
-          }
-        ],
-        "count": 4
-      }
+      res: res
     }
   }
   constructor(props) {
@@ -178,7 +99,8 @@ export default class extends React.Component {
   render() {
     const item = this.props.item;
     const list = this.state.data;
-    return (<Layout>
+    return (
+      <Layout title="佣金详情">
       <Wrapper>
         <PullToRefresh key={this.state.switchContainer}
           // style={{ height: 200, overflow: 'auto', border: '1px solid #ccc' }}
