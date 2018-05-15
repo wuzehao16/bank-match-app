@@ -1,0 +1,22 @@
+{
+  "name": "众银云测",
+  "short_name": "众银云测",
+  "description": "A Hacker News Progressive Web App built with ibankmatch",
+  "icons": [
+    {
+      "src": "/static/57px.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/144px.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ff80cc",
+  "lang": "zh",
+  "background_color": "#fff",
+  "start_url": "/",
+  "display": "standalone"
+}

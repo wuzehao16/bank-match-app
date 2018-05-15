@@ -20,8 +20,13 @@ class MyDocument extends Document {
               'minimum-scale=1, width=device-width, height=device-height'
             }
           />
+          <meta
+            name="description"
+            content="A Progressive Web App built with ibankmatch"
+          />
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
+          <link rel="manifest" href="/static/manifest/manifest.json" />
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             rel="stylesheet"
