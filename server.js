@@ -25,6 +25,9 @@ app.prepare()
     await app.render(ctx.req, ctx.res, '/financial', ctx.query)
     ctx.respond = false
   })
+  router.get('/service-worker.js', async ctx => {
+    app.serveStatic(req, res, join(root, `.${req.url}`))
+  })
 
   router.get('*', async ctx => {
     await handle(ctx.req, ctx.res)
