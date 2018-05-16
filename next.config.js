@@ -1,3 +1,3 @@
-const withWorkbox = require('next-workbox')
+const withOffline = require('next-offline')
 const withCSS = require('@zeit/next-css')
-module.exports = withWorkbox(withCSS())
+module.exports = withOffline(withCSS())

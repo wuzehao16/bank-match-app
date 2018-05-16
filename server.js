@@ -26,6 +26,7 @@ app.prepare()
     ctx.respond = false
   })
   router.get('/service-worker.js', async ctx => {
+    // res.setHeader('Service-Worker-Allowed', '/')
     app.serveStatic(req, res, join(root, `.${req.url}`))
   })
 

@@ -26,7 +26,7 @@ class Thing extends React.Component {
   async componentDidMount() {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/static/service-worker.js")
+        .register("/static/manifest/service-worker.js")
         .then(registration => {
           console.log("service worker registration successful");
         })
@@ -38,7 +38,7 @@ class Thing extends React.Component {
   render() {
     return (
       <SomeContext.Provider value={this.state.context}>
-        {this.props.children}
+        hello there
       </SomeContext.Provider>
     )
   }

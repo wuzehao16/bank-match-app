@@ -21,6 +21,7 @@
     "koa-router": "^7.1.0",
     "material-ui": "^1.0.0-beta.41",
     "next": "latest",
+    "next-offline": "^2.7.0",
     "next-redux-saga": "1.0.1",
     "next-redux-wrapper": "1.2.0",
     "prop-types": "latest",
@@ -38,7 +39,6 @@
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
-    "next-workbox": "^1.4.1",
     "redux-devtools-extension": "2.13.2"
   }
 }
