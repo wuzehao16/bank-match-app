@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import SwipeableViews from 'react-swipeable-views';
-import AppBar from 'material-ui/AppBar';
-import Input from 'material-ui/Input'
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Input from '@material-ui/core/Input'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
 import withRoot from '../src/withRoot';
 import { Form } from 'antd';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import {calculatorfetch} from '../services/calculatorfetch'
 import styled from 'styled-components'
 // import Layout from '../layout/Blanklayout'

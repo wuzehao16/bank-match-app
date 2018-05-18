@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Layout from '../layout/Blanklayout';
 import withRoot from '../src/withRoot'
 

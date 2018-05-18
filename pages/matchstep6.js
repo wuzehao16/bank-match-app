@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Router from 'next/router';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';

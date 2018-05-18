@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Divider from 'material-ui/Divider';
-import Icon from 'material-ui/Icon';
+import Divider from '@material-ui/core/Divider';
+import Icon from '@material-ui/core/Icon';
 import PullToRefresh from 'rmc-pull-to-refresh'
-import '../node_modules/rmc-pull-to-refresh/assets/index.css'
+import 'rmc-pull-to-refresh/assets/index.css'
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'

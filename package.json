@@ -21,7 +21,6 @@
     "koa-compress": "^3.0.0",
     "koa-is-json": "^1.0.0",
     "koa-router": "^7.1.0",
-    "material-ui": "^1.0.0-beta.41",
     "next": "latest",
     "next-offline": "^2.7.0",
     "next-redux-saga": "1.0.1",

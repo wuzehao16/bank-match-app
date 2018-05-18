@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
@@ -42,7 +43,6 @@ export default class extends React.Component {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const res = await await fetch(`/getTeamsCountList`,token)
-    console.log(res)
     return { i: res }
   }
   constructor (props) {
@@ -82,7 +82,6 @@ export default class extends React.Component {
   echarts = () =>{
     var myChart = echarts.init(document.getElementById('main'));
     const {   xaxis, ypaxis, yvaxis, type } = this.state;
-    console.log(this.state)
     // 指定图表的配置项和数据
     const y = (type == 1) ? yvaxis : ypaxis
     var option = {
@@ -125,7 +124,6 @@ export default class extends React.Component {
     const { classes } = this.props;
     const { value, timeSlotIncome, newSum, xaxis, ypaxis, yvaxis, type } = this.state;
     const { i } = this.props;
-    console.log(i)
     return (
       <Layout title="我的团队">
         <Income>
