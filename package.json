@@ -21,6 +21,7 @@
     "koa-compress": "^3.0.0",
     "koa-is-json": "^1.0.0",
     "koa-router": "^7.1.0",
+    "koa-socket": "^4.4.0",
     "next": "latest",
     "next-offline": "^2.7.0",
     "next-redux-saga": "1.0.1",
@@ -37,6 +38,7 @@
     "redux-saga": "0.15.4",
     "rmc-pull-to-refresh": "^1.0.7",
     "rmc-steps": "^1.0.0",
+    "socket.io-client": "^2.1.1",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
