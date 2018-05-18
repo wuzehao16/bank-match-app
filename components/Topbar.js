@@ -57,13 +57,13 @@ class Topbar extends React.Component {
                 display:none;
               }
               .p1{
-                left:22%;
+                left:29%;
               }
               .p2{
-                left:42%;
+                left:54%;
               }
               .p3{
-                left:62%;
+                left:80%;
               }
               .num{
                 color:#ee5648;
