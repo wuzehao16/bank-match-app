@@ -13,7 +13,7 @@ class ContactUs extends React.PureComponent {
           {/* <div className="button">保存二维码</div> */}
         </section>
         <section style={{height:204}}>
-          <p>2、用微信“扫一扫”添加关注公众号</p>
+          <p>2、用微信“扫一扫”添加联系客服</p>
           <img src='/static/followwechat.png' style={{width:228,height:125,'-webkit-touch-callout':'default'}}/>
         </section>
         <style jsx global>{`
