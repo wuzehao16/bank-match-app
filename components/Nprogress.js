@@ -2,8 +2,8 @@ import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 // import NProgress from 'nprogress'
-import Fade from 'material-ui/transitions/Fade';
-import { CircularProgress } from 'material-ui/Progress';
+import Fade from '@material-ui/core/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Router from 'next/router'
 import { loadingStart,loadingEnd } from '../redux/actions'
 import { configureStore } from '../redux/store'
