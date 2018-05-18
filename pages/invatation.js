@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import styled from 'styled-components'
+import md5 from 'blueimp-md5'
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -36,9 +37,10 @@ const styles = theme => ({
   },
   card: {
     minWidth: 275,
-    marginTop: theme.spacing.unit,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginTop: 30 * theme.spacing.unit,
+    marginLeft: 5 * theme.spacing.unit,
+    marginRight:5 * theme.spacing.unit,
+
   },
   menu: {
     width: 200,
@@ -51,6 +53,18 @@ const styles = theme => ({
     margin:'0 auto',
   }
 });
+const Wrapper = styled.div`
+  background: url(static/invatation.jpg);
+  background-size: cover;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+`
+
 const GetCaptcha = styled(Button)`
   ${'' /* background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); */}
   ${'' /* border-radius: 3px; */}
@@ -63,7 +77,7 @@ const Title = styled.div`
   text-align: center;
   margin-top: 10px;
 `
-class Wanted extends React.PureComponent {
+class Invatation extends React.PureComponent {
   static async getInitialProps ({ query }) {
     // eslint-disable-next-line no-undef
     return { query: query }
@@ -150,7 +164,12 @@ class Wanted extends React.PureComponent {
   submit = e =>{
     e.preventDefault();
     console.log(this.state)
-    register(this.state).then(res => {
+    console.log(md5(123))
+    const data = {
+      ...this.state,
+      loginPassord: md5(this.state.loginPassord + 'leoansReview')
+    }
+    register(data).then(res => {
       if(res.code ==0){
         this.handleDialogClick();
 
@@ -168,6 +187,7 @@ class Wanted extends React.PureComponent {
     const { count } = this.state;
     return (
       <Layout title="邀请好友">
+        <Wrapper>
         <Card className={classes.card}>
         <Title>您的好友 {this.state.userName}</Title>
         <Title>诚挚邀请您成为正式经纪人</Title>
@@ -284,9 +304,10 @@ class Wanted extends React.PureComponent {
             ]}
           />
         </div>
+        </Wrapper>
       </Layout>
     )
   }
 }
 
-export default withRoot(withStyles(styles)(Wanted));
+export default withRoot(withStyles(styles)(Invatation));
