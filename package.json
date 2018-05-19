@@ -8,10 +8,12 @@
     "start1": " set NODE_ENV=production&& node server.js"
   },
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0-beta.43",
     "@zeit/next-css": "^0.1.5",
     "antd": "^3.3.1",
     "babel-plugin-styled-components": "^1.1.5",
+    "blueimp-md5": "^2.10.0",
     "es6-promise": "4.1.1",
     "isomorphic-unfetch": "2.0.0",
     "jss": "^9.8.1",
@@ -19,8 +21,9 @@
     "koa-compress": "^3.0.0",
     "koa-is-json": "^1.0.0",
     "koa-router": "^7.1.0",
-    "material-ui": "^1.0.0-beta.41",
+    "koa-socket": "^4.4.0",
     "next": "latest",
+    "next-offline": "^2.7.0",
     "next-redux-saga": "1.0.1",
     "next-redux-wrapper": "1.2.0",
     "prop-types": "latest",
@@ -33,7 +36,9 @@
     "react-swipeable-views": "^0.12.13",
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
+    "rmc-pull-to-refresh": "^1.0.7",
     "rmc-steps": "^1.0.0",
+    "socket.io-client": "^2.1.1",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {

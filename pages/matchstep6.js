@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Router from 'next/router';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
@@ -114,7 +114,7 @@ class MatchStep6 extends React.Component {
   }
   state = {
     name: '',
-    disabled: 'true',
+    disabled: false,
   };
   handleChange = name => event => {
     this.setState({
@@ -126,7 +126,11 @@ class MatchStep6 extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.setState({
+          disabled: true
+        })
         this.props.dispatch(saveStep6(values))
+
       }
     });
   }
@@ -152,7 +156,8 @@ class MatchStep6 extends React.Component {
     const creditCardUsedLimitError = isFieldTouched('creditCardUsedLimit') && getFieldError('creditCardUsedLimit');
     const creditCardSixMonthsAvgUsedLimitError = isFieldTouched('creditCardSixMonthsAvgUsedLimit') && getFieldError('creditCardSixMonthsAvgUsedLimit');
     const sumStagesCreditCardError = isFieldTouched('sumStagesCreditCard') && getFieldError('sumStagesCreditCard');
-
+    console.log(this.state)
+    console.log(this.state.disabled && this.hasErrors(getFieldsError()) )
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
       <Layout title="智能匹配">
@@ -531,7 +536,7 @@ class MatchStep6 extends React.Component {
         </Wrapper>
         <div className='btn' style={{marginTop:30}}>
           <FormItem>
-              <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
+              <NextButton variant="raised" color="primary" type="primary"  disabled={this.state.disabled || this.hasErrors(getFieldsError()) }>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>

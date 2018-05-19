@@ -2,25 +2,33 @@ import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import styled from 'styled-components'
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import md5 from 'blueimp-md5'
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Snackbar from 'material-ui/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from "material-ui/Dialog";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+
 import Layout from '../layout/Blanklayout';
 import withRoot from '../src/withRoot';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import { getCaptcha, register } from '../services/invatation'
 import SimpleSnackbar from '../components/Snackbars'
 const styles = theme => ({
@@ -36,9 +44,10 @@ const styles = theme => ({
   },
   card: {
     minWidth: 275,
-    marginTop: theme.spacing.unit,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginTop: 30 * theme.spacing.unit,
+    marginLeft: 3 * theme.spacing.unit,
+    marginRight:3 * theme.spacing.unit,
+
   },
   menu: {
     width: 200,
@@ -51,19 +60,28 @@ const styles = theme => ({
     margin:'0 auto',
   }
 });
+const Wrapper = styled.div`
+  background: url(static/invatation.jpg);
+  background-size: cover;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+`
+
 const GetCaptcha = styled(Button)`
-  ${'' /* background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); */}
-  ${'' /* border-radius: 3px; */}
   border: 0;
   color: white;
   height: 20px;
-  ${'' /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .30); */}
 `;
 const Title = styled.div`
   text-align: center;
   margin-top: 10px;
 `
-class Wanted extends React.PureComponent {
+class Invatation extends React.PureComponent {
   static async getInitialProps ({ query }) {
     // eslint-disable-next-line no-undef
     return { query: query }
@@ -150,7 +168,12 @@ class Wanted extends React.PureComponent {
   submit = e =>{
     e.preventDefault();
     console.log(this.state)
-    register(this.state).then(res => {
+    console.log(md5(123))
+    const data = {
+      ...this.state,
+      loginPassord: md5(this.state.loginPassord + 'leoansReview')
+    }
+    register(data).then(res => {
       if(res.code ==0){
         this.handleDialogClick();
 
@@ -168,6 +191,7 @@ class Wanted extends React.PureComponent {
     const { count } = this.state;
     return (
       <Layout title="邀请好友">
+        <Wrapper>
         <Card className={classes.card}>
         <Title>您的好友 {this.state.userName}</Title>
         <Title>诚挚邀请您成为正式经纪人</Title>
@@ -284,9 +308,10 @@ class Wanted extends React.PureComponent {
             ]}
           />
         </div>
+        </Wrapper>
       </Layout>
     )
   }
 }
 
-export default withRoot(withStyles(styles)(Wanted));
+export default withRoot(withStyles(styles)(Invatation));

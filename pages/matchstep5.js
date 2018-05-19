@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import { Radio, Form } from 'antd';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';

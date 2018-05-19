@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React from 'react'
 import styled from 'styled-components'
 import Layout from '../layout/layout'
-import Icon from 'material-ui/Icon'
+import Icon from '@material-ui/core/Icon'
 
 const iconStyles = {
   color: '#c4c4c4',

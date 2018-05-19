@@ -90,7 +90,9 @@ function * sendDataSaga (action) {
     if (res.code ==0) {
       yield put(cleanData())
     }
-    window.webkit.messageHandlers.getMatchResult.postMessage(res.data)
+    navigator.userAgent.match(/iPhone|iPad|iPod/i)
+      ? window.webkit.messageHandlers.getMatchResult.postMessage(res.data)
+      : window.androidRef.notifyMatchResult(res.data.matchNo);
   } catch (err) {
     yield put(failure(err))
   }

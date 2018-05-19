@@ -1,11 +1,11 @@
-import request from '../lib/request';
 import qs from 'qs';
+import request from '../lib/request';
 export async function getCaptcha(params) {
-  return request(`http://ad.ibankmatch.com:8611/app/getCheckCode?${qs.stringify(params)}`);
+  return request(`/app/getCheckCode?${qs.stringify(params)}`);
 }
 
 export async function register(params) {
-  return request('http://ad.ibankmatch.com:8611/app/regist', {
+  return request(`/app/regist`, {
     method: 'POST',
     body: {
       ...params,

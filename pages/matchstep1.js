@@ -3,11 +3,12 @@ import Link from 'next/link'
 import Router from 'next/router'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { Radio, Form } from 'antd';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import {  withStyles } from 'material-ui/styles';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import {  withStyles } from '@material-ui/core/styles';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';
 import {withReduxSaga} from '../redux/store'
@@ -125,7 +126,7 @@ class MatchStep1 extends React.Component {
                   id="name"
                   className={classes.textField}
                   inputProps={{
-                    maxlength: '10',
+                    maxLength: '10',
                     pattern:'[\u4e00-\u9fa5|a-zA-Z]*',
                     title:"请输入中文或英文字符"
                   }}

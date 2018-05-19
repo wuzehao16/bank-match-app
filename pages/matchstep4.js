@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { Radio, Form } from 'antd';
 import Layout from '../layout/layout';
 import Topbar from '../components/Topbar';

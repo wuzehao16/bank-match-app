@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Layout from '../layout/Blanklayout';
 import withRoot from '../src/withRoot'
 
@@ -38,12 +38,27 @@ class Download extends React.PureComponent {
           <img src="/static/logo.png" style={{width:120,height:120,display:'block',margin:'60px auto 15px'}}/>
           <h1 style={{color:'#646464',fontSize:'24px',textAlign:'center',marginTop:'50px'}}>众银云测</h1>
           <Divider style={{marginTop:'30px',width:'200px',margin: '30px auto'}}/>
-          <h2 style={{color:'#cacaca',fontSize:'16px',textAlign:'center',marginTop:30}}>V1.0.0</h2>
+          <h2 style={{color:'#cacaca',fontSize:'16px',textAlign:'center',marginTop:30}}>V1.0.0
+            <div>
+              首次下载完成后请前往【设置】
+            </div>
+            <div>>点击【通用】</div>
+            <div>>点击【描述文件与设备管理】</div>
+            <div>>点击企业级应用的【TOP LTD TOV】</div>
+            <div>>点击【信任TOP LTD TOV】</div>
+          </h2>
 
           <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href="itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist">
           <Button className={classes.button}>下载</Button>
           </a>
         </Wrapper>
+        <style jsx>{`
+          h2{
+            font-weight:400;
+            width:300px;
+            margin:0 auto;
+          }
+        `}</style>
       </Layout>
     )
   }

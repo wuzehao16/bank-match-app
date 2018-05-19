@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import SwipeableViews from 'react-swipeable-views';
-import AppBar from 'material-ui/AppBar';
-import Input from 'material-ui/Input'
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Input from '@material-ui/core/Input'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
 import withRoot from '../src/withRoot';
 import { Form } from 'antd';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import {calculatorfetch} from '../services/calculatorfetch'
 import styled from 'styled-components'
 // import Layout from '../layout/Blanklayout'
@@ -106,13 +107,13 @@ const styles = theme => ({
 });
 
 class Calculator extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      loandata:{
-        dataList:[]
+      loandata: {
+        dataList: []
       },
-      cal:{
+      cal: {
         loanmethod: 0,
         repaymentMethod: 0
       }
@@ -120,253 +121,317 @@ class Calculator extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.state.loandata = {dataList:[]};
-    this.setState({ cal:{loanmethod: value,repaymentMethod:0,CommercialPrincipal:'',months:'',commercialRate:'',accumulationRate:'',publicPrincipal:''}});
+    this.state.loandata = {
+      dataList: []
+    };
+    this.setState({
+      cal: {
+        loanmethod: value,
+        repaymentMethod: 0,
+        CommercialPrincipal: '',
+        months: '',
+        commercialRate: '',
+        accumulationRate: '',
+        publicPrincipal: ''
+      }
+    });
   };
 
   handleChangeIndex = index => {
-    this.state.loandata = {dataList:[]};
-    this.setState({ cal:{loanmethod: index,repaymentMethod:0,CommercialPrincipal:'',months:'',commercialRate:'',accumulationRate:'',publicPrincipal:''}});
+    this.state.loandata = {
+      dataList: []
+    };
+    this.setState({
+      cal: {
+        loanmethod: index,
+        repaymentMethod: 0,
+        CommercialPrincipal: '',
+        months: '',
+        commercialRate: '',
+        accumulationRate: '',
+        publicPrincipal: ''
+      }
+    });
   };
 
-  handleValueChange = name =>event =>{
+  handleValueChange = name => event => {
     this.setState({
-      cal:{
+      cal: {
         ...this.state.cal,
-      [name]: event.target.value,
+        [name]: event.target.value
       }
     });
     console.log(this.state);
   }
-
+  async fetch(data) {
+    const res = await calculatorfetch({
+      ...this.state.cal,
+      ...data
+    })
+    const loandata = res.data;
+    this.setState({loandata: loandata})
+  }
   submit = data => e => {
     e.preventDefault();
     this.setState({
-      cal:{
+      cal: {
         ...this.state.cal,
         ...data
       }
     });
+    this.fetch(data)
+  }
 
-    calculatorfetch(
-      {
-      ...this.state.cal,
-      ...data
-    }
-  ).then(response => {
-      const loandata = response.data;
-      this.setState({
-        loandata:loandata
-      })
-      console.log(this.state);
-      console.log(loandata);
-    });
-  }
-  changeMethod = (v) =>{
-    console.log(v)
-  }
   render() {
-    const { classes, theme } = this.props;
+    const {classes, theme} = this.props;
     const {getFieldDecorator} = this.props.form;
     console.log(this.state)
-    return (
-      <Layout title = '房贷计算器' className={classes.root}>
-          <AppBar position="static" color="default">
-            <Tabs
-              value={this.state.cal.loanmethod}
-              onChange={this.handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              fullWidth
-            >
-              <Tab label="商业贷款"/>
-              <Tab label="公积金贷款"/>
-              <Tab label="组合贷款"/>
-            </Tabs>
-          </AppBar>
-          <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={this.state.cal.loanmethod}
-            onChangeIndex={this.handleChangeIndex}
-          >
-            <TabContainer dir={theme.direction}>
-              <form className="inputList" >
-                  <div className="forminput">
-                    <label>商贷金额</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/> 
-                      <span>万元</span>
-                    </div>
+    return (<Layout title='房贷计算器' className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs value={this.state.cal.loanmethod} onChange={this.handleChange} indicatorColor="primary" textColor="primary" fullWidth="fullWidth">
+          <Tab label="商业贷款"/>
+          <Tab label="公积金贷款"/>
+          <Tab label="组合贷款"/>
+        </Tabs>
+      </AppBar>
+      <SwipeableViews axis={theme.direction === 'rtl'
+          ? 'x-reverse'
+          : 'x'} index={this.state.cal.loanmethod} onChangeIndex={this.handleChangeIndex}>
+        <TabContainer dir={theme.direction}>
+          <form className="inputList">
+            <div className="forminput">
+              <label>商贷金额</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款金额" type="number" required="required" min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
+                <span>万元</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>商贷期限</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款期限" type="number" required="required" min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
+                <span>月</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>贷款利率</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款利率" type="number" step={0.01} required="required" min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
+                <span>%</span>
+              </div>
+            </div>
+            <div style={{
+                display: 'flex'
+              }}>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 0
+                  ? true
+                  : false} onClick={this.submit({repaymentMethod: 0})} style={{
+                  flex: 1,
+                  marginRight: 12.5
+                }}>等额本息</SubmitButton>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 1
+                  ? true
+                  : false} onClick={this.submit({repaymentMethod: 1})} style={{
+                  flex: 1,
+                  marginLeft: 12.5
+                }}>等额本金</SubmitButton>
+            </div>
+          </form>
+          {
+            this.state.loandata.dataList.length > 0
+              ? <div className="details">
+                  <div className="listname">{
+                      this.state.cal.repaymentMethod === 0
+                        ? "[等额本息]"
+                        : "[等额本金]"
+                    }计算结果</div>
+                  <div className="calculatorresult">
+                    <CalculatorResult content={this.state.loandata}/>
                   </div>
-                  <div className="forminput">
-                    <label>商贷期限</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款期限" type="number" required  min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
-                      <span>月</span>
+                  <div className="paydetails">
+                    <div className="listname" style={{
+                        marginTop: '10px'
+                      }}>还款明细</div>
+                    <div className="paydetaillist">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>期数</td>
+                            <td>本金(元)</td>
+                            <td>利息(元)</td>
+                            <td>剩余本金(元)</td>
+                          </tr>
+                        </thead>
+                        <Reimbursement content={this.state.loandata}/>
+                      </table>
                     </div>
-                  </div>
-                  <div  className="forminput">
-                    <label>贷款利率</label>
-                    <div className="inputright">
-                      <input placeholder="请输入贷款利率" type="number" step={0.01} required min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
-                      <span>%</span>
-                    </div>
-                  </div>
-                <div style={{display:'flex'}}>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} onClick={this.submit({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false}  onClick={this.submit({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
-                </div>
-              </form>
-              {
-                this.state.loandata.dataList.length > 0 ?
-                  <div className="details" >
-                    <div className="listname">{this.state.cal.repaymentMethod === 0 ? "[等额本息]" : "[等额本金]"}计算结果</div>
-                    <div className="calculatorresult">
-                      <CalculatorResult content={this.state.loandata}/>
-                    </div>
-                    <div className="paydetails">
-                      <div className="listname" style={{marginTop:'10px'}}>还款明细</div>
-                      <div className="paydetaillist">
-                        <table>
-                          <thead>
-                            <tr>
-                              <td>期数</td>
-                              <td>本金(元)</td>
-                              <td>利息(元)</td>
-                              <td>剩余本金(元)</td>
-                            </tr>
-                          </thead>
-                          <Reimbursement content={this.state.loandata}/>
-                        </table>
-                      </div>
 
+                  </div>
+                </div>
+              : null
+          }
+        </TabContainer>
+        <TabContainer dir={theme.direction}>
+          <form className="inputList">
+            <div className="forminput">
+              <label>公积金贷款金额</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款金额" type="number" required="required" min={0} value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
+                <span>万元</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>公积金贷款期限</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款期限" type="number" required="required" min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
+                <span>月</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>公积金贷款利率</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款利率" step={0.01} type="number" required="required" min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
+                <span>%</span>
+              </div>
+            </div>
+            <div style={{
+                display: 'flex'
+              }}>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 0
+                  ? true
+                  : false} type='submit' onClick={this.submit({repaymentMethod: 0})} style={{
+                  flex: 1,
+                  marginRight: 12.5
+                }}>等额本息</SubmitButton>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 1
+                  ? true
+                  : false} type='submit' onClick={this.submit({repaymentMethod: 1})} style={{
+                  flex: 1,
+                  marginLeft: 12.5
+                }}>等额本金</SubmitButton>
+            </div>
+          </form>
+          {
+            this.state.loandata.dataList.length > 0
+              ? <div className="details">
+                  <div className="listname">{
+                      this.state.cal.repaymentMethod === 0
+                        ? "[等额本息]"
+                        : "[等额本金]"
+                    }计算结果</div>
+                  <div className="calculatorresult">
+                    <CalculatorResult content={this.state.loandata}/>
+                  </div>
+                  <div className="paydetails">
+                    <div className="listname" style={{
+                        marginTop: '10px'
+                      }}>还款明细</div>
+                    <div className="paydetaillist">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>期数</td>
+                            <td>本金(元)</td>
+                            <td>利息(元)</td>
+                            <td>剩余本金(元)</td>
+                          </tr>
+                        </thead>
+                        <Reimbursement content={this.state.loandata}/>
+                      </table>
                     </div>
-                  </div>: null
-              }
-            </TabContainer>
-            <TabContainer dir={theme.direction}>
-              <form  className="inputList">
-                <div className="forminput">
-                  <label>公积金贷款金额</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款金额" type="number" required  min={0} value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
-                    <span>万元</span>
                   </div>
                 </div>
-                <div className="forminput">
-                  <label>公积金贷款期限</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款期限"  type="number" required  min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
-                    <span>月</span>
+              : null
+          }
+        </TabContainer>
+        <TabContainer dir={theme.direction}>
+          <form className="inputList">
+            <div className="forminput">
+              <label>商贷金额</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款金额" type="number" required="required" min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
+                <span>万元</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>商业贷款利率</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款利率" step={0.01} type="number" required="required" min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
+                <span>%</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>公积金贷款金额</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款金额" type="number" required="required" min={0} value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
+                <span>万元</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>公积金贷款利率</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款利率" step={0.01} type="number" required="required" min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
+                <span>%</span>
+              </div>
+            </div>
+            <div className="forminput">
+              <label>贷款期限</label>
+              <div className="inputright">
+                <input placeholder="请输入贷款期限" type="number" required="required" min={0} value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
+                <span>月</span>
+              </div>
+            </div>
+            <div style={{
+                display: 'flex'
+              }}>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 0
+                  ? true
+                  : false} type='submit' onClick={this.submit({repaymentMethod: 0})} style={{
+                  flex: 1,
+                  marginRight: 12.5
+                }}>等额本息</SubmitButton>
+              <SubmitButton primary={this.state.cal.repaymentMethod == 1
+                  ? true
+                  : false} type='submit' onClick={this.submit({repaymentMethod: 1})} style={{
+                  flex: 1,
+                  marginLeft: 12.5
+                }}>等额本金</SubmitButton>
+            </div>
+          </form>
+          {
+            this.state.loandata.dataList.length > 0
+              ? <div className="details">
+                  <div className="listname">{
+                      this.state.cal.repaymentMethod === 0
+                        ? "[等额本息]"
+                        : "[等额本金]"
+                    }计算结果</div>
+                  <div className="calculatorresult">
+                    <CalculatorResult content={this.state.loandata}/>
                   </div>
-                </div>
-                <div className="forminput">
-                  <label>公积金贷款利率</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款利率"  step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
-                    <span>%</span>
-                  </div>
-                </div>
-                <div style={{display:'flex'}}>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type='submit' onClick={this.submit({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false} type='submit' onClick={this.submit({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
-                </div>
-              </form>
-              {
-                this.state.loandata.dataList.length > 0 ?
-                  <div className="details" >
-                    <div className="listname">{this.state.cal.repaymentMethod === 0 ? "[等额本息]" : "[等额本金]"}计算结果</div>
-                    <div className="calculatorresult">
-                      <CalculatorResult content={this.state.loandata}/>
+                  <div className="paydetails">
+                    <div className="listname" style={{
+                        marginTop: '10px'
+                      }}>还款明细</div>
+                    <div className="paydetaillist">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>期数</td>
+                            <td>本金(元)</td>
+                            <td>利息(元)</td>
+                            <td>剩余本金(元)</td>
+                          </tr>
+                        </thead>
+                        <Reimbursement content={this.state.loandata}/>
+                      </table>
                     </div>
-                    <div className="paydetails">
-                      <div className="listname" style={{marginTop:'10px'}}>还款明细</div>
-                      <div className="paydetaillist">
-                        <table>
-                          <thead>
-                            <tr>
-                              <td>期数</td>
-                              <td>本金(元)</td>
-                              <td>利息(元)</td>
-                              <td>剩余本金(元)</td>
-                            </tr>
-                          </thead>
-                          <Reimbursement content={this.state.loandata}/>
-                        </table>
-                      </div>
-                    </div>
-                  </div>: null
-              }
-            </TabContainer>
-            <TabContainer dir={theme.direction}>
-              <form  className="inputList">
-                <div className="forminput">
-                  <label>商贷金额</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款金额"  type="number" required  min={0} value={this.state.cal.CommercialPrincipal} onChange={this.handleValueChange('CommercialPrincipal')}/>
-                    <span>万元</span>
                   </div>
                 </div>
-                <div className="forminput">
-                  <label>商业贷款利率</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.commercialRate} onChange={this.handleValueChange('commercialRate')}/>
-                    <span>%</span>
-                  </div>
-                </div>
-                <div className="forminput">
-                  <label>公积金贷款金额</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款金额"  type="number" required  min={0}  value={this.state.cal.publicPrincipal} onChange={this.handleValueChange('publicPrincipal')}/>
-                    <span>万元</span>
-                  </div>
-                </div>
-                <div className="forminput">
-                  <label>公积金贷款利率</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款利率" step={0.01} type="number" required  min={0} max={100} value={this.state.cal.accumulationRate} onChange={this.handleValueChange('accumulationRate')}/>
-                    <span>%</span>
-                  </div>
-                </div>
-                <div className="forminput">
-                  <label>贷款期限</label>
-                  <div className="inputright">
-                    <input placeholder="请输入贷款期限"  type="number" required  min={0}  value={this.state.cal.months} onChange={this.handleValueChange('months')}/>
-                    <span>月</span>
-                  </div>
-                </div>
-                <div style={{display:'flex'}}>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==0?true:false} type='submit' onClick={this.submit({repaymentMethod:0})} style={{flex:1,marginRight:12.5}}>等额本息</SubmitButton>
-                  <SubmitButton primary={this.state.cal.repaymentMethod==1?true:false} type='submit' onClick={this.submit({repaymentMethod:1})} style={{flex:1,marginLeft:12.5}}>等额本金</SubmitButton>
-                </div>
-              </form>
-              {
-                this.state.loandata.dataList.length > 0 ?
-                  <div className="details" >
-                    <div className="listname">{this.state.cal.repaymentMethod === 0 ? "[等额本息]" : "[等额本金]"}计算结果</div>
-                    <div className="calculatorresult">
-                      <CalculatorResult content={this.state.loandata}/>
-                    </div>
-                    <div className="paydetails">
-                      <div className="listname" style={{marginTop:'10px'}}>还款明细</div>
-                      <div className="paydetaillist">
-                        <table>
-                          <thead>
-                            <tr>
-                              <td>期数</td>
-                              <td>本金(元)</td>
-                              <td>利息(元)</td>
-                              <td>剩余本金(元)</td>
-                            </tr>
-                          </thead>
-                          <Reimbursement content={this.state.loandata}/>
-                        </table>
-                      </div>
-                    </div>
-                  </div>: null
-              }
-            </TabContainer>
-          </SwipeableViews>
+              : null
+          }
+        </TabContainer>
+      </SwipeableViews>
 
           <style jsx>{`
             body,html {

@@ -6,7 +6,6 @@ export default ({ children, title = '产品详情' }) => (
     <Head>
       <title>{ title }</title>
       <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' />
       <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
     </Head>
     {/* <header>

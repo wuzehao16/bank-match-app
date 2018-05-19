@@ -23,10 +23,22 @@ class Thing extends React.Component {
       }
     })
   };
+  async componentDidMount() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/static/manifest/service-worker.js")
+        .then(registration => {
+          console.log("service worker registration successful");
+        })
+        .catch(err => {
+          console.warn("service worker registration failed");
+        });
+    }
+  }
   render() {
     return (
       <SomeContext.Provider value={this.state.context}>
-        {this.props.children}
+        hello there
       </SomeContext.Provider>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Layout from '../layout/Blanklayout';
 import Nprogress from '../components/Nprogress'
 import fetch from '../lib/fetch'
@@ -103,23 +103,30 @@ const NextButton = styled(Button)`
   border-radius: 4px;
 `
 class MatchBegin extends React.Component {
-  // static async getInitialProps({query}) {
-	// 	return {
-	// 		item: await fetch(`/item/${query.id}`)
-	// 	}
-	// }
   state = {
     name: '',
     disabled: 'true',
   };
+
+  async componentDidMount() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/static/manifest/service-worker.js")
+        .then(registration => {
+          console.log("service worker registration successful");
+        })
+        .catch(err => {
+          console.warn("service worker registration failed");
+        });
+    }
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
-  // toMatchList = () => {
-  //   window.webkit.messageHandlers.gotoMatchHistory.postMessage({});
-  // }
+
 
   render () {
     const { classes } = this.props;
