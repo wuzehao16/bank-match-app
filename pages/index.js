@@ -38,7 +38,9 @@ class Thing extends React.Component {
   render() {
     return (
       <SomeContext.Provider value={this.state.context}>
-        hello there
+        <div style={{fontSize:'0.14rem'}}>
+          ggg
+        </div>
       </SomeContext.Provider>
     )
   }
