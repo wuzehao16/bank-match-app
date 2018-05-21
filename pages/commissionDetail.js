@@ -65,7 +65,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.res.data || [],
+      data: this.props.res || [],
       refreshing: false,
       params: {
         page: 0

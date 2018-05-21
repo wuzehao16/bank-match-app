@@ -12,6 +12,8 @@
     "@material-ui/icons": "^1.0.0-beta.43",
     "@zeit/next-css": "^0.1.5",
     "antd": "^3.3.1",
+    "antd-mobile": "^2.1.8",
+    "babel-plugin-import": "^1.7.0",
     "babel-plugin-styled-components": "^1.1.5",
     "blueimp-md5": "^2.10.0",
     "es6-promise": "4.1.1",
@@ -36,10 +38,12 @@
     "react-swipeable-views": "^0.12.13",
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
+    "require-hacker": "^3.0.1",
     "rmc-pull-to-refresh": "^1.0.7",
     "rmc-steps": "^1.0.0",
     "socket.io-client": "^2.1.1",
-    "styled-components": "^2.1.0"
+    "styled-components": "^2.1.0",
+    "svg-sprite-loader": "^3.7.3"
   },
   "devDependencies": {
     "redux-devtools-extension": "2.13.2"

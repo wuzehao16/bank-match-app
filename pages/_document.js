@@ -27,7 +27,9 @@ class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="manifest" href="/static/manifest/manifest.json" />
+          {/* <script src='/static/hd.min.js' /> */}
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel='stylesheet' type='text/css' href='//unpkg.com/antd-mobile/dist/antd-mobile.min.css' />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"

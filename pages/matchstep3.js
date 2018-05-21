@@ -19,6 +19,7 @@ const RadioGroup = Radio.Group;
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
+    margin-bottom: 50px;
 `
 const Container = styled.div`
   padding: 19px 0;
@@ -60,7 +61,6 @@ const Help = styled.div`
   position: absolute;
   bottom: 1px;
   left: 0px;
-  z-index: 10;
   font-size: 10px;
 `
 const Red = styled.span`
@@ -80,7 +80,7 @@ const Relative = styled.div`
   justify-content: space-between;
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
@@ -643,6 +643,7 @@ class MatchStep3 extends React.Component {
       </Layout>
       <style jsx>{`
         input{
+         outline:none;
          border-color: #878787;
          border-style: solid;
          border-radius:0;
