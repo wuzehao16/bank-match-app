@@ -61,15 +61,15 @@ const InfoRight = styled.div`
   position:relative;
   font-size: 12px;
   @media (min-width:320px) {
-    padding: 27px 0 0 2px;
+    padding: 27px 0 0 0px;
     font-size: 11px;
   }
   @media(min-width: 360px) {
-    padding: 27px 0 0 2px;
+    padding: 27px 0 0 0px;
     font-size: 12px;
   }
   @media (min-width:375px) {
-    padding: 27px 0 0 4px;
+    padding: 27px 0 0 0px;
     font-size: 13px;
   }
   @media (min-width:414px) {
