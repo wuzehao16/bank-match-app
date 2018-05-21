@@ -54,7 +54,7 @@ const Contain = styled.div`
   padding-bottom: 20px;
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
@@ -204,12 +204,16 @@ class MatchStep1 extends React.Component {
             </FormItem>
           </Contain>
         </Wrapper>
-        <div className='btn' style={{marginTop:0,paddingTop:30,background:'#f2f2f2'}}>
+        <div className='btn' >
           <FormItem>
               <NextButton variant="raised" color="primary" type="primary" htmltype="submit" disabled={this.hasErrors(getFieldsError())}>下一步</NextButton>
           </FormItem>
         </div>
       </Layout>
+      <style jsx>{`
+
+      `}
+      </style>
       </Form>
     )
   }

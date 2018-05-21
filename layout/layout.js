@@ -97,9 +97,12 @@ export default ({ children, title = '智能匹配' }) => (
         opacity:0;
       }
       .btn{
-        margin-top: 75px;
         text-align: center;
-        padding-bottom: 30px;
+        background:#e4e4e4;
+        padding:5px 15px;
+        width:100%;
+        position:fixed;
+        bottom:0;
       }
       p{
         font-size:16px;

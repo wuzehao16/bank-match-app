@@ -36,6 +36,7 @@ const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
   font-size:16px;
+  margin-bottom: 50px;
   @media (min-width:320px) {
     font-size: 14px;
   }
@@ -86,7 +87,6 @@ const Help = styled.div`
   position: absolute;
   bottom: 1px;
   left: 0px;
-  z-index: 10;
   font-size: 10px;
 `
 const Red = styled.span`
@@ -103,7 +103,7 @@ const DoubleInput = styled.div`
   justify-content: space-between; */}
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
@@ -523,6 +523,7 @@ class MatchStep4 extends React.Component {
       </Layout>
       <style jsx>{`
         input{
+         outline:none;
          border-color: #878787;
          border-style: solid;
          border-radius:0;

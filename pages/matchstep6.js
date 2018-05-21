@@ -32,6 +32,7 @@ const styles = theme => ({
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
+  margin-bottom: 50px;
 `
 const Container = styled.div`
   padding: 19px 0;
@@ -73,7 +74,6 @@ const Help = styled.div`
   position: absolute;
   bottom: 1px;
   left: 0px;
-  z-index: 10;
   font-size: 10px;
 `
 const Red = styled.span`
@@ -99,7 +99,7 @@ const Relative = styled.div`
   justify-content: space-between;
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
@@ -536,12 +536,13 @@ class MatchStep6 extends React.Component {
         </Wrapper>
         <div className='btn' style={{marginTop:30}}>
           <FormItem>
-              <NextButton variant="raised" color="primary" type="primary"  disabled={this.state.disabled || this.hasErrors(getFieldsError()) }>下一步</NextButton>
+              <NextButton variant="raised" color="primary" type="primary"  disabled={this.state.disabled || this.hasErrors(getFieldsError()) }>生成报告</NextButton>
           </FormItem>
         </div>
       </Layout>
       <style jsx>{`
         input{
+         outline:none;
          border-color: #878787;
          border-style: solid;
          border-radius:0;

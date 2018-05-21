@@ -16,6 +16,7 @@ const RadioGroup = Radio.Group;
 
 const Wrapper = styled.div`
   padding: 0 15px;
+  margin-bottom: 40px;
   background: #fff;
 `
 const Container = styled.div`
@@ -38,7 +39,7 @@ const Title = styled.div`
   padding: 0 15px;
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
@@ -56,6 +57,11 @@ const SubContainTitle = styled.div`
 `
 const Br = styled.div`
   height: 10px;
+`
+const Relative = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 `
 class MatchStep2 extends React.Component {
   static async getInitialProps({store}) {
@@ -144,27 +150,29 @@ class MatchStep2 extends React.Component {
           {
             (getFieldValue('age') ===0||getFieldValue('age') ===1||getFieldValue('age') ===3)
               ?           <SubContain>
-                            <div
+                            <Relative
                               style={{position:'relative',color:'#646464'}}
                               >
                               <span>具体年龄</span>
-                            <FormItem
-                              style={{display:"inline-block"}}
-                              validateStatus={specificAgeError ? 'error' : ''}
-                              help={specificAgeError || ''}
-                              >
-                              {getFieldDecorator('specificAge', {
-                                initialValue:item.specificAge,
-                                rules: [{
-                                   required: true,
-                                   message:'请输入具体年龄'
-                                }],
-                              })(
-                                  <input  type="number" min={0} max={100} style={{width:60}}/>
-                              )}
-                            </FormItem>
-                              <span>岁</span>
-                            </div>
+                              <span>
+                                <FormItem
+                                  style={{display:"inline-block"}}
+                                  validateStatus={specificAgeError ? 'error' : ''}
+                                  help={specificAgeError || ''}
+                                  >
+                                  {getFieldDecorator('specificAge', {
+                                    initialValue:item.specificAge,
+                                    rules: [{
+                                       required: true,
+                                       message:'请输入具体年龄'
+                                    }],
+                                  })(
+                                      <input  type="number" min={0} max={100} style={{width:60}}/>
+                                  )}
+                                </FormItem>
+                                  <span>岁</span>
+                              </span>
+                            </Relative>
                         </SubContain> : null
           }
 
@@ -608,12 +616,13 @@ class MatchStep2 extends React.Component {
           color: #fff;
         }
         input{
+         outline:none;
          border-color: #878787;
          border-style: solid;
          border-radius:0;
          border-top-width: 0px;
          border-right-width: 0px;
-         border-bottom-width: 1px;
+         border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
         }
