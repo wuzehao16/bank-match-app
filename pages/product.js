@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import Steps, { Step } from 'rmc-steps';
 import 'isomorphic-unfetch';
 import Layout from '../layout/Elayout';
-import '../styles/iconfont.css';
-import stylesheet from '../styles/index.css';
+import  '../styles/rmc-steps.css';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie'
 const Pd = styled.div`
@@ -391,7 +390,7 @@ class ProductDetail extends React.PureComponent {
                           product.applyFlow.split(',').map(v => {
                             if (v=="") return
                             return(
-                                <Step title={v}  />
+                                <Step key={v} title={v}  />
                             )
                           })
                         }
@@ -438,7 +437,7 @@ class ProductDetail extends React.PureComponent {
             display:flex;
           }
           .after {
-            margin-left: -18px;
+            margin-left: -15px;
             vertical-align: middle;
             font-size:12px;
             display: inline-block;
