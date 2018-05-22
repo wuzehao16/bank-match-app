@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
   font-size:16px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   @media (min-width:320px) {
     font-size: 14px;
   }

@@ -16,7 +16,7 @@ const RadioGroup = Radio.Group;
 
 const Wrapper = styled.div`
   padding: 0 15px;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
   background: #fff;
 `
 const Container = styled.div`
