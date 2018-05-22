@@ -3,8 +3,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
 import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import "../styles/index.css"
 import { Form } from 'antd';
-
 const FormItem = Form.Item;
 const Item = List.Item;
 const sex =[
@@ -17,6 +17,17 @@ const sex =[
     value:'1'
   },
 ]
+const jobStatus =[
+  {
+    label:'离职',
+    value:'0'
+  },
+  {
+    label:'在职',
+    value:'1'
+  },
+]
+
 class BaseInformation extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error) => {
@@ -33,9 +44,6 @@ class BaseInformation extends React.PureComponent {
       <Layout>
         <WhiteSpace/>
         <List >
-          {/* <Item
-            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
-            > */}
           <InputItem
             {...getFieldProps('name')}
             clear
@@ -55,20 +63,12 @@ class BaseInformation extends React.PureComponent {
         <WhiteSpace/>
 
         <List>
-         <InputItem
-           {...getFieldProps('education')}
-           clear
-           placeholder="请填入最高学历"
-         >
-           最高学历
-         </InputItem>
-         <InputItem
-           {...getFieldProps('autofocus')}
-           clear
-           placeholder="请填入工作年限"
-         >
-           工作年限
-         </InputItem>
+          <Picker data={sex} cols={1} {...getFieldProps('education')} className="forss">
+            <List.Item arrow="horizontal">最高学历</List.Item>
+          </Picker>
+          <Picker data={jobStatus} cols={1} {...getFieldProps('workingYear')} className="forss">
+            <List.Item arrow="horizontal">工作年限</List.Item>
+          </Picker>
        </List>
        <WhiteSpace/>
        <List>
@@ -89,10 +89,10 @@ class BaseInformation extends React.PureComponent {
       </List>
       <WhiteSpace/>
       <List>
-        <Picker data={sex} cols={1} {...getFieldProps('birthday')} className="forss">
+        <Picker data={sex} cols={1} {...getFieldProps('city')} className="forss">
           <List.Item arrow="horizontal">所在城市</List.Item>
         </Picker>
-        <Picker data={sex} cols={1} {...getFieldProps('birthday')} className="forss">
+        <Picker data={jobStatus} cols={1} {...getFieldProps('jobStatus')} className="forss">
           <List.Item arrow="horizontal">在职状态</List.Item>
         </Picker>
       </List>
