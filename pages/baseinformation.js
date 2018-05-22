@@ -37,10 +37,9 @@ class BaseInformation extends React.PureComponent {
             thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             > */}
           <InputItem
-            {...getFieldProps('autofocus')}
+            {...getFieldProps('name')}
             clear
             placeholder="最好使用真实姓名"
-            ref={el => this.autoFocusInst = el}
           >
             姓名
           </InputItem>
@@ -49,7 +48,7 @@ class BaseInformation extends React.PureComponent {
           <Picker data={sex} cols={1} {...getFieldProps('sex')} className="forss">
             <List.Item arrow="horizontal">性别</List.Item>
           </Picker>
-          <Picker data={sex} cols={1} {...getFieldProps('birthday')} className="forss">
+          <Picker data={sex} cols={1} {...getFieldProps('birthYear')} className="forss">
             <List.Item arrow="horizontal">出生年份</List.Item>
           </Picker>
         </List>
@@ -57,44 +56,45 @@ class BaseInformation extends React.PureComponent {
 
         <List>
          <InputItem
-           {...getFieldProps('autofocus')}
+           {...getFieldProps('education')}
            clear
            placeholder="请填入最高学历"
-           ref={el => this.autoFocusInst = el}
          >
            最高学历
          </InputItem>
          <InputItem
            {...getFieldProps('autofocus')}
            clear
-           placeholder="请填入最高学历"
-           ref={el => this.autoFocusInst = el}
+           placeholder="请填入工作年限"
          >
-           最高学历
+           工作年限
          </InputItem>
        </List>
        <WhiteSpace/>
        <List>
         <InputItem
-          {...getFieldProps('autofocus')}
+          {...getFieldProps('phone')}
           clear
           placeholder="请填入电话号码"
-          ref={el => this.autoFocusInst = el}
         >
           电话号码
         </InputItem>
         <InputItem
-          {...getFieldProps('autofocus')}
+          {...getFieldProps('mail')}
           clear
           placeholder="请填入邮箱"
-          ref={el => this.autoFocusInst = el}
         >
           邮箱
         </InputItem>
       </List>
       <WhiteSpace/>
       <List>
-
+        <Picker data={sex} cols={1} {...getFieldProps('birthday')} className="forss">
+          <List.Item arrow="horizontal">所在城市</List.Item>
+        </Picker>
+        <Picker data={sex} cols={1} {...getFieldProps('birthday')} className="forss">
+          <List.Item arrow="horizontal">在职状态</List.Item>
+        </Picker>
       </List>
        <List.Item>
          <Button type="primary" size="small" inline onClick={this.onSubmit}>Submit</Button>
