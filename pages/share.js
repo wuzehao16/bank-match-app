@@ -37,7 +37,7 @@ class Share extends React.PureComponent {
   handleClick = () => {
     if(typeof window !== 'undefined'){
       navigator.userAgent.match(/iPhone|iPad|iPod/i) ? window.webkit.messageHandlers.inviteFriends.postMessage({})
-      : ''
+      : window.androidRef.notifyMatchResult()
     }
   }
   render() {
