@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Blanklayout';
-import '../styles/recruit-iconfont.css';
 
 class EducationExperience extends React.PureComponent {
   render() {
