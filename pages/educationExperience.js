@@ -1,13 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-<<<<<<< HEAD
 import Layout from '../layout/Nolayout';
 import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import { Form } from 'antd';
-=======
-import Layout from '../layout/Blanklayout';
->>>>>>> f2db322e173fe25d08c8b3769c81f944f54b0107
 
 const FormItem = Form.Item;
 const Item = List.Item;
@@ -143,7 +139,7 @@ class EducationExperience extends React.PureComponent {
           .am-list-item .am-input-label {
             color: #ee5648 !important;
             font-size: 14px !important;
-          }   
+          }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
           }
