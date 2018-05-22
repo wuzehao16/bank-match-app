@@ -32,7 +32,7 @@ const styles = theme => ({
 const Wrapper = styled.div`
   padding: 0 15px;
   background: #fff;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 `
 const Container = styled.div`
   padding: 19px 0;
