@@ -97,7 +97,7 @@ class BaseInformation extends React.PureComponent {
         </Picker>
       </List>
        <List.Item>
-         <Button type="primary" size="small" inline onClick={this.onSubmit}>Submit</Button>
+         <Button type="warning" size="small" inline onClick={this.onSubmit}>Submit</Button>
        </List.Item>
       </Layout>
     )

@@ -29,19 +29,19 @@ class Help extends React.PureComponent {
       <Layout title = '帮助中心' >
       <div className="helplist">
         <ul style={ulStyles}>
-          <Link href='/helpquestions'>
+          <a href='/helpquestions'>
             <Li>
               <span>常见问题</span>
 
               <Icon>chevron_right</Icon>
             </Li>
-          </Link>
-          <Link href='/contactus'>
+          </a>
+          <a href='/contactus'>
             <Li>
             <span>联系客服</span>
             <Icon>chevron_right</Icon>
             </Li>
-          </Link>
+          </a>
         </ul>
       </div>
         <style jsx global>{`

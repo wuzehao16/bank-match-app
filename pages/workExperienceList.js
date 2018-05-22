@@ -8,18 +8,7 @@ import { Form } from 'antd';
 const FormItem = Form.Item;
 const Item = List.Item;
 
-// const I = styled.i`
-//   font-size: 14px;
-//   color: #ee5648;
-// `
-
-const Span = styled.span`
-  font-size: 14px;
-  color: #666;
-  padding-left: 10px;
-`
-
-class Educations extends React.PureComponent {
+class WorkExperienceList extends React.PureComponent {
   add = () => {
   }
 
@@ -28,19 +17,19 @@ class Educations extends React.PureComponent {
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <Layout  title="教育经历">
+      <Layout  title="工作经历">
         <List>
         <WingBlank size="lg">
           <WhiteSpace size="lg" />
-          <Link href='/educationExperience'>
+          <Link href='/workExperience'>
             <Card>
               <Card.Header
                 title="2018.01-2018.05"
                 extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
               />
               <Card.Body>
-                <div className="school">西南民族大学</div>
-                <div className="major">信息管理与信息系统</div>
+                <div className="company">众银云测有限公司</div>
+                <div className="job">销售主管</div>
               </Card.Body>
             </Card>
           </Link>
@@ -50,7 +39,7 @@ class Educations extends React.PureComponent {
         <WhiteSpace/>
         
         <WingBlank>
-          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.add}>新增教育经历</Button><WhiteSpace />
+          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.add}>新增工作经历</Button><WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {
@@ -60,10 +49,10 @@ class Educations extends React.PureComponent {
           .am-list-item .am-input-control input {
             font-size: 14px !important;
           }
-          .school {
+          .company {
             margin: 0 0 10px 0;
           }
-          .major {
+          .job {
             color: #999;
           }
           .am-card-header {
@@ -76,5 +65,5 @@ class Educations extends React.PureComponent {
   }
 }
 
-const EducationsWapper = Form.create()(Educations);
-export default EducationsWapper;
+const WorkExperienceListWapper = Form.create()(WorkExperienceList);
+export default WorkExperienceListWapper;
