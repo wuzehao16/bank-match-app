@@ -210,10 +210,6 @@ class MatchStep1 extends React.Component {
           </FormItem>
         </div>
       </Layout>
-      <style jsx>{`
-
-      `}
-      </style>
       </Form>
     )
   }
