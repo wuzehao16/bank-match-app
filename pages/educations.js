@@ -1,35 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
-import { Card, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
+import Layout from '../layout/RecruitLayout';
+import { Card, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
 
-const Button = styled.button`
-  font-size: 14px;
-  color: #fff;
-  background: #ee5648;
-  border-radius: 3px;
-  height: 40px;
-  width: 100%;
-  margin: 50px 0 0 0;
-  border: none;
-`
-
-const Span = styled.span`
-  font-size: 14px;
-  color: #666;
-  padding-left: 10px;
-`
-
 class Educations extends React.PureComponent {
   add = () => {
-    // dispatch
   }
 
+  edit = () => {
+  }
   render() {
     const { getFieldProps } = this.props.form;
     return (
@@ -40,25 +24,24 @@ class Educations extends React.PureComponent {
             <Card>
               <Card.Header
                 title="2018.01-2018.05"
-                extra={<Link href='/educationExperience' style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</Link>}
+                extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
               />
               <Card.Body>
-                <div className="school">西南民族大学</div>
-                <div className="major">信息管理与信息系统</div>
+                <div className="school">杭州电子科技大学</div>
+                <div className="major">本科-信息管理与信息系统</div>
               </Card.Body>
             </Card>
           </Link>
-          <WhiteSpace size="lg" />
+          <WhiteSpace size="lg" /> 
         </WingBlank>
         <WhiteSpace/>
         
         <WingBlank>
-          <Button onClick={this.add}>新增教育经历</Button>
+          <Button type="primary" onClick={this.add} style={{marginTop:'50px',fontSize:'14px'}}>新增教育经历</Button>
           <WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {
-            color: #ee5648 !important;
             font-size: 14px !important;
           }   
           .am-list-item .am-input-control input {

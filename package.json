@@ -17,6 +17,7 @@
     "babel-plugin-styled-components": "^1.1.5",
     "babel-plugin-wrap-in-js": "^1.1.1",
     "blueimp-md5": "^2.10.0",
+    "dayjs": "^1.6.3",
     "es6-promise": "4.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "isomorphic-unfetch": "2.0.0",

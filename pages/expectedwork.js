@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
 import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
-import "../styles/index.css"
 import { Form } from 'antd';
+import Layout from '../layout/RecruitLayout';
+import "../styles/index.css"
+import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
 const FormItem = Form.Item;
 const Item = List.Item;
 
@@ -33,28 +35,41 @@ const job =[
     value:'3'
   }
 ]
-const city =[
-  {
-    label:'离职',
-    value:'0'
-  },
-  {
-    label:'在职',
-    value:'1'
-  },
-]
 const salary =[
-  {
-    label:'离职',
-    value:'0'
-  },
-  {
-    label:'在职',
-    value:'1'
-  },
-]
+  [
+    {
+      label: '1k',
+      value: '1',
+    },
+    {
+      label: '2k',
+      value: '2',
+    },
+  ],
+  [
+    {
+      label: '2k',
+      value: '2',
+    },
+    {
+      label: '3k',
+      value: '3',
+    },
+  ],
+];
 
 class ExpectedWork extends React.PureComponent {
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
+    const jobTitle = await fetch(`/selectByType?type=jobTitle`)
+    const city = await fetch(`/selectByType?type=city`)
+    return { dic: {
+                jobTitle:jobTitle,
+                city:city
+              }
+            }
+  }
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error) => {
       if (!error) {
@@ -64,24 +79,31 @@ class ExpectedWork extends React.PureComponent {
       }
     });
   }
+  handleChange = () => {
+    console.log(1)
+  }
   render() {
+    const {city ,jobTitle } = this.props.dic;
     const { getFieldProps } = this.props.form;
+    const jobTitleOption = jobTitle.map(i => {return {value:i.code, label:i.name}})
+    const cityOption = city.map(i => {return {value:i.code, label:i.name}})
+    console.log(cityOption)
     return (
       <Layout title="期望工作">
         <WhiteSpace/>
       <List>
-        <Picker data={job} cols={1} {...getFieldProps('city')} className="forss">
+        <Picker data={jobTitleOption} cols={1} {...getFieldProps('jobStatus')} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-city"/><Span>期望工作</Span></div>
           </List.Item>
         </Picker>
-        <Picker data={city} cols={1} {...getFieldProps('jobStatus')} className="forss">
+        <Picker data={cityOption} cols={1} {...getFieldProps('city')} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-incumbencyHr"/><Span>期望城市</Span></div>
           </List.Item>
         </Picker>
-        <Picker data={salary} cols={1} {...getFieldProps('jobStatus')} className="forss">
-          <List.Item arrow="horizontal">
+        <Picker cascade={false}  data={salary} onPickerChange={this.handleChange} onScrollChange={this.handleChange} onChange={this.handleChange} cols={1} {...getFieldProps('jobStatus')} className="forss">
+          <List.Item arrow="horizontal" >
             <div><I className="iconfont icon-incumbencyHr"/><Span>期望月薪</Span></div>
           </List.Item>
         </Picker>

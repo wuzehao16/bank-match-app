@@ -1,23 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
-import { Card, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
+import Layout from '../layout/RecruitLayout';
+import { Card, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
-
-const Button = styled.button`
-  font-size: 14px;
-  color: #fff;
-  background: #ee5648;
-  border-radius: 3px;
-  height: 40px;
-  width: 100%;
-  margin: 50px 0 0 0;
-  border: none;
-`
 
 class WorkExperienceList extends React.PureComponent {
   add = () => {
@@ -27,6 +16,7 @@ class WorkExperienceList extends React.PureComponent {
   }
   render() {
     const { getFieldProps } = this.props.form;
+    
     return (
       <Layout  title="工作经历">
         <WingBlank size="lg">
@@ -43,17 +33,16 @@ class WorkExperienceList extends React.PureComponent {
               </Card.Body>
             </Card>
           </Link>
-          <WhiteSpace size="lg" />
+          <WhiteSpace size="lg" /> 
         </WingBlank>
         <WhiteSpace/>
         
         <WingBlank>
-          <Button onClick={this.add}>新增工作经历</Button>
+          <Button type="primary" onClick={this.add} style={{marginTop:'50px',fontSize:'14px'}}>新增工作经历</Button>
           <WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {
-            color: #ee5648 !important;
             font-size: 14px !important;
           }   
           .am-list-item .am-input-control input {

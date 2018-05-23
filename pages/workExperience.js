@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
-import { Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem} from 'antd-mobile';
+import Layout from '../layout/RecruitLayout';
+import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem, Button} from 'antd-mobile';
 import { Form } from 'antd';
+import dayjs from 'dayjs';
+
 
 const FormItem = Form.Item;
 const Item = List.Item;
@@ -17,17 +19,6 @@ const Span = styled.span`
   font-size: 14px;
   color: #666;
   padding-left: 10px;
-`
-
-const Button = styled.button`
-font-size: 14px;
-color: #ee5648;
-background: #fff;
-border-radius: 3px;
-height: 40px;
-width: 100%;
-margin: 50px 0 0 0;
-border: 1px solid #ee5648;
 `
 
 const date = new Date();
@@ -97,33 +88,57 @@ EmploymentDate.push(Month);
 
 const leaveDate = EmploymentDate;
 
-console.log('leaveDate',leaveDate);
-
 class WorkExperience extends React.PureComponent {
-  remove = () => {
-    // this.props.form.validateFields({ force: true }, (error) => {
-    //   if (!error) {
-    //     console.log(this.props.form.getFieldsValue());
-    //   } else {
-    //     alert('Validation failed');
-    //   }
-    // });
+  componentDidMount () {
+    this.props.form.validateFields();
+  }
+
+  hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+  save = () => {
+    this.props.form.validateFields({ force: true }, (error) => {
+      if (!error) {
+        const validateValues = this.props.form.getFieldsValue();
+        console.log('validateValues',validateValues)
+        let arr=validateValues.entryTime;
+        arr.push('01');
+        const str = arr.join('-');
+        const entryTime = dayjs(str).valueOf();
+        console.log('entryTime',entryTime);
+      } else {
+        console.log('Validation failed',error);
+      }
+    });
   }
 
   render() {
-    const { getFieldProps } = this.props.form;
+    const { getFieldProps, getFieldsError} = this.props.form;
+    // console.log(this.props)
     return (
       <Layout  title="工作经历">
         <WhiteSpace/>
         <List>
           <InputItem
-            {...getFieldProps('inputtitle1')}
+            {...getFieldProps('companyName',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
             placeholder="请输入公司名称"
           >
             <div><i className="iconfont icon-company"/><Span className="itemTitle">公司名称</Span></div>
           </InputItem>
           <InputItem
-            {...getFieldProps('inputtitle2')}
+            {...getFieldProps('job',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })
+        }
             placeholder="请输入任职岗位"
           >
             <div><i className="iconfont icon-jober"/><Span className="itemTitle">任职岗位</Span></div>
@@ -136,7 +151,12 @@ class WorkExperience extends React.PureComponent {
             title="入职时间"
             className="forss"
             cascade={false}
-            {...getFieldProps('EmploymentDate')}
+            {...getFieldProps('entryTime',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
           >
             <List.Item arrow="horizontal"><i className="iconfont icon-year" /><Span className="itemTitle">入职时间</Span></List.Item>
           </Picker>
@@ -145,7 +165,12 @@ class WorkExperience extends React.PureComponent {
             title="离职时间"
             className="forss"
             cascade={false}
-            {...getFieldProps('leaveDate')}
+            {...getFieldProps('leaveTime',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
           >
             <List.Item arrow="horizontal"><i className="iconfont icon-time" /><Span className="itemTitle">离职时间</Span></List.Item>
           </Picker>
@@ -153,14 +178,22 @@ class WorkExperience extends React.PureComponent {
         <WhiteSpace/>
         <List renderHeader={() => <div><i className="iconfont icon-content" /><Span className="itemTitle">工作内容</Span></div>}>
           <TextareaItem
-            {...getFieldProps('count')}
-            rows={5}
+            {...getFieldProps('jobContent',{rules:[
+              {
+                required: true,
+                message:"岗位不为空"
+              }
+            ]
+          })}
+            rows={8}
             placeholder='请输入你的工作内容…'
-            count={200}
+            count={1600}
           />
         </List>
-        <WingBlank>
-          <Button onClick={this.remove}>删除此工作经历</Button><WhiteSpace />
+        <WingBlank size="lg">
+          <Button type="primary" style={{marginTop:'50px',marginLeft: '8px',fontSize:'14px'}} disabled={this.hasErrors(getFieldsError())} className="am-button-borderfix" onClick={this.save}>保存</Button>
+          {/* <WhiteSpace /> */}
+          {/* <Button >删除此工作经历</Button> */}
         </WingBlank>
         <style jsx global>{`
           .iconfont {

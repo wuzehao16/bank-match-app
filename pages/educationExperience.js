@@ -1,9 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
+import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
-import { Picker, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
+import Layout from '../layout/RecruitLayout';
+import { Picker, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import { Form } from 'antd';
+import dayjs from 'dayjs';
 
 const FormItem = Form.Item;
 const Item = List.Item;
@@ -42,41 +45,66 @@ const education = [
     },
 ]
 
-const Button = styled.button`
-font-size: 14px;
-color: #ee5648;
-background: #fff;
-border-radius: 3px;
-height: 40px;
-width: 100%;
-margin: 50px 0 0 0;
-border: 1px solid #ee5648;
-`
 class EducationExperience extends React.PureComponent {
-  remove = () => {
-    // this.props.form.validateFields({ force: true }, (error) => {
-    //   if (!error) {
-    //     console.log(this.props.form.getFieldsValue());
-    //   } else {
-    //     alert('Validation failed');
-    //   }
-    // });
+  componentDidMount () {
+    this.props.form.validateFields();
   }
 
+  hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+    
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
+    // const education = await fetch(`/selectByType?type=education`)
+    return { dic: {
+                education:education,
+              }
+            }
+  }
+
+
+  save = () => {
+    this.props.form.validateFields({ force: true }, (error) => {
+      if (!error) {
+        const validateValues = this.props.form.getFieldsValue();
+        const array=validateValues.entryTime;
+        // array.push('01');
+        // array.
+      } else {
+        console.log('Validation failed',error);
+      }
+    });
+  }
+
+
   render() {
-    const { getFieldProps } = this.props.form;
+    const { education} = this.props.dic;
+    const educationOption = education.map(i => {return {value:i.code, label:i.name}})
+    const { getFieldProps, getFieldsError } = this.props.form;
     return (
       <Layout  title="教育经历">
         <WhiteSpace/>
         <List>
           <InputItem
-            {...getFieldProps('inputtitle1')}
+            {...getFieldProps('school',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
             placeholder="请输入毕业学校"
           >
             <div><i className="iconfont icon-school"/><span className="itemTitle">学校</span></div>
           </InputItem>
           <InputItem
-            {...getFieldProps('inputtitle2')}
+            {...getFieldProps('major',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
             placeholder="请输入专业"
           >
             <div><i className="iconfont icon-zhuanye"/><span className="itemTitle">专业</span></div>
@@ -90,7 +118,12 @@ class EducationExperience extends React.PureComponent {
             title="毕业时间"
             className="forss"
             cols={1}
-            {...getFieldProps('graduationTime')}
+            {...getFieldProps('graduate',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })}
             // extra="请选择毕业年份"
             // value={this.state.gtValue}
             // onChange={v => this.setState({ sValue: v })}
@@ -98,12 +131,17 @@ class EducationExperience extends React.PureComponent {
           >
             <List.Item arrow="horizontal"><i className="iconfont icon-year" /><span className="itemTitle">毕业时间</span></List.Item>
           </Picker>
-          <Picker data={education} cols={1} title="学历" {...getFieldProps('education')} className="forss">
+          <Picker data={educationOption} cols={1} title="学历" {...getFieldProps('educationBackground',{rules:[
+              {
+                required: true,
+              }
+            ]
+          })} className="forss">
             <List.Item arrow="horizontal"><i className="iconfont icon-school1" /><span className="itemTitle">学历</span></List.Item>
           </Picker>
         </List>
         <WingBlank>
-          <Button onClick={this.remove}>删除此教育经历</Button><WhiteSpace />
+          <Button onClick={this.save} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .iconfont {
