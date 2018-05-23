@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
-import { Picker, List, InputItem, WhiteSpace, Button, WingBlank, TextareaItem} from 'antd-mobile';
+import { Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem} from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
@@ -18,6 +18,18 @@ const Span = styled.span`
   color: #666;
   padding-left: 10px;
 `
+
+const Button = styled.button`
+font-size: 14px;
+color: #ee5648;
+background: #fff;
+border-radius: 3px;
+height: 40px;
+width: 100%;
+margin: 50px 0 0 0;
+border: 1px solid #ee5648;
+`
+
 const date = new Date();
 const currentYear = date.getFullYear();
 let EmploymentDate = new Array();
@@ -148,7 +160,7 @@ class WorkExperience extends React.PureComponent {
           />
         </List>
         <WingBlank>
-          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.remove}>删除此工作经历</Button><WhiteSpace />
+          <Button onClick={this.remove}>删除此工作经历</Button><WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .iconfont {

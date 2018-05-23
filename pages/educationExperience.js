@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
-import { Picker, List, InputItem, WhiteSpace, Button, WingBlank } from 'antd-mobile';
+import { Picker, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
@@ -41,6 +41,17 @@ const education = [
       value:'高中'
     },
 ]
+
+const Button = styled.button`
+font-size: 14px;
+color: #ee5648;
+background: #fff;
+border-radius: 3px;
+height: 40px;
+width: 100%;
+margin: 50px 0 0 0;
+border: 1px solid #ee5648;
+`
 class EducationExperience extends React.PureComponent {
   remove = () => {
     // this.props.form.validateFields({ force: true }, (error) => {
@@ -92,7 +103,7 @@ class EducationExperience extends React.PureComponent {
           </Picker>
         </List>
         <WingBlank>
-          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.remove}>删除此教育经历</Button><WhiteSpace />
+          <Button onClick={this.remove}>删除此教育经历</Button><WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .iconfont {
@@ -112,10 +123,10 @@ class EducationExperience extends React.PureComponent {
             text-align: right;
           }
           .am-picker-popup-item {
-            color: #ee5648;
+            color: #ee5648 !important;
           }
           .am-picker-popup-title {
-            color: #000;
+            color: #000 !important;
           }
         `}
         </style>

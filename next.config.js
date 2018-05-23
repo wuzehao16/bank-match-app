@@ -53,4 +53,4 @@ module.exports = withOffline(withCSS({
     )
     return config
   }
-}
+}))
