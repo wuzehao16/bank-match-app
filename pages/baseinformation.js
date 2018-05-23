@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
+import Layout from '../layout/RecruitLayout';
 import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import "../styles/index.css"
 import fetch from '../lib/fetch'

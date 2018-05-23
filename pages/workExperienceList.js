@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
+import Layout from '../layout/RecruitLayout';
 import { Card, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
 import { Form } from 'antd';
 

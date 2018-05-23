@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import { Form } from 'antd';
-import Layout from '../layout/Nolayout';
+import Layout from '../layout/RecruitLayout';
 import "../styles/index.css"
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
