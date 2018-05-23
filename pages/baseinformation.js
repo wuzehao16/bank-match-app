@@ -63,27 +63,33 @@ const workingSeniority =[
     value:'5'
   }
 ]
-const year = (new Date()).getFullYear();
-const birthday =[];
-let beginYear = 1970;
-
-for (let i = 0; i <= year - 1970; i++) {
-  birthday[i] = {
-    label: `${beginYear}`,
-    value: `${beginYear}`
+function getYear() {
+  const year = (new Date()).getFullYear();
+  const birthday =[];
+  let beginYear = 1970;
+  for (let i = 0; i <= year - 1970; i++) {
+    birthday[i] = {
+      label: `${beginYear}`,
+      value: `${beginYear}`
+    }
+    beginYear += 1
   }
-  beginYear += 1
+  return birthday
 }
-console.log(year - beginYear,birthday)
 class BaseInformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
-    return { dic: {
-                education:education,
-                city:city
+    const i = await fetch(`/getResumeDetail`)
+    // var i ;
+    console.log(i)
+    return {
+            i: i || {},
+            dic: {
+                education: education,
+                city: city
               }
             }
   }
@@ -98,6 +104,7 @@ class BaseInformation extends React.PureComponent {
   }
   render() {
     const { education,city } = this.props.dic;
+    const i = this.props.i;
     const educationOption = education.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
     const { getFieldProps } = this.props.form;
@@ -106,7 +113,7 @@ class BaseInformation extends React.PureComponent {
         <WhiteSpace/>
         <List >
           <InputItem
-            {...getFieldProps('name',{initialValue:123456})}
+            {...getFieldProps('name',{initialValue:i.name,rules:[{required:true}]})}
             clear
             placeholder="最好使用真实姓名"
           >
@@ -114,12 +121,12 @@ class BaseInformation extends React.PureComponent {
           </InputItem>
           {/* </Item> */}
 
-          <Picker data={sex} cols={1} {...getFieldProps('sex', {initialValue:["0"]})} className="forss">
+          <Picker data={sex} cols={1} {...getFieldProps('sex', {initialValue:[i.sex],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
                 <div><I className="iconfont icon-Sex"/><Span>性别</Span></div>
             </List.Item>
           </Picker>
-          <Picker data={birthday} cols={1} {...getFieldProps('birthYear', {initialValue:['1970']})} className="forss">
+          <Picker data={getYear()} cols={1} {...getFieldProps('birthYear', {initialValue:[i.birthYear],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><I className="iconfont icon-icon-chushengriqi"/><Span>出生年月</Span></div>
             </List.Item>
@@ -128,12 +135,12 @@ class BaseInformation extends React.PureComponent {
         <WhiteSpace/>
 
         <List>
-          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:['3']})} className="forss">
+          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:[i.education],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><I className="iconfont icon-incumbencyHr"/><Span>最高学历</Span></div>
             </List.Item>
           </Picker>
-          <Picker data={workingSeniority} cols={1} {...getFieldProps('workingYear', {initialValue:['3']})} className="forss">
+          <Picker data={workingSeniority} cols={1} {...getFieldProps('workingYear', {initialValue:[i.workingYear],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><I className="iconfont icon-time"/><Span>工作年限</Span></div>
             </List.Item>
@@ -142,14 +149,14 @@ class BaseInformation extends React.PureComponent {
        <WhiteSpace/>
        <List>
         <InputItem
-          {...getFieldProps('phone', {initialValue:'18312341324'})}
+          {...getFieldProps('phone', {initialValue:i.phone,rules:[{required:true}]})}
           clear
           placeholder="请填入电话号码"
         >
           <div><I className="iconfont icon-tel"/><Span>电话号码</Span></div>
         </InputItem>
         <InputItem
-          {...getFieldProps('mail', {initialValue:'279920@qq.com'})}
+          {...getFieldProps('mail', {initialValue:i.mail,rules:[{required:true}]})}
           clear
           placeholder="请填入邮箱"
         >
@@ -158,12 +165,12 @@ class BaseInformation extends React.PureComponent {
       </List>
       <WhiteSpace/>
       <List>
-        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:['50']})} className="forss">
+        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:[i.city],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-city"/><Span>所在城市</Span></div>
           </List.Item>
         </Picker>
-        <Picker data={jobStatus} cols={1} {...getFieldProps('jobStatus', {initialValue:['0']})} className="forss">
+        <Picker data={jobStatus} cols={1} {...getFieldProps('status', {initialValue:[i.status],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-incumbencyHr"/><Span>在职状态</Span></div>
           </List.Item>

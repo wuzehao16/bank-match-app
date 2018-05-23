@@ -3,7 +3,6 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import JssProvider from 'react-jss/lib/JssProvider';
 import flush from 'styled-jsx/server';
 import getPageContext from '../src/getPageContext';
-// import stylesheet from "styles/index.less";
 class MyDocument extends Document {
   render() {
     const { pageContext } = this.props;
@@ -29,8 +28,12 @@ class MyDocument extends Document {
           <link rel="manifest" href="/static/manifest/manifest.json" />
           {/* <script src='/static/hd.min.js' /> */}
           <link rel="stylesheet" href="/_next/static/style.css" />
+<<<<<<< HEAD
           {/* <style>{stylesheet}</style>   */}
           {/* <link rel='stylesheet' type='text/css' href='//unpkg.com/antd-mobile/dist/antd-mobile.min.css' /> */}
+=======
+
+>>>>>>> 892e550b53f30121ac8a1e5b3e5603f623a30436
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"

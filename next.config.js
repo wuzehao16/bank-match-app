@@ -10,7 +10,7 @@ function moduleDir(m) {
 
 module.exports = withOffline(withCSS({
   webpack: (config, { dev }) => {
-    // config.resolve.extensions = ['.web.js', '.js', '.json','.css','.less']
+    config.resolve.extensions = ['.web.js', '.js', '.json']
 
     config.module.rules.push(
       // {
