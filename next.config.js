@@ -10,9 +10,27 @@ function moduleDir(m) {
 
 module.exports = withOffline(withCSS({
   webpack: (config, { dev }) => {
-    config.resolve.extensions = ['.web.js', '.js', '.json']
+    // config.resolve.extensions = ['.web.js', '.js', '.json','.css','.less']
 
     config.module.rules.push(
+      // {
+      //   test: /\.(less)/,
+      //   loader:'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+      //   options:{
+      //     javascriptEnabled: true
+      //   }
+      // },
+      // {
+      //   test: /\.(less)/,
+      //   loader: "emit-file-loader",
+      //   options: {
+      //     name: "dist/[path][name].[ext]"
+      //   }
+      // },
+      // {
+      //   test: /\.less$/,
+      //   use: ["babel-loader", "raw-loader", "less-loader"]
+      // },
       {
         test: /\.(svg)$/i,
         loader: 'emit-file-loader',
@@ -31,9 +49,8 @@ module.exports = withOffline(withCSS({
           moduleDir('antd-mobile'),
           __dirname
         ]
-      }
+      } 
     )
-
     return config
   }
-}))
+}

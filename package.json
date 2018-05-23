@@ -13,10 +13,12 @@
     "@zeit/next-css": "^0.1.5",
     "antd": "^3.3.1",
     "antd-mobile": "^2.1.8",
-    "babel-plugin-import": "^1.7.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-styled-components": "^1.1.5",
+    "babel-plugin-wrap-in-js": "^1.1.1",
     "blueimp-md5": "^2.10.0",
     "es6-promise": "4.1.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "isomorphic-unfetch": "2.0.0",
     "jss": "^9.8.1",
     "koa": "^2.0.1",
@@ -30,6 +32,7 @@
     "next-redux-wrapper": "1.2.0",
     "prop-types": "latest",
     "qs": "^6.5.1",
+    "raw-loader": "^0.5.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-jss": "^8.4.0",
@@ -46,6 +49,11 @@
     "svg-sprite-loader": "^3.7.3"
   },
   "devDependencies": {
-    "redux-devtools-extension": "2.13.2"
+    "babel-plugin-import": "^1.7.0",
+    "css-loader": "^0.28.11",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "redux-devtools-extension": "2.13.2",
+    "style-loader": "^0.21.0"
   }
 }

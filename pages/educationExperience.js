@@ -2,71 +2,24 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
-import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import { Picker, List, InputItem, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
 
-const I = styled.i`
-  font-size: 14px;
-  color: #ee5648;
-`
-
-const Span = styled.span`
-  font-size: 14px;
-  color: #666;
-  padding-left: 10px;
-`
-const graduationTime = [
-  [
-    {
-      label:'2018',
-      value:'2018'
-    },
-    {
-      label:'2017',
-      value:'2017'
-    }
-  ],
-  [
-    {
-      label:'1',
-      value:'1'
-    },
-    {
-      label:'2',
-      value:'2'
-    },
-    {
-      label:'3',
-      value:'3'
-    },
-    {
-      label:'4',
-      value:'4'
-    },
-    {
-      label:'5',
-      value:'5'
-    },
-    {
-      label:'6',
-      value:'6'
-    },
-    {
-      label:'7',
-      value:'7'
-    },
-    {
-      label:'8',
-      value:'8'
-    },
-  ]
-];
+const date = new Date();
+const currentYear = date.getFullYear();
+let graduationTime = new Array();
+for (let i = 1990; i<=currentYear;i++){
+  let data = {
+    label: i,
+    value: i
+  }
+   graduationTime.unshift(data);
+}
 
 const education = [
-  [
     {
       label:'博士',
       value:'博士'
@@ -87,17 +40,18 @@ const education = [
       label:'高中',
       value:'高中'
     },
-  ]
 ]
 class EducationExperience extends React.PureComponent {
-  state = {
-    // data: [],
-    // cols: 1,
-    // pickerValue: [],
-    // asyncValue: [],
-    gtValue: ['2018', '6'],
-    // visible: false,
-  };
+  remove = () => {
+    // this.props.form.validateFields({ force: true }, (error) => {
+    //   if (!error) {
+    //     console.log(this.props.form.getFieldsValue());
+    //   } else {
+    //     alert('Validation failed');
+    //   }
+    // });
+  }
+
   render() {
     const { getFieldProps } = this.props.form;
     return (
@@ -108,13 +62,13 @@ class EducationExperience extends React.PureComponent {
             {...getFieldProps('inputtitle1')}
             placeholder="请输入毕业学校"
           >
-            <div><I className="iconfont icon-school"/><Span>学校</Span></div>
+            <div><i className="iconfont icon-school"/><span className="itemTitle">学校</span></div>
           </InputItem>
           <InputItem
             {...getFieldProps('inputtitle2')}
             placeholder="请输入专业"
           >
-            <div><I className="iconfont icon-zhuanye"/><Span>专业</Span></div>
+            <div><i className="iconfont icon-zhuanye"/><span className="itemTitle">专业</span></div>
           </InputItem>
 
         </List>
@@ -122,29 +76,46 @@ class EducationExperience extends React.PureComponent {
         <List>
           <Picker
             data={graduationTime}
-            title="毕业年份"
-            // cascade={false}
+            title="毕业时间"
+            className="forss"
+            cols={1}
+            {...getFieldProps('graduationTime')}
             // extra="请选择毕业年份"
-            value={this.state.gtValue}
+            // value={this.state.gtValue}
             // onChange={v => this.setState({ sValue: v })}
             // onOk={v => this.setState({ sValue: v })}
           >
-            <List.Item arrow="horizontal"><I className="iconfont icon-year" /><Span>毕业年份</Span></List.Item>
+            <List.Item arrow="horizontal"><i className="iconfont icon-year" /><span className="itemTitle">毕业时间</span></List.Item>
           </Picker>
-          <Picker data={education} cols={1} title="学历" {...getFieldProps('education')}>
-            <List.Item arrow="horizontal"><I className="iconfont icon-school1" /><Span>学历</Span></List.Item>
+          <Picker data={education} cols={1} title="学历" {...getFieldProps('education')} className="forss">
+            <List.Item arrow="horizontal"><i className="iconfont icon-school1" /><span className="itemTitle">学历</span></List.Item>
           </Picker>
         </List>
+        <WingBlank>
+          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.remove}>删除此教育经历</Button><WhiteSpace />
+        </WingBlank>
         <style jsx global>{`
-          .am-list-item .am-input-label {
-            color: #ee5648 !important;
+          .iconfont {
+            color: #ee5648;
+          }
+          .itemTitle {
+            color: #666;
+            font-size: 14px;
+            padding-left: 10px;
+          }
+          .am-list-extra {
             font-size: 14px !important;
           }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
+            color: #888 !important;
+            text-align: right;
           }
-          .am-list-extra {
-            font-size: 14px !important;
+          .am-picker-popup-item {
+            color: #ee5648;
+          }
+          .am-picker-popup-title {
+            color: #000;
           }
         `}
         </style>
