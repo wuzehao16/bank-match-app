@@ -2,16 +2,22 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
-import { Card, List, InputItem, WhiteSpace, Button, WingBlank } from 'antd-mobile';
+import { Card, List, InputItem, WhiteSpace, WingBlank } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
 
-// const I = styled.i`
-//   font-size: 14px;
-//   color: #ee5648;
-// `
+const Button = styled.button`
+  font-size: 14px;
+  color: #fff;
+  background: #ee5648;
+  border-radius: 3px;
+  height: 40px;
+  width: 100%;
+  margin: 50px 0 0 0;
+  border: none;
+`
 
 const Span = styled.span`
   font-size: 14px;
@@ -29,7 +35,6 @@ class Educations extends React.PureComponent {
     const { getFieldProps } = this.props.form;
     return (
       <Layout  title="教育经历">
-        <List>
         <WingBlank size="lg">
           <WhiteSpace size="lg" />
           <Link href='/educationExperience'>
@@ -46,11 +51,11 @@ class Educations extends React.PureComponent {
           </Link>
           <WhiteSpace size="lg" />
         </WingBlank>
-        </List>
         <WhiteSpace/>
         
         <WingBlank>
-          <Button type="primary" style={{marginTop:'100px',fontSize:'14px'}} onClick={this.add}>新增教育经历</Button><WhiteSpace />
+          <Button onClick={this.add}>新增教育经历</Button>
+          <WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {
