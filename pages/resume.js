@@ -1,8 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Blanklayout';
+import Layout from '../layout/Nolayout';
 import ControlPoint from '@material-ui/icons/ControlPoint';
+import Avatar from '@material-ui/core/Avatar';
+import fetch from '../lib/fetch';
+import getCookie from '../lib/getCookie'
 const Head = styled.div`
   height:111px;
   background-color:#fff;
@@ -10,10 +13,7 @@ const Head = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Avatar = styled.div`
-  background: red;
-  height: 60px;
-`
+
 const Title = styled.div`
   height: 57px;
   font-size: 15px;
@@ -31,7 +31,7 @@ const AddContainer = styled.div`
 `
 const Add = styled.div`
   height: 14px;
-  width: 115px;
+  width: 130px;
   color:#ee5648;
   display: flex;
   justify-content: center;
@@ -42,18 +42,22 @@ const Wrapper = styled.div`
   padding-bottom: 50px;
 `
 class Resume extends React.PureComponent {
-  static async getInitialProps ({query,req}) {
+  static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const education = await fetch(`/selectByType?type=education`, token)
-    console.log(education)
-    return { product: education }
+    const userInfo = await fetch(`/getUserInfo`)
+    return { userInfo: userInfo }
   }
   render() {
+    const { userInfo } = this.props
     return (
       <Layout>
         <Head>
-          <Avatar></Avatar>
+            <Avatar
+            alt="Adelle Charles"
+            src={userInfo.userHead}
+            style={{height:60,width:60}}
+          />
         </Head>
         <Wrapper>
           <Title>基本信息</Title>

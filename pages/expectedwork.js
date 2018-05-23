@@ -59,10 +59,11 @@ const salary =[
 ];
 
 class ExpectedWork extends React.PureComponent {
-  static async getInitialProps ({query,req}) {
+  static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const jobTitle = await fetch(`/selectByType?type=jobTitle`)
+    const jobTitle = await fetch(`/selectByType`)
+    console.log(jobTitle)
     const city = await fetch(`/selectByType?type=city`)
     return { dic: {
                 jobTitle:jobTitle,
@@ -92,17 +93,17 @@ class ExpectedWork extends React.PureComponent {
       <Layout title="期望工作">
         <WhiteSpace/>
       <List>
-        <Picker data={jobTitleOption} cols={1} {...getFieldProps('jobStatus')} className="forss">
+        <Picker data={jobTitleOption} cols={1} {...getFieldProps('jobStatus', {initialValue:[i.jobStatus],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-city"/><Span>期望工作</Span></div>
           </List.Item>
         </Picker>
-        <Picker data={cityOption} cols={1} {...getFieldProps('city')} className="forss">
+        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:[i.jobStatus],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><I className="iconfont icon-incumbencyHr"/><Span>期望城市</Span></div>
           </List.Item>
         </Picker>
-        <Picker cascade={false}  data={salary} onPickerChange={this.handleChange} onScrollChange={this.handleChange} onChange={this.handleChange} cols={1} {...getFieldProps('jobStatus')} className="forss">
+        <Picker cascade={false}  data={salary}  cols={1} {...getFieldProps('salary',{initialValue:[i.jobStatus],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal" >
             <div><I className="iconfont icon-incumbencyHr"/><Span>期望月薪</Span></div>
           </List.Item>
