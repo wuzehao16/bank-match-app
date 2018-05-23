@@ -50,21 +50,29 @@ class Resume extends React.PureComponent {
         </Head>
         <Wrapper>
           <Title>基本信息</Title>
-          <AddContainer>
-            <Add ><ControlPoint/><span>添加基本信息</span></Add>
-          </AddContainer>
+          <Link prefetch href="/baseinformation">
+            <AddContainer>
+              <Add ><ControlPoint/><span>添加基本信息</span></Add>
+            </AddContainer>
+          </Link>
           <Title>工作经历</Title>
-          <AddContainer>
-            <Add ><ControlPoint/><span>添加工作经历</span></Add>
-          </AddContainer>
+          <Link prefetch href="/workExperienceList">
+            <AddContainer>
+              <Add ><ControlPoint/><span>添加工作经历</span></Add>
+            </AddContainer>
+          </Link>
           <Title>教育经历</Title>
-          <AddContainer>
-            <Add ><ControlPoint/><span>添加教育经历</span></Add>
-          </AddContainer>
+          <Link prefetch href="/educationExperienceList">
+            <AddContainer>
+              <Add ><ControlPoint/><span>添加教育经历</span></Add>
+            </AddContainer>
+          </Link>
           <Title>期望工作</Title>
-          <AddContainer>
-            <Add ><ControlPoint/><span>添加期望工作</span></Add>
-          </AddContainer>
+          <Link prefetch href="/expectedwork">
+            <AddContainer>
+              <Add ><ControlPoint/><span>添加期望工作</span></Add>
+            </AddContainer>
+          </Link>
         </Wrapper>
       </Layout>
     )

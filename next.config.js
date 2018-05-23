@@ -49,7 +49,7 @@ module.exports = withOffline(withCSS({
           moduleDir('antd-mobile'),
           __dirname
         ]
-      } 
+      }
     )
     return config
   }

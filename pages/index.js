@@ -39,7 +39,7 @@ class Thing extends React.Component {
     return (
       <SomeContext.Provider value={this.state.context}>
         <div style={{fontSize:'0.14rem'}}>
-          ggg
+          there
         </div>
       </SomeContext.Provider>
     )
