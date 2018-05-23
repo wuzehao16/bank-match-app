@@ -27,10 +27,9 @@ const Span = styled.span`
 
 class Educations extends React.PureComponent {
   add = () => {
+    // dispatch
   }
 
-  edit = () => {
-  }
   render() {
     const { getFieldProps } = this.props.form;
     return (
@@ -41,7 +40,7 @@ class Educations extends React.PureComponent {
             <Card>
               <Card.Header
                 title="2018.01-2018.05"
-                extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
+                extra={<Link href='/educationExperience' style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</Link>}
               />
               <Card.Body>
                 <div className="school">西南民族大学</div>
