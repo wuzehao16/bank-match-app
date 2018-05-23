@@ -42,6 +42,13 @@ const Wrapper = styled.div`
   padding-bottom: 50px;
 `
 class Resume extends React.PureComponent {
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
+    const education = await fetch(`/selectByType?type=education`, token)
+    console.log(education)
+    return { product: education }
+  }
   render() {
     return (
       <Layout>
