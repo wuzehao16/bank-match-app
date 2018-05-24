@@ -46,14 +46,6 @@ const education = [
 ]
 
 class EducationExperience extends React.PureComponent {
-  componentDidMount () {
-    this.props.form.validateFields();
-  }
-
-  hasErrors = (fieldsError) => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
-    
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
@@ -63,7 +55,13 @@ class EducationExperience extends React.PureComponent {
               }
             }
   }
+  componentDidMount () {
+    this.props.form.validateFields();
+  }
 
+  hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
 
   save = () => {
     this.props.form.validateFields({ force: true }, (error) => {

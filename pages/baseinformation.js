@@ -2,11 +2,13 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/RecruitLayout';
-import { Picker, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast } from 'antd-mobile';
+import { Form } from 'antd';
 import "../styles/index.css"
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
-import { Form } from 'antd';
+import { formatData } from '../lib/util'
+import { updateBaseInformation } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
@@ -79,10 +81,11 @@ function getYear() {
 class BaseInformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
+    var i;
     const token = getCookie('token', req)
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
-    const i = await fetch(`/getResumeDetail`)
+    i = await fetch(`/getResumeDetail`)
     // var i ;
     console.log(i)
     return {
@@ -93,10 +96,23 @@ class BaseInformation extends React.PureComponent {
               }
             }
   }
+  componentDidMount () {
+    this.props.form.validateFields();
+  }
+  hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+  async sendData(value) {
+    const res = await updateBaseInformation(value);
+    if (res.code != 0) {
+      Toast.fail(res.msg);
+    }
+  }
   onSubmit = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
+    this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        console.log(this.props.form.getFieldsValue());
+        value = formatData(value)
+        this.sendData(value);
       } else {
         alert('Validation failed');
       }
@@ -107,7 +123,7 @@ class BaseInformation extends React.PureComponent {
     const i = this.props.i;
     const educationOption = education.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
-    const { getFieldProps } = this.props.form;
+    const { getFieldProps, getFieldsError } = this.props.form;
     return (
       <Layout title="基本信息">
         <WhiteSpace/>
@@ -176,9 +192,9 @@ class BaseInformation extends React.PureComponent {
           </List.Item>
         </Picker>
       </List>
-       <List.Item>
-         <Button type="warning" size="small" inline onClick={this.onSubmit}>Submit</Button>
-       </List.Item>
+      <WingBlank>
+        <Button onClick={this.onSubmit} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
+      </WingBlank>
       </Layout>
     )
   }

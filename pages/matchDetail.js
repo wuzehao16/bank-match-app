@@ -251,7 +251,7 @@ class MatchDetail extends React.PureComponent {
       )
     })
     return (
-      <Layout title="匹配详情">
+      <Layout title="报告详情">
         <Wrapper>
 
            <Name><span>{loanDemand.name}</span></Name>
