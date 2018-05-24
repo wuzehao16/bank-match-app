@@ -107,6 +107,16 @@ function * loadDataSaga () {
     yield put(failure(err))
   }
 }
+function * sendBaseInformation (action) {
+  try {
+    console.log(action)
+    const res = yield call(updateBaseInformation,action.data)
+    console.log(res)
+    yield put(loadDataSuccess(res.data))
+  } catch (err) {
+    yield put(failure(err))
+  }
+}
 
 function * rootSaga () {
   yield all([
@@ -117,6 +127,7 @@ function * rootSaga () {
     takeLatest(actionTypes.SAVE_STEP4, sendData4Saga),
     takeLatest(actionTypes.SAVE_STEP5, sendData5Saga),
     takeLatest(actionTypes.SAVE_STEP6, sendDataSaga),
+    takeLatest(actionTypes.SEND_BASE_INFORMATION, sendBaseInformation),
   ])
 }
 

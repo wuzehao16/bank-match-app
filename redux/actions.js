@@ -12,6 +12,7 @@ export const actionTypes = {
   SAVE_STEP4: 'SAVE_STEP4',
   SAVE_STEP5: 'SAVE_STEP5',
   SAVE_STEP6: 'SAVE_STEP6',
+  SEND_BASE_INFORMATION:'SEND_BASE_INFORMATION',
 }
 
 
@@ -88,6 +89,13 @@ export function saveStep5 (data) {
 export function saveStep6 (data) {
   return {
     type: actionTypes.SAVE_STEP6,
+    data
+  }
+}
+// 招聘
+export function sendBaseInformation (data) {
+  return {
+    type: actionTypes.SEND_BASE_INFORMATION,
     data
   }
 }
