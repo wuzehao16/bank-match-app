@@ -8,6 +8,7 @@ import "../styles/index.css"
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
+import { updateExpectedWork } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
@@ -48,13 +49,15 @@ const salary =[
 ];
 
 class ExpectedWork extends React.PureComponent {
-  static async getInitialProps ({req}) {
+  static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     var i;
-    const token = getCookie('token', req)
-    const jobTitle = await fetch(`/selectByType`)
+    const token = req ? getCookie('token', req) : '';
+    if (query) {
+      i = await fetch(`/getExpectJobDetail`)
+    }
+    const jobTitle = await fetch(`/selectByType?type=jobTitle`)
     const city = await fetch(`/selectByType?type=city`)
-    i = await fetch(`/getExpectJobDetail`)
     return {
             i: i,
             dic: {
@@ -71,7 +74,7 @@ class ExpectedWork extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   async sendData(value) {
-    const res = await updateBaseInformation(value);
+    const res = await updateExpectedWork(value);
     if (res.code != 0) {
       Toast.fail(res.msg);
     }
@@ -92,7 +95,7 @@ class ExpectedWork extends React.PureComponent {
     const { getFieldProps, getFieldsError } = this.props.form;
     const jobTitleOption = jobTitle.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
-    console.log(jobTitleOption,this)
+    console.log(i)
     return (
       <Layout title="期望工作">
         <WhiteSpace/>
@@ -123,7 +126,7 @@ class ExpectedWork extends React.PureComponent {
         data = {cityOption}
       cols = {1}
       {...getFieldProps('expectCity', {
-          initialValue: [i.expectCity],
+          initialValue: i.expectCity?[i.expectCity]:'',
           rules: [
             {
               required: true
@@ -143,7 +146,7 @@ class ExpectedWork extends React.PureComponent {
         title="期望月薪"
       cols = {1}
       {  ...getFieldProps('expectSalary', {
-          initialValue: [i.expectSalary],
+          initialValue: i.expectSalary?[i.expectSalary]:'',
           rules: [
             {
               required: true
@@ -161,7 +164,7 @@ class ExpectedWork extends React.PureComponent {
       </Picker>
       </List>
       <WingBlank>
-        <Button onClick={this.save} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
+        <Button onClick={this.onSubmit} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
       </WingBlank>
       </Layout>
     )

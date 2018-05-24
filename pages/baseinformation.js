@@ -82,10 +82,12 @@ class BaseInformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     var i;
-    const token = getCookie('token', req)
+    const token = req ? getCookie('token', req) : ''
+    if (query.type) {
+      i = await fetch(`/getResumeDetail`)
+    }
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
-    i = await fetch(`/getResumeDetail`)
     // var i ;
     console.log(i)
     return {

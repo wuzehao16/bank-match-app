@@ -18,3 +18,12 @@ export async function updateBaseInformation(params) {
     },
   });
 }
+//新增编辑期望工作
+export async function updateExpectedWork(params) {
+  return request(`/app/updateExpectJob`, {
+    method: 'PUT',
+    body: {
+      ...params,
+    },
+  });
+}

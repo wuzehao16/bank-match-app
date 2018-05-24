@@ -2,6 +2,7 @@ const Koa = require('koa')
 const next = require('next')
 const IO = require('koa-socket')
 const Router = require('koa-router')
+const mock = require('./mock');
 const gzip =  require('./middleware/gzip')
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -23,7 +24,9 @@ app.prepare()
     await app.render(ctx.req, ctx.res, '/commission', ctx.query)
     ctx.respond = false
   })
-
+  if (dev) {
+    mock.init(router)
+  }
   router.get('/b', async ctx => {
     await app.render(ctx.req, ctx.res, '/a', ctx.query)
     ctx.respond = false
