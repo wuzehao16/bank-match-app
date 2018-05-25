@@ -190,14 +190,15 @@ class Invatation extends React.PureComponent {
     const {classes} = this.props;
     const { count } = this.state;
     return (
-      <Layout title="邀请好友拿奖励">
+      <Layout title="邀请好友">
         <Wrapper>
         <Card className={classes.card}>
         <Title>您的好友 {this.state.userName}</Title>
         <Title>诚挚邀请您成为正式经纪人</Title>
-        <form className={classes.container} onSubmit={this.submit} autoComplete="off">
+        <form className={classes.container} onSubmit={this.submit} autoComplete="off" style={{margin:'0 24px'}}>
 
           <FormControl
+            style={{width:'100%'}}
             required
              >
             <InputLabel htmlFor="adornment-phone">手机</InputLabel>
@@ -210,6 +211,7 @@ class Invatation extends React.PureComponent {
             />
           </FormControl>
           <FormControl
+            style={{width:'100%'}}
             required
              >
             <InputLabel htmlFor="adornment-password">密码</InputLabel>
@@ -232,6 +234,7 @@ class Invatation extends React.PureComponent {
             />
           </FormControl>
           <FormControl
+            style={{width:'100%'}}
             required
              >
             <InputLabel htmlFor="adornment-checkCode">验证码</InputLabel>
@@ -244,6 +247,7 @@ class Invatation extends React.PureComponent {
               endAdornment={
                 <InputAdornment position="end">
                   <GetCaptcha
+                    style={{padding:'8px 0'}}
                     disabled={Boolean(count)}
                      onClick={this.getCaptcha}>
                     {count ? `${count} s` : '获取验证码'}
@@ -309,6 +313,10 @@ class Invatation extends React.PureComponent {
           />
         </div>
         </Wrapper>
+        <style jsx global>{`
+
+        `}
+        </style>
       </Layout>
     )
   }

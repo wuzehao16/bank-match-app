@@ -49,7 +49,7 @@ class EducationExperience extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    // const education = await fetch(`/selectByType?type=education`)
+    const education = await fetch(`/selectByType?type=education`)
     return { dic: {
                 education:education,
               }
@@ -157,12 +157,6 @@ class EducationExperience extends React.PureComponent {
             font-size: 14px !important;
             color: #888 !important;
             text-align: right;
-          }
-          .am-picker-popup-item {
-            color: #ee5648 !important;
-          }
-          .am-picker-popup-title {
-            color: #000 !important;
           }
         `}
         </style>

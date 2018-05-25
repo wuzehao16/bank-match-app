@@ -205,10 +205,7 @@ class WorkExperience extends React.PureComponent {
             font-size: 14px;
             padding-left: 10px;
           }
-          // .am-list-item .am-input-label {
-          //   color: #ee5648 !important;
-          //   font-size: 14px !important;
-          // }   
+
           .am-list-item .am-input-control input {
             font-size: 14px !important;
           }
@@ -225,12 +222,6 @@ class WorkExperience extends React.PureComponent {
           .am-textarea-control textarea {
             font-size: 14px !important;
             color: #666 !important;
-          }
-          .am-picker-popup-item {
-            color: #ee5648 !important;
-          }
-          .am-picker-popup-title {
-            color: #000 !important;
           }
         `}
         </style>
