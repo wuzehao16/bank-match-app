@@ -313,10 +313,6 @@ class Invatation extends React.PureComponent {
           />
         </div>
         </Wrapper>
-        <style jsx global>{`
-
-        `}
-        </style>
       </Layout>
     )
   }
