@@ -126,12 +126,7 @@ class PublishJob extends React.PureComponent {
   hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
-  async sendData(value) {
-    const res = await updateBaseInformation(value);
-    if (res.code != 0) {
-      Toast.fail(res.msg);
-    }
-  }
+
   publishJob = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
