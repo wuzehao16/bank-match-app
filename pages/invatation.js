@@ -190,7 +190,7 @@ class Invatation extends React.PureComponent {
     const {classes} = this.props;
     const { count } = this.state;
     return (
-      <Layout title="邀请好友">
+      <Layout title="邀请好友拿奖励">
         <Wrapper>
         <Card className={classes.card}>
         <Title>您的好友 {this.state.userName}</Title>
