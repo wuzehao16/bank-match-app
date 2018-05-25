@@ -32,6 +32,7 @@ class EducationExperience extends React.PureComponent {
               }
             }
   }
+  
   componentDidMount () {
     this.props.form.validateFields();
   }
