@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Layout from '../layout/RecruitLayout'
 import { WhiteSpace, WingBlank, Button } from 'antd-mobile'
+import { Form } from 'antd';
 
 class NewJob extends React.PureComponent {
 

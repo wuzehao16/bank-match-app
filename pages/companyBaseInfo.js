@@ -14,7 +14,7 @@ const P = styled.p`
   margin: 15px 0;
 `
 
-class CompanyInfo extends React.PureComponent {
+class CompanyBaseInfo extends React.PureComponent {
   state = {
     files: [{
       url: '',
@@ -23,6 +23,24 @@ class CompanyInfo extends React.PureComponent {
     multiple: false,
   }
 
+  componentDidMount () {
+    this.props.form.validateFields();
+  }
+
+  hasErrors = (fieldsError) => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+  saveCompanyInfo = () => {
+    this.props.form.validateFields({ force: true }, (error, value) => {
+      if (!error) {
+        value = formatData(value)
+        this.sendData(value);
+      } else {
+        alert('Validation failed');
+      }
+    });
+  }
   onChange = (files, type, index) => {
     console.log(files, type, index);
     this.setState({
@@ -52,7 +70,7 @@ class CompanyInfo extends React.PureComponent {
           onChange={this.onChange}
           onImageClick={(index, fs) => console.log(index, fs)}
           // selectable={true}
-          // multiple={false}
+          multiple={false}
         />
         <P>上传营业执照</P>
         <ImagePicker
@@ -60,9 +78,13 @@ class CompanyInfo extends React.PureComponent {
           onChange={this.onChange}
           onImageClick={(index, fs) => console.log(index, fs)}
           // selectable={true}
-          // multiple={false}
+          multiple={false}
         />
-        <P>上传公司logo</P>
+        <P>上传公司标志</P>
+
+        <WingBlank style={{padding:'0 17px'}}>
+          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>保存/下一步</Button>
+        </WingBlank>
         <style jsx global>{`
         .am-list-item .am-input-label {
           font-size: 14px !important;
@@ -79,5 +101,5 @@ class CompanyInfo extends React.PureComponent {
   }
 }
 
-const CompanyInfoWapper = Form.create()(CompanyInfo);
-export default CompanyInfoWapper;
+const CompanyBaseInfoWapper = Form.create()(CompanyBaseInfo);
+export default CompanyBaseInfoWapper;

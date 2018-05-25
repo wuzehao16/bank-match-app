@@ -100,7 +100,7 @@ export default class extends React.Component {
     const item = this.props.item;
     const list = this.state.data;
     return (
-      <Layout title="佣金详情">
+      <Layout title="佣金明细">
       <Wrapper>
         <PullToRefresh key={this.state.switchContainer}
           // style={{ height: 200, overflow: 'auto', border: '1px solid #ccc' }}

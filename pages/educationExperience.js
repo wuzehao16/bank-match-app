@@ -22,29 +22,6 @@ for (let i = 1990; i<=currentYear;i++){
    graduationTime.unshift(data);
 }
 
-const education = [
-    {
-      label:'博士',
-      value:'博士'
-    },
-    {
-      label:'研究生',
-      value:'研究生'
-    },
-    {
-      label:'本科',
-      value:'本科'
-    },
-    {
-      label:'专科',
-      value:'专科'
-    },
-    {
-      label:'高中',
-      value:'高中'
-    },
-]
-
 class EducationExperience extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef

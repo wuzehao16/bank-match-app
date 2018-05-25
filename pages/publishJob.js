@@ -130,8 +130,11 @@ class PublishJob extends React.PureComponent {
   publishJob = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value)
-        this.sendData(value);
+        const validateValues = this.props.form.getFieldsValue();
+        console.log('validateValues',validateValues);
+
+        // value = formatData(value)
+        // this.sendData(value);
       } else {
         alert('Validation failed');
       }
