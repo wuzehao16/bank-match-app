@@ -5,75 +5,134 @@ import styled from 'styled-components'
 import Layout from '../layout/RecruitLayout';
 import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile';
 import { Form } from 'antd';
+import { ListView, Button } from 'antd-mobile';
 
-const FormItem = Form.Item;
-const Item = List.Item;
+const data = [
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+    title: 'Meet hotel',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
+    title: 'McDonald\'s invites you',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
+    title: 'Eat the week',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+];
+const NUM_ROWS = 5;
+let pageIndex = 0;
 
-function genData() {
+function genData(pIndex = 0) {
   const dataArr = [];
-  for (let i = 0; i < 4; i++) {
-    dataArr.push(i);
+  for (let i = 0; i < NUM_ROWS; i++) {
+    dataArr.push(`row - ${(pIndex * NUM_ROWS) + i}`);
   }
   return dataArr;
 }
 
-
-
-class workList extends React.PureComponent {
+class workList extends React.Component {
   constructor(props) {
     super(props);
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    });
+
     this.state = {
-      value:"搜索关键词",
-      refreshing: false,
-      down: true,
-      height: '736px',
-      data: []
+      dataSource,
+      refreshing: true,
+      isLoading: true,
+      height: '1000px',
+      useBodyScroll: false,
     };
   }
 
-  componentDidMount() {
-    // this.autoFocusInst.focus();
-    if(typeof window !== 'undefined'){
-      // const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-      setTimeout(() => this.setState({
-        // height: hei,
-        data: genData(),
-      }), 0);
-    }
-  }
-
-  onChange= (value) => {
-    this.setState({ value });
-  };
-  clear = () => {
-    this.setState({ value: '' });
-  };
-  // handleClick = () => {
-  //   // this.manualFocusInst.focus();
+  // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.dataSource !== this.props.dataSource) {
+  //     this.setState({
+  //       dataSource: this.state.dataSource.cloneWithRows(nextProps.dataSource),
+  //     });
+  //   }
   // }
 
+  componentDidUpdate() {
+      document.body.style.overflow = 'hidden';
+  }
+
+  componentDidMount() {
+    if(typeof window !== 'undefined'){
+    this.setState({
+      height:document.documentElement.clientHeight
+    })
+   }
+    const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
+
+    setTimeout(() => {
+      this.rData = genData();
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(genData()),
+        height: hei,
+        refreshing: false,
+        isLoading: false,
+      });
+    }, 1500);
+  }
+
+  onRefresh = () => {
+    this.setState({ refreshing: true, isLoading: true });
+    // simulate initial Ajax
+    setTimeout(() => {
+      this.rData = genData();
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.rData),
+        refreshing: false,
+        isLoading: false,
+      });
+    }, 600);
+  };
+
+  onEndReached = (event) => {
+    // load new data
+    // hasMore: from backend data, indicates whether it is the last page, here is false
+    if (this.state.isLoading && !this.state.hasMore) {
+      return;
+    }
+    console.log('reach end', event);
+    this.setState({ isLoading: true });
+    setTimeout(() => {
+      this.rData = [...this.rData, ...genData(++pageIndex)];
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.rData),
+        isLoading: false,
+      });
+    }, 1000);
+  };
+
   render() {
-    return (
-    // <div style={{height:'100%'}}>
-    <Layout>
-      <SearchBar placeholder="搜索关键词" maxLength={8} />
-      <PullToRefresh
-        ref={el => this.ptr = el}
+    const separator = (sectionID, rowID) => (
+      <div
+        key={`${sectionID}-${rowID}`}
         style={{
-          height: this.state.height,
-          overflow: 'auto',
+          backgroundColor: '#F5F5F9',
+          height: 8,
+          borderTop: '1px solid #ECECED',
+          borderBottom: '1px solid #ECECED',
         }}
-        direction={'down'}
-        refreshing={this.state.refreshing}
-        onRefresh={() => {
-          this.setState({ refreshing: true });
-          setTimeout(() => {
-            this.setState({ refreshing: false });
-          }, 1000);
-        }}
-      >
-        {this.state.data.map(i => (
-          <div key={i}>
+      />
+    );
+    let index = data.length - 1;
+    const row = (rowData, sectionID, rowID) => {
+      if (index < 0) {
+        index = data.length - 1;
+      }
+      const obj = data[index--];
+      return (
+        <div key={rowID}>
             <Link href='/workDetail'>
               <Card full>
                 <Card.Header
@@ -96,8 +155,42 @@ class workList extends React.PureComponent {
             </Link>
             <WhiteSpace size="lg" />
           </div>
-        ))}
-      </PullToRefresh>
+      );
+    };
+    return (<Layout title="职位列表">
+      <SearchBar
+        // value={this.state.value}
+        onSubmit={value => console.log(value, 'onSubmit')}
+        onClear={value => console.log(value, 'onClear')}
+        onFocus={() => console.log('onFocus')}
+        onBlur={() => console.log('onBlur')}
+        onCancel={() => console.log('onCancel')}
+        placeholder="搜索关键词"
+        // onChange={this.onChange}
+      />
+      <ListView
+        key="1"
+        ref={el => this.lv = el}
+        dataSource={this.state.dataSource}
+        // renderHeader={() => <span></span>}
+        renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
+          {this.state.isLoading ? 'Loading...' : 'Loaded'}
+        </div>)}
+        renderRow={row}
+        renderSeparator={separator}
+        // useBodyScroll={this.state.useBodyScroll}
+        style={{
+          height: this.state.height,
+          border: '1px solid #ddd',
+          margin: '5px 0',
+        }}
+        pullToRefresh={<PullToRefresh
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+        />}
+        onEndReached={this.onEndReached}
+        pageSize={5}
+      />
       <style jsx global>{`
         .am-pull-to-refresh-content-wrapper {
           height:100% !important;
@@ -141,10 +234,18 @@ class workList extends React.PureComponent {
           color: #999;
           font-size: 13px;
         }
+        .am-search-input {
+          border-radius: 5px !important;
+        }
+        .am-search-cancel{
+          font-size: 14px !important;
+        }
+        .am-list-view-scrollview {
+          border: none !important;
+        }
       `}
       </style>
-    </Layout>
-    );
+    </Layout>);
   }
 }
 

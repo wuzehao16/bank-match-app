@@ -73,6 +73,7 @@ class Resume extends React.PureComponent {
   }
   render() {
     const { userInfo, resume } = this.props
+    console.log('resume',resume)
     return (
       <Layout>
         <Head>
@@ -120,7 +121,7 @@ class Resume extends React.PureComponent {
             </AddContainer>
           </Link>
           <Title>教育经历</Title>
-          <Link prefetch href="/educationExperienceList">
+          <Link prefetch href="/educations">
             <AddContainer>
               <Add ><ControlPoint/><span>添加教育经历</span></Add>
             </AddContainer>

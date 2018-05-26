@@ -12,17 +12,6 @@ import { updateBaseInformation } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
-const I = styled.i`
-  font-size: 14px;
-  color: #ee5648;
-`
-
-const Span = styled.span`
-  font-size: 14px;
-  color: #666;
-  padding-left: 10px;
-`
-
 const sex =[
   {
     label:'男',
@@ -85,11 +74,11 @@ class BaseInformation extends React.PureComponent {
     const token = req ? getCookie('token', req) : ''
     if (query.type) {
       i = await fetch(`/getResumeDetail`)
+      console.log('i',i)
     }
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
-    // var i ;
-    console.log(i)
+    
     return {
             i: i || {},
             dic: {
@@ -113,7 +102,7 @@ class BaseInformation extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value)
+        value = formatData(value);
         this.sendData(value);
       } else {
         alert('Validation failed');
@@ -123,6 +112,7 @@ class BaseInformation extends React.PureComponent {
   render() {
     const { education,city } = this.props.dic;
     const i = this.props.i;
+    console.log('i',i)
     const educationOption = education.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
     const { getFieldProps, getFieldsError } = this.props.form;
@@ -135,18 +125,18 @@ class BaseInformation extends React.PureComponent {
             clear
             placeholder="最好使用真实姓名"
           >
-            <div><I className="iconfont icon-name"/><Span>姓名</Span></div>
+            <div><i className="iconfont icon-name"/><span className="itemTitle">姓名</span></div>
           </InputItem>
           {/* </Item> */}
 
           <Picker data={sex} cols={1} {...getFieldProps('sex', {initialValue:[i.sex],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
-                <div><I className="iconfont icon-Sex"/><Span>性别</Span></div>
+                <div><i className="iconfont icon-Sex"/><span className="itemTitle">性别</span></div>
             </List.Item>
           </Picker>
           <Picker data={getYear()} cols={1} {...getFieldProps('birthYear', {initialValue:[i.birthYear],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
-              <div><I className="iconfont icon-icon-chushengriqi"/><Span>出生年月</Span></div>
+              <div><i className="iconfont icon-icon-chushengriqi"/><span className="itemTitle">出生年月</span></div>
             </List.Item>
           </Picker>
         </List>
@@ -155,12 +145,12 @@ class BaseInformation extends React.PureComponent {
         <List>
           <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:[i.education],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
-              <div><I className="iconfont icon-incumbencyHr"/><Span>最高学历</Span></div>
+              <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">最高学历</span></div>
             </List.Item>
           </Picker>
           <Picker data={workingSeniority} cols={1} {...getFieldProps('workingYear', {initialValue:[i.workingYear],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
-              <div><I className="iconfont icon-time"/><Span>工作年限</Span></div>
+              <div><i className="iconfont icon-time"/><span className="itemTitle">工作年限</span></div>
             </List.Item>
           </Picker>
        </List>
@@ -171,32 +161,55 @@ class BaseInformation extends React.PureComponent {
           clear
           placeholder="请填入电话号码"
         >
-          <div><I className="iconfont icon-tel"/><Span>电话号码</Span></div>
+          <div><i className="iconfont icon-tel"/><span className="itemTitle">电话号码</span></div>
         </InputItem>
         <InputItem
           {...getFieldProps('mail', {initialValue:i.mail,rules:[{required:true}]})}
           clear
           placeholder="请填入邮箱"
         >
-          <div><I className="iconfont icon-email"/><Span>邮箱</Span></div>
+          <div><i className="iconfont icon-email"/><span className="itemTitle">邮箱</span></div>
         </InputItem>
       </List>
       <WhiteSpace/>
       <List>
         <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:[i.city],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
-            <div><I className="iconfont icon-city"/><Span>所在城市</Span></div>
+            <div><i className="iconfont icon-city"/><span className="itemTitle">所在城市</span></div>
           </List.Item>
         </Picker>
         <Picker data={jobStatus} cols={1} {...getFieldProps('status', {initialValue:[i.status],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
-            <div><I className="iconfont icon-incumbencyHr"/><Span>在职状态</Span></div>
+            <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">在职状态</span></div>
           </List.Item>
         </Picker>
       </List>
       <WingBlank>
         <Button onClick={this.onSubmit} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
       </WingBlank>
+      <style jsx global>{`
+          .iconfont {
+            font-size: 14px;
+            color: #ee5648;
+          }
+          .itemTitle {
+            color: #666;
+            font-size: 14px;
+            padding-left: 10px;
+          }
+
+          .am-list-item .am-input-control input {
+            font-size: 14px !important;
+          }
+          .am-list-extra {
+            font-size: 14px !important;
+          }
+          .am-list-item .am-input-control input {
+            color: #888 !important;
+            text-align: right;
+          }
+        `}
+        </style>
       </Layout>
     )
   }
