@@ -2,24 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/RecruitLayout';
-import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem, Button} from 'antd-mobile';
+import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem, Button, Toast} from 'antd-mobile';
 import { Form } from 'antd';
-import dayjs from 'dayjs';
-
-
-const FormItem = Form.Item;
-const Item = List.Item;
-
-const I = styled.i`
-  font-size: 14px;
-  color: #ee5648;
-`
-
-const Span = styled.span`
-  font-size: 14px;
-  color: #666;
-  padding-left: 10px;
-`
+import { formatData } from '../lib/util'
+import { insertWorkExperience } from '../services/recruit'
 
 const date = new Date();
 const currentYear = date.getFullYear();
@@ -89,28 +75,34 @@ EmploymentDate.push(Month);
 const leaveDate = EmploymentDate;
 
 class WorkExperience extends React.PureComponent {
+
+  async saveData(value) {
+    const res = await insertWorkExperience(value);
+    console.log('res',res)
+    if (res.code != 0) {
+      Toast.fail(res.msg);
+    }
+  }
+
+  save = () => {
+    this.props.form.validateFields({ force: true }, (error,value) => {
+      if (!error) {
+        console.log('value1',value)
+        value = formatData(value);
+        console.log('value2',value);
+        this.saveData(value);
+      } else {
+        console.log('Validation failed',error);
+      }
+    });
+  }
+
   componentDidMount () {
     this.props.form.validateFields();
   }
 
   hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
-
-  save = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
-      if (!error) {
-        const validateValues = this.props.form.getFieldsValue();
-        console.log('validateValues',validateValues)
-        let arr=validateValues.entryTime;
-        arr.push('01');
-        const str = arr.join('-');
-        const entryTime = dayjs(str).valueOf();
-        console.log('entryTime',entryTime);
-      } else {
-        console.log('Validation failed',error);
-      }
-    });
   }
 
   render() {
@@ -129,7 +121,7 @@ class WorkExperience extends React.PureComponent {
           })}
             placeholder="请输入公司名称"
           >
-            <div><i className="iconfont icon-company"/><Span className="itemTitle">公司名称</Span></div>
+            <div><i className="iconfont icon-company"/><span className="itemTitle">公司名称</span></div>
           </InputItem>
           <InputItem
             {...getFieldProps('job',{rules:[
@@ -141,7 +133,7 @@ class WorkExperience extends React.PureComponent {
         }
             placeholder="请输入任职岗位"
           >
-            <div><i className="iconfont icon-jober"/><Span className="itemTitle">任职岗位</Span></div>
+            <div><i className="iconfont icon-jober"/><span className="itemTitle">任职岗位</span></div>
           </InputItem>
         </List>
         <WhiteSpace/>
@@ -158,7 +150,7 @@ class WorkExperience extends React.PureComponent {
             ]
           })}
           >
-            <List.Item arrow="horizontal"><i className="iconfont icon-year" /><Span className="itemTitle">入职时间</Span></List.Item>
+            <List.Item arrow="horizontal"><i className="iconfont icon-year" /><span className="itemTitle">入职时间</span></List.Item>
           </Picker>
           <Picker
             data={leaveDate}
@@ -172,11 +164,11 @@ class WorkExperience extends React.PureComponent {
             ]
           })}
           >
-            <List.Item arrow="horizontal"><i className="iconfont icon-time" /><Span className="itemTitle">离职时间</Span></List.Item>
+            <List.Item arrow="horizontal"><i className="iconfont icon-time" /><span className="itemTitle">离职时间</span></List.Item>
           </Picker>
         </List>
         <WhiteSpace/>
-        <List renderHeader={() => <div><i className="iconfont icon-content" /><Span className="itemTitle">工作内容</Span></div>}>
+        <List renderHeader={() => <div><i className="iconfont icon-content" /><span className="itemTitle">工作内容</span></div>}>
           <TextareaItem
             {...getFieldProps('jobContent',{rules:[
               {

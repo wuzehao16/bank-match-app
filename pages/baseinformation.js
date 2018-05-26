@@ -89,7 +89,7 @@ class BaseInformation extends React.PureComponent {
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
     // var i ;
-    console.log(i)
+    console.log('i',i)
     return {
             i: i || {},
             dic: {
@@ -113,7 +113,7 @@ class BaseInformation extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value)
+        value = formatData(value);
         this.sendData(value);
       } else {
         alert('Validation failed');

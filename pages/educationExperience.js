@@ -3,13 +3,11 @@ import Link from 'next/link'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
-import { Picker, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
-import { Form } from 'antd';
-import dayjs from 'dayjs';
-
-const FormItem = Form.Item;
-const Item = List.Item;
+import Layout from '../layout/RecruitLayout'
+import { formatData } from '../lib/util'
+import { Picker, List, InputItem, WhiteSpace, WingBlank, Button, Toast } from 'antd-mobile'
+import { Form } from 'antd'
+import { insertEducation } from '../services/recruit'
 
 const date = new Date();
 const currentYear = date.getFullYear();
@@ -25,9 +23,16 @@ for (let i = 1990; i<=currentYear;i++){
 class EducationExperience extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    const token = getCookie('token', req)
+    var educationDetail;
+    const token = req ? getCookie('token', req) : ''
+    if (query.type) {
+      educationDetail = await fetch(`/getEducationDetail`)
+    }
+    console.log('EducationDetail',educationDetail);
     const education = await fetch(`/selectByType?type=education`)
-    return { dic: {
+    return { 
+            educationDetail: educationDetail || {},
+            dic: {
                 education:education,
               }
             }
@@ -41,13 +46,24 @@ class EducationExperience extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
+  async saveData(value) {
+    const res = await insertEducation(value);
+    console.log('res',res)
+    if (res.code != 0) {
+      Toast.fail(res.msg);
+    }
+    Router.push({
+      pathname:'/educations',
+      // query:
+    })
+  }
+
   save = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
+    this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
-        const validateValues = this.props.form.getFieldsValue();
-        const array=validateValues.entryTime;
-        // array.push('01');
-        // array.
+        value = formatData(value);
+        console.log('value',value)
+        this.saveData(value);
       } else {
         console.log('Validation failed',error);
       }
@@ -56,6 +72,7 @@ class EducationExperience extends React.PureComponent {
 
 
   render() {
+    const educationDetail = this.props.educationDetail;
     const { education} = this.props.dic;
     const educationOption = education.map(i => {return {value:i.code, label:i.name}})
     const { getFieldProps, getFieldsError } = this.props.form;
@@ -64,7 +81,7 @@ class EducationExperience extends React.PureComponent {
         <WhiteSpace/>
         <List>
           <InputItem
-            {...getFieldProps('school',{rules:[
+            {...getFieldProps('school',{initialValue:educationDetail.school,rules:[
               {
                 required: true,
               }
@@ -75,7 +92,7 @@ class EducationExperience extends React.PureComponent {
             <div><i className="iconfont icon-school"/><span className="itemTitle">学校</span></div>
           </InputItem>
           <InputItem
-            {...getFieldProps('major',{rules:[
+            {...getFieldProps('major',{initialValue:educationDetail.major,rules:[
               {
                 required: true,
               }
@@ -94,20 +111,16 @@ class EducationExperience extends React.PureComponent {
             title="毕业时间"
             className="forss"
             cols={1}
-            {...getFieldProps('graduate',{rules:[
+            {...getFieldProps('graduate',{initialValue:educationDetail.graduate,rules:[
               {
                 required: true,
               }
             ]
           })}
-            // extra="请选择毕业年份"
-            // value={this.state.gtValue}
-            // onChange={v => this.setState({ sValue: v })}
-            // onOk={v => this.setState({ sValue: v })}
           >
             <List.Item arrow="horizontal"><i className="iconfont icon-year" /><span className="itemTitle">毕业时间</span></List.Item>
           </Picker>
-          <Picker data={educationOption} cols={1} title="学历" {...getFieldProps('educationBackground',{rules:[
+          <Picker data={educationOption} cols={1} title="学历" {...getFieldProps('educationBackground',{initialValue:educationDetail.educationBackground,rules:[
               {
                 required: true,
               }

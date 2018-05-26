@@ -1,7 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import fetch from '../lib/fetch'
+import Router from 'next/router'
+import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
+import Layout from '../layout/RecruitLayout'
 import { Card, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import { Form } from 'antd';
 
@@ -9,13 +12,41 @@ const FormItem = Form.Item;
 const Item = List.Item;
 
 class Educations extends React.PureComponent {
-  add = () => {
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    var educationList;
+    const token = req ? getCookie('token', req) : ''
+    if (query.type) {
+      educationList = await fetch(`/getEducationList`)
+    }
+    console.log('educationList',educationList);
+    return { 
+              educationList: educationList || {
+                graduate:'2018',
+                school:'民大',
+                educationBackground:'本科',
+                major:'信管'
+              }
+          }
   }
 
-  edit = () => {
+  add = () => {
+    Router.push({
+      pathname:'/educationExperience',
+      // query: { ...this.resumeId }
+    })
   }
+
+  // edit = () => {
+  //   Router.push({
+  //     pathname:'/educationExperience?type=1',
+  //     // query: { ...this.resumeId }
+  //   })
+  // }
   render() {
     const { getFieldProps } = this.props.form;
+    const {educationList} = this.props.educationList
+    console.log('educationList',educationList)
     return (
       <Layout  title="教育经历">
         <WingBlank size="lg">
@@ -23,12 +54,12 @@ class Educations extends React.PureComponent {
           <Link href='/educationExperience'>
             <Card>
               <Card.Header
-                title="2018.01-2018.05"
-                extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
+                title={<span>毕业年份：{educationList.graduate}</span>}
+                extra={<div style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
               />
               <Card.Body>
-                <div className="school">杭州电子科技大学</div>
-                <div className="major">本科-信息管理与信息系统</div>
+                <div className="school">{educationList.school}杭州电子科技大学</div>
+                <div className="majorInfo"><span>{educationList.educationBackground}-</span><span>{educationList.major}</span></div>
               </Card.Body>
             </Card>
           </Link>
@@ -50,7 +81,7 @@ class Educations extends React.PureComponent {
           .school {
             margin: 0 0 10px 0;
           }
-          .major {
+          .majorInfo {
             color: #999;
           }
           .am-card-header {
