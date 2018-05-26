@@ -54,7 +54,8 @@ class ExpectedWork extends React.PureComponent {
     var i;
     const token = req ? getCookie('token', req) : '';
     if (query) {
-      i = await fetch(`/getExpectJobDetail`)
+      i = await fetch(`/getExpectJobDetail`);
+      console.log('i1',i)
     }
     const jobTitle = await fetch(`/selectByType?type=jobTitle`)
     const city = await fetch(`/selectByType?type=city`)
@@ -95,7 +96,7 @@ class ExpectedWork extends React.PureComponent {
     const { getFieldProps, getFieldsError } = this.props.form;
     const jobTitleOption = jobTitle.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
-    console.log(i)
+    console.log('i',i)
     return (
       <Layout title="期望工作">
         <WhiteSpace/>
@@ -166,6 +167,12 @@ class ExpectedWork extends React.PureComponent {
       <WingBlank>
         <Button onClick={this.onSubmit} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>保存</Button><WhiteSpace />
       </WingBlank>
+      <style jsx global>{`
+        .am-list-extra {
+          font-size: 14px !important;
+        }
+      `}
+      </style>
       </Layout>
     )
   }
