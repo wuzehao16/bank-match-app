@@ -5,6 +5,9 @@ import { InputItem, List, Button, WingBlank, WhiteSpace, ImagePicker } from 'ant
 import { Form } from 'antd';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
+import  Upload  from 'rc-upload';
+import { uploadImage } from '../services/recruit'
+import UploadImage from '../components/uploadImage'
 const FormItem = Form.Item;
 
 const P = styled.p`
@@ -13,13 +16,22 @@ const P = styled.p`
   text-align: center;
   margin: 15px 0;
 `
-
+const IDCard = styled.div`
+  position: relative;
+  width: 280px;
+  height: 150px;
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  overflow: hidden;
+`
 class CompanyBaseInfo extends React.PureComponent {
   state = {
-    files: [{
-      url: '',
-      id:''
-    }],
+    files: [],
+    files2: [],
     multiple: false,
   }
 
@@ -31,26 +43,52 @@ class CompanyBaseInfo extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
+  async sendData(value) {
+    const res = await updateBaseInformation(value);
+    if (res.code != 0) {
+      Toast.fail(res.msg);
+    }
+  }
   saveCompanyInfo = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value)
+        console.log(value)
         this.sendData(value);
       } else {
         alert('Validation failed');
       }
     });
   }
-  onChange = (files, type, index) => {
-    console.log(files, type, index);
+  handleChange = (res) => {
+    console.log(res)
     this.setState({
-      files,
-    });
+      businessLicense:res.data
+    })
+    this.props.form.setFieldsValue({
+      businessLicense:res.data
+    })
   }
-
+  handleChange2 = (res) => {
+    console.log(res)
+    this.setState({
+      logo:res.data
+    })
+  }
   render () {
-    const { files } = this.state;
-    const { getFieldProps, getFieldsError } = this.props.form;
+    const { files, files2 } = this.state;
+    const { getFieldProps, getFieldsError, getFieldDecorator } = this.props.form;
+    const Img =(
+      <img className="img" src={this.state.businessLicense} alt="" height={150} width={280}/>
+    )
+    const Img2 =(
+      <img className="img" src={this.state.logo} alt="" height={150} width={280}/>
+    )
+    const uploadButton = (
+      <div>
+        {/* <Icon type={this.state.loading ? 'loading' : 'plus'} /> */}
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     return (
       <Layout title="公司信息">
         <WhiteSpace />
@@ -65,21 +103,51 @@ class CompanyBaseInfo extends React.PureComponent {
           >
             <div className="itemTitle">公司名称</div>
           </InputItem>
-        <ImagePicker
-          // files={files}
-          onChange={this.onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          // selectable={true}
-          multiple={false}
-        />
+          {
+            getFieldDecorator('businessLicense',{
+              // initialValue:"1234",
+              rules:[
+                {
+                  required: true,
+                }
+            ]
+          })(
+            <Upload
+              action="http://localhost:3000/app/uploadImage"
+              onSuccess={this.handleChange}
+               >
+               <IDCard>
+                 {this.state.businessLicense
+                   ?Img
+                  : uploadButton
+                }
+               </IDCard>
+             </Upload>
+            )
+          }
         <P>上传营业执照</P>
-        <ImagePicker
-          // files={files}
-          onChange={this.onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          // selectable={true}
-          multiple={false}
-        />
+        <Upload
+          action="http://localhost:3000/app/uploadImage"
+          onSuccess={this.handleChange2}
+           >
+           <IDCard
+             {...getFieldProps('logo',{
+               // initialValue:"1234",
+               rules:[
+                 // {
+                 //   required: true,
+                 // }
+             ]
+           })}
+             >
+
+             {this.state.businessLicense
+               ?Img2
+              : uploadButton
+            }
+           </IDCard>
+         </Upload>
+
         <P>上传公司标志</P>
 
         <WingBlank style={{padding:'0 17px'}}>
@@ -93,6 +161,9 @@ class CompanyBaseInfo extends React.PureComponent {
           font-size: 14px !important;
           color: #888 !important;
           text-align: right;
+        }
+        .am-image-picker-list{
+          background:#fff;
         }
         `}
         </style>

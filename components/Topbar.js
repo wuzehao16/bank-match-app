@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   background: url(/static/topbar.jpg);
   background-size: 100% 100%;
 `
-class Topbar extends React.Component {
+class Topbar extends React.PureComponent {
   // static async getInitialProps({query}) {
 	// 	return {
 	// 		item: await fetch(`/item/${query.id}`)

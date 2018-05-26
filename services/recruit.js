@@ -9,6 +9,12 @@ export async function addBaseInformation(params) {
     },
   });
 }
+export async function uploadImage(formData) {
+  return request(`/app/uploadImage`, {
+    method: 'POST',
+    body: formData
+  });
+}
 //新增和编辑时候调用
 export async function updateBaseInformation(params) {
   return request(`/app/updateResume`, {
