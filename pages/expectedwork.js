@@ -39,12 +39,36 @@ const job =[
 ]
 const salary =[
     {
-      label: '1k',
+      label: '面议',
+      value: 0,
+    },
+    {
+      label: '2k以下',
       value: 1,
     },
     {
-      label: '2k',
+      label: '2k-5k',
       value: 2,
+    },
+    {
+      label: '5k-10k',
+      value: 3,
+    },
+    {
+      label: '10k-15k',
+      value: 4,
+    },
+    {
+      label: '15k-25k',
+      value: 5,
+    },
+    {
+      label: '25k-50k',
+      value: 6,
+    },
+    {
+      label: '50k以上',
+      value: 7,
     },
 ];
 
@@ -53,14 +77,12 @@ class ExpectedWork extends React.PureComponent {
     // eslint-disable-next-line no-undef
     var i;
     const token = req ? getCookie('token', req) : '';
-    if (query) {
-      i = await fetch(`/getExpectJobDetail`);
-      console.log('i1',i)
-    }
+    i = await fetch(`/getExpectJobDetail`);
     const jobTitle = await fetch(`/selectByType?type=jobTitle`)
     const city = await fetch(`/selectByType?type=city`)
     return {
-            i: i,
+            resumeId:query.resumeId,
+            i: i || {},
             dic: {
                 jobTitle:jobTitle,
                 city:city
@@ -83,7 +105,7 @@ class ExpectedWork extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value)
+        value = {...formatData(value),resumeId:this.props.resumeId}
         this.sendData(value);
       } else {
         alert('Validation failed');

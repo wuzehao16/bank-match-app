@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import Router from 'next/router'
 import Layout from '../layout/RecruitLayout';
 import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast } from 'antd-mobile';
 import { Form } from 'antd';
@@ -72,14 +73,12 @@ class BaseInformation extends React.PureComponent {
     // eslint-disable-next-line no-undef
     var i;
     const token = req ? getCookie('token', req) : ''
-    if (query.type) {
-      i = await fetch(`/getResumeDetail`)
-      console.log('i',i)
-    }
+    i = await fetch(`/getResumeDetail`)
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
-    
+
     return {
+            resumeId:query.resumeId,
             i: i || {},
             dic: {
                 education: education,
@@ -95,14 +94,16 @@ class BaseInformation extends React.PureComponent {
   }
   async sendData(value) {
     const res = await updateBaseInformation(value);
-    if (res.code != 0) {
+    if (res.code ==0) {
+       Router.push('/resume')
+    } else {
       Toast.fail(res.msg);
     }
   }
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = formatData(value);
+        value = {...formatData(value),resumeId:this.props.resumeId}
         this.sendData(value);
       } else {
         alert('Validation failed');
@@ -129,12 +130,12 @@ class BaseInformation extends React.PureComponent {
           </InputItem>
           {/* </Item> */}
 
-          <Picker data={sex} cols={1} {...getFieldProps('sex', {initialValue:[i.sex],rules:[{required:true}]})} className="forss">
+          <Picker data={sex} cols={1} {...getFieldProps('sex', {initialValue:i.sex?[i.sex]:'',rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
                 <div><i className="iconfont icon-Sex"/><span className="itemTitle">性别</span></div>
             </List.Item>
           </Picker>
-          <Picker data={getYear()} cols={1} {...getFieldProps('birthYear', {initialValue:[i.birthYear],rules:[{required:true}]})} className="forss">
+          <Picker data={getYear()} cols={1} {...getFieldProps('birthYear', {initialValue:i.birthYear?[i.birthYear]:'',rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><i className="iconfont icon-icon-chushengriqi"/><span className="itemTitle">出生年月</span></div>
             </List.Item>
@@ -143,12 +144,12 @@ class BaseInformation extends React.PureComponent {
         <WhiteSpace/>
 
         <List>
-          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:[i.education],rules:[{required:true}]})} className="forss">
+          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:i.education?[i.education]:"",rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">最高学历</span></div>
             </List.Item>
           </Picker>
-          <Picker data={workingSeniority} cols={1} {...getFieldProps('workingYear', {initialValue:[i.workingYear],rules:[{required:true}]})} className="forss">
+          <Picker data={workingSeniority} cols={1} {...getFieldProps('workingYear', {initialValue:i.workingYear?[i.workingYear]:'',rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><i className="iconfont icon-time"/><span className="itemTitle">工作年限</span></div>
             </List.Item>
@@ -173,12 +174,12 @@ class BaseInformation extends React.PureComponent {
       </List>
       <WhiteSpace/>
       <List>
-        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:[i.city],rules:[{required:true}]})} className="forss">
+        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:i.city?[i.city]:'',rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><i className="iconfont icon-city"/><span className="itemTitle">所在城市</span></div>
           </List.Item>
         </Picker>
-        <Picker data={jobStatus} cols={1} {...getFieldProps('status', {initialValue:[i.status],rules:[{required:true}]})} className="forss">
+        <Picker data={jobStatus} cols={1} {...getFieldProps('status', {initialValue:i.status?[i.status]:'',rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">在职状态</span></div>
           </List.Item>
