@@ -4,8 +4,10 @@ import styled from 'styled-components'
 import Layout from '../layout/Nolayout';
 import ControlPoint from '@material-ui/icons/ControlPoint';
 import Avatar from '@material-ui/core/Avatar';
+import dayjs from 'dayjs'
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie'
+import { addBaseInformation } from '../services/recruit'
 const Head = styled.div`
   height:111px;
   background-color:#fff;
@@ -56,57 +58,74 @@ const Edit = styled.div`
   line-height: 30px;
   color: #ee5749;
 `
+const workingSeniority =[0,'1年以下','1-3年','3-5年','5-10年','10年以上']
+const salary =[ '面议','2k以下', '2k-5k','5k-10k','10k-15k','15k-25k','25k-50k', '50k以上'];
 class Resume extends React.PureComponent {
   static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
-    // const token = getCookie('token', req)
-    const userInfo = await fetch(`/getUserInfo`)
+    const token = getCookie('token', req)
+    const userInfo = await fetch(`/getUserInfo`,token)
+    const resume = await fetch(`/getResumeAllDetail`,token)
+    console.log(resume)
     return {
-      resume:{
-        a1:{},
-        a2:{},
-        a3:{},
-        a4:{}
-      },
+      resume: resume||'',
       userInfo: userInfo
      }
   }
+  state = {
+    resumeId: ''
+  }
+  async componentDidMount () {
+    console.log(this.props)
+    if (this.props.resume&&this.props.resume.appResume.resumeId) {
+      this.setState({
+        resumeId:this.props.resume.appResume.resumeId
+      })
+    } else {
+      const resumeId = (await addBaseInformation()).data
+      console.log(resumeId)
+      this.setState({
+        resumeId:resumeId
+      })
+    }
+  }
   render() {
-    const { userInfo, resume } = this.props
-    console.log('resume',resume)
+    const { userInfo, resume:{appResume,education,expectJob,workExperience} } = this.props
+    const resumeId = this.state.resumeId
+    console.log(this.props.resume)
     return (
       <Layout>
         <Head>
             <Avatar
             alt="Adelle Charles"
-            src={userInfo.userHead}
+            src={userInfo?userInfo.userHead:""}
             style={{height:60,width:60}}
           />
         </Head>
         <Wrapper>
           <Title>基本信息</Title>
           {
-            resume.a1
+            appResume
               ? <Card>
-                <Link href="/baseinformation?type=1">
+                <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
                   <Edit>
                     <i className="iconfont icon-edit"/>
                     <span>编辑</span>
                   </Edit>
                 </Link>
                   <ul className="ul">
-                    <li>姓名：幅度萨芬</li>
-                    <li>性别：幅度萨芬</li>
-                    <li>出生年月：幅度萨芬</li>
-                    <li>最高学历：幅度萨芬</li>
-                    <li>工作年限：幅度萨芬</li>
-                    <li>电话号码：幅度萨芬</li>
-                    <li>邮箱：幅度萨芬</li>
-                    <li>所在城市：幅度萨芬</li>
-                    <li>在职状态：幅度萨芬</li>
+                    <li>姓名：{appResume.name}</li>
+                    <li>性别：{appResume.sex==1?'女':'男'}</li>
+                    <li>出生年月：{appResume.birthYear}</li>
+                    <li>最高学历：{appResume.education}</li>
+                    <li>工作年限：{appResume.workingYear}</li>
+                    <li>电话号码：{appResume.phone}</li>
+                    <li>邮箱：{appResume.mail}</li>
+                    <li>所在城市：{appResume.city}</li>
+                    <li>在职状态：{appResume.status==1?'在职':'离职'}</li>
                   </ul>
                 </Card>
-              : <Link prefetch="prefetch" href="/baseinformation">
+              : <Link prefetch href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
                   <AddContainer>
                     <Add ><ControlPoint/>
                       <span>添加基本信息</span>
@@ -115,34 +134,78 @@ class Resume extends React.PureComponent {
                 </Link>
           }
           <Title>工作经历</Title>
-          <Link prefetch href="/workExperienceList">
-            <AddContainer>
-              <Add ><ControlPoint/><span>添加工作经历</span></Add>
-            </AddContainer>
-          </Link>
+          {
+            workExperience
+            ? <Card>
+                <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
+                  <Edit>
+                    <i className="iconfont icon-school"/>
+                    <span>编辑</span>
+                  </Edit>
+                </Link>
+                  {workExperience.map(i => {
+                    return(
+                      <ul className="list">
+                    <li>{dayjs(i.entryTime).format('YYYY-MM')}-{dayjs(i.leaveTime).format('YYYY-MM')}</li>
+                    <li className="company">{i.companyName}</li>
+                    <li className="job">{i.job}</li>
+                  </ul>
+                  )
+                  })}
+              </Card>
+              : <Link prefetch href={{pathname:'/workExperience',query:{resumeId:resumeId}}}>
+                <AddContainer>
+                  <Add ><ControlPoint/>
+                    <span>添加工作经历</span>
+                  </Add>
+                </AddContainer>
+              </Link>
+          }
+
           <Title>教育经历</Title>
-          <Link prefetch href="/educations">
-            <AddContainer>
-              <Add ><ControlPoint/><span>添加教育经历</span></Add>
-            </AddContainer>
-          </Link>
+          {
+            education
+            ? <Card>
+                <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
+                  <Edit>
+                    <i className="iconfont icon-school"/>
+                    <span>编辑</span>
+                  </Edit>
+                </Link>
+                  {education.map(i => {
+                    return(
+                      <ul className="list">
+                    <li>毕业时间：{dayjs(i.graduate).format('YYYY-MM')}</li>
+                    <li className="company">{i.school}</li>
+                    <li className="job">{i.educationBackground}-{i.major}</li>
+                  </ul>
+                  )
+                  })}
+              </Card>
+             :  <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId}}}>
+                <AddContainer>
+                  <Add ><ControlPoint/><span>添加教育经历</span></Add>
+                </AddContainer>
+              </Link>
+          }
+
           <Title>期望工作</Title>
           {
-            resume.a4
+            expectJob
             ? <Card>
-              <Link href="/expectedwork?type=1">
+              <Link href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
                 <Edit>
                   <i className="iconfont icon-edit"/>
                   <span>编辑</span>
                 </Edit>
               </Link>
                 <ul className="ul">
-                  <li>期望岗位：幅度萨芬</li>
-                  <li>期望商区：幅度萨芬</li>
-                  <li>期望月薪：幅度萨芬</li>
+                  <li>期望岗位：{expectJob.expectJob}</li>
+                  <li>期望城市：{expectJob.expectCity}</li>
+                  <li>期望月薪：{salary[expectJob.expectSalary]}</li>
                 </ul>
               </Card>
-              : <Link prefetch="prefetch" href="/expectedwork">
+              : <Link prefetch href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
                   <AddContainer>
                     <Add ><ControlPoint/>
                       <span>添加期望工作</span>
@@ -159,6 +222,23 @@ class Resume extends React.PureComponent {
             list-style:none;
             font-size: 13px;
             line-height: 30px;
+          }
+          .list{
+            background:url(static/resume_list.jpg) no-repeat;
+            background-size:15px 100%;
+            color:#333333;
+            margin:0;
+            padding:0 20px;
+            list-style:none;
+            font-size: 13px;
+          }
+          .company{
+            margin:10px 0;
+          }
+          .job{
+            font-size:12px;
+            color:#999999;
+            padding-bottom:20px;
           }
         `}</style>
       </Layout>

@@ -5,7 +5,7 @@ const ok = {
 const insertResume = {
     "code": 0,
     "msg": "ok",
-    // "data" "2ebe0e2dae94433b89d8f50532c74829"
+    "data":"2ebe0e2dae94433b89d8f50532c74829"
 }
 function selectByType(ctx) {
   const params = ctx.query.type;
@@ -260,6 +260,53 @@ const uploadImage =   {
     "msg": "ok",
     "data":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg"
   }
+const getResumeAllDetail = {
+    "code": 0,
+    "msg": "ok",
+    "data": {
+        "appResume": {
+            "resumeId": "dd49fd4256ba4e24ab975444b2deea84",
+            "name": "林先生",
+            "sex": "1",
+            "birthYear": 1996,
+            "education": "博士",
+            "workingYear": "3",
+            "phone": "18312320206",
+            "mail": "1243935366@qq.ocm",
+            "city": 520658,
+            "status": "1"
+        },
+        "education": [
+            {
+                "educationId": "749739e9ba5d460caf351370a1a40278",
+                "school": "麻省理工",
+                "major": "软件科学",
+                "graduate": "2005",
+                "educationBackground": "博士"
+            },
+            {
+                "educationId": "43d9cf34b95946d7a3108ead953e9f7b",
+                "school": "常春藤大学",
+                "major": "软件科学",
+                "graduate": "2003",
+                "educationBackground": "硕士"
+            }
+        ],
+        "workExperience": [
+            {
+                "workExperienceId": "055d75e025864fbf9932e7d48d43d7d4",
+                "companyName": "众银云测",
+                "job": "销售",
+                "entryTime": 1277950210000,
+                "leaveTime": 1372644610000
+            }
+        ],
+        "expectJob": {
+            "expectJob": "销售主管",
+            "expectCity": 520658,
+            "expectSalary": "1"
+        }
+    }
+}
 
-
-module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail, uploadImage}
+module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail, uploadImage, getResumeAllDetail}
