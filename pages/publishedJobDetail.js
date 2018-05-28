@@ -45,7 +45,7 @@ const Button =styled.button`
   border-radius: 5px;
   background: ${props => props.delete ? '#ee5648' : '#fdc041'};
 `
-class publishJobDetail extends React.PureComponent {
+class publishedJobDetail extends React.PureComponent {
   handleClickDelete = () => {
     alert('删除', '你确定删除该职位吗?', [
       { text: '取消', onPress: () => console.log('cancel') },
@@ -97,4 +97,4 @@ class publishJobDetail extends React.PureComponent {
   }
 }
 
-export default publishJobDetail;
+export default publishedJobDetail;

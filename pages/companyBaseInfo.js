@@ -73,6 +73,9 @@ class CompanyBaseInfo extends React.PureComponent {
     this.setState({
       logo:res.data
     })
+    this.props.form.setFieldsValue({
+      logo:res.data
+    })
   }
   render () {
     const { files, files2 } = this.state;
@@ -86,7 +89,7 @@ class CompanyBaseInfo extends React.PureComponent {
     const uploadButton = (
       <div>
         {/* <Icon type={this.state.loading ? 'loading' : 'plus'} /> */}
-        <div className="ant-upload-text">Upload</div>
+        <div className="ant-upload-text"><i className="iconfont icon-add2" style={{fontSize:'40px',fontWeight:700,color:'#aeaeae'}}></i></div>
       </div>
     );
     return (
@@ -141,7 +144,7 @@ class CompanyBaseInfo extends React.PureComponent {
            })}
              >
 
-             {this.state.businessLicense
+             {this.state.logo
                ?Img2
               : uploadButton
             }
@@ -151,7 +154,7 @@ class CompanyBaseInfo extends React.PureComponent {
         <P>上传公司标志</P>
 
         <WingBlank style={{padding:'0 17px'}}>
-          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>保存/下一步</Button>
+          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>保存-下一步</Button>
         </WingBlank>
         <style jsx global>{`
         .am-list-item .am-input-label {

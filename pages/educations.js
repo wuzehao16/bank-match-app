@@ -5,11 +5,7 @@ import Router from 'next/router'
 import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
 import Layout from '../layout/RecruitLayout'
-import { Card, List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile';
-import { Form } from 'antd';
-
-const FormItem = Form.Item;
-const Item = List.Item;
+import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 
 class Educations extends React.PureComponent {
   static async getInitialProps ({query,req}) {
@@ -44,7 +40,6 @@ class Educations extends React.PureComponent {
   //   })
   // }
   render() {
-    const { getFieldProps } = this.props.form;
     const {educationList} = this.props.educationList
     console.log('educationList',educationList)
     return (
@@ -68,7 +63,9 @@ class Educations extends React.PureComponent {
         <WhiteSpace/>
         
         <WingBlank>
-          <Button type="primary" onClick={this.add} style={{marginTop:'50px',fontSize:'14px'}}>新增教育经历</Button>
+          <Link href="/educationExperience">
+            <Button type="primary" style={{marginTop:'50px',fontSize:'14px'}}>新增教育经历</Button>
+          </Link>  
           <WhiteSpace />
         </WingBlank>
         <style jsx global>{`
@@ -94,5 +91,4 @@ class Educations extends React.PureComponent {
   }
 }
 
-const EducationsWapper = Form.create()(Educations);
-export default EducationsWapper;
+export default Educations;

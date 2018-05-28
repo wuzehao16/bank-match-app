@@ -108,7 +108,7 @@ class Resume extends React.PureComponent {
               ? <Card>
                 <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
                   <Edit>
-                    <i className="iconfont icon-school"/>
+                    <i className="iconfont icon-edit"/>
                     <span>编辑</span>
                   </Edit>
                 </Link>
@@ -194,7 +194,7 @@ class Resume extends React.PureComponent {
             ? <Card>
               <Link href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
                 <Edit>
-                  <i className="iconfont icon-school"/>
+                  <i className="iconfont icon-edit"/>
                   <span>编辑</span>
                 </Edit>
               </Link>

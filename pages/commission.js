@@ -97,7 +97,7 @@ export default class extends React.Component {
             <div>{item.openAmt}</div>
           </div>
           <div className="price">
-            <div>累计收益(元)</div>
+            <div>累计佣金(元)</div>
             <div>{item.sumAmt}</div>
           </div>
         </Income>

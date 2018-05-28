@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
-import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast } from 'antd-mobile';
-import { Form } from 'antd';
+import Layout from '../layout/RecruitLayout'
+import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast,TextareaItem } from 'antd-mobile'
+import { Form } from 'antd'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
@@ -130,10 +130,9 @@ class PublishJob extends React.PureComponent {
   publishJob = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        const validateValues = this.props.form.getFieldsValue();
-        console.log('validateValues',validateValues);
-
-        // value = formatData(value)
+        console.log('value1',value);
+        value = formatData(value)
+        console.log('value2',value);
         // this.sendData(value);
       } else {
         alert('Validation failed');
@@ -155,15 +154,6 @@ class PublishJob extends React.PureComponent {
                 <div>职位名称</div>
             </List.Item>
           </Picker>
-          <Link href="/jobDescribe"><Item arrow="horizontal" onClick={() => {}}>职位描述</Item></Link>
-          
-          {/* <Picker cols={1} title="职位描述" {...getFieldProps('jobDesribe', {rules:[{required:true}]})} className="forss">
-            <List.Item arrow="horizontal">
-              <div>职位描述</div>
-            </List.Item>
-          </Picker> */}
-
-          
           <Picker data={nature} cols={1} title="工作性质" {...getFieldProps('nature', {initialValue:i.nature?[i.nature]:'',rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div>工作性质</div>
@@ -198,7 +188,22 @@ class PublishJob extends React.PureComponent {
             </List.Item>
           </Picker>
       </List>
-      <WingBlank style={{padding:'0 17px'}}>
+      <List renderHeader={() => '职位描述'}>
+          <TextareaItem
+            {...getFieldProps('jobDesribe',{
+              rules:[
+                {
+                  required: true
+                }
+              ]
+            })}
+            rows={8}
+            count={1600}
+            placeholder='请输入该职位描述…'
+            style={{background:'#f2f2f2'}}
+          />
+      </List>
+      <WingBlank>
         <Button onClick={this.publishJob} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>发布</Button><WhiteSpace />
       </WingBlank>
       <style jsx global>{`
@@ -209,6 +214,17 @@ class PublishJob extends React.PureComponent {
           .am-list-item .am-list-line .am-list-content {
             font-size: 14px !important;
             color: #3c3c3c !important;
+          }
+          .am-list-header {
+            background: #fff;
+            color: #3c3c3c;
+          }
+          .am-list-body::before {
+            height: 0px !important;
+          }
+          .am-textarea-control textarea {
+            font-size: 14px !important;
+            color: #666 !important;
           }
         `}
         </style>
