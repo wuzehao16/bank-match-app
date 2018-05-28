@@ -55,8 +55,10 @@ class WorkDetail extends React.PureComponent {
              <span className="title">职位描述</span>
              <Line></Line>
            </Title>
-           <div>
-             yaoqiu
+          <div dangerouslySetInnerHTML={{
+                   __html: '<h3>hahhah</h3>'
+               }}
+           >
            </div>
            <Title>
              <span className="title">公司信息</span>

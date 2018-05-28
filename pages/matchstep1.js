@@ -26,6 +26,7 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
+    border:'none'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -121,17 +122,18 @@ class MatchStep1 extends React.Component {
               {getFieldDecorator('name', {
                 initialValue:item.name,
               })(
-                <TextField
-                  required
-                  id="name"
-                  className={classes.textField}
-                  inputProps={{
-                    maxLength: '10',
-                    pattern:'[\u4e00-\u9fa5|a-zA-Z]*',
-                    title:"请输入中文或英文字符"
-                  }}
-                  placeholder="请输入姓名"
-                />
+                // <TextField
+                //   required
+                //   id="name"
+                //   className={classes.textField}
+                //   inputProps={{
+                //     maxLength: '10',
+                //     pattern:'[\u4e00-\u9fa5|a-zA-Z]*',
+                //     title:"请输入中文或英文字符"
+                //   }}
+                //   placeholder="请输入姓名"
+                // />
+                <input placeholder="请输入姓名" type="text" min={0} max={100} style={{width:100}}/>
               )}
             </FormItem>
 
@@ -146,21 +148,21 @@ class MatchStep1 extends React.Component {
               {getFieldDecorator('exLoanAmount', {
                 initialValue: item.exLoanAmount,
               })(
-                <TextField
-                  required
-                  // label="期望贷款金额"
-                   className={classes.textField}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">元</InputAdornment>
-                  }}
-                  inputProps={{
-                    type:'number',
-                    min: 1,
-                    max: 99999999
-                  }}
-                  placeholder="请输入金额"
-                />
-
+                // <TextField
+                //   required
+                //   // label="期望贷款金额"
+                //    className={classes.textField}
+                //   InputProps={{
+                //     endAdornment: <InputAdornment position="end">元</InputAdornment>
+                //   }}
+                //   inputProps={{
+                //     type:'number',
+                //     min: 1,
+                //     max: 99999999,
+                //   }}
+                //   placeholder="请输入金额"
+                // />
+                <input placeholder="请输入金额" type="text" min={1} max={99999999} style={{width:100}}/>
               )}
             </FormItem>
           </Container>
@@ -210,6 +212,20 @@ class MatchStep1 extends React.Component {
           </FormItem>
         </div>
       </Layout>
+      <style jsx>{`
+        input{
+         outline:none;
+         border-color: #878787;
+         border-style: solid;
+         border-radius:0;
+         border-top-width: 0px;
+         border-right-width: 0px;
+         border-bottom-width: 0px;
+         border-left-width: 0px;
+         font-size: 16px;
+        }
+      `}
+      </style>
       </Form>
     )
   }

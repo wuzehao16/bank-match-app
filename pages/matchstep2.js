@@ -46,7 +46,7 @@ const NextButton = styled(Button)`
 const SubContain = styled.div`
   color: #646464;
   background-color: #fff;
-  padding: 10px 0px 20px 5px;
+  padding: 20px 0px 20px 5px;
   border-bottom: 1px solid #f2f2f2;
   font-size: 16px;
 `
@@ -167,7 +167,7 @@ class MatchStep2 extends React.Component {
                                        message:'请输入具体年龄'
                                     }],
                                   })(
-                                      <input  type="number" min={0} max={100} style={{width:60}}/>
+                                      <input placeholder="请输入"  type="number" min={0} max={100} style={{width:60}}/>
                                   )}
                                 </FormItem>
                                   <span>岁</span>
@@ -625,6 +625,7 @@ class MatchStep2 extends React.Component {
          border-bottom-width: 0px;
          border-left-width: 0px;
          font-size: 16px;
+         text-align:right;
         }
         .second-level{
           color: #646464;

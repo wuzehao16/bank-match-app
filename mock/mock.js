@@ -255,4 +255,11 @@ const getExpectJobDetail = {
     }
 }
 
-module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail}
+const uploadImage =   {
+    "code": 0,
+    "msg": "ok",
+    "data":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg"
+  }
+
+
+module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail, uploadImage}

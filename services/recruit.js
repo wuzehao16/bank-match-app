@@ -9,7 +9,13 @@ export async function addBaseInformation(params) {
     },
   });
 }
-//新增和编辑简历基本信息
+export async function uploadImage(formData) {
+  return request(`/app/uploadImage`, {
+    method: 'POST',
+    body: formData
+  });
+}
+//新增和编辑时候调用
 export async function updateBaseInformation(params) {
   return request(`/app/updateResume`, {
     method: 'PUT',
@@ -67,4 +73,3 @@ export async function updateWorkExperience(params) {
     },
   });
 }
-
