@@ -73,6 +73,9 @@ class CompanyBaseInfo extends React.PureComponent {
     this.setState({
       logo:res.data
     })
+    this.props.form.setFieldsValue({
+      logo:res.data
+    })
   }
   render () {
     const { files, files2 } = this.state;
@@ -86,7 +89,7 @@ class CompanyBaseInfo extends React.PureComponent {
     const uploadButton = (
       <div>
         {/* <Icon type={this.state.loading ? 'loading' : 'plus'} /> */}
-        <div className="ant-upload-text">Upload</div>
+        <div className="ant-upload-text"><i className="iconfont icon-add2" style={{fontSize:'40px',fontWeight:700,color:'#aeaeae'}}></i></div>
       </div>
     );
     return (
@@ -141,7 +144,7 @@ class CompanyBaseInfo extends React.PureComponent {
            })}
              >
 
-             {this.state.businessLicense
+             {this.state.logo
                ?Img2
               : uploadButton
             }

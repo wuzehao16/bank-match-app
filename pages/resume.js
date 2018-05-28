@@ -90,7 +90,7 @@ class Resume extends React.PureComponent {
               ? <Card>
                 <Link href="/baseinformation?type=1">
                   <Edit>
-                    <i className="iconfont icon-school"/>
+                    <i className="iconfont icon-edit"/>
                     <span>编辑</span>
                   </Edit>
                 </Link>
@@ -132,7 +132,7 @@ class Resume extends React.PureComponent {
             ? <Card>
               <Link href="/expectedwork?type=1">
                 <Edit>
-                  <i className="iconfont icon-school"/>
+                  <i className="iconfont icon-edit"/>
                   <span>编辑</span>
                 </Edit>
               </Link>

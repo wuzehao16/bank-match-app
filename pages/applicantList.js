@@ -1,9 +1,9 @@
 import React, { Fragment }from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
-import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile';
-import { Form } from 'antd';
+import Layout from '../layout/RecruitLayout'
+import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile'
+import { Form } from 'antd'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
@@ -19,7 +19,14 @@ const Info = styled.span`
   font-size: 12px;
   color: #999;
 `
-
+const Divider = styled.span`
+  display:inline-block;
+  margin: 0 3px;
+`
+const Salary = styled.span`
+  font-size: 12px;
+  color:rgb(238,86,72);
+`
 class PublishedJobList extends React.PureComponent {
   // static async getInitialProps ({query,req}) {
   //   // eslint-disable-next-line no-undef
@@ -44,13 +51,13 @@ class PublishedJobList extends React.PureComponent {
     return (
       <Layout title="人才列表">
         <WhiteSpace/>
-        <WingBlank size="md" style={{paddingLeft:'2px'}}>
-          <Button inline size="small" type="inline ghost">客户经理</Button>
-          <Button inline size="small" type="inline ghost">高级客户经理</Button>
-          <Button inline size="small" type="inline ghost">销售代表</Button>
-          <Button inline size="small" type="inline ghost">电话销售</Button>
-        </WingBlank>
-
+        <div style={{display:'flex'}}>
+          <Button inline size="small" type="inline ghost" style={{flex:'1'}}>客户经理</Button>
+          <Button inline size="small" type="inline ghost" style={{flex:'1.5'}}>高级客户经理</Button>
+          <Button inline size="small" type="inline ghost" style={{flex:'1'}}>销售代表</Button>
+          <Button inline size="small" type="inline ghost" style={{flex:'1'}}>电话销售</Button>
+        </div>
+        <WhiteSpace/>
         <List >
         <Link href="/resumeDetail：resumeId">
             <Item 
@@ -60,9 +67,9 @@ class PublishedJobList extends React.PureComponent {
             <Name>王小姐</Name> 
             <Brief>
               <Fragment>
-                <Info>三年|</Info>
-                <Info>本科|</Info>
-                <Info>10-15K</Info>
+                <Info>三年<Divider>|</Divider></Info>
+                <Info>本科<Divider>|</Divider></Info>
+                <Salary>10-15K</Salary>
               </Fragment>
             </Brief>
             </Item>
@@ -75,9 +82,9 @@ class PublishedJobList extends React.PureComponent {
             <Name>王小姐</Name> 
             <Brief>
               <Fragment>
-                <Info>三年|</Info>
-                <Info>本科|</Info>
-                <Info>10-15K</Info>
+                <Info>三年<Divider>|</Divider></Info>
+                <Info>本科<Divider>|</Divider></Info>
+                <Salary>10-15K</Salary>
               </Fragment>
             </Brief>
             </Item>
@@ -90,9 +97,9 @@ class PublishedJobList extends React.PureComponent {
             <Name>王小姐</Name> 
             <Brief>
               <Fragment>
-                <Info>三年|</Info>
-                <Info>本科|</Info>
-                <Info>10-15K</Info>
+                <Info>三年<Divider>|</Divider></Info>
+                <Info>本科<Divider>|</Divider></Info>
+                <Salary>10-15K</Salary>
               </Fragment>
             </Brief>
             </Item>

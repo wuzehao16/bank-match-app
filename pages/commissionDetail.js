@@ -119,7 +119,7 @@ export default class extends React.Component {
                     marginTop: 30
                   }}>
                   <Row>
-                    <L>当前收益(元)</L>
+                    <L>当前佣金(元)</L>
                     <R>已结算(元)：{i.settledAmount}</R>
                   </Row>
                   <Row>

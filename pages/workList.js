@@ -1,29 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Link from 'next/link'
+import fetch from '../lib/fetch'
 import styled from 'styled-components'
+import Router from 'next/router'
+import getCookie from '../lib/getCookie'
 import Layout from '../layout/RecruitLayout';
 import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile';
 import { Form } from 'antd';
 import { ListView, Button } from 'antd-mobile';
 
-const data = [
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-    title: 'Meet hotel',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
-    title: 'McDonald\'s invites you',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-    title: 'Eat the week',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-];
+
+// const data = [
+//   {
+//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+//     title: 'Meet hotel',
+//     des: '不是所有的兼职汪都需要风吹日晒',
+//   }
+// ];
+
 const NUM_ROWS = 5;
 let pageIndex = 0;
 
@@ -36,20 +31,27 @@ function genData(pIndex = 0) {
 }
 
 class workList extends React.Component {
-  constructor(props) {
-    super(props);
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    });
-
-    this.state = {
+    static async getInitialProps ({query,req}) {
+      // eslint-disable-next-line no-undef
+      // const resumeID = query.resumeID
+      const token = req ? getCookie('token', req) : ''
+      const data = await fetch(`/getJobList`)
+      const dataSource = new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      });
+      return { 
+                data: data || {},
+                dataSource: dataSource
+            }
+    };
+    
+    state = {
       dataSource,
       refreshing: true,
       isLoading: true,
       height: '1000px',
       useBodyScroll: false,
     };
-  }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   // componentWillReceiveProps(nextProps) {
@@ -249,5 +251,4 @@ class workList extends React.Component {
   }
 }
 
-const workListWapper = Form.create()(workList);
-export default workListWapper;
+export default workList;

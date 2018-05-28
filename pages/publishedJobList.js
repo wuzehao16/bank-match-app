@@ -3,7 +3,6 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/RecruitLayout';
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile';
-import { Form } from 'antd';
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
@@ -99,5 +98,4 @@ class PublishedJobList extends React.PureComponent {
     )
   }
 }
-const PublishedJobListWapper = Form.create()(PublishedJobList);
-export default PublishedJobListWapper;
+export default PublishedJobList;
