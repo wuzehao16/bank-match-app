@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Steps, { Step } from 'rmc-steps';
 import 'isomorphic-unfetch';
 import Layout from '../layout/Elayout';
-import  stylesheet from '../styles/rmc-steps.css';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie'
 const Pd = styled.div`
@@ -44,6 +43,7 @@ const Input = styled.input`
   background: papayawhip;
   border: none;
   border-radius: 0px;
+  vertical-align: bottom;
 `
 const Square = styled.span`
   background: ${props => {
@@ -257,7 +257,6 @@ class ProductDetail extends React.PureComponent {
     return (
 
       <Layout title="产品详情">
-        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Pd>
           <div className="head">
             <div className="title-container">
