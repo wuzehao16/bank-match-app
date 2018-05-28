@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import  stylesheet from '../styles/rmc-steps.css';
 
 export default ({ children, title = '产品详情' }) => (
   <div className='app'>
     <Head>
       <title>{ title }</title>
       <meta charSet='utf-8' />
+      <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
     </Head>
     {/* <header>
