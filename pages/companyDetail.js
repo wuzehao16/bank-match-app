@@ -5,11 +5,22 @@ import Layout from '../layout/RecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
+import address from '../lib/address'
 import { InputItem, List, Button, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
+
+function getAddress(address) {
+  return   address.map(ad=>{
+            const result = {value:ad.name,label:ad.name};
+            if (ad.children) {
+              result.children =getAddress(ad.children)
+            }
+            return result
+          })
+}
 
 const Head = styled.div`
   padding:15px 0 15px 25px;
@@ -71,7 +82,7 @@ class companyDetail extends React.PureComponent {
   static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const userInfo = await fetch(`/getUserInfo`)
+    const userInfo = await fetch(`/getUserInfo`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
     return { dic: {
               orgType:orgType,
@@ -89,21 +100,22 @@ class companyDetail extends React.PureComponent {
   }
 
   save = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
+    this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
         const validateValues = this.props.form.getFieldsValue();
         const validateData = {
-          headProtrait: validateValues.headProtrait,
-          userName:validateValues.userName,
-          companyName:validateValues.companyName,
-          intro:validateValues.intro,
-          organizationCategory:validateValues.organizationCategory.toString(),
-          scale:validateValues.scale.toString(),
-          job:validateValues.job,
-          mail:validateValues.mail,
-          addressDetial:validateValues.addressDetial,
+          headProtrait: value.headProtrait,
+          userName:value.userName,
+          companyName:value.companyName,
+          intro:value.intro,
+          organizationCategory:value.organizationCategory.toString(),
+          scale:value.scale.toString(),
+          job:value.job,
+          mail:value.mail,
+          address:value.address,
+          addressDetial:value.addressDetial,
         }
-        console.log(validateData);
+        console.log(value);
       } else {
         console.log('Validation failed',error);
       }
@@ -180,6 +192,17 @@ class companyDetail extends React.PureComponent {
             <div className="itemTitle">接收简历邮箱</div>
           </InputItem>
         </List>
+        {/* <List> */}
+          <Picker
+            extra="请选择"
+        data={getAddress(address)}
+        title="地区"
+        {...getFieldProps('address', {
+        })}
+      >
+        <List.Item arrow="horizontal">公司地址</List.Item>
+      </Picker>
+        {/* </List> */}
         <List renderHeader={() => '所在地区(详细地址)'}>
           <TextareaItem
             {...getFieldProps('addressDetial',{
@@ -194,7 +217,7 @@ class companyDetail extends React.PureComponent {
             // placeholder='请输入公司详细地址'
             style={{background:'#f2f2f2',padding:'3px 3px'}}
           />
-        </List>  
+        </List>
         <WhiteSpace />
         <List>
           <InputItem
@@ -210,17 +233,20 @@ class companyDetail extends React.PureComponent {
         </List>
         <WhiteSpace />
         <ImgGroup>
-          <Img 
-            src={userInfo.userHead} 
+          <Img
+            src={userInfo.userHead}
             {...getFieldProps('logo',{initialValue:''})}
           />
           <P>公司标志</P>
-          <Img 
-            src={userInfo.userHead} 
+          <Img
+            src={userInfo.userHead}
             {...getFieldProps('businessLicense',{initialValue:''})}
           />
           <P>营业执照</P>
         </ImgGroup>
+        <WingBlank style={{padding:'0 17px'}}>
+          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.save}>保存</Button>
+        </WingBlank>
         <style jsx global>{`
           .am-list-header {
             background: #fff !important;
