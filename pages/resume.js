@@ -66,7 +66,6 @@ class Resume extends React.PureComponent {
     const token = getCookie('token', req)
     const userInfo = await fetch(`/getUserInfo`,token)
     const resume = await fetch(`/getResumeAllDetail`,token)
-    console.log(resume)
     return {
       resume: resume||'',
       userInfo: userInfo
@@ -98,7 +97,7 @@ class Resume extends React.PureComponent {
         <Head>
             <Avatar
             alt="Adelle Charles"
-            src={userInfo?userInfo.userHead:""}
+            src={userInfo.userHead?userInfo.userHead:"/static/resume_head.png"}
             style={{height:60,width:60}}
           />
         </Head>
@@ -145,7 +144,7 @@ class Resume extends React.PureComponent {
                 </Link>
                   {workExperience.map(i => {
                     return(
-                      <ul className="list">
+                      <ul className="list" key={i.workExperienceId}>
                     <li>{dayjs(i.entryTime).format('YYYY-MM')}-{dayjs(i.leaveTime).format('YYYY-MM')}</li>
                     <li className="company">{i.companyName}</li>
                     <li className="job">{i.job}</li>
@@ -174,7 +173,7 @@ class Resume extends React.PureComponent {
                 </Link>
                   {education.map(i => {
                     return(
-                      <ul className="list">
+                      <ul className="list" key={i.educationId}>
                     <li>毕业时间：{dayjs(i.graduate).format('YYYY-MM')}</li>
                     <li className="company">{i.school}</li>
                     <li className="job">{i.educationBackground}-{i.major}</li>

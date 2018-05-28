@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import Router from 'next/router'
 import { Picker, List, InputItem, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { Form } from 'antd';
 import Layout from '../layout/RecruitLayout';
@@ -75,9 +76,8 @@ const salary =[
 class ExpectedWork extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    var i;
-    const token = req ? getCookie('token', req) : '';
-    i = await fetch(`/getExpectJobDetail`);
+    const token = getCookie('token', req)
+    const i = await fetch(`/getExpectJobDetail?resumeId=${query.resumeId}`, token);
     const jobTitle = await fetch(`/selectByType?type=jobTitle`)
     const city = await fetch(`/selectByType?type=city`)
     return {
@@ -98,7 +98,9 @@ class ExpectedWork extends React.PureComponent {
   }
   async sendData(value) {
     const res = await updateExpectedWork(value);
-    if (res.code != 0) {
+    if (res.code ==0) {
+       Router.push('/resume')
+    } else {
       Toast.fail(res.msg);
     }
   }
@@ -114,7 +116,7 @@ class ExpectedWork extends React.PureComponent {
   }
 
   render() {
-    const {dic:{city , jobTitle} , i={}} = this.props;
+    const {dic:{city , jobTitle} , i} = this.props;
     const { getFieldProps, getFieldsError } = this.props.form;
     const jobTitleOption = jobTitle.map(i => {return {value:i.code, label:i.name}})
     const cityOption = city.map(i => {return {value:i.code, label:i.name}})
