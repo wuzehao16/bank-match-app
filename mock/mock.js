@@ -187,15 +187,15 @@ const getWorkExperienceList = {
         "workExperienceId":"2ebe0e2dae94433b89d8f50532c74829",
         "companyName":"众银云测",
         "job":"销售",
-        "entryTime":"1526969363000",
-        "leaveTime":"1526969363000",
+        "entryTime":1526969363000,
+        "leaveTime":1526969363000,
         },
         {
         "workExperienceId":"2ebe0e2dae94433b89d8f50532c74829",
         "companyName":"众银云测",
         "job":"销售",
-        "entryTime":"1526969363000",
-        "leaveTime":"1526969363000",
+        "entryTime":1526969363000,
+        "leaveTime":1526969363000,
         }
     ]
 }
@@ -206,8 +206,8 @@ const getWorkExperienceDetail = {
         "workExperienceId":"2ebe0e2dae94433b89d8f50532c74829",
         "companyName":"众银云测",
         "job":"销售",
-        "entryTime":"1526969363000",
-        "leaveTime":"1526969363000",
+        "entryTime":1526969363000,
+        "leaveTime":1526969363000,
         "jobContent":"工作内容"
     }
 }
@@ -253,6 +253,27 @@ const getExpectJobDetail = {
          "expectLowestSalary":"10",
           "expectHighestSalary":"50"
     }
+}
+
+const getJobList = {
+    "code": 0,
+    "msg": "ok",
+    "data": [
+        {
+            "jobId":"246d568067254847a6e26e405796a125",
+            "jobName":"1",
+            "ageLimit":"1",
+            "education":"1",
+            "nature":"1",
+            "salary":"10",
+          "companyName":"众银云测",
+          "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
+          "organizationCategory":"1",
+          "scale":"1",
+          "address":"123548",
+          "createTime":"152568548565"
+      }
+    ]
 }
 
 const uploadImage =   {
@@ -309,4 +330,4 @@ const getResumeAllDetail = {
     }
 }
 
-module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail, uploadImage, getResumeAllDetail}
+module.exports = {ok, insertResume, selectByType, getUserInfo, getResumeDetail, getResumeList, getWorkExperienceList,getWorkExperienceDetail,getEducationDetail,getEducationList, getExpectJobDetail, getJobList, uploadImage, getResumeAllDetail}

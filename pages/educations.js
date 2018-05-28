@@ -10,27 +10,13 @@ import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 class Educations extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    var educationList;
+    var i;
     const token = req ? getCookie('token', req) : ''
-    if (query.type) {
-      educationList = await fetch(`/getEducationList`)
-    }
-    console.log('educationList',educationList);
+    i = await fetch(`/getEducationList`,token);
     return { 
-              educationList: educationList || {
-                graduate:'2018',
-                school:'民大',
-                educationBackground:'本科',
-                major:'信管'
-              }
+              resumeId:query.resumeId,
+              i: i || []
           }
-  }
-
-  add = () => {
-    Router.push({
-      pathname:'/educationExperience',
-      // query: { ...this.resumeId }
-    })
   }
 
   // edit = () => {
@@ -39,31 +25,38 @@ class Educations extends React.PureComponent {
   //     // query: { ...this.resumeId }
   //   })
   // }
+
   render() {
-    const {educationList} = this.props.educationList
-    console.log('educationList',educationList)
+    const {i, resumeId }= this.props
     return (
       <Layout  title="教育经历">
-        <WingBlank size="lg">
-          <WhiteSpace size="lg" />
-          <Link href='/educationExperience'>
-            <Card>
-              <Card.Header
-                title={<span>毕业年份：{educationList.graduate}</span>}
-                extra={<div style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
-              />
-              <Card.Body>
-                <div className="school">{educationList.school}杭州电子科技大学</div>
-                <div className="majorInfo"><span>{educationList.educationBackground}-</span><span>{educationList.major}</span></div>
-              </Card.Body>
-            </Card>
-          </Link>
-          <WhiteSpace size="lg" /> 
-        </WingBlank>
-        <WhiteSpace/>
-        
+        {i.length==0?null:<div>
+          {
+          i.map((item,index) =>
+            <WingBlank size="lg" key={index}>
+              <WhiteSpace size="lg" />
+              <Link prefetch href={{pathname:'/educationExperience',query:{educationId:item.educationId}}}>
+                <Card>
+                  <Card.Header
+                    title={<span>毕业年份：{item.graduate}</span>}
+                    extra={<div style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
+                  />
+                  <Card.Body>
+                    <div className="school">{item.school}杭州电子科技大学</div>
+                    <div className="majorInfo"><span>{item.educationBackground}-</span><span>{item.major}</span></div>
+                  </Card.Body>
+                </Card>
+              </Link>
+              <WhiteSpace size="lg" /> 
+            {/* <WhiteSpace/> */}
+          </WingBlank>
+          )
+          }
+        </div>
+        }
+      
         <WingBlank>
-          <Link href="/educationExperience">
+          <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId}}}>
             <Button type="primary" style={{marginTop:'50px',fontSize:'14px'}}>新增教育经历</Button>
           </Link>  
           <WhiteSpace />

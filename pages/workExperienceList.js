@@ -4,6 +4,7 @@ import getCookie from '../lib/getCookie'
 import fetch from '../lib/fetch'
 import styled from 'styled-components'
 import Router from 'next/router'
+import dayjs from 'dayjs'
 import Layout from '../layout/RecruitLayout'
 import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile'
 
@@ -12,13 +13,10 @@ class WorkExperienceList extends React.PureComponent {
     // eslint-disable-next-line no-undef
     // const resumeID = query.resumeID
     const token = req ? getCookie('token', req) : ''
-    const WorkExperienceList = await fetch('/getWorkExperienceList')
-    console.log('WorkExperienceList', WorkExperienceList);
-    WorkExperienceList.entryTime = `${dayjs(WorkExperienceList.entryTime).year()}.${dayjs(WorkExperienceList.entryTime).month()+1}`;
-    WorkExperienceList.leaveTime = `${dayjs(WorkExperienceList.leaveTime).year()}.${dayjs(WorkExperienceList.leaveTime).month()+1}`;
+    const WorkExperienceList = await fetch('/getWorkExperienceList',token);
     return { 
-              educationList: educationList || {},
-              resumeID: resumeID
+            WorkExperienceList: WorkExperienceList || [],
+            resumeId: query.resumeId
           }
   };
 
@@ -32,32 +30,34 @@ class WorkExperienceList extends React.PureComponent {
   edit = () => {
   }
   render() {
-    const {WorkExperienceList, resumeID} = this.props;
-  
+    const {WorkExperienceList, resumeId} = this.props;
     return (
       <Layout  title="工作经历">
-      {WorkExperienceList.map(item => 
-      <WingBlank size="lg">
-          <WhiteSpace size="lg" />
-          <Link href='/workExperience'>
-            <Card>
-              <Card.Header
-                title={<div><span>{WorkExperienceList.entryTime}</span> <span>{WorkExperienceList.leaveTime}</span></div>}
-                extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
-              />
-              <Card.Body>
-                <div className="company">众银云测有限公司</div>
-                <div className="job">销售主管</div>
-              </Card.Body>
-            </Card>
-          </Link>
-          <WhiteSpace size="lg" /> 
-          <WhiteSpace/>
-        </WingBlank>
-      )} 
+        {WorkExperienceList.length==0?null:<div>
+          {WorkExperienceList.map((item,index) => 
+            <WingBlank size="lg" key={index}>
+              <WhiteSpace size="lg" />
+              <Link href={{pathname:'/workExperience',query:{workExperienceId:item.workExperienceId}}} >
+                <Card>
+                  <Card.Header
+                    title={<span>{dayjs(item.entryTime).format('YYYY.MM')}-{dayjs(item.leaveTime).format('YYYY.MM')}</span>}
+                    extra={<div onClick={this.edit} style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
+                  />
+                  <Card.Body>
+                    <div className="company">{item.companyName}</div>
+                    <div className="job">{item.job}</div>
+                  </Card.Body>
+                </Card>
+              </Link>
+              <WhiteSpace size="lg" /> 
+              <WhiteSpace/>
+            </WingBlank>
+          )} 
+        </div>}
         <WingBlank>
-          <Button type="primary" onClick={this.add} style={{marginTop:'50px',fontSize:'14px'}}>新增工作经历</Button>
-          <WhiteSpace />
+          <Link prefetch href={{pathname:'/workExperience',query:{resumeId:resumeId}}}>
+            <Button type="primary" style={{marginTop:'50px',fontSize:'14px'}}>新增工作经历</Button>
+          </Link>
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {

@@ -71,8 +71,9 @@ function getYear() {
 class BaseInformation extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    const token = getCookie('token', req)
-    const i = await fetch(`/getResumeDetail`, token)
+    var i;
+    const token = req ? getCookie('token', req) : ''
+    i = await fetch(`/getResumeDetail`)
     const education = await fetch(`/selectByType?type=education`)
     const city = await fetch(`/selectByType?type=city`)
 

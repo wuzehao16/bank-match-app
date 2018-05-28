@@ -11,13 +11,13 @@ import { Form } from 'antd';
 import { ListView, Button } from 'antd-mobile';
 
 
-// const data = [
-//   {
-//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-//     title: 'Meet hotel',
-//     des: '不是所有的兼职汪都需要风吹日晒',
-//   }
-// ];
+const data = [
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+    title: 'Meet hotel',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  }
+];
 
 const NUM_ROWS = 5;
 let pageIndex = 0;
@@ -34,24 +34,30 @@ class workList extends React.Component {
     static async getInitialProps ({query,req}) {
       // eslint-disable-next-line no-undef
       // const resumeID = query.resumeID
-      const token = req ? getCookie('token', req) : ''
-      const data = await fetch(`/getJobList`)
+      const token = req ? getCookie('token', req) : '';
+      var data = await fetch('/getJobList',token);
+      console.log('data',data);
       const dataSource = new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       });
+
+      this.state = {
+        keyword:'',
+        dataSource,
+        refreshing: true,
+        isLoading: true,
+        height: '1000px',
+        useBodyScroll: false,
+      };
+
       return { 
-                data: data || {},
+                data: data || [],
                 dataSource: dataSource
             }
     };
     
-    state = {
-      dataSource,
-      refreshing: true,
-      isLoading: true,
-      height: '1000px',
-      useBodyScroll: false,
-    };
+  
+    
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   // componentWillReceiveProps(nextProps) {
@@ -61,7 +67,7 @@ class workList extends React.Component {
   //     });
   //   }
   // }
-
+  
   componentDidUpdate() {
       document.body.style.overflow = 'hidden';
   }
@@ -83,6 +89,10 @@ class workList extends React.Component {
         isLoading: false,
       });
     }, 1500);
+  }
+
+  onSearchChange = (val) => {
+    console.log('val',val);
   }
 
   onRefresh = () => {
@@ -116,6 +126,8 @@ class workList extends React.Component {
   };
 
   render() {
+    const data = this.props.data;
+    console.log('this.state',this.state)
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -162,10 +174,11 @@ class workList extends React.Component {
     return (<Layout title="职位列表">
       <SearchBar
         // value={this.state.value}
-        onSubmit={value => console.log(value, 'onSubmit')}
+        onChange={this.onSearchChange}
+        // onSubmit={value => console.log(value, 'onSubmit')}
         onClear={value => console.log(value, 'onClear')}
-        onFocus={() => console.log('onFocus')}
-        onBlur={() => console.log('onBlur')}
+        // onFocus={() => console.log('onFocus')}
+        // onBlur={() => console.log('onBlur')}
         onCancel={() => console.log('onCancel')}
         placeholder="搜索关键词"
         // onChange={this.onChange}

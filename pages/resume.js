@@ -90,6 +90,7 @@ class Resume extends React.PureComponent {
   }
   render() {
     const { userInfo, resume:{appResume,education,expectJob,workExperience} } = this.props
+    console.log('workExperience',workExperience)
     const resumeId = this.state.resumeId
     console.log(this.props.resume)
     return (
@@ -109,7 +110,7 @@ class Resume extends React.PureComponent {
                 <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
                   <Edit>
                     <i className="iconfont icon-edit"/>
-                    <span>编辑</span>
+                    <span style={{paddingLeft:'5px'}}>编辑</span>
                   </Edit>
                 </Link>
                   <ul className="ul">
@@ -138,14 +139,14 @@ class Resume extends React.PureComponent {
             ? <Card>
                 <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
                   <Edit>
-                    <i className="iconfont icon-school"/>
-                    <span>编辑</span>
+                    <i className="iconfont icon-edit"/>
+                    <span style={{paddingLeft:'5px'}}>编辑</span>
                   </Edit>
                 </Link>
                   {workExperience.map(i => {
                     return(
                       <ul className="list" key={i.workExperienceId}>
-                    <li>{dayjs(i.entryTime).format('YYYY-MM')}-{dayjs(i.leaveTime).format('YYYY-MM')}</li>
+                    <li>{dayjs(i.entryTime).format('YYYY.MM')}-{dayjs(i.leaveTime).format('YYYY.MM')}</li>
                     <li className="company">{i.companyName}</li>
                     <li className="job">{i.job}</li>
                   </ul>
@@ -167,14 +168,14 @@ class Resume extends React.PureComponent {
             ? <Card>
                 <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
                   <Edit>
-                    <i className="iconfont icon-school"/>
-                    <span>编辑</span>
+                    <i className="iconfont icon-edit"/>
+                    <span style={{paddingLeft:'5px'}}>编辑</span>
                   </Edit>
                 </Link>
                   {education.map(i => {
                     return(
                       <ul className="list" key={i.educationId}>
-                    <li>毕业时间：{dayjs(i.graduate).format('YYYY-MM')}</li>
+                    <li>毕业年份：{i.graduate}</li>
                     <li className="company">{i.school}</li>
                     <li className="job">{i.educationBackground}-{i.major}</li>
                   </ul>
@@ -195,7 +196,7 @@ class Resume extends React.PureComponent {
               <Link href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
                 <Edit>
                   <i className="iconfont icon-edit"/>
-                  <span>编辑</span>
+                  <span style={{paddingLeft:'5px'}}>编辑</span>
                 </Edit>
               </Link>
                 <ul className="ul">
@@ -238,6 +239,9 @@ class Resume extends React.PureComponent {
             font-size:12px;
             color:#999999;
             padding-bottom:20px;
+          }
+          .iconfont{
+            font-size: 14px;
           }
         `}</style>
       </Layout>

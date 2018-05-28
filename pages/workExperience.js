@@ -1,73 +1,35 @@
 import React from 'react'
 import Link from 'next/link'
+import fetch from '../lib/fetch'
+import Router from 'next/router'
+import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
-import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem, Button, Toast} from 'antd-mobile';
-import { Form } from 'antd';
+import Layout from '../layout/RecruitLayout'
+import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaItem, Button, Toast} from 'antd-mobile'
+import { Form } from 'antd'
 import { formatData } from '../lib/util'
-import { insertWorkExperience } from '../services/recruit'
+import dayjs from 'dayjs'
+import { insertWorkExperience, updateWorkExperience } from '../services/recruit'
 
 const date = new Date();
 const currentYear = date.getFullYear();
+const currentMonth = date.getMonth()+1;
 let EmploymentDate = new Array();
 let EmploymentYear = new Array();
-for (let i = 1990; i<=currentYear;i++){
-  let data = {
+let Month = new Array();
+for (let i = 1990; i <= currentYear;i++){
+  EmploymentYear.unshift({
     label: i,
     value: i
-  }
-  EmploymentYear.unshift(data);
+  });
 }
-const Month = [
-  {
-    label:'01',
-    value:'01'
-  },
-  {
-    label:'02',
-    value:'02'
-  },
-  {
-    label:'03',
-    value:'03'
-  },
-  {
-    label:'04',
-    value:'04'
-  },
-  {
-    label:'05',
-    value:'05'
-  },
-  {
-    label:'06',
-    value:'06'
-  },
-  {
-    label:'07',
-    value:'07'
-  },
-  {
-    label:'08',
-    value:'08'
-  },
-  {
-    label:'09',
-    value:'09'
-  },
-  {
-    label:'10',
-    value:'10'
-  },
-  {
-    label:'11',
-    value:'11'
-  },
-  {
-    label:'12',
-    value:'12'
-  },
-]
+
+for (let i = 1; i <= currentMonth; i++){
+  Month.push({
+    label: i,
+    value: i
+  })
+}
 
 EmploymentDate.push(EmploymentYear);
 EmploymentDate.push(Month);
@@ -75,22 +37,42 @@ EmploymentDate.push(Month);
 const leaveDate = EmploymentDate;
 
 class WorkExperience extends React.PureComponent {
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    const token = req ? getCookie('token', req) : ''
+    var i;
+    if(query.workExperienceId){
+      i = await fetch('/getWorkExperienceDetail',token)
+    }
+    return { 
+            workExperienceId: query.workExperienceId,
+            resumeId: query.resumeId,
+            i: i || {},
+            }
+  }
 
   async saveData(value) {
     const res = await insertWorkExperience(value);
-    console.log('res',res)
     if (res.code != 0) {
       Toast.fail(res.msg);
     }
   }
 
+  async updateData(value) {
+    const res = await updateWorkExperience(value);
+    if (res.code != 0) {
+      Toast.fail(res.msg);
+    }
+  }
   save = () => {
     this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
-        console.log('value1',value)
-        value = formatData(value);
-        console.log('value2',value);
-        this.saveData(value);
+        value = this.props.workExperienceId?{...formatData(value),workExperienceId:this.props.workExperienceId}:{...formatData(value),resumeId:this.props.resumeId}
+        this.props.workExperienceId?this.updateData(value): this.saveData(value);
+        Router.push({
+          pathname:'/workExperienceList',
+          query: { ...this.props.resumeId }
+        })
       } else {
         console.log('Validation failed',error);
       }
@@ -107,13 +89,13 @@ class WorkExperience extends React.PureComponent {
 
   render() {
     const { getFieldProps, getFieldsError} = this.props.form;
-    // console.log(this.props)
+    const {i, workExperienceId, resumeId} = this.props;
     return (
       <Layout  title="工作经历">
         <WhiteSpace/>
         <List>
           <InputItem
-            {...getFieldProps('companyName',{rules:[
+            {...getFieldProps('companyName',{initialValue:i.companyName,rules:[
               {
                 required: true,
               }
@@ -124,7 +106,7 @@ class WorkExperience extends React.PureComponent {
             <div><i className="iconfont icon-company"/><span className="itemTitle">公司名称</span></div>
           </InputItem>
           <InputItem
-            {...getFieldProps('job',{rules:[
+            {...getFieldProps('job',{initialValue:i.job, rules:[
               {
                 required: true,
               }
@@ -143,9 +125,10 @@ class WorkExperience extends React.PureComponent {
             title="入职时间"
             className="forss"
             cascade={false}
-            {...getFieldProps('entryTime',{rules:[
+            {...getFieldProps('entryTime',{initialValue:i.entryTime?[dayjs(i.entryTime).year(),dayjs(i.entryTime).month()+1]:[],rules:[
               {
                 required: true,
+                // dayjs(i.entryTime).format('YYYY,MM')
               }
             ]
           })}
@@ -157,7 +140,7 @@ class WorkExperience extends React.PureComponent {
             title="离职时间"
             className="forss"
             cascade={false}
-            {...getFieldProps('leaveTime',{rules:[
+            {...getFieldProps('leaveTime',{initialValue:i.leaveTime?[dayjs(i.leaveTime).year(),dayjs(i.leaveTime).month()+1]:[],rules:[
               {
                 required: true,
               }
@@ -170,7 +153,7 @@ class WorkExperience extends React.PureComponent {
         <WhiteSpace/>
         <List renderHeader={() => <div><i className="iconfont icon-content" /><span className="itemTitle">工作内容</span></div>}>
           <TextareaItem
-            {...getFieldProps('jobContent',{rules:[
+            {...getFieldProps('jobContent',{initialValue:i.job, rules:[
               {
                 required: true,
                 message:"岗位不为空"
