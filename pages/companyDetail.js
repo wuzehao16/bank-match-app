@@ -6,22 +6,14 @@ import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
-import address from '../lib/address'
+import getAddress from '../lib/address'
 import withRoot from '../src/withRoot';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
 
-function getAddress(address) {
-  return   address.map(ad=>{
-            const result = {value:ad.name,label:ad.name};
-            if (ad.children) {
-              result.children =getAddress(ad.children)
-            }
-            return result
-          })
-}
+
 
 const Head = styled.div`
   padding:15px 0 15px 25px;
@@ -199,7 +191,7 @@ class companyDetail extends React.PureComponent {
         {/* <List> */}
           <Picker
             extra="请选择"
-        data={getAddress(address)}
+        data={getAddress}
         title="地区"
         {...getFieldProps('address', {
         })}
@@ -236,6 +228,7 @@ class companyDetail extends React.PureComponent {
           </InputItem>
         </List>
         <WhiteSpace />
+        {/* <button onClick={this.save}>123</button> */}
         <ImgGroup>
           <Img
             src={userInfo.userHead}
