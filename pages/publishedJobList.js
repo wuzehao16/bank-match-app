@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout';
+import Layout from '../layout/HasFooterRecruitLayout';
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
@@ -44,7 +44,7 @@ class PublishedJobList extends React.PureComponent {
           </Link>
         </WingBlank>
         <WhiteSpace/>
-        
+
         <List >
           <Link href="/jobDetail：jobId">
             <Item arrow="horizontal" multipleLine onClick={() => {}}>
@@ -85,7 +85,7 @@ class PublishedJobList extends React.PureComponent {
               </Brief>
             </Item>
           </Link>
-         
+
         </List>
       <style jsx global>{`
           .am-list-item .am-list-line .am-list-brief{

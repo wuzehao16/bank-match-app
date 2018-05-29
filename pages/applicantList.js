@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout'
+import Layout from '../layout/HasFooterRecruitLayout'
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile'
 import { Form } from 'antd'
 import fetch from '../lib/fetch'
@@ -60,11 +60,11 @@ class PublishedJobList extends React.PureComponent {
         <WhiteSpace/>
         <List >
         <Link href="/resumeDetail：resumeId">
-            <Item 
-              align="top" 
-              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png" 
+            <Item
+              align="top"
+              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
               multipleLine>
-            <Name>王小姐</Name> 
+            <Name>王小姐</Name>
             <Brief>
               <Fragment>
                 <Info>三年<Divider>|</Divider></Info>
@@ -75,11 +75,11 @@ class PublishedJobList extends React.PureComponent {
             </Item>
           </Link>
           <Link href="/resumeDetail：resumeId">
-            <Item 
-              align="top" 
-              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png" 
+            <Item
+              align="top"
+              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
               multipleLine>
-            <Name>王小姐</Name> 
+            <Name>王小姐</Name>
             <Brief>
               <Fragment>
                 <Info>三年<Divider>|</Divider></Info>
@@ -90,11 +90,11 @@ class PublishedJobList extends React.PureComponent {
             </Item>
           </Link>
           <Link href="/resumeDetail：resumeId">
-            <Item 
-              align="top" 
-              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png" 
+            <Item
+              align="top"
+              thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
               multipleLine>
-            <Name>王小姐</Name> 
+            <Name>王小姐</Name>
             <Brief>
               <Fragment>
                 <Info>三年<Divider>|</Divider></Info>
@@ -104,7 +104,7 @@ class PublishedJobList extends React.PureComponent {
             </Brief>
             </Item>
           </Link>
-         
+
         </List>
       <style jsx global>{`
           .am-list-item .am-list-line .am-list-brief{

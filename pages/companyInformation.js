@@ -5,12 +5,22 @@ import Layout from '../layout/RecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
+import address from '../lib/address'
 import { InputItem, List, Button, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
 
+function getAddress(address) {
+  return   address.map(ad=>{
+            const result = {value:ad.name,label:ad.name};
+            if (ad.children) {
+              result.children =getAddress(ad.children)
+            }
+            return result
+          })
+}
 const Head = styled.div`
   padding:15px 0 15px 25px;
   // height:111px;
@@ -103,11 +113,11 @@ class CompanyInformation extends React.PureComponent {
         <Head>
             <Avatar
               alt="Adelle Charles"
-              src={userInfo.userHead}
+              // src={userInfo.userHead}
               style={{height:60,width:60}}
-              {...getFieldProps('headProtrait',{initialValue:userInfo.userHead})}
+              // {...getFieldProps('headProtrait',{initialValue:userInfo.userHead})}
             />
-            <Name {...getFieldProps('userName',{initialValue:userInfo.userName})}>{userInfo.userName}</Name>
+            {/* <Name {...getFieldProps('userName',{initialValue:userInfo.userName})}>{userInfo.userName}</Name> */}
         </Head>
         <WhiteSpace />
         <List>
@@ -163,6 +173,15 @@ class CompanyInformation extends React.PureComponent {
             <div className="itemTitle">接收简历邮箱</div>
           </InputItem>
         </List>
+        <Picker
+          extra="请选择"
+          data={getAddress(address)}
+          title="地区"
+          {...getFieldProps('address', {
+          })}
+        >
+          <List.Item arrow="horizontal">公司地址</List.Item>
+        </Picker>
         <List renderHeader={() => '所在地区(详细地址)'}>
           <TextareaItem
             {...getFieldProps('addressDetial',{
@@ -177,7 +196,7 @@ class CompanyInformation extends React.PureComponent {
             // placeholder='请输入公司详细地址'
             style={{background:'#f2f2f2',padding:'3px 3px'}}
           />
-        </List>  
+        </List>
         <WhiteSpace />
         <List>
           <InputItem
