@@ -424,9 +424,9 @@ class ProductDetail extends React.PureComponent {
             margin-top:10px;
           }
           .logo{
-            width: 90%;
-            height: 40px;
-            margin-left: 25%;
+            width: 100%;
+            height: 50px;
+            margin-left: 60%;
             background: #fff;
           }
           .logo img{

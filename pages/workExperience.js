@@ -39,10 +39,11 @@ const leaveDate = EmploymentDate;
 class WorkExperience extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    const token = req ? getCookie('token', req) : ''
+    const token = getCookie('token', req);
     var i;
+    // ${query.workExperienceId}
     if(query.workExperienceId){
-      i = await fetch('/getWorkExperienceDetail',token)
+      i = await fetch(`/getWorkExperienceDetail?workExperienceId=${query.workExperienceId}`,token)
     }
     return { 
             workExperienceId: query.workExperienceId,
@@ -69,9 +70,10 @@ class WorkExperience extends React.PureComponent {
       if (!error) {
         value = this.props.workExperienceId?{...formatData(value),workExperienceId:this.props.workExperienceId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.workExperienceId?this.updateData(value): this.saveData(value);
+        console.log('this.props.resumeId',this.props.resumeId)
         Router.push({
           pathname:'/workExperienceList',
-          query: { ...this.props.resumeId }
+          query: { resumeId: this.props.resumeId }
         })
       } else {
         console.log('Validation failed',error);

@@ -18,13 +18,6 @@ class Educations extends React.PureComponent {
           }
   }
 
-  // edit = () => {
-  //   Router.push({
-  //     pathname:'/educationExperience?type=1',
-  //     // query: { ...this.resumeId }
-  //   })
-  // }
-
   render() {
     const {i, resumeId }= this.props
     return (
@@ -34,7 +27,7 @@ class Educations extends React.PureComponent {
           i.map((item,index) =>
             <WingBlank size="lg" key={index}>
               <WhiteSpace size="lg" />
-              <Link prefetch href={{pathname:'/educationExperience',query:{educationId:item.educationId}}}>
+              <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId,educationId:item.educationId}}}>
                 <Card>
                   <Card.Header
                     title={<span>毕业年份：{item.graduate}</span>}

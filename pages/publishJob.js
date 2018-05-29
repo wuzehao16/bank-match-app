@@ -103,10 +103,9 @@ const salary =[
 class PublishJob extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    var i;
-    const token = req ? getCookie('token', req) : ''
-    if (query.type) {
-      i = await fetch(`/getResumeDetail`)
+    const token =getCookie('token', req)
+    if (query.jobId) {
+      var i = await fetch(`/getResumeDetail?jobId=${query.jobId}`,token)
     }
     const education = await fetch(`/selectByType?type=education`)
     const jobName = await fetch(`/selectByType?type=jobTitle`)
@@ -119,6 +118,7 @@ class PublishJob extends React.PureComponent {
                 jobName: jobName
               }
             }
+            companyId: query.companyId
   }
   componentDidMount () {
     this.props.form.validateFields();

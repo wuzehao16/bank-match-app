@@ -37,7 +37,7 @@ class WorkExperienceList extends React.PureComponent {
           {WorkExperienceList.map((item,index) =>
             <WingBlank size="lg" key={index}>
               <WhiteSpace size="lg" />
-              <Link href={{pathname:'/workExperience',query:{workExperienceId:item.workExperienceId}}} >
+              <Link href={{pathname:'/workExperience',query:{resumeId:resumeId,workExperienceId:item.workExperienceId}}} >
                 <Card>
                   <Card.Header
                     title={<span>{dayjs(item.entryTime).format('YYYY.MM')}-{dayjs(item.leaveTime).format('YYYY.MM')}</span>}

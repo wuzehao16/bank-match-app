@@ -26,10 +26,10 @@ console.log('graduationTime',graduationTime)
 class EducationExperience extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    const token = req ? getCookie('token', req) : ''
+    const token = getCookie('token', req);
     var educationDetail;
     if(query.educationId){
-      educationDetail = await fetch('/getEducationDetail',token)
+      educationDetail = await fetch(`/getEducationDetail?educationId=${query.educationId}`,token)
     }
     const education = await fetch('/selectByType?type=education')
     return { 
@@ -68,11 +68,11 @@ class EducationExperience extends React.PureComponent {
   save = () => {
     this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
-        value = this.props.educationId?{...formatData(value),resumeId:this.props.educationId}:{...formatData(value),resumeId:this.props.resumeId}
+        value = this.props.educationId?{...formatData(value),educationId:this.props.educationId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.educationId?this.updateData(value):this.saveData(value);
         Router.push({
           pathname:'/educations',
-          query: { ...this.props.resumeId }
+          query: { resumeId:this.props.resumeId }
         })
       } else {
         console.log('Validation failed',error);
