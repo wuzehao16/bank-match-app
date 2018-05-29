@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Router from 'next/router'
 import getCookie from '../lib/getCookie'
 import dayjs from 'dayjs'
-import Layout from '../layout/RecruitLayout'
+import Layout from '../layout/HasFooterWantedLayout'
 import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile'
 import { Form } from 'antd'
 import { ListView, Button } from 'antd-mobile'
@@ -41,7 +41,7 @@ class workList extends React.Component {
       const organizationCategory = await fetch('/selectByType?type=orgType')
       const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
 
-      return { 
+      return {
                 data: data || [],
                 dic:{
                   jobNameDic: jobName,
@@ -55,14 +55,14 @@ class workList extends React.Component {
                 // dataSource: dataSource
             }
     };
-    
-  
+
+
     constructor(props) {
       super(props);
       const dataSource = new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       });
-  
+
       this.state = {
         resdata:[],
         dataSource,
@@ -72,7 +72,7 @@ class workList extends React.Component {
         useBodyScroll: false,
       };
     }
-    
+
 
     genData(pIndex = 1) {
       const dataArr = [];
@@ -91,7 +91,7 @@ class workList extends React.Component {
   //     });
   //   }
   // }
-  
+
   componentDidUpdate() {
       document.body.style.overflow = 'hidden';
   }
@@ -155,7 +155,7 @@ class workList extends React.Component {
     if (res.code !==0) {
       Toast.fail(res.msg);
     }
-  } 
+  }
 
   onSearchSubmit = (val) => {
     console.log("提交val",val)

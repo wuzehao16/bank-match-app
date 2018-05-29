@@ -36,9 +36,9 @@ class SimpleBottomNavigation extends React.Component {
         onChange={this.handleChange}
         showLabels
       >
-        <BottomNavigationAction label="职位" value="/publishedJobList"icon={<i className="iconfont icon-zhifeiji" style={{fontSize:'20px'}}></i>}/>
-        <BottomNavigationAction label="人才"  value="/applicantList" icon={<i className="iconfont icon-school1" style={{fontSize:'20px'}}></i>}/>
-        <BottomNavigationAction label="公司" value="/companyDetail" icon={<i className="iconfont icon-company" style={{fontSize:'20px'}}></i>}/>
+        <BottomNavigationAction label="职位" value="/workList"icon={<i className="iconfont icon-zhifeiji" style={{fontSize:'20px'}}></i>}/>
+        <BottomNavigationAction label="简历"  value="/resume" icon={<i className="iconfont icon-school1" style={{fontSize:'20px'}}></i>}/>
+        {/* <BottomNavigationAction label="公司" value="/companyDetail" icon={<i className="iconfont icon-company" style={{fontSize:'20px'}}></i>}/> */}
       </BottomNavigation>
     );
   }

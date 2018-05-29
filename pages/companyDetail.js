@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
 import address from '../lib/address'
-import { InputItem, List, Button, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
+import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
@@ -39,6 +39,8 @@ const Name = styled.h3`
 const ImgGroup = styled.div`
   text-align: center;
   margin-top: 15px;
+  margin-bottom: 50px;
+  padding-bottom: 10px;
 `
 
 const Img = styled.img`

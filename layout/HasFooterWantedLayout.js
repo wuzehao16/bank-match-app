@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import stylesheet from '../styles/antd-mobile.min.css'
-import BottomNavigation from '../components/BottomNavigation'
+import BottomNavigation from '../components/BottomNavigation1'
 export default ({ children, title = '众银云测' }) => (
   <div className='app'>
     <Head>

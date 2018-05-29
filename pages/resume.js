@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/Nolayout';
+import Layout from '../layout/HasFooterWantedLayout';
 import ControlPoint from '@material-ui/icons/ControlPoint';
 import Avatar from '@material-ui/core/Avatar';
 import dayjs from 'dayjs'
@@ -42,6 +42,7 @@ const Add = styled.div`
 const Wrapper = styled.div`
   padding: 0 15px;
   padding-bottom: 50px;
+  margin-bottom: 50px;
 `
 const Card = styled.div`
   position: relative;
