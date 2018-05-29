@@ -403,7 +403,7 @@ class ProductDetail extends React.PureComponent {
         }
         <style jsx>{`
           .head{
-            padding: 30px 0;
+            padding: 20px 0;
             display:flex;
             border-bottom:1px solid #f2f2f2;
           }
@@ -421,7 +421,7 @@ class ProductDetail extends React.PureComponent {
           .sub-title{
             font-size:12px;
             color:#646464;
-            margin-top:5px;
+            margin-top:10px;
           }
           .logo{
             width: 90%;

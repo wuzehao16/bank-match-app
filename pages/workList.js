@@ -5,59 +5,83 @@ import fetch from '../lib/fetch'
 import styled from 'styled-components'
 import Router from 'next/router'
 import getCookie from '../lib/getCookie'
-import Layout from '../layout/RecruitLayout';
-import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile';
-import { Form } from 'antd';
-import { ListView, Button } from 'antd-mobile';
+import dayjs from 'dayjs'
+import Layout from '../layout/RecruitLayout'
+import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile'
+import { Form } from 'antd'
+import { ListView, Button } from 'antd-mobile'
+import { searchJobList } from '../services/recruit'
 
 
-const data = [
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-    title: 'Meet hotel',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  }
-];
+// const data = [
+//   {
+//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+//     title: 'Meet hotel',
+//     des: '不是所有的兼职汪都需要风吹日晒',
+//   },
+//   {
+//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+//     title: 'Meet hotel',
+//     des: '不是所有的兼职汪都需要风吹日晒',
+//   }
+// ];
 
-const NUM_ROWS = 5;
-let pageIndex = 0;
-
-function genData(pIndex = 0) {
-  const dataArr = [];
-  for (let i = 0; i < NUM_ROWS; i++) {
-    dataArr.push(`row - ${(pIndex * NUM_ROWS) + i}`);
-  }
-  return dataArr;
-}
 
 class workList extends React.Component {
+
     static async getInitialProps ({query,req}) {
       // eslint-disable-next-line no-undef
-      // const resumeID = query.resumeID
-      const token = req ? getCookie('token', req) : '';
+      const token =  getCookie('token', req);
       var data = await fetch('/getJobList',token);
-      console.log('data',data);
+      const jobName = await fetch('/selectByType?type=jobTitle')
+      const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
+      const education = await fetch('/selectByType?type=education')
+      const nature = ["","全职","兼职","实习"]
+      const salary = ["面议","2k以下","2k-5k","5k-10k",'10k-15k','15k-25k','25k-50k','50k以上']
+      const organizationCategory = await fetch('/selectByType?type=orgType')
+      const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
+
+      return { 
+                data: data || [],
+                dic:{
+                  jobNameDic: jobName,
+                  ageLimitDic: ageLimit,
+                  educationDic: education,
+                  natureDic: nature,
+                  salaryDic: salary,
+                  organizationCategoryDic: organizationCategory,
+                  scaleDic: scale
+                }
+                // dataSource: dataSource
+            }
+    };
+    
+  
+    constructor(props) {
+      super(props);
       const dataSource = new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       });
-
+  
       this.state = {
-        keyword:'',
+        resdata:[],
         dataSource,
         refreshing: true,
         isLoading: true,
         height: '1000px',
         useBodyScroll: false,
       };
+    }
+    
 
-      return { 
-                data: data || [],
-                dataSource: dataSource
-            }
-    };
-    
-  
-    
+    genData(pIndex = 1) {
+      const dataArr = [];
+      for (let i = 0; i < this.props.data.length; i++) {
+        dataArr.push(`row - ${(pIndex * this.props.data.length) + i}`);
+      }
+      console.log('dataArr',dataArr)
+      return dataArr;
+    }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   // componentWillReceiveProps(nextProps) {
@@ -81,25 +105,23 @@ class workList extends React.Component {
     const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
 
     setTimeout(() => {
-      this.rData = genData();
+      this.rData = this.genData();
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(genData()),
+        dataSource: this.state.dataSource.cloneWithRows(this.genData()),
         height: hei,
         refreshing: false,
         isLoading: false,
       });
-    }, 1500);
+    }, 1000);
   }
 
-  onSearchChange = (val) => {
-    console.log('val',val);
-  }
 
   onRefresh = () => {
     this.setState({ refreshing: true, isLoading: true });
+    console.log("refresh")
     // simulate initial Ajax
     setTimeout(() => {
-      this.rData = genData();
+      this.rData = this.genData();
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.rData),
         refreshing: false,
@@ -108,26 +130,52 @@ class workList extends React.Component {
     }, 600);
   };
 
-  onEndReached = (event) => {
-    // load new data
-    // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (this.state.isLoading && !this.state.hasMore) {
-      return;
+  // onEndReached = (event) => {
+  //   // load new data
+  //   // hasMore: from backend data, indicates whether it is the last page, here is false
+  //   if (this.state.isLoading && !this.state.hasMore) {
+  //     return;
+  //   }
+  //   console.log('reach end', event);
+  //   this.setState({ isLoading: true });
+  //   setTimeout(() => {
+  //     this.rData = [...this.rData, ...genData(++pageIndex)];
+  //     this.setState({
+  //       dataSource: this.state.dataSource.cloneWithRows(this.rData),
+  //       isLoading: false,
+  //     });
+  //   }, 1000);
+  // };
+
+  async searchJobList(params) {
+    const res = await searchJobList(params);
+    this.state.setState=({
+      resdata: res.data
+    })
+    if (res.code !==0) {
+      Toast.fail(res.msg);
     }
-    console.log('reach end', event);
-    this.setState({ isLoading: true });
-    setTimeout(() => {
-      this.rData = [...this.rData, ...genData(++pageIndex)];
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false,
-      });
-    }, 1000);
-  };
+  } 
+
+  onSearchSubmit = (val) => {
+    console.log("提交val",val)
+    const params = {keyword:val,currentPage:1,pageSize:8};
+    this.searchJobList(params);
+  }
+
+  onSearchCancel = () => {
+    let searchBar = this.refs.search;
+    searchBar.state.value = '';
+
+    console.log("点击取消")
+  }
 
   render() {
     const data = this.props.data;
-    console.log('this.state',this.state)
+    const {jobNameDic, ageLimitDic, educationDic, natureDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
+    console.log('data2',data)
+    console.log('dic',this.props.dic)
+    // console.log('this.state',this.state)
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -139,30 +187,31 @@ class workList extends React.Component {
         }}
       />
     );
-    let index = data.length - 1;
+    const dataObj = this.state.resdata.length?this.state.resdata:data;
+    let index = dataObj.length - 1;
     const row = (rowData, sectionID, rowID) => {
       if (index < 0) {
-        index = data.length - 1;
+        index = dataObj.length - 1;
       }
-      const obj = data[index--];
+      const obj = dataObj[index--];
       return (
         <div key={rowID}>
             <Link href='/workDetail'>
               <Card full>
                 <Card.Header
                   className="jobdesc"
-                  title="客户经理"
-                  extra={<span className="salary">8-16k</span>}
+                  title={jobNameDic.filter(item => item.code == obj.jobName)[0].name}
+                  extra={<span className="salary">{salaryDic[obj.salary]}</span>}
                 />
                 <Card.Header
                 className="jobInfo"
-                  title="深圳南山区|3-5年|本科"
-                  extra={<span className="publishedTime">2018年05月23日 15:23</span>}
+                  title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{educationDic.filter(item => item.code ==obj.education)[0].name}</div>}
+                  extra={<span className="publishedTime">{dayjs(obj.createTime).format("MM月DD日 HH:mm")}</span>}
                 />
                 <Card.Header
-                  title={<div><p className="companyName">众银云测有限公司</p><p className="companyInfo">5000人以上/金融机构</p></div>}
+                  title={<div><p className="companyName">{obj.companyName}</p><p className="companyInfo">{scaleDic[obj.scale]}/{organizationCategoryDic.filter(item => item.code==obj.organizationCategory)[0].name}</p></div>}
                   // title="深圳众银云测有限责任公司"
-                  thumb="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png"
+                  thumb={obj.logo}
                   thumbStyle={{width:'64px',height:'64px'}}
                 />
               </Card>
@@ -174,12 +223,13 @@ class workList extends React.Component {
     return (<Layout title="职位列表">
       <SearchBar
         // value={this.state.value}
-        onChange={this.onSearchChange}
-        // onSubmit={value => console.log(value, 'onSubmit')}
-        onClear={value => console.log(value, 'onClear')}
+        // onChange={this.onSearchChange}
+        ref="search"
+        onSubmit={this.onSearchSubmit}
+        // onClear={value => console.log(value, 'onClear')}
         // onFocus={() => console.log('onFocus')}
         // onBlur={() => console.log('onBlur')}
-        onCancel={() => console.log('onCancel')}
+        onCancel={this.onSearchCancel}
         placeholder="搜索关键词"
         // onChange={this.onChange}
       />
@@ -188,8 +238,8 @@ class workList extends React.Component {
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
         // renderHeader={() => <span></span>}
-        renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-          {this.state.isLoading ? 'Loading...' : 'Loaded'}
+        renderFooter={() => (<div style={{ padding: '10px 0 50px 0', textAlign: 'center' }}>
+          {this.state.isLoading ? 'Loading...' : '没有更多啦~'}
         </div>)}
         renderRow={row}
         renderSeparator={separator}
@@ -203,8 +253,8 @@ class workList extends React.Component {
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}
         />}
-        onEndReached={this.onEndReached}
-        pageSize={5}
+        // onEndReached={this.onEndReached}
+        // pageSize={5}
       />
       <style jsx global>{`
         .am-pull-to-refresh-content-wrapper {

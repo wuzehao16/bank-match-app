@@ -49,8 +49,6 @@ class WorkExperienceList extends React.PureComponent {
                   </Card.Body>
                 </Card>
               </Link>
-              <WhiteSpace size="lg" /> 
-              <WhiteSpace/>
             </WingBlank>
           )} 
         </div>}

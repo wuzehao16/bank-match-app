@@ -54,6 +54,7 @@
     "css-loader": "^0.28.11",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "nodemon": "^1.17.5",
     "redux-devtools-extension": "2.13.2",
     "style-loader": "^0.21.0"
   }

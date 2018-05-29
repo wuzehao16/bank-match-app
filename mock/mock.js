@@ -265,14 +265,68 @@ const getJobList = {
             "ageLimit":"1",
             "education":"1",
             "nature":"1",
-            "salary":"10",
+            "salary":"5",
           "companyName":"众银云测",
           "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
           "organizationCategory":"1",
           "scale":"1",
-          "address":"123548",
+          "address":"深圳南山",
           "createTime":"152568548565"
-      }
+        },
+        {
+            "jobId":"246d568067254847a6e26e405796a125",
+            "jobName":"1",
+            "ageLimit":"1",
+            "education":"1",
+            "nature":"1",
+            "salary":"4",
+          "companyName":"众银云测",
+          "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
+          "organizationCategory":"1",
+          "scale":"1",
+          "address":"深圳龙华",
+          "createTime":"152568548565"
+        },
+        {
+            "jobId":"246d568067254847a6e26e405796a125",
+            "jobName":"1",
+            "ageLimit":"1",
+            "education":"1",
+            "nature":"1",
+            "salary":"3",
+          "companyName":"众银云测",
+          "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
+          "organizationCategory":"1",
+          "scale":"1",
+          "address":"深圳福田",
+          "createTime":"152568548565"
+        },{
+            "jobId":"246d568067254847a6e26e405796a125",
+            "jobName":"1",
+            "ageLimit":"1",
+            "education":"1",
+            "nature":"1",
+            "salary":"2",
+          "companyName":"众银云测",
+          "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
+          "organizationCategory":"1",
+          "scale":"1",
+          "address":"深圳宝安",
+          "createTime":"152568548565"
+        },{
+            "jobId":"246d568067254847a6e26e405796a125",
+            "jobName":"1",
+            "ageLimit":"1",
+            "education":"1",
+            "nature":"1",
+            "salary":"1",
+          "companyName":"众银云测",
+          "logo":"https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg",
+          "organizationCategory":"1",
+          "scale":"1",
+          "address":"深圳光明",
+          "createTime":"152568548565"
+        }
     ]
 }
 
