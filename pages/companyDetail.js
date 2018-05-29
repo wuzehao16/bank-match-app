@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Layout from '../layout/RecruitLayout';
+import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
@@ -84,12 +84,13 @@ class companyDetail extends React.PureComponent {
     const token = getCookie('token', req)
     const userInfo = await fetch(`/getUserInfo`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
-    return { dic: {
-              orgType:orgType,
-              },
-             userInfo: userInfo
-            }
-  }
+    return {
+      dic: {
+        orgType: orgType
+      },
+      userInfo: userInfo
+    }
+}
 
   componentDidMount () {
     this.props.form.validateFields();
@@ -244,9 +245,6 @@ class companyDetail extends React.PureComponent {
           />
           <P>营业执照</P>
         </ImgGroup>
-        <WingBlank style={{padding:'0 17px'}}>
-          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.save}>保存</Button>
-        </WingBlank>
         <style jsx global>{`
           .am-list-header {
             background: #fff !important;
