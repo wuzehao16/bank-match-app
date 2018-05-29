@@ -12,9 +12,9 @@ class WorkExperienceList extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     // const resumeID = query.resumeID
-    const token = req ? getCookie('token', req) : ''
-    const WorkExperienceList = await fetch('/getWorkExperienceList',token);
-    return { 
+    const token = getCookie('token', req)
+    const WorkExperienceList = await fetch(`/getWorkExperienceList?resumeId=${query.resumeId}`,token);
+    return {
             WorkExperienceList: WorkExperienceList || [],
             resumeId: query.resumeId
           }
@@ -34,7 +34,7 @@ class WorkExperienceList extends React.PureComponent {
     return (
       <Layout  title="工作经历">
         {WorkExperienceList.length==0?null:<div>
-          {WorkExperienceList.map((item,index) => 
+          {WorkExperienceList.map((item,index) =>
             <WingBlank size="lg" key={index}>
               <WhiteSpace size="lg" />
               <Link href={{pathname:'/workExperience',query:{workExperienceId:item.workExperienceId}}} >
@@ -50,7 +50,7 @@ class WorkExperienceList extends React.PureComponent {
                 </Card>
               </Link>
             </WingBlank>
-          )} 
+          )}
         </div>}
         <WingBlank>
           <Link prefetch href={{pathname:'/workExperience',query:{resumeId:resumeId}}}>
@@ -60,7 +60,7 @@ class WorkExperienceList extends React.PureComponent {
         <style jsx global>{`
           .am-list-item .am-input-label {
             font-size: 14px !important;
-          }   
+          }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
           }

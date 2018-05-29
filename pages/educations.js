@@ -10,10 +10,9 @@ import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 class Educations extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    var i;
-    const token = req ? getCookie('token', req) : ''
-    i = await fetch(`/getEducationList`,token);
-    return { 
+    const token = getCookie('token', req)
+    const i = await fetch(`/getEducationList?resumeId=${query.resumeId}`,token);
+    return {
               resumeId:query.resumeId,
               i: i || []
           }
@@ -52,17 +51,17 @@ class Educations extends React.PureComponent {
           }
         </div>
         }
-      
+
         <WingBlank>
           <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId}}}>
             <Button type="primary" style={{marginTop:'50px',fontSize:'14px'}}>新增教育经历</Button>
-          </Link>  
+          </Link>
           <WhiteSpace />
         </WingBlank>
         <style jsx global>{`
           .am-list-item .am-input-label {
             font-size: 14px !important;
-          }   
+          }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
           }
