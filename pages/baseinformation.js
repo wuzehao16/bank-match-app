@@ -62,7 +62,7 @@ function getYear() {
   for (let i = 0; i <= year - 1970; i++) {
     birthday[i] = {
       label: `${beginYear}`,
-      value: `${beginYear}`
+      value: beginYear
     }
     beginYear += 1
   }
@@ -147,7 +147,9 @@ class BaseInformation extends React.PureComponent {
         <WhiteSpace/>
 
         <List>
-          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:i.education?[i.education]:"",rules:[{required:true}]})} className="forss">
+          <Picker data={educationOption} cols={1} {...getFieldProps('education', {initialValue:
+            [i.education?(educationOption.filter( item => item.label == i.education))[0].value:'']
+            ,rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">最高学历</span></div>
             </List.Item>
