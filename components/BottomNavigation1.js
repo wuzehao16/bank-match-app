@@ -6,7 +6,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SendIcon from '@material-ui/icons/Send';
 import SchoolIcon from '@material-ui/icons/School';
 import LocationIcon from '@material-ui/icons/LocationCity';
-import withRoot from '../src/withRoot';
 
 
 class SimpleBottomNavigation extends React.Component {
@@ -45,4 +44,4 @@ class SimpleBottomNavigation extends React.Component {
 }
 
 
-export default withRoot(SimpleBottomNavigation);
+export default SimpleBottomNavigation;

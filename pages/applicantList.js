@@ -1,12 +1,13 @@
 import React, { Fragment }from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/HasFooterRecruitLayout'
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile'
 import { Form } from 'antd'
+import Layout from '../layout/HasFooterRecruitLayout'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
+import withRoot from '../src/withRoot';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -122,4 +123,4 @@ class PublishedJobList extends React.PureComponent {
   }
 }
 const PublishedJobListWapper = Form.create()(PublishedJobList);
-export default PublishedJobListWapper;
+export default withRoot(PublishedJobListWapper);

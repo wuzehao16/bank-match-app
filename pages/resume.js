@@ -1,13 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/HasFooterWantedLayout';
 import ControlPoint from '@material-ui/icons/ControlPoint';
 import Avatar from '@material-ui/core/Avatar';
 import dayjs from 'dayjs'
+import Layout from '../layout/HasFooterWantedLayout';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie'
 import { addBaseInformation } from '../services/recruit'
+import withRoot from '../src/withRoot';
+
 const Head = styled.div`
   height:111px;
   background-color:#fff;
@@ -108,7 +110,7 @@ class Resume extends React.PureComponent {
           {
             appResume
               ? <Card>
-                <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
+                <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId,avatar:userInfo.userHead}}}>
                   <Edit>
                     <i className="iconfont icon-edit"/>
                     <span style={{paddingLeft:'5px'}}>编辑</span>
@@ -126,7 +128,7 @@ class Resume extends React.PureComponent {
                     <li>在职状态：{appResume.status==1?'在职':'离职'}</li>
                   </ul>
                 </Card>
-              : <Link prefetch href={{pathname:'/baseinformation',query:{resumeId:resumeId}}}>
+              : <Link prefetch href={{pathname:'/baseinformation',query:{resumeId:resumeId},avatar:userInfo.userHead}}>
                   <AddContainer>
                     <Add ><ControlPoint/>
                       <span>添加基本信息</span>
@@ -250,4 +252,4 @@ class Resume extends React.PureComponent {
   }
 }
 
-export default Resume;
+export default withRoot(Resume);

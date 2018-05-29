@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
 import getCookie from '../lib/getCookie';
 import address from '../lib/address'
-import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
+import withRoot from '../src/withRoot';
 import { Form } from 'antd';
 
 const FormItem = Form.Item;
@@ -278,4 +279,4 @@ class companyDetail extends React.PureComponent {
 }
 
 const companyDetailWapper = Form.create()(companyDetail);
-export default companyDetailWapper;
+export default withRoot(companyDetailWapper);

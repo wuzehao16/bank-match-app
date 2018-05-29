@@ -11,6 +11,7 @@ import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile'
 import { Form } from 'antd'
 import { ListView, Button } from 'antd-mobile'
 import { searchJobList } from '../services/recruit'
+import withRoot from '../src/withRoot';
 
 
 // const data = [
@@ -314,4 +315,4 @@ class workList extends React.Component {
   }
 }
 
-export default workList;
+export default withRoot(workList);

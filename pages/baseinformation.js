@@ -103,7 +103,11 @@ class BaseInformation extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        value = {...formatData(value),resumeId:this.props.resumeId}
+        value = {
+          ...formatData(value),
+          resumeId: this.props.resumeId,
+          headPortrait:this.props.avatar
+        }
         this.sendData(value);
       } else {
         alert('Validation failed');
