@@ -165,10 +165,35 @@ class Invatation extends React.PureComponent {
       pathname:'/download',
     })
   }
+  checkPass = (s) => {
+    if (s.length < 6 ||s.length > 24) {
+      return 0;
+    }
+    let ls = 0;
+    if (s.match(/([a-z])+/)) {
+      ls += 1;
+    }
+    if (s.match(/([0-9])+/)) {
+      ls += 1;
+    }
+    if (s.match(/([A-Z])+/)) {
+      ls += 1;
+    }
+    if (s.match(/[^a-zA-Z0-9]+/)) {
+      ls += 1;
+    }
+    return ls
+  }
   submit = e =>{
     e.preventDefault();
     console.log(this.state)
-    console.log(md5(123))
+    if (this.checkPass(this.state.loginPassord) < 2) {
+      this.setState({
+        error:'请输入6-24位字母、数字或“_”,两种以上',
+        open:true
+      });
+      return
+    }
     const data = {
       ...this.state,
       loginPassord: md5(this.state.loginPassord + 'leoansReview')
