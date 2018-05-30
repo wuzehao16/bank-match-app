@@ -443,9 +443,9 @@ class ProductDetail extends React.PureComponent {
           }
           .after {
             margin-left: -15px;
-            font-size:12px;
+            vertical-align: middle;
+            font-size: 12px;
             display: inline-block;
-            margin-bottom:2px;
           }
           .pie{
             width:135px;
