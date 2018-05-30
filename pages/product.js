@@ -421,12 +421,12 @@ class ProductDetail extends React.PureComponent {
           .sub-title{
             font-size:12px;
             color:#646464;
-            margin-top:10px;
+            margin-top:20px;
           }
           .logo{
             width: 100%;
-            height: 50px;
-            margin-left: 60%;
+            height: 45px;
+            margin-left: 10%;
             background: #fff;
           }
           .logo img{
@@ -439,9 +439,9 @@ class ProductDetail extends React.PureComponent {
           }
           .after {
             margin-left: -15px;
-            vertical-align: middle;
             font-size:12px;
             display: inline-block;
+            margin-bottom:2px;
           }
           .pie{
             width:135px;
