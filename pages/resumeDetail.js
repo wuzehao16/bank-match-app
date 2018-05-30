@@ -80,7 +80,7 @@ class Resume extends React.PureComponent {
     console.log(this.props.resume)
   return (<Layout>
   <Head>
-    <Avatar alt="Adelle Charles" src={appResume
+    <Avatar alt="Adelle Charles" src={appResume.headPortrait
         ? appResume.headPortrait
         : "/static/resume_head.png"} style={{
         height: 60,
@@ -113,8 +113,8 @@ class Resume extends React.PureComponent {
     <Title>工作经历</Title>
     <Card>
       {
-        workExperience.map(i => {
-          return (<ul className="list" key={i.workExperienceId}>
+        workExperience.map((i,index) => {
+          return (<ul className="list" key={index}>
             <li>{dayjs(i.entryTime).format('YYYY.MM')}-{dayjs(i.leaveTime).format('YYYY.MM')}</li>
             <li className="company">{i.companyName}</li>
             <li className="job">{i.job}</li>
@@ -125,8 +125,8 @@ class Resume extends React.PureComponent {
     <Title>教育经历</Title>
     <Card>
       {
-        education.map(i => {
-          return (<ul className="list" key={i.educationId}>
+        education.map((i,index) => {
+          return (<ul className="list" key={index}>
             <li>毕业年份：{i.graduate}</li>
             <li className="company">{i.school}</li>
             <li className="job">{i.educationBackground}-{i.major}</li>
