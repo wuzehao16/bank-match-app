@@ -421,15 +421,19 @@ class ProductDetail extends React.PureComponent {
           .sub-title{
             font-size:12px;
             color:#646464;
-            margin-top:20px;
+            margin-top:10px;
           }
           .logo{
             width: 100%;
             height: 45px;
             margin-left: 10%;
             background: #fff;
+            text-align:center;
           }
           .logo img{
+            // width: 192px;
+            // height: 45px;
+            // object-fit: contain;
               max-width:100%;
               max-height:100%;
           }
