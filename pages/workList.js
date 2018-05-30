@@ -10,23 +10,8 @@ import Layout from '../layout/HasFooterWantedLayout'
 import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile'
 import { Form } from 'antd'
 import { ListView, Button } from 'antd-mobile'
-import { searchJobList } from '../services/recruit'
+// import { searchJobList } from '../services/recruit'
 import withRoot from '../src/withRoot';
-
-
-// const data = [
-//   {
-//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-//     title: 'Meet hotel',
-//     des: '不是所有的兼职汪都需要风吹日晒',
-//   },
-//   {
-//     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-//     title: 'Meet hotel',
-//     des: '不是所有的兼职汪都需要风吹日晒',
-//   }
-// ];
-
 
 class workList extends React.Component {
 
@@ -63,7 +48,8 @@ class workList extends React.Component {
       });
 
       this.state = {
-        resdata:[],
+        data: this.props.data,
+        // resdata:[],
         dataSource,
         refreshing: true,
         isLoading: true,
@@ -78,7 +64,6 @@ class workList extends React.Component {
       for (let i = 0; i < this.props.data.length; i++) {
         dataArr.push(`row - ${(pIndex * this.props.data.length) + i}`);
       }
-      console.log('dataArr',dataArr)
       return dataArr;
     }
 
@@ -117,7 +102,6 @@ class workList extends React.Component {
 
   onRefresh = () => {
     this.setState({ refreshing: true, isLoading: true });
-    console.log("refresh")
     // simulate initial Ajax
     setTimeout(() => {
       this.rData = this.genData();
@@ -146,35 +130,33 @@ class workList extends React.Component {
   //   }, 1000);
   // };
 
-  async searchJobList(params) {
-    const res = await searchJobList(params);
-    this.state.setState=({
-      resdata: res.data
-    })
-    if (res.code !==0) {
+  async searchJobList(val) {
+    const res = await fetch(`/getJobList?keyword=${val}`);
+    console.log("搜索",res)
+    if(res.code == 0){
+      this.state.setState=({
+        data: res.data
+      })
+      console.log('更新后',this.state.data)
+    }else {
       Toast.fail(res.msg);
     }
   }
 
   onSearchSubmit = (val) => {
-    console.log("提交val",val)
-    const params = {keyword:val,currentPage:1,pageSize:8};
-    this.searchJobList(params);
+    // const params = {keyword:val};
+    this.searchJobList(val);
   }
 
   onSearchCancel = () => {
     let searchBar = this.refs.search;
     searchBar.state.value = '';
-
-    console.log("点击取消")
   }
 
   render() {
-    const data = this.props.data;
+    const data = this.state.data;
+    console.log('state',this.state.data)
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
-    console.log('data2',data)
-    console.log('dic',this.props.dic)
-    // console.log('this.state',this.state)
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -186,13 +168,15 @@ class workList extends React.Component {
         }}
       />
     );
-    const dataObj = this.state.resdata.length?this.state.resdata:data;
-    let index = dataObj.length - 1;
+    // const dataObj = data;
+    // console.log('data',data)
+    // console.log('dataObj',dataObj)
+    let index = data.length - 1;
     const row = (rowData, sectionID, rowID) => {
       if (index < 0) {
-        index = dataObj.length - 1;
+        index = data.length - 1;
       }
-      const obj = dataObj[index--];
+      const obj = data[index--];
       return (
         // <div key={rowID}>
             <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>

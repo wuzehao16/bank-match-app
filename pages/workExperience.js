@@ -53,6 +53,7 @@ class WorkExperience extends React.PureComponent {
   }
 
   async saveData(value) {
+    console.log('value',value)
     const res = await insertWorkExperience(value);
     if (res.code == 0) {
       Router.push({
@@ -78,9 +79,10 @@ class WorkExperience extends React.PureComponent {
   save = () => {
     this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
+        console.log('提交的value',value)
         value = this.props.workExperienceId?{...formatData(value),workExperienceId:this.props.workExperienceId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.workExperienceId?this.updateData(value): this.saveData(value);
-        console.log('this.props.resumeId',this.props.resumeId)
+        console.log('formatvalue',value)
       } else {
         console.log('Validation failed',error);
       }

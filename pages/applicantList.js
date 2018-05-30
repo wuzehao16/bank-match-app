@@ -58,7 +58,7 @@ class PublishedJobList extends React.PureComponent {
     const education = await fetch(`/selectByType?type=education`)
     const expectJob = await fetch(`/selectByType?type=jobTitle`)
 
-
+    console.log('expectJob',expectJob)
     return {
       resumeListData: resumeListData || [],
       dic:{
@@ -82,18 +82,19 @@ class PublishedJobList extends React.PureComponent {
       <Layout title="人才列表">
         <WhiteSpace/>
         {/* <WingBlank size="sm"> */}
-        <div style={{display:'flex',justifyContent:'space-around'}}>
+        <SegmentedControl selectedIndex={0} onChange={this.onChange}  onValueChange={this.onValueChange} values={['销售人员', '销售主管', '销售总监']} />
+        {/* <div style={{display:'flex',justifyContent:'space-around'}}>
           <Button>客户经理</Button>
           <Button>高级客户经理</Button>
           <Button>销售代表</Button>
           <Button>电话销售</Button>
-        </div>
+        </div> */}
         {/* </WingBlank> */}
         <WhiteSpace/>
         <List>
           {
-            resumeListData.length ? resumeListData.map(item => 
-              <Link href={`/resumeDetail?resumeId=${item.resumeId}`}>
+            resumeListData.length ? resumeListData.map((item,index) => 
+              <Link key={index} href={`/resumeDetail?resumeId=${item.resumeId}`}>
                 <Item
                   align="top"
                   thumb={item.headPortrait}
@@ -120,6 +121,17 @@ class PublishedJobList extends React.PureComponent {
           .am-list-thumb  img{
             width: 35px !important;
             height: 35px !important;
+          }
+          .am-segment-item {
+            border-radius: 5px !important;
+            background-color: #f2f2f2 !important;
+            border: 1px solid #ccc !important;
+            color: #3c3c3c !important;
+          }
+          .am-segment-item-selected {
+            border: 1px solid #ee5648 !important;
+            background: #fff !important;
+            color: #ee5648 !important;
           }
         `}
         </style>
