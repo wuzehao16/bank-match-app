@@ -123,3 +123,13 @@ export async function updateCompany(params) {
     },
   });
 }
+
+//删除发布职位
+export async function deleteJob(params) {
+  return request(`/app/deleteJob`, {
+    method: 'DELETE',
+    body: {
+      ...params,
+    },
+  });
+}

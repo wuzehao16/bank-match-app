@@ -11,93 +11,83 @@ import { insertJob, updateJob } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
-const sex =[
-  {
-    label:'男',
-    value:'0'
-  },
-  {
-    label:'女',
-    value:'1'
-  },
-]
 const nature =[
   {
     label:'全职',
-    value: 1
+    value: "1"
   },
   {
     label:'兼职',
-    value: 2
+    value: "2"
   },
   {
     label:'实习',
-    value: 3
+    value: "3"
   },
 ]
 const ageLimit =[
   {
     label:'经验不限',
-    value: 1
+    value: "1"
   },
   {
     label:'应届生',
-    value: 2
+    value: "2"
   },
   {
     label:'一年以下',
-    value: 3
+    value: "3"
   },
   {
     label:'1-3年',
-    value: 4
+    value: "4"
   },
   {
     label:'3-5年',
-    value: 5
+    value: "5"
   },
   {
     label:'5-10年',
-    value: 6
+    value: "6"
   },
   {
     label:'10年以上',
-    value: 7
+    value: "7"
   }
 ]
 
 const salary =[
   {
     label:'面议',
-    value: 0
+    value: "0"
   },
   {
     label: '2k以下',
-    value: 1,
+    value: "1",
   },
   {
     label: '2k-5k',
-    value: 2,
+    value: "2",
   },
   {
     label: '5k-10k',
-    value: 3,
+    value: "3",
   },
   {
     label: '10k-15k',
-    value: 4,
+    value: "4",
   },
   {
     label: '15k-25k',
-    value: 5,
+    value: "5",
   },
   {
     label: '25k-50k',
-    value: 6,
+    value: "6",
   },
   {
     label: '50k以上',
-    value: 7,
+    value: "7",
   }
 ];
 
@@ -166,6 +156,7 @@ class PublishJob extends React.PureComponent {
       }
     });
   }
+  
   render() {
     const { education,city,jobName } = this.props.dic;
     const i = this.props.i;
@@ -176,22 +167,22 @@ class PublishJob extends React.PureComponent {
       <Layout title="发布职位">
         <WhiteSpace/>
         <List >
-          <Picker data={jobNameOption} title="职位名称" cols={1} {...getFieldProps('jobName', {initialValue:i.jobName?[i.jobName]:'',rules:[{required:true}]})} className="forss">
+          <Picker data={jobNameOption} title="职位名称" cols={1} {...getFieldProps('jobName', {initialValue:[i.jobName?jobNameOption.filter(item => item.label == i.jobName)[0].value:''],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
                 <div>职位名称</div>
             </List.Item>
           </Picker>
-          <Picker data={nature} cols={1} title="工作性质" {...getFieldProps('nature', {initialValue:i.nature?[i.nature]:'',rules:[{required:true}]})} className="forss">
+          <Picker data={nature} cols={1} title="工作性质" {...getFieldProps('nature', {initialValue:[i.nature?i.nature:''],rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div>工作性质</div>
           </List.Item>
         </Picker>
-          <Picker data={ageLimit} cols={1} title="工作年限" {...getFieldProps('ageLimit', {initialValue:i.ageLimit?[i.ageLimit]:'',rules:[{required:true}]})} className="forss">
+          <Picker data={ageLimit} cols={1} title="工作年限" {...getFieldProps('ageLimit', {initialValue:[i.ageLimit?i.ageLimit:''],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div>工作年限</div>
             </List.Item>
           </Picker>
-          <Picker data={educationOption} title="学历要求" cols={1} {...getFieldProps('education', {initialValue:i.education?[i.education]:'',rules:[{required:true}]})} className="forss">
+          <Picker data={educationOption} title="学历要求" cols={1} {...getFieldProps('education', {initialValue:[i.education?educationOption.filter(item => item.label==i.education)[0].value:''],rules:[{required:true}]})} className="forss">
             <List.Item arrow="horizontal">
               <div>学历要求</div>
             </List.Item>
@@ -201,7 +192,7 @@ class PublishJob extends React.PureComponent {
               title="月薪范围"
             cols = {1}
             {  ...getFieldProps('salary', {
-                initialValue: i.salary?[i.salary]:'',
+                initialValue: [i.salary?i.salary:''],
                 rules: [
                   {
                     required: true
@@ -217,7 +208,7 @@ class PublishJob extends React.PureComponent {
       </List>
       <List renderHeader={() => '职位描述'}>
           <TextareaItem
-            {...getFieldProps('jobDesribe',{
+            {...getFieldProps('jobDesribe',{initialValue:i.jobDesribe?i.jobDesribe:'',
               rules:[
                 {
                   required: true

@@ -5,6 +5,7 @@ import {  WhiteSpace, Modal } from 'antd-mobile'
 import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
 import Layout from '../layout/Blanklayout'
+import {deleteJob} from '../services/recruit'
 
 const alert = Modal.alert;
 
@@ -13,29 +14,43 @@ const Container = styled.div`
   padding: 15px;
 `
 const Name =styled.div`
-  font-size: 14px;
+  font-size: 15px;
+  line-height:15px;
+  font-weight: 700;
   color: #333333;
+  margin-bottom: 10px;
 `
 const More =styled.div`
-  font-size: 11px;
-  color:#666666;
+  font-size: 13px;
+  line-height: 15px;
+  color: #666;
 `
 const Title =styled.div`
-  font-size: 14px;
+  font-size: 15px;
   color: #333333;
 `
 const Divider = styled.div`
   height: 1px;
   background-color: #f2f2f2;
-  margin: 20px 0;
+  margin: 12px 0;
 `
 const Describe = styled.div`
-  font-size: 12px;
-  color: #666666;
+  font-size: 13px;
+  color: #333;
+  line-height: 25px;
 `
+const AddDescribe = styled.div`
+  font-size: 13px;
+  color: #666;
+  line-height: 15px;
+`
+
 const Address = styled.div`
   display: flex;
   justify-content: space-between;
+  font-size: 13px;
+  line-height: 15px;
+  color: #333;
 `
 const Button =styled.button`
 
@@ -52,6 +67,7 @@ class publishedJobDetail extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req);
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`,token);
+
     console.log('query','jobDetail',query,jobDetail)
     const jobName = await fetch('/selectByType?type=jobTitle')
     const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
@@ -60,6 +76,7 @@ class publishedJobDetail extends React.PureComponent {
     return {
             jobDetail: jobDetail || {},
             jobId: query.jobId,
+            companyId: query.companyId,
             dic:{
               jobNameDic: jobName,
               ageLimitDic: ageLimit,
@@ -72,7 +89,16 @@ class publishedJobDetail extends React.PureComponent {
   handleClickDelete = () => {
     alert('删除', '你确定删除该职位吗?', [
       { text: '取消', onPress: () => console.log('cancel') },
-      { text: '确定', onPress: () => console.log('ok') },
+      { text: '确定', onPress: () => {
+          const res = await deleteJob(this.props.jobId);
+          if(res.code == 0){
+            Router.push({
+              pathname:`/publishedJobList?companyId=${this.props.companyId}`
+            })
+          }else {
+            Toast.fail(res.msg);
+          }
+      } },
     ])
   }
   render() {
@@ -99,15 +125,15 @@ class publishedJobDetail extends React.PureComponent {
         <Container>
           <Address>
             <Title>所在地区</Title>
-            <Title>{jobDetail.address}</Title>
+            <Address>{jobDetail.address}</Address>
           </Address>
           <Divider />
-          <Describe>
+          <AddDescribe>
             {jobDetail.addressDetial}
-          </Describe>
+          </AddDescribe>
         </Container>
         <div className="bottom">
-          <Button>编辑</Button>
+          <Link href={`/publishJob?jobId=${this.props.jobId}`}><Button>编辑</Button></Link>
           <Button delete onClick={this.handleClickDelete}>删除</Button>
         </div>
         <style jsx>{`
