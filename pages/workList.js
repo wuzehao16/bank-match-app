@@ -32,12 +32,11 @@ class workList extends React.Component {
 
     static async getInitialProps ({query,req}) {
       // eslint-disable-next-line no-undef
-      const token =  getCookie('token', req);
-      var data = await fetch('/getJobList',token);
+      var data = await fetch('/getJobList');
+      console.log('data',data)
       const jobName = await fetch('/selectByType?type=jobTitle')
       const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
       const education = await fetch('/selectByType?type=education')
-      const nature = ["","全职","兼职","实习"]
       const salary = ["面议","2k以下","2k-5k","5k-10k",'10k-15k','15k-25k','25k-50k','50k以上']
       const organizationCategory = await fetch('/selectByType?type=orgType')
       const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
@@ -48,7 +47,6 @@ class workList extends React.Component {
                   jobNameDic: jobName,
                   ageLimitDic: ageLimit,
                   educationDic: education,
-                  natureDic: nature,
                   salaryDic: salary,
                   organizationCategoryDic: organizationCategory,
                   scaleDic: scale
@@ -173,7 +171,7 @@ class workList extends React.Component {
 
   render() {
     const data = this.props.data;
-    const {jobNameDic, ageLimitDic, educationDic, natureDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
+    const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     console.log('data2',data)
     console.log('dic',this.props.dic)
     // console.log('this.state',this.state)
@@ -196,29 +194,27 @@ class workList extends React.Component {
       }
       const obj = dataObj[index--];
       return (
-        <div key={rowID}>
-            <Link href='/workDetail'>
+        // <div key={rowID}>
+            <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
               <Card full>
                 <Card.Header
                   className="jobdesc"
-                  title={jobNameDic.filter(item => item.code == obj.jobName)[0].name}
+                  title={obj.jobName}
                   extra={<span className="salary">{salaryDic[obj.salary]}</span>}
                 />
                 <Card.Header
                 className="jobInfo"
-                  title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{educationDic.filter(item => item.code ==obj.education)[0].name}</div>}
-                  extra={<span className="publishedTime">{dayjs(obj.createTime).format("MM月DD日 HH:mm")}</span>}
+                  title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{obj.education}</div>}
                 />
                 <Card.Header
-                  title={<div><p className="companyName">{obj.companyName}</p><p className="companyInfo">{scaleDic[obj.scale]}/{organizationCategoryDic.filter(item => item.code==obj.organizationCategory)[0].name}</p></div>}
-                  // title="深圳众银云测有限责任公司"
+                  title={<div style={{width:'100%'}}><p className="companyName">{obj.companyName}</p><p className="companyInfo" style={{width:'100%'}}>{scaleDic[obj.scale]}/{obj.organizationCategory}<span className="publishedTime" style={{float:'right'}}>{dayjs(obj.createTime).format("MM月DD日 HH:mm")}</span></p></div>}
                   thumb={obj.logo}
                   thumbStyle={{width:'64px',height:'64px'}}
                 />
               </Card>
             </Link>
-            <WhiteSpace size="lg" />
-          </div>
+            // <div style={{width:'100%',height:'20px',background:'rgb(245,245,249)'}}></div>
+          // </div>
       );
     };
     return (<Layout title="职位列表">
@@ -243,6 +239,7 @@ class workList extends React.Component {
           {this.state.isLoading ? 'Loading...' : '没有更多啦~'}
         </div>)}
         renderRow={row}
+        // renderRow={row}
         renderSeparator={separator}
         // useBodyScroll={this.state.useBodyScroll}
         style={{

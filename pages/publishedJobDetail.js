@@ -46,6 +46,27 @@ const Button =styled.button`
   background: ${props => props.delete ? '#ee5648' : '#fdc041'};
 `
 class publishedJobDetail extends React.PureComponent {
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    // const token = getCookie('token', req);
+    const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
+
+    const jobName = await fetch('/selectByType?type=jobTitle')
+    const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
+    const education = await fetch('/selectByType?type=education')
+    const nature = ["","全职","兼职","实习"]
+    return {
+            jobDetail: jobDetail || {},
+            jobId: query.jobId,
+            dic:{
+              jobNameDic: jobName,
+              ageLimitDic: ageLimit,
+              educationDic: education,
+              natureDic: nature,
+            }
+          };
+  }
+
   handleClickDelete = () => {
     alert('删除', '你确定删除该职位吗?', [
       { text: '取消', onPress: () => console.log('cancel') },

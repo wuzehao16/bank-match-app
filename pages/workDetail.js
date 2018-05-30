@@ -38,6 +38,7 @@ const Card = styled.div`
   height: 82px;
 `
 class WorkDetail extends React.PureComponent {
+  
   render() {
     return (
       <Layout>
@@ -48,7 +49,7 @@ class WorkDetail extends React.PureComponent {
             <div className="salary">8k-16k</div>
             <div className="logo"></div>
             <Divider></Divider>
-            <div className="address">广东省-地址</div>
+            <div className="address"><i className="iconfont icon-city" style={{fontSize:'14px'}}></i>广东省-地址</div>
             <div className="address-detail">深圳软件元4动</div>
           </ICard>
            <Title>

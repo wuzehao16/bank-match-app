@@ -1,12 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout'
+import Router from 'next/router'
 import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast,TextareaItem } from 'antd-mobile'
 import { Form } from 'antd'
+import Layout from '../layout/RecruitLayout'
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
 import { formatData } from '../lib/util'
+import { insertJob, updateJob } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
@@ -105,7 +107,7 @@ class PublishJob extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token =getCookie('token', req)
     if (query.jobId) {
-      var i = await fetch(`/getResumeDetail?jobId=${query.jobId}`,token)
+      var i = await fetch(`/getJobDetail?jobId=${query.jobId}`,token)
     }
     const education = await fetch(`/selectByType?type=education`)
     const jobName = await fetch(`/selectByType?type=jobTitle`)
@@ -116,24 +118,50 @@ class PublishJob extends React.PureComponent {
             dic: {
                 education: education,
                 jobName: jobName
-              }
-            }
-            companyId: query.companyId
+              },
+              companyId: query.companyId,
+              jobId: query.jobId  
+          }
+            
   }
+
   componentDidMount () {
     this.props.form.validateFields();
   }
+
   hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+  async insertData(value) {
+    const res = await insertJob(value);
+    if (res.code == 0) {
+      Router.push({
+        pathname:'/publishedJobList'
+      })
+    } else {
+      Toast.fail(res.msg);
+    }
+  }
+
+  async updateData(value) {
+    const res = await updateJob(value);
+    if (res.code == 0) {
+      Router.push({
+        pathname:'/publishedJobList'
+      })
+    } else {
+      Toast.fail(res.msg);
+    }
   }
 
   publishJob = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
         console.log('value1',value);
-        value = formatData(value)
+        value = this.props.jobId?{...formatData(value),jobId:this.props.jobId}:{...formatData(value),companyId:this.props.companyId}
+        this.props.jobId?this.updateData(value): this.insertData(value);
         console.log('value2',value);
-        // this.sendData(value);
       } else {
         alert('Validation failed');
       }

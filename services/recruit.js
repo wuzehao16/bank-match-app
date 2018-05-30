@@ -83,3 +83,23 @@ export async function searchJobList(params) {
     },
   });
 }
+
+// 发布公司职位
+export async function insertJob(params) {
+  return request(`/app/insertJob`, {
+    method: 'POST',
+    body: {
+      ...params,
+    },
+  });
+}
+
+// 修改公司职位
+export async function updateJob(params) {
+  return request(`/app/updateJob`, {
+    method: 'PUT',
+    body: {
+      ...params,
+    },
+  });
+}
