@@ -8,6 +8,7 @@ import { Form } from 'antd';
 import "../styles/index.css"
 import fetch from '../lib/fetch'
 import getCookie from '../lib/getCookie'
+import  addressData from '../lib/address'
 import { formatData } from '../lib/util'
 import { updateBaseInformation } from '../services/recruit'
 const FormItem = Form.Item;
@@ -102,10 +103,20 @@ class BaseInformation extends React.PureComponent {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
+        console.log(value)
         value = {
-          ...formatData(value),
+          // ...formatData(value),
           resumeId: this.props.resumeId,
-          headPortrait:this.props.avatar
+          headPortrait:this.props.avatar,
+          birthYear:value.birthYear,
+          city:value.city,
+          education:value.education,
+          mail:value.mail,
+          name:value.name,
+          phone:value.phone,
+          sex:value.sex,
+          status:value.status,
+          workingYear:value.workingYear
         }
         this.sendData(value);
       } else {
@@ -179,11 +190,25 @@ class BaseInformation extends React.PureComponent {
       </List>
       <WhiteSpace/>
       <List>
-        <Picker data={cityOption} cols={1} {...getFieldProps('city', {initialValue:i.city?[i.city]:'',rules:[{required:true}]})} className="forss">
+        <Picker
+          extra="期望城市"
+          data={addressData}
+          title="地区"
+          {...getFieldProps('city', {
+            // initialValue: i.city?i.city.split("-"):''
+          })}
+        >
+          <List.Item arrow="horizontal">
+            <div><i className="iconfont icon-city"/>
+              <span className="itemTitle">期望城市</span>
+            </div>
+          </List.Item>
+        </Picker>
+        {/* <Picker data={addressData} cols={1} {...getFieldProps('city', {initialValue:i.city?[i.city]:'',rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><i className="iconfont icon-city"/><span className="itemTitle">所在城市</span></div>
           </List.Item>
-        </Picker>
+        </Picker> */}
         <Picker data={jobStatus} cols={1} {...getFieldProps('status', {initialValue:i.status?[i.status]:'',rules:[{required:true}]})} className="forss">
           <List.Item arrow="horizontal">
             <div><i className="iconfont icon-incumbencyHr"/><span className="itemTitle">在职状态</span></div>

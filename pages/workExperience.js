@@ -45,7 +45,7 @@ class WorkExperience extends React.PureComponent {
     if(query.workExperienceId){
       i = await fetch(`/getWorkExperienceDetail?workExperienceId=${query.workExperienceId}`,token)
     }
-    return { 
+    return {
             workExperienceId: query.workExperienceId,
             resumeId: query.resumeId,
             i: i || {},
@@ -54,14 +54,24 @@ class WorkExperience extends React.PureComponent {
 
   async saveData(value) {
     const res = await insertWorkExperience(value);
-    if (res.code != 0) {
+    if (res.code == 0) {
+      Router.push({
+        pathname:'/workExperienceList',
+        query: { resumeId: this.props.resumeId }
+      })
+    } else {
       Toast.fail(res.msg);
     }
   }
 
   async updateData(value) {
     const res = await updateWorkExperience(value);
-    if (res.code != 0) {
+    if (res.code == 0) {
+      Router.push({
+        pathname:'/workExperienceList',
+        query: { resumeId: this.props.resumeId }
+      })
+    } else {
       Toast.fail(res.msg);
     }
   }
@@ -71,10 +81,6 @@ class WorkExperience extends React.PureComponent {
         value = this.props.workExperienceId?{...formatData(value),workExperienceId:this.props.workExperienceId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.workExperienceId?this.updateData(value): this.saveData(value);
         console.log('this.props.resumeId',this.props.resumeId)
-        Router.push({
-          pathname:'/workExperienceList',
-          query: { resumeId: this.props.resumeId }
-        })
       } else {
         console.log('Validation failed',error);
       }

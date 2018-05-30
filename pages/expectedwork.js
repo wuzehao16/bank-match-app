@@ -72,7 +72,6 @@ const salary =[
       value: '7',
     },
 ];
-console.log(addressData)
 class ExpectedWork extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef

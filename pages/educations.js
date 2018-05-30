@@ -1,17 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
-import fetch from '../lib/fetch'
-import Router from 'next/router'
-import getCookie from '../lib/getCookie'
 import styled from 'styled-components'
-import Layout from '../layout/RecruitLayout'
 import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile';
+import Router from 'next/router'
+import fetch from '../lib/fetch'
+import getCookie from '../lib/getCookie'
+import Layout from '../layout/RecruitLayout'
 
 class Educations extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const i = await fetch(`/getEducationList?resumeId=${query.resumeId}`,token);
+    console.log('u',i)
     return {
               resumeId:query.resumeId,
               i: i || []
@@ -34,7 +35,7 @@ class Educations extends React.PureComponent {
                     extra={<div style={{color:'#ee5648',fontSize:'14px'}}><i className="iconfont icon-edit" style={{marginRight:'5px'}}></i>编辑</div>}
                   />
                   <Card.Body>
-                    <div className="school">{item.school}杭州电子科技大学</div>
+                    <div className="school">{item.school}</div>
                     <div className="majorInfo"><span>{item.educationBackground}-</span><span>{item.major}</span></div>
                   </Card.Body>
                 </Card>

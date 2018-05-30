@@ -32,7 +32,7 @@ class EducationExperience extends React.PureComponent {
       educationDetail = await fetch(`/getEducationDetail?educationId=${query.educationId}`,token)
     }
     const education = await fetch('/selectByType?type=education')
-    return { 
+    return {
             resumeId: query.resumeId ,
             educationId: query.educationId,
             educationDetail: educationDetail || {},
@@ -41,7 +41,7 @@ class EducationExperience extends React.PureComponent {
               }
             }
   }
-  
+
   componentDidMount () {
     this.props.form.validateFields();
   }
@@ -52,15 +52,18 @@ class EducationExperience extends React.PureComponent {
 
   async saveData(value) {
     const res = await insertEducation(value);
-  
-    if (res.code !==0) {
-       Toast.fail(res.msg);
+    if (res.code == 0) {
+      Router.push(`/educations?resumeId=${this.props.resumeId}`)
+    } else {
+      Toast.fail(res.msg);
     }
   }
 
   async updateData(value) {
     const res = await updateEducation(value);
-    if (res.code !==0) {
+    if (res.code == 0) {
+      Router.push(`/educations?resumeId=${this.props.resumeId}`)
+    } else {
       Toast.fail(res.msg);
     }
   }
@@ -70,10 +73,10 @@ class EducationExperience extends React.PureComponent {
       if (!error) {
         value = this.props.educationId?{...formatData(value),educationId:this.props.educationId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.educationId?this.updateData(value):this.saveData(value);
-        Router.push({
-          pathname:'/educations',
-          query: { resumeId:this.props.resumeId }
-        })
+        // Router.push({
+        //   pathname:'/educations',
+        //   query: { resumeId:this.props.resumeId }
+        // })
       } else {
         console.log('Validation failed',error);
       }
