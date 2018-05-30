@@ -68,7 +68,7 @@ class PublishedJobList extends React.PureComponent {
             </Link>
           )}
         </List>
-    }   
+    }
       <style jsx global>{`
           .am-list-item .am-list-line .am-list-brief{
             font-size: 12px !important;
