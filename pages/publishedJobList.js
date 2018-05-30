@@ -4,19 +4,10 @@ import styled from 'styled-components'
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile'
 import Layout from '../layout/HasFooterRecruitLayout'
 import fetch from '../lib/fetch'
-<<<<<<< HEAD
-import getCookie from '../lib/getCookie'
-import { formatData } from '../lib/util'
-import withRoot from '../src/withRoot'
-// import { disconnect } from 'cluster';
-const Item = List.Item
-const Brief = Item.Brief
-=======
 import { getCookie, formatData } from '../lib/util'
-import withRoot from '../src/withRoot';
+import withRoot from '../src/withRoot'
 const Item = List.Item;
 const Brief = Item.Brief;
->>>>>>> f9a1b1bce965d82bc1dbf9a8a8e5a9a192d4cc86
 
 const Name = styled.span`
   font-size: 14px;

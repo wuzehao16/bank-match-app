@@ -236,7 +236,7 @@ class companyDetail extends React.PureComponent {
             rows={3}
             // count={50}
             // placeholder='请输入公司详细地址'
-            style={{background:'#f2f2f2',padding:'3px 3px'}}
+            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#3c3c3c'}}
           />
         </List>
         <WhiteSpace />

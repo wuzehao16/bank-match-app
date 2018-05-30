@@ -171,7 +171,7 @@ class CompanyBaseInfo extends React.PureComponent {
         <P>上传公司标志</P>
 
         <WingBlank style={{padding:'0 17px'}}>
-          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>保存-下一步</Button>
+          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>{this.props.companyInfo?"下一步":"保存"}</Button>
         </WingBlank>
         <style jsx global>{`
         .am-list-item .am-input-label {

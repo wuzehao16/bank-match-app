@@ -60,6 +60,7 @@ class CompanyInformation extends React.PureComponent {
     const userInfo = await fetch(`/getUserInfo`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
     const companyInfo = JSON.parse(sessionStorage.getItem('companyInfo'));
+    console.log('companyInfo',companyInfo)
     return {
       dic: {
         orgType: orgType
@@ -88,7 +89,7 @@ class CompanyInformation extends React.PureComponent {
         res = await insertCompany(value);
       }
       if (res.code ==0) {
-        Router.push('/companyDetail')
+        Router.push(`/publishedJobList?companyId=${this.props.companyInfo.companyId}`)
       } else {
         Toast.fail(res.msg);
       }
@@ -225,7 +226,7 @@ class CompanyInformation extends React.PureComponent {
             rows={3}
             // count={50}
             // placeholder='请输入公司详细地址'
-            style={{background:'#f2f2f2',padding:'3px 3px'}}
+            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#3c3c3c'}}
           />
         </List>
         <WhiteSpace />

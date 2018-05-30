@@ -1,8 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import {  WhiteSpace, Modal } from 'antd-mobile';
-import Layout from '../layout/Blanklayout';
+import {  WhiteSpace, Modal } from 'antd-mobile'
+import fetch from '../lib/fetch';
+import { getCookie } from '../lib/util'
+import Layout from '../layout/Blanklayout'
 
 const alert = Modal.alert;
 
@@ -48,9 +50,9 @@ const Button =styled.button`
 class publishedJobDetail extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
-    // const token = getCookie('token', req);
-    const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
-
+    const token = getCookie('token', req);
+    const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`,token);
+    console.log('query','jobDetail',query,jobDetail)
     const jobName = await fetch('/selectByType?type=jobTitle')
     const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
     const education = await fetch('/selectByType?type=education')
@@ -74,11 +76,13 @@ class publishedJobDetail extends React.PureComponent {
     ])
   }
   render() {
+    const {jobDetail, dic, jobId} = this.props;
+    console.log('this.props',this.props)
     return (
       <Layout>
         <Container>
-            <Name>客户经理</Name>
-            <More>深圳南山区/3-5年/本科/全职</More>
+            <Name>{jobDetail.jobName}</Name>
+            <More>{jobDetail.address}/{dic.ageLimitDic[jobDetail.ageLimit]}/{jobDetail.education}/{dic.natureDic[jobDetail.nature]}</More>
         </Container>
         <WhiteSpace />
         <Container>
@@ -86,7 +90,7 @@ class publishedJobDetail extends React.PureComponent {
           <Divider />
           <Describe
             dangerouslySetInnerHTML={{
-                    __html: '<h3>hahhah</h3>'
+                    __html: jobDetail.jobDesribe
                 }}
             />
 
@@ -95,11 +99,11 @@ class publishedJobDetail extends React.PureComponent {
         <Container>
           <Address>
             <Title>所在地区</Title>
-            <Title>深圳市南山区</Title>
+            <Title>{jobDetail.address}</Title>
           </Address>
           <Divider />
           <Describe>
-            详细地址
+            {jobDetail.addressDetial}
           </Describe>
         </Container>
         <div className="bottom">
