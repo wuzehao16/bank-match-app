@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Icon from '@material-ui/core/Icon';
 import Layout from '../layout/contentLayout';
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 
 const Ul = styled.ul`
   margin: 0;

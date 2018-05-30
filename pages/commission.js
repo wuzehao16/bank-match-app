@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 
 const Title = styled.div`
   height: 136px;

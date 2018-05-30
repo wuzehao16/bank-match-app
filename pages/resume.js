@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import dayjs from 'dayjs'
 import Layout from '../layout/HasFooterWantedLayout';
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 import { addBaseInformation } from '../services/recruit'
 import withRoot from '../src/withRoot';
 
@@ -102,7 +102,7 @@ class Resume extends React.PureComponent {
         <Head>
             <Avatar
             alt="Adelle Charles"
-            src={userInfo.userHead?userInfo.userHead:"/static/resume_head.png"}
+            src={userInfo?userInfo.userHead:"/static/resume_head.png"}
             style={{height:60,width:60}}
           />
         </Head>

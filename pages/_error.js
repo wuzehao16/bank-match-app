@@ -10,11 +10,17 @@ export default class Error extends React.Component {
     console.log(this.props)
     return (
       <p>
-        {this.props.statusCode}
         {/* {this.props.statusCode
           ? `An error ${this.props.statusCode} occurred on server`
           : 'An error occurred on client'} */}
-          <span>服务器被劫走了</span>
+          <div>
+            <div >
+              <img src="/static/error.png" alt="" height={180} width={200}/>
+
+            </div>
+
+            <div style={{marginTop:'20px'}}>{this.props.statusCode}服务器繁忙，请稍后再试~</div>
+          </div>
           <style jsx>{`
             p{
               display: flex;

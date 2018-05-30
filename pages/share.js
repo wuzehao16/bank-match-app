@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../layout/Blanklayout';
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 
 const Wrapper = styled.div`
   background: url(static/share.jpg);

@@ -7,9 +7,8 @@ import { Form } from 'antd';
 import Layout from '../layout/RecruitLayout';
 import "../styles/index.css"
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
 import  addressData from '../lib/address'
-import { formatData } from '../lib/util'
+import { getCookie, formatData } from '../lib/util'
 import { updateExpectedWork } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;

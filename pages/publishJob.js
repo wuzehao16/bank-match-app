@@ -6,8 +6,7 @@ import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast,TextareaIt
 import { Form } from 'antd'
 import Layout from '../layout/RecruitLayout'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
-import { formatData } from '../lib/util'
+import { getCookie, formatData } from '../lib/util'
 import { insertJob, updateJob } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;

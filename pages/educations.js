@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Card, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import Router from 'next/router'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 import Layout from '../layout/RecruitLayout'
 
 class Educations extends React.PureComponent {

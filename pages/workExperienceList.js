@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 import fetch from '../lib/fetch'
 import styled from 'styled-components'
 import Router from 'next/router'
