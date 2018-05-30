@@ -1,26 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Layout from '../layout/RecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
-import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie';
-import address from '../lib/address'
-import { InputItem, List, Button, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
+import Router from 'next/router'
+import { InputItem, List, Button, WingBlank, WhiteSpace, Picker, TextareaItem, Toast } from 'antd-mobile';
 import { Form } from 'antd';
-
+import Layout from '../layout/RecruitLayout';
+import fetch from '../lib/fetch';
+import addressData from '../lib/address';
+import { formatData,getCookie } from '../lib/util'
+import { insertCompany, updateCompany } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
 
-function getAddress(address) {
-  return   address.map(ad=>{
-            const result = {value:ad.name,label:ad.name};
-            if (ad.children) {
-              result.children =getAddress(ad.children)
-            }
-            return result
-          })
-}
+
 const Head = styled.div`
   padding:15px 0 15px 25px;
   // height:111px;
@@ -36,26 +29,26 @@ const Name = styled.h3`
   font-weight: normal;
 `
 
-const scale = [
+const scaleOption = [
   {
     label: '20人以下',
-    value: 1
+    value: '1'
   },
   {
     label: '20-49人',
-    value: 2
+    value: '2'
   },
   {
     label: '50-99人',
-    value: 3
+    value: '3'
   },
   {
     label: '100-499人',
-    value: 4
+    value: '4'
   },
   {
     label: '500人以上',
-    value: 5
+    value: '5'
   }
 ]
 
@@ -64,15 +57,20 @@ class CompanyInformation extends React.PureComponent {
   static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const userInfo = await fetch(`/getUserInfo`)
+    const userInfo = await fetch(`/getUserInfo`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
-    return { dic: {
-              orgType:orgType,
-              },
-             userInfo: userInfo
-            }
+    const companyInfo = JSON.parse(sessionStorage.getItem('companyInfo'));
+    return {
+      dic: {
+        orgType: orgType
+      },
+      companyInfo:companyInfo,
+      userInfo: userInfo
+    }
   }
-
+  state ={
+    companyName:""
+  }
   componentDidMount () {
     this.props.form.validateFields();
   }
@@ -81,22 +79,34 @@ class CompanyInformation extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
+  async sendData(value) {
+    try {
+      var res;
+      if (value.companyId) {
+        res = await updateCompany(value);
+      } else {
+        res = await insertCompany(value);
+      }
+      if (res.code ==0) {
+        Router.push('/companyDetail')
+      } else {
+        Toast.fail(res.msg);
+      }
+    } catch (e) {
+        console.log(e)
+    }
+  }
+
   save = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
+    this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        const validateValues = this.props.form.getFieldsValue();
-        const validateData = {
-          headProtrait: validateValues.headProtrait,
-          userName:validateValues.userName,
-          companyName:validateValues.companyName,
-          intro:validateValues.intro,
-          organizationCategory:validateValues.organizationCategory.toString(),
-          scale:validateValues.scale.toString(),
-          job:validateValues.job,
-          mail:validateValues.mail,
-          addressDetial:validateValues.addressDetial,
+        value = {
+          ...this.props.companyInfo,
+          ...formatData(value)
         }
-        console.log(validateData);
+        this.sendData(value)
+
+        console.log(value);
       } else {
         console.log('Validation failed',error);
       }
@@ -104,7 +114,8 @@ class CompanyInformation extends React.PureComponent {
   }
 
   render() {
-    const { userInfo, resume } = this.props
+    const { userInfo, resume } = this.props;
+    const { companyName, intro, organizationCategory, scale, mail,address, addressDetial, job } = this.props.companyInfo;
     const { getFieldProps, getFieldsError } = this.props.form;
     const { orgType} = this.props.dic;
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
@@ -113,16 +124,19 @@ class CompanyInformation extends React.PureComponent {
         <Head>
             <Avatar
               alt="Adelle Charles"
-              // src={userInfo.userHead}
+              src={userInfo.userHead}
               style={{height:60,width:60}}
-              // {...getFieldProps('headProtrait',{initialValue:userInfo.userHead})}
+              {...getFieldProps('headProtrait',{initialValue:userInfo.userHead})}
             />
-            {/* <Name {...getFieldProps('userName',{initialValue:userInfo.userName})}>{userInfo.userName}</Name> */}
+            <Name {...getFieldProps('userName',{initialValue:userInfo.userName})}>{userInfo.userName}</Name>
         </Head>
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('companyName',{rules:[
+            disabled
+            {...getFieldProps('companyName',{
+              initialValue: companyName,
+              rules:[
               {
                 required: true,
               }
@@ -132,7 +146,9 @@ class CompanyInformation extends React.PureComponent {
             <div className="itemTitle">公司名称</div>
           </InputItem>
           <InputItem
-            {...getFieldProps('intro',{rules:[
+            {...getFieldProps('intro',{
+              initialValue:intro,
+              rules:[
               {
                 required: true,
               }
@@ -141,7 +157,11 @@ class CompanyInformation extends React.PureComponent {
           >
             <div className="intro">公司简称</div>
           </InputItem>
-          <Picker data={orgTypeOption} cols={1} title="机构类别" {...getFieldProps('organizationCategory',{rules:[
+          <Picker data={orgTypeOption} cols={1} title="机构类别" {...getFieldProps('organizationCategory',{
+            initialValue:
+            [organizationCategory?(orgTypeOption.filter( item => item.label == organizationCategory))[0].value:'']
+            ,
+            rules:[
               {
                 required: true,
               }
@@ -149,7 +169,9 @@ class CompanyInformation extends React.PureComponent {
           })} className="forss">
             <List.Item arrow="horizontal">机构类别</List.Item>
           </Picker>
-          <Picker data={scale} cols={1} title="公司规模" {...getFieldProps('scale',{rules:[
+          <Picker data={scaleOption} cols={1} title="公司规模" {...getFieldProps('scale',{
+            initialValue:scale,
+            rules:[
               {
                 required: true,
               }
@@ -161,7 +183,9 @@ class CompanyInformation extends React.PureComponent {
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('mail',{rules:[
+            {...getFieldProps('mail',{
+              initialValue:mail,
+              rules:[
               {
                 required: true,
               }
@@ -175,9 +199,15 @@ class CompanyInformation extends React.PureComponent {
         </List>
         <Picker
           extra="请选择"
-          data={getAddress(address)}
+          data={addressData}
           title="地区"
           {...getFieldProps('address', {
+            initialValue:address?address.split('-'):'',
+            rules:[
+            {
+              required: true,
+            }
+          ]
           })}
         >
           <List.Item arrow="horizontal">公司地址</List.Item>
@@ -185,6 +215,7 @@ class CompanyInformation extends React.PureComponent {
         <List renderHeader={() => '所在地区(详细地址)'}>
           <TextareaItem
             {...getFieldProps('addressDetial',{
+              initialValue:addressDetial,
               rules:[
                 {
                   required: true
@@ -200,7 +231,9 @@ class CompanyInformation extends React.PureComponent {
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('job',{rules:[
+            {...getFieldProps('job',{
+              initialValue:job,
+              rules:[
               {
                 required: true,
               }

@@ -3,8 +3,9 @@ import Layout from '../layout/RecruitLayout';
 import styled from 'styled-components'
 import { InputItem, List, Button, WingBlank, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { Form } from 'antd';
+import Router from 'next/router'
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie';
+import { getCookie } from '../lib/util';
 import  Upload  from 'rc-upload';
 import { uploadImage } from '../services/recruit'
 import UploadImage from '../components/uploadImage'
@@ -29,14 +30,24 @@ const IDCard = styled.div`
   overflow: hidden;
 `
 class CompanyBaseInfo extends React.PureComponent {
+
+  static async getInitialProps ({req}) {
+    // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
+    const companyInfo = await fetch(`/getCompanyDetail`,token)
+    return {
+             companyInfo: companyInfo
+            }
+  }
   state = {
-    files: [],
-    files2: [],
     multiple: false,
   }
 
   componentDidMount () {
     this.props.form.validateFields();
+    this.setState({
+      ...this.props.companyInfo
+    })
   }
 
   hasErrors = (fieldsError) => {
@@ -53,14 +64,18 @@ class CompanyBaseInfo extends React.PureComponent {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
         console.log(value)
-        this.sendData(value);
+        value = {
+          ...this.props.companyInfo,
+          ...value
+        }
+        sessionStorage.setItem('companyInfo', JSON.stringify(value));
+        Router.push('/companyInformation')
       } else {
         alert('Validation failed');
       }
     });
   }
   handleChange = (res) => {
-    console.log(res)
     this.setState({
       businessLicense:res.data
     })
@@ -69,7 +84,6 @@ class CompanyBaseInfo extends React.PureComponent {
     })
   }
   handleChange2 = (res) => {
-    console.log(res)
     this.setState({
       logo:res.data
     })
@@ -78,6 +92,7 @@ class CompanyBaseInfo extends React.PureComponent {
     })
   }
   render () {
+    const { companyName, businessLicense, logo } = this.props.companyInfo;
     const { files, files2 } = this.state;
     const { getFieldProps, getFieldsError, getFieldDecorator } = this.props.form;
     const Img =(
@@ -96,7 +111,9 @@ class CompanyBaseInfo extends React.PureComponent {
       <Layout title="公司信息">
         <WhiteSpace />
         <InputItem
-            {...getFieldProps('companyName',{rules:[
+            {...getFieldProps('companyName',{
+              initialValue:companyName,
+              rules:[
               {
                 required: true,
               }
@@ -108,7 +125,7 @@ class CompanyBaseInfo extends React.PureComponent {
           </InputItem>
           {
             getFieldDecorator('businessLicense',{
-              // initialValue:"1234",
+              initialValue:businessLicense,
               rules:[
                 {
                   required: true,
@@ -135,7 +152,7 @@ class CompanyBaseInfo extends React.PureComponent {
            >
            <IDCard
              {...getFieldProps('logo',{
-               // initialValue:"1234",
+               initialValue:logo,
                rules:[
                  // {
                  //   required: true,

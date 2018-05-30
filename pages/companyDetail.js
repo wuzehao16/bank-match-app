@@ -5,8 +5,8 @@ import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'an
 import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie';
-import getAddress from '../lib/address'
+import { getCookie } from '../lib/util';
+import addressData from '../lib/address';
 import withRoot from '../src/withRoot';
 import { Form } from 'antd';
 
@@ -49,26 +49,26 @@ const P = styled.p`
   margin: 15px 0;
 `
 
-const scale = [
+const scaleOption = [
   {
     label: '20人以下',
-    value: 1
+    value: '1'
   },
   {
     label: '20-49人',
-    value: 2
+    value: '2'
   },
   {
     label: '50-99人',
-    value: 3
+    value: '3'
   },
   {
     label: '100-499人',
-    value: 4
+    value: '4'
   },
   {
     label: '500人以上',
-    value: 5
+    value: '5'
   }
 ]
 
@@ -78,11 +78,13 @@ class companyDetail extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const userInfo = await fetch(`/getUserInfo`,token)
+    const companyInfo = await fetch(`/getCompanyDetail`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
     return {
       dic: {
         orgType: orgType
       },
+      companyInfo:companyInfo,
       userInfo: userInfo
     }
 }
@@ -120,6 +122,7 @@ class companyDetail extends React.PureComponent {
 
   render() {
     const { userInfo, resume } = this.props
+    const { companyName, intro, organizationCategory, scale, mail,address, addressDetial, job, logo,businessLicense } = this.props.companyInfo;
     const { getFieldProps, getFieldsError } = this.props.form;
     const { orgType} = this.props.dic;
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
@@ -137,7 +140,10 @@ class companyDetail extends React.PureComponent {
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('companyName',{rules:[
+            disabled
+            {...getFieldProps('companyName',{
+              initialValue: companyName,
+              rules:[
               {
                 required: true,
               }
@@ -147,7 +153,10 @@ class companyDetail extends React.PureComponent {
             <div className="itemTitle">公司名称</div>
           </InputItem>
           <InputItem
-            {...getFieldProps('intro',{rules:[
+            disabled
+            {...getFieldProps('intro',{
+              initialValue:intro,
+              rules:[
               {
                 required: true,
               }
@@ -156,7 +165,11 @@ class companyDetail extends React.PureComponent {
           >
             <div className="intro">公司简称</div>
           </InputItem>
-          <Picker data={orgTypeOption} cols={1} title="机构类别" {...getFieldProps('organizationCategory',{rules:[
+          <Picker disabled data={orgTypeOption} cols={1} title="机构类别" {...getFieldProps('organizationCategory',{
+            initialValue:
+            [organizationCategory?(orgTypeOption.filter( item => item.label == organizationCategory))[0].value:'']
+            ,
+            rules:[
               {
                 required: true,
               }
@@ -164,7 +177,9 @@ class companyDetail extends React.PureComponent {
           })} className="forss">
             <List.Item arrow="horizontal">机构类别</List.Item>
           </Picker>
-          <Picker data={scale} cols={1} title="公司规模" {...getFieldProps('scale',{rules:[
+          <Picker disabled data={scaleOption} cols={1} title="公司规模" {...getFieldProps('scale',{
+            initialValue:scale,
+            rules:[
               {
                 required: true,
               }
@@ -176,7 +191,10 @@ class companyDetail extends React.PureComponent {
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('mail',{rules:[
+            disabled
+            {...getFieldProps('mail',{
+              initialValue:mail,
+              rules:[
               {
                 required: true,
               }
@@ -188,20 +206,27 @@ class companyDetail extends React.PureComponent {
             <div className="itemTitle">接收简历邮箱</div>
           </InputItem>
         </List>
-        {/* <List> */}
-          <Picker
-            extra="请选择"
-        data={getAddress}
-        title="地区"
-        {...getFieldProps('address', {
-        })}
-      >
-        <List.Item arrow="horizontal">公司地址</List.Item>
-      </Picker>
-        {/* </List> */}
+        <Picker
+          disabled
+          extra="请选择"
+          data={addressData}
+          title="地区"
+          {...getFieldProps('address', {
+            initialValue:address?address.split('-'):'',
+            rules:[
+            {
+              required: true,
+            }
+          ]
+          })}
+        >
+          <List.Item arrow="horizontal">公司地址</List.Item>
+        </Picker>
         <List renderHeader={() => '所在地区(详细地址)'}>
           <TextareaItem
+            disabled
             {...getFieldProps('addressDetial',{
+              initialValue:addressDetial,
               rules:[
                 {
                   required: true
@@ -217,7 +242,10 @@ class companyDetail extends React.PureComponent {
         <WhiteSpace />
         <List>
           <InputItem
-            {...getFieldProps('job',{rules:[
+            disabled
+            {...getFieldProps('job',{
+              initialValue:job,
+              rules:[
               {
                 required: true,
               }
@@ -228,16 +256,15 @@ class companyDetail extends React.PureComponent {
           </InputItem>
         </List>
         <WhiteSpace />
-        {/* <button onClick={this.save}>123</button> */}
         <ImgGroup>
           <Img
-            src={userInfo.userHead}
-            {...getFieldProps('logo',{initialValue:''})}
+            src={logo}
+            {...getFieldProps('logo',{initialValue:logo})}
           />
           <P>公司标志</P>
           <Img
-            src={userInfo.userHead}
-            {...getFieldProps('businessLicense',{initialValue:''})}
+            src={businessLicense}
+            {...getFieldProps('businessLicense',{initialValue:businessLicense})}
           />
           <P>营业执照</P>
         </ImgGroup>
