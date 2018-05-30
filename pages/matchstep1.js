@@ -15,7 +15,7 @@ import {withReduxSaga} from '../redux/store'
 import { saveStep1, saveModel } from '../redux/actions'
 import withRoot from '../src/withRoot';
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 const FormItem = Form.Item;
 
 const RadioButton = Radio.Button;

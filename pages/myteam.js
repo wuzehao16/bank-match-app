@@ -6,7 +6,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 const theme = createMuiTheme({
   overrides: {
     MuiButton: {

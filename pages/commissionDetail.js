@@ -7,7 +7,7 @@ import PullToRefresh from 'rmc-pull-to-refresh'
 import 'rmc-pull-to-refresh/assets/index.css'
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 import { fetchDetail } from '../services/commission'
 const Wrapper = styled.div`
   padding: 5px 15px 15px;

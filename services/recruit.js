@@ -83,3 +83,20 @@ export async function searchJobList(params) {
     },
   });
 }
+//新增公司信息
+export async function insertCompany(params) {
+  return request(`/app/insertCompany`, {
+    method: 'POST',
+    body: {
+      ...params,
+    },
+  });
+}
+export async function updateCompany(params) {
+  return request(`/app/updateCompany`, {
+    method: 'PUT',
+    body: {
+      ...params,
+    },
+  });
+}

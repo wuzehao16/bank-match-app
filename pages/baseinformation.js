@@ -7,9 +7,8 @@ import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast } from 'an
 import { Form } from 'antd';
 import "../styles/index.css"
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
 import  addressData from '../lib/address'
-import { formatData } from '../lib/util'
+import { formatData, getCookie } from '../lib/util'
 import { updateBaseInformation } from '../services/recruit'
 const FormItem = Form.Item;
 const Item = List.Item;
@@ -79,6 +78,7 @@ class BaseInformation extends React.PureComponent {
 
     return {
             resumeId:query.resumeId,
+            avatar:query.avatar,
             i: i || {},
             dic: {
                 education: education,
@@ -93,31 +93,26 @@ class BaseInformation extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   async sendData(value) {
-    const res = await updateBaseInformation(value);
-    if (res.code ==0) {
-       Router.push('/resume')
-    } else {
-      Toast.fail(res.msg);
+    try {
+      const res = await updateBaseInformation(value);
+      if (res.code ==0) {
+        Router.push('/resume')
+      } else {
+        Toast.fail(res.msg);
+      }
+    } catch (e) {
+        console.log(e)
     }
   }
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
-        console.log(value)
         value = {
-          // ...formatData(value),
+          ...formatData(value),
           resumeId: this.props.resumeId,
-          headPortrait:this.props.avatar,
-          birthYear:value.birthYear,
-          city:value.city,
-          education:value.education,
-          mail:value.mail,
-          name:value.name,
-          phone:value.phone,
-          sex:value.sex,
-          status:value.status,
-          workingYear:value.workingYear
+          headPortrait:this.props.avatar
         }
+        console.log(value,"value")
         this.sendData(value);
       } else {
         alert('Validation failed');
@@ -195,7 +190,7 @@ class BaseInformation extends React.PureComponent {
           data={addressData}
           title="地区"
           {...getFieldProps('city', {
-            // initialValue: i.city?i.city.split("-"):''
+            initialValue: i.city?i.city.split("-"):''
           })}
         >
           <List.Item arrow="horizontal">

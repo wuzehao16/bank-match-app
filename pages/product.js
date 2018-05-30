@@ -5,7 +5,7 @@ import Steps, { Step } from 'rmc-steps';
 import 'isomorphic-unfetch';
 import Layout from '../layout/Elayout';
 import fetch from '../lib/fetch';
-import getCookie from '../lib/getCookie'
+import { getCookie } from '../lib/util'
 const Pd = styled.div`
   padding: 0 15px;
   background: #fff;

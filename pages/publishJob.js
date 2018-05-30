@@ -5,8 +5,7 @@ import Layout from '../layout/RecruitLayout'
 import { Picker, List, InputItem, WhiteSpace, Button, WingBlank,Toast,TextareaItem } from 'antd-mobile'
 import { Form } from 'antd'
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
-import { formatData } from '../lib/util'
+import { getCookie, formatData } from '../lib/util'
 const FormItem = Form.Item;
 const Item = List.Item;
 

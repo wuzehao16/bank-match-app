@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { List, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import Layout from '../layout/HasFooterRecruitLayout';
 import fetch from '../lib/fetch'
-import getCookie from '../lib/getCookie'
-import { formatData } from '../lib/util'
+import { getCookie, formatData } from '../lib/util'
 import withRoot from '../src/withRoot';
 const Item = List.Item;
 const Brief = Item.Brief;
