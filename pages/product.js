@@ -294,8 +294,12 @@ class ProductDetail extends React.PureComponent {
                 <div><Square primary="#beb1ff"/>月供<span className="pie-info-detail">{this.countMonthlyPayment2(product.productTime)}元</span></div>
                 <div><Square primary="#00ddb0"/>手续费<span className="pie-info-detail">{this.countPoundage(product.productPoundage)}元/{product.productPoundage?product.productPoundage:0.00}%</span></div>
               </div>
-              <Input type="number" min={3}  onBlur={this.changeLoanAmount}  placeholder={`输入借款额度(1-${product.productMaxLoad})`}/><span className="after">万</span>
-              <Input type="number" min={1}  onBlur={ this.changeProductTimeLimit }  placeholder={`输入借款期限(${product.productTimeLimit})`}/><span className="after">期</span>
+              <div>
+                <Input type="number" min={3}  onBlur={this.changeLoanAmount}  placeholder={`输入借款额度(1-${product.productMaxLoad})`}/><span className="after">万</span>
+              </div>
+              <div>
+                <Input type="number" min={1}  onBlur={ this.changeProductTimeLimit }  placeholder={`输入借款期限(${product.productTimeLimit})`}/><span className="after">期</span>
+              </div>
             </InfoRight>
           </div>
         </Pd>
@@ -443,9 +447,10 @@ class ProductDetail extends React.PureComponent {
           }
           .after {
             margin-left: -15px;
-            font-size:12px;
-            display: inline-block;
+            vertical-align: middle;
+            font-size: 12px;
             margin-bottom:2px;
+            display: inline-block;
           }
           .pie{
             width:135px;
