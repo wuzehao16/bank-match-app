@@ -1,4 +1,4 @@
-import React, { Fragment }from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { List, WhiteSpace, WingBlank, SegmentedControl } from 'antd-mobile'
@@ -56,7 +56,8 @@ class PublishedJobList extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req);
-    const resumeListData = await fetch('/getResumeList',token)
+    const resumeListData = await fetch(`/getResumeList?expectJob=1`,token);
+    console.log('resumeListData',resumeListData)
     const education = await fetch('/selectByType?type=education')
     const expectJob = await fetch('/selectByType?type=jobTitle')
   
@@ -69,30 +70,32 @@ class PublishedJobList extends React.PureComponent {
     };
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     resumeListData: resumeListData || []
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      resumeListData: this.props.resumeListData || [],
+      selectIndex: 0
+    };
+  }
 
-  // async getResumeList (params) {
-  //   const res = await getResumeList(params);
-  //   console.log('res',res);
-  //   if (res.code == 0) {
-  //     this.setState({
-  //       resumeListData: res.data
-  //     })
+  async getResumeList (value) {
+    const res = await getResumeList({expectJob:value+1});
+    console.log('res',res);
+    if (res.code == 0) {
+      this.setState({
+        resumeListData: res.data,
+        selectIndex: value
+      })
       
-  //   } else {
-  //     Toast.fail(res.msg);
-  //   }
-  // }
+    } else {
+      Toast.fail(res.msg);
+    }
+  }
 
   onChange = (e) => {
-    const params= {expectJob: e.nativeEvent.selectedSegmentIndex+1};
-    console.log(params);
-    // this.getResumeList(params);
+    const value= e.nativeEvent.selectedSegmentIndex;
+    console.log('value',value);
+    this.getResumeList(value);
   }
 
 
@@ -104,7 +107,7 @@ class PublishedJobList extends React.PureComponent {
     return (
       <Layout title="人才列表">
         <WhiteSpace/>
-        <SegmentedControl selectedIndex={0} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
+        <SegmentedControl selectedIndex={this.state.selectIndex} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
         <WhiteSpace/>
         <List>
           {
