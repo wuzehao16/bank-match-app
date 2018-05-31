@@ -100,16 +100,14 @@ class PublishedJobList extends React.PureComponent {
     this.state = {
       resumeListData: this.props.resumeListData || [],
       params:{
-        expectJob: 0,
-
       }
     };
   }
 
   async getResumeList (data) {
+    console.log('data',data)
   const res = await getResumeList({
-    ...data,
-    expectJob:data.expectJob+1
+    ...data
   });
     console.log('res',res);
     if (res.code == 0) {
@@ -123,41 +121,44 @@ class PublishedJobList extends React.PureComponent {
   }
 
   handleChange = field => e => {
+  
     const params = {
       ...this.state.params,
       [field]: e.target.value
-    }
+    };
     this.setState({
       params: params
     })
+    console.log('params',this.state.params)
     this.getResumeList(params);
   }
-
-  onChange = (e) => {
-    const value= e.nativeEvent.selectedSegmentIndex;
-    console.log('value',value);
-    const params = {
-      ...this.state.params,
-      expectJob: value,
-    }
-    this.setState({
-      params:params
-    })
-    this.getResumeList(params);
-  }
-
 
   render() {
     const resumeListData = this.state.resumeListData;
     const {educationDic,expectJobDic} = this.props.dic
     const educationOption = educationDic.map(i => {return {value:i.code, label:i.name}})
     const expectJobOption = expectJobDic.map(i => {return {value:i.code, label:i.name}})
-    const expectJobArr = expectJobDic.map(item => item.name);
+    // const expectJobArr = expectJobDic.map(item => item.name);
     console.log('resumeListData',resumeListData)
+    
     return (
       <Layout title="人才列表">
         {/* <WhiteSpace/> */}
         <div className="filter">
+          <Select
+              style={{fontSize:'14px'}}
+              value={this.state.age}
+              onChange={this.handleChange('expectJob')}
+              native defaultValue='none'>
+              <option value="">
+                职位名称
+              </option>
+              {
+                expectJobOption.map(i => {
+                  return <option value={i.value}>{i.label}</option>
+                })
+              }
+            </Select>
           {/* <FormControl  style={{minWidth:'45%'}}> */}
           {/* <InputLabel htmlFor="controlled-open-select">工作年限</InputLabel> */}
           <Select
@@ -195,7 +196,7 @@ class PublishedJobList extends React.PureComponent {
               {/* </FormControl> */}
 
         </div>
-        <SegmentedControl selectedIndex={this.state.params.expectJob} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
+        {/* <SegmentedControl selectedIndex={this.state.params.expectJob} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} /> */}
         {/* <WhiteSpace/> */}
         <List>
           {
