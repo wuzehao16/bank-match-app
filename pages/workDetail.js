@@ -1,8 +1,27 @@
-import React from 'react'
+import React ,{ Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import {  Toast } from 'antd-mobile';
-import Layout from '../layout/Blanklayout';
+import { List , WhiteSpace, WingBlank, Toast, Button } from 'antd-mobile'
+import fetch from '../lib/fetch';
+import { getCookie } from '../lib/util'
+import Layout from '../layout/Blanklayout'
+
+const Item = List.Item;
+const Brief = Item.Brief
+
+const Name = styled.span`
+  font-size: 14px;
+  color: #404040;
+  margin-right: 10px;
+`
+const Info = styled.span`
+  font-size: 12px;
+  color: #999;
+`
+const Divide = styled.span`
+  display:inline-block;
+  margin: 0 3px;
+`
 
 const Wrapper =styled.div`
   padding: 5px 15px;
@@ -19,12 +38,12 @@ const Divider = styled.div`
   margin: 20px 0;
 `
 const Title = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   color: #242424;
   font-weight: 500;
   margin: 25px 0;
   display: flex;
-  align-items: center;
+  align-items: center;        
 `
 const Line = styled.div`
   height: 1px;
@@ -38,40 +57,79 @@ const Card = styled.div`
   height: 82px;
 `
 class WorkDetail extends React.PureComponent {
-  
+  static async getInitialProps ({query,req}) {
+    // eslint-disable-next-line no-undef
+    // const token = getCookie('token', req);
+    const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
+
+    console.log('jobDetail',query,jobDetail)
+    const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
+    const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
+    const education = await fetch('/selectByType?type=education')
+    const nature = ["","全职","兼职","实习"]
+    const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
+    return {
+            jobDetail: jobDetail || {},
+            jobId: query.jobId,
+            companyId: query.companyId,
+            dic:{
+              ageLimitDic: ageLimit,
+              educationDic: education,
+              natureDic: nature,
+              expectSalaryDic: expectSalary,
+              scaleDic: scale,
+            }
+          };
+  }
+
   render() {
+    const {jobDetail, dic, jobId} = this.props;
+    console.log('jobDetail',jobDetail)
+    console.log('dic',dic)
     return (
       <Layout>
         <Wrapper>
           <ICard>
-            <div className="name">客户经理</div>
-            <div className="info">深圳南山区|3-5年|本科</div>
-            <div className="salary">8k-16k</div>
-            <div className="logo"></div>
+            <div className="name">{jobDetail.jobName}</div>
+            <div className="info">{jobDetail.address}/{dic.ageLimitDic[jobDetail.ageLimit]}/{jobDetail.education}</div>
+            <div className="salary">{dic.expectSalaryDic[jobDetail.salary]}</div>
+            <div className="logo"><img src={jobDetail.logo}/></div>
             <Divider></Divider>
-            <div className="address"><i className="iconfont icon-city" style={{fontSize:'14px'}}></i>广东省-地址</div>
-            <div className="address-detail">深圳软件元4动</div>
+            <div className="address"><i className="iconfont icon-city" style={{fontSize:'14px'}}></i>{jobDetail.address}</div>
+            <div className="address-detail">{jobDetail.addressDetial}</div>
           </ICard>
            <Title>
              <span className="title">职位描述</span>
-             <Line></Line>
            </Title>
-          <div dangerouslySetInnerHTML={{
-                   __html: '<h3>hahhah</h3>'
-               }}
-           >
-           </div>
+              <div style={{fontSize:'14px',color:'#333'}} dangerouslySetInnerHTML={{
+                      __html: jobDetail.jobDesribe
+                  }}
+              >
+              </div>
            <Title>
              <span className="title">公司信息</span>
-             <Line></Line>
            </Title>
-           <Card>
-             <div></div>
-           </Card>
+           <List>
+              <Item
+                align="top"
+                thumb={jobDetail.logo}
+                multipleLine>        
+                <Name>{jobDetail.companyName}</Name>
+                <Brief>
+                  <Fragment>
+                    <Info>{dic.scaleDic[jobDetail.scale]}<Divide>|</Divide></Info>
+                    <Info>{jobDetail.organizationCategory}</Info>
+                  </Fragment>
+                </Brief>
+              </Item>
+            </List>
         </Wrapper>
+        <WingBlank>
+          <Button onClick={this.sendResume} type="primary" style={{marginTop:'30px',fontSize:'14px'}}>发送简历</Button><WhiteSpace />
+        </WingBlank>
         <style jsx>{`
           .name{
-            font-size:18px;
+            font-size:16px;
             font-weight:bold;
             line-height:15px;
           }
@@ -81,7 +139,6 @@ class WorkDetail extends React.PureComponent {
             right:15px;
             height:45px;
             width:45px;
-            background:url(https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png);
             border: solid 1px #f2f2f2;
             margin-bottom:20px;
           }
@@ -97,13 +154,22 @@ class WorkDetail extends React.PureComponent {
           .address{
             font-size:14px;
             margin-bottom:10px;
+            color: #242424;
           }
           .address-detail{
-            font-sise:10px;
-            color:#989898;
+            font-size: 10px;
+            color: #989898;
           }
           .title{
             flex: 0 0 75px;
+          }
+          .am-list-item .am-list-line .am-list-brief{
+            font-size: 12px !important;
+            color: #999 !important;
+          }
+          .am-list-item .am-list-thumb  img{
+            width: 55px !important;
+            height: 55px !important;
           }
         `}</style>
       </Layout>
