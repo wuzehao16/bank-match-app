@@ -6,7 +6,9 @@ import { Form } from 'antd'
 import Layout from '../layout/HasFooterRecruitLayout'
 import fetch from '../lib/fetch'
 import { formatData , getCookie } from '../lib/util'
-import withRoot from '../src/withRoot';
+import withRoot from '../src/withRoot'
+import { getResumeList } from '../services/recruit'
+
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -55,10 +57,9 @@ class PublishedJobList extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req);
     const resumeListData = await fetch('/getResumeList',token)
-    const education = await fetch(`/selectByType?type=education`)
-    const expectJob = await fetch(`/selectByType?type=jobTitle`)
-
-    console.log('expectJob',expectJob)
+    const education = await fetch('/selectByType?type=education')
+    const expectJob = await fetch('/selectByType?type=jobTitle')
+  
     return {
       resumeListData: resumeListData || [],
       dic:{
@@ -68,28 +69,42 @@ class PublishedJobList extends React.PureComponent {
     };
   }
 
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     resumeListData: resumeListData || []
+  //   };
+  // }
+
+  // async getResumeList (params) {
+  //   const res = await getResumeList(params);
+  //   console.log('res',res);
+  //   if (res.code == 0) {
+  //     this.setState({
+  //       resumeListData: res.data
+  //     })
+      
+  //   } else {
+  //     Toast.fail(res.msg);
+  //   }
+  // }
+
   onChange = (e) => {
-    console.log(`selectedIndex:${e.nativeEvent.selectedSegmentIndex}`);
+    const params= {expectJob: e.nativeEvent.selectedSegmentIndex+1};
+    console.log(params);
+    // this.getResumeList(params);
   }
-  onValueChange = (value) => {
-    console.log(value);
-  }
+
 
   render() {
     const resumeListData = this.props.resumeListData;
     const {educationDic,expectJobDic} = this.props.dic
+    const expectJobArr = expectJobDic.map(item => item.name);
+    console.log('resumeListData',resumeListData)
     return (
       <Layout title="人才列表">
         <WhiteSpace/>
-        {/* <WingBlank size="sm"> */}
-        <SegmentedControl selectedIndex={0} onChange={this.onChange}  onValueChange={this.onValueChange} values={['销售人员', '销售主管', '销售总监']} />
-        {/* <div style={{display:'flex',justifyContent:'space-around'}}>
-          <Button>客户经理</Button>
-          <Button>高级客户经理</Button>
-          <Button>销售代表</Button>
-          <Button>电话销售</Button>
-        </div> */}
-        {/* </WingBlank> */}
+        <SegmentedControl selectedIndex={0} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
         <WhiteSpace/>
         <List>
           {
@@ -103,7 +118,7 @@ class PublishedJobList extends React.PureComponent {
                 <Brief>
                   <Fragment>
                     <Info>{workingYearDic[item.workingYear]}<Divider>|</Divider></Info>
-                    <Info>{educationDic[item.education]}<Divider>|</Divider></Info>
+                    <Info>{item.education}<Divider>|</Divider></Info>
                     <Salary>{expectSalaryDic[item.expectSalary]}</Salary>
                   </Fragment>
                 </Brief>
