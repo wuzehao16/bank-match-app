@@ -75,7 +75,7 @@ export async function updateWorkExperience(params) {
 }
 
 //搜索工作列表
-export async function searchJobList(params) {
+export async function getJobList(params) {
   return request(`/app/getJobList`, {
     method: 'GET',
     body: {

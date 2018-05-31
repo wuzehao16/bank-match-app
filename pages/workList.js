@@ -10,7 +10,7 @@ import Layout from '../layout/HasFooterWantedLayout'
 import { Card, List, WhiteSpace, PullToRefresh,SearchBar} from 'antd-mobile'
 import { Form } from 'antd'
 import { ListView, Button } from 'antd-mobile'
-// import { searchJobList } from '../services/recruit'
+import { getJobList } from '../services/recruit'
 import withRoot from '../src/withRoot';
 
 class workList extends React.Component {
@@ -131,8 +131,8 @@ class workList extends React.Component {
   // };
 
   async searchJobList(val) {
-    const res = await fetch(`/getJobList?keyword=${val}`);
-    console.log("搜索",res)
+    const res = await getJobList(val);
+    console.log("搜索",val,res)
     if(res.code == 0){
       this.state.setState=({
         data: res.data
@@ -144,8 +144,8 @@ class workList extends React.Component {
   }
 
   onSearchSubmit = (val) => {
-    // const params = {keyword:val};
-    this.searchJobList(val);
+    const params = {keyword:val};
+    this.searchJobList(params);
   }
 
   onSearchCancel = () => {
