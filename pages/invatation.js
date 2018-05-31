@@ -189,7 +189,7 @@ class Invatation extends React.PureComponent {
     console.log(this.state)
     if (this.checkPass(this.state.loginPassord) < 2) {
       this.setState({
-        error:'请输入6-24位字母、数字或“_”,两种以上',
+        error:'请输入6-24位数字与字母组合',
         open:true
       });
       return
