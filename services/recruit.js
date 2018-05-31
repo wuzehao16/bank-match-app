@@ -133,3 +133,13 @@ export async function deleteJob(params) {
     },
   });
 }
+
+// 筛选人才列表
+export async function getResumeList(params) {
+  return request(`/app/getResumeList`, {
+    method: 'GET',
+    body: {
+      ...params,
+    },
+  });
+}
