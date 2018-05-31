@@ -3,6 +3,10 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { List, WhiteSpace, WingBlank, SegmentedControl } from 'antd-mobile'
 import { Form } from 'antd'
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import Layout from '../layout/HasFooterRecruitLayout'
 import fetch from '../lib/fetch'
 import { formatData , getCookie } from '../lib/util'
@@ -51,7 +55,28 @@ const Desc = styled.div`
 
 const workingYearDic = ['','一年以下','1-3年','3-5年','5-10年','10年以上']
 const expectSalaryDic = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
-
+const workingSeniority =[
+  {
+    label:'1年以下',
+    value:'1'
+  },
+  {
+    label:'1-3年',
+    value:'2'
+  },
+  {
+    label:'3-5年',
+    value:'3'
+  },
+  {
+    label:'5-10年',
+    value:'4'
+  },
+  {
+    label:'10年以上',
+    value:'5'
+  }
+]
 class PublishedJobList extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
@@ -60,7 +85,7 @@ class PublishedJobList extends React.PureComponent {
     console.log('resumeListData',resumeListData)
     const education = await fetch('/selectByType?type=education')
     const expectJob = await fetch('/selectByType?type=jobTitle')
-  
+
     return {
       resumeListData: resumeListData || [],
       dic:{
@@ -74,44 +99,107 @@ class PublishedJobList extends React.PureComponent {
     super(props);
     this.state = {
       resumeListData: this.props.resumeListData || [],
-      selectIndex: 0
+      params:{
+        expectJob: 0,
+
+      }
     };
   }
 
-  async getResumeList (value) {
-    const res = await getResumeList({expectJob:value+1});
+  async getResumeList (data) {
+  const res = await getResumeList({
+    ...data,
+    expectJob:data.expectJob+1
+  });
     console.log('res',res);
     if (res.code == 0) {
       this.setState({
         resumeListData: res.data,
-        selectIndex: value
       })
-      
+
     } else {
       Toast.fail(res.msg);
     }
   }
 
+  handleChange = field => e => {
+    const params = {
+      ...this.state.params,
+      [field]: e.target.value
+    }
+    this.setState({
+      params: params
+    })
+    this.getResumeList(params);
+  }
+
   onChange = (e) => {
     const value= e.nativeEvent.selectedSegmentIndex;
     console.log('value',value);
-    this.getResumeList(value);
+    const params = {
+      ...this.state.params,
+      expectJob: value,
+    }
+    this.setState({
+      params:params
+    })
+    this.getResumeList(params);
   }
 
 
   render() {
-    const resumeListData = this.props.resumeListData;
+    const resumeListData = this.state.resumeListData;
     const {educationDic,expectJobDic} = this.props.dic
+    const educationOption = educationDic.map(i => {return {value:i.code, label:i.name}})
+    const expectJobOption = expectJobDic.map(i => {return {value:i.code, label:i.name}})
     const expectJobArr = expectJobDic.map(item => item.name);
     console.log('resumeListData',resumeListData)
     return (
       <Layout title="人才列表">
-        <WhiteSpace/>
-        <SegmentedControl selectedIndex={this.state.selectIndex} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
-        <WhiteSpace/>
+        {/* <WhiteSpace/> */}
+        <div className="filter">
+          {/* <FormControl  style={{minWidth:'45%'}}> */}
+          {/* <InputLabel htmlFor="controlled-open-select">工作年限</InputLabel> */}
+          <Select
+            style={{fontSize:'14px'}}
+            value={this.state.age}
+            onChange={this.handleChange('workingYear')}
+             native defaultValue='none'>
+            <option value="">
+              工作年限
+            </option>
+            {
+              workingSeniority.map(i => {
+                return <option value={i.value}>{i.label}</option>
+              })
+            }
+          </Select>
+          {/* </FormControl> */}
+          {/* <FormControl style={{minWidth:'45%'}}> */}
+                {/* <InputLabel htmlFor="controlled-open-select1">最该学历</InputLabel> */}
+                <Select
+                  style={{fontSize:'14px'}}
+                  
+                  value={this.state.age}
+                  onChange={this.handleChange('education')}
+                   native defaultValue='none'>
+                  <option value="">
+                    最高学历
+                  </option>
+                  {
+                    educationOption.map(i => {
+                      return <option value={i.value}>{i.label}</option>
+                    })
+                  }
+                </Select>
+              {/* </FormControl> */}
+
+        </div>
+        <SegmentedControl selectedIndex={this.state.params.expectJob} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} />
+        {/* <WhiteSpace/> */}
         <List>
           {
-            resumeListData.length ? resumeListData.map((item,index) => 
+            resumeListData.length ? resumeListData.map((item,index) =>
               <Link key={index} href={`/resumeDetail?resumeId=${item.resumeId}`}>
                 <Item
                   align="top"
@@ -132,6 +220,28 @@ class PublishedJobList extends React.PureComponent {
           }
         </List>
       <style jsx global>{`
+        .select {
+        height: 40px;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        font-size : 18px;
+        padding : 0px 10px;
+        display: block;
+        width : 50%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: #FFFFFF;
+        color: #333333;
+        border-radius : 4px
+        }
+        .filter{
+          // margin-bottom:10px;
+          padding:10px 0;
+          background-color:#ffffff;
+          display:flex;
+          justify-content: space-around;
+        }
           .am-list-item .am-list-line .am-list-brief{
             font-size: 12px !important;
             color: #999 !important;
