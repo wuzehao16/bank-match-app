@@ -133,38 +133,41 @@ class MatchStep1 extends React.Component {
                 //   }}
                 //   placeholder="请输入姓名"
                 // />
-                <input placeholder="请输入姓名" type="text" min={0} max={100} style={{width:100}}/>
+                <input placeholder="请输入姓名" type="text" min={0} max={100} style={{width:116}}/>
               )}
             </FormItem>
 
           </Container>
           <Container>
             <div className={classes.lable} style={{fontSize:'16px',lineHeight: '32px',color:'#3c3c3c'}}>期望贷款金额</div>
-            <FormItem
-              style={{position:'relative'}}
-              validateStatus={exLoanAmountError ? 'error' : ''}
-              help={exLoanAmountError || ''}
-              >
-              {getFieldDecorator('exLoanAmount', {
-                initialValue: item.exLoanAmount,
-              })(
-                // <TextField
-                //   required
-                //   // label="期望贷款金额"
-                //    className={classes.textField}
-                //   InputProps={{
-                //     endAdornment: <InputAdornment position="end">元</InputAdornment>
-                //   }}
-                //   inputProps={{
-                //     type:'number',
-                //     min: 1,
-                //     max: 99999999,
-                //   }}
-                //   placeholder="请输入金额"
-                // />
-                <input placeholder="请输入金额" type="text" min={1} max={99999999} style={{width:100}}/>
-              )}
-            </FormItem>
+            <div>
+              <FormItem
+                style={{position:'relative',display:'inline-block'}}
+                validateStatus={exLoanAmountError ? 'error' : ''}
+                help={exLoanAmountError || ''}
+                >
+                {getFieldDecorator('exLoanAmount', {
+                  initialValue: item.exLoanAmount,
+                })(
+                  // <TextField
+                  //   required
+                  //   // label="期望贷款金额"
+                  //    className={classes.textField}
+                  //   InputProps={{
+                  //     endAdornment: <InputAdornment position="end">元</InputAdornment>
+                  //   }}
+                  //   inputProps={{
+                  //     type:'number',
+                  //     min: 1,
+                  //     max: 99999999,
+                  //   }}
+                  //   placeholder="请输入金额"
+                  // />
+                  <input placeholder="请输入金额" type="number" min={1} max={99999999} style={{width:100}}/>
+                )}
+              </FormItem>
+              <span>元</span>
+            </div>
           </Container>
           <Contain>
             <p>贷款类型</p>

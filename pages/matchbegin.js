@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button';
-import Layout from '../layout/Blanklayout';
+import Layout from '../layout/layout';
 import Nprogress from '../components/Nprogress'
 import fetch from '../lib/fetch'
 import withRoot from '../src/withRoot';
@@ -98,7 +98,7 @@ const Step = styled.div`
   }
 `
 const NextButton = styled(Button)`
-  width: 180px;
+  width: 100%;
   height: 36px;
   border-radius: 4px;
 `
