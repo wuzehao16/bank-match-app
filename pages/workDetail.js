@@ -56,18 +56,21 @@ const Card = styled.div`
   border: solid 1px #f2f2f2;
   height: 82px;
 `
+const nature = ["","全职","兼职","实习"]
+const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
+const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
+const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
+
 class WorkDetail extends React.PureComponent {
-  static async getInitialProps ({query,req}) {
+  static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
     // const token = getCookie('token', req);
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
 
     console.log('jobDetail',query,jobDetail)
-    const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
-    const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
+
     const education = await fetch('/selectByType?type=education')
-    const nature = ["","全职","兼职","实习"]
-    const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
+
     return {
             jobDetail: jobDetail || {},
             jobId: query.jobId,

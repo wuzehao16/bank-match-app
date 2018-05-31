@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import {  WhiteSpace, Modal } from 'antd-mobile'
+import Router from 'next/router'
+import {  WhiteSpace, Modal, Toast } from 'antd-mobile'
 import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
 import Layout from '../layout/Blanklayout'
@@ -71,6 +72,7 @@ class publishedJobDetail extends React.PureComponent {
     console.log('query','jobDetail',query,jobDetail)
     const jobName = await fetch('/selectByType?type=jobTitle')
     const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
+    const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
     const education = await fetch('/selectByType?type=education')
     const nature = ["","全职","兼职","实习"]
     return {
@@ -82,15 +84,14 @@ class publishedJobDetail extends React.PureComponent {
               ageLimitDic: ageLimit,
               educationDic: education,
               natureDic: nature,
+              expectSalaryDic: expectSalary
             }
           };
   }
 
-  handleClickDelete = () => {
-    alert('删除', '你确定删除该职位吗?', [
-      { text: '取消', onPress: () => console.log('cancel') },
-      { text: '确定', onPress: () => {
-          const res = await deleteJob(this.props.jobId);
+  async deleteJob () {
+    const res = await deleteJob(this.props.jobId);
+    console.log('res',res)
           if(res.code == 0){
             Router.push({
               pathname:`/publishedJobList?companyId=${this.props.companyId}`
@@ -98,9 +99,17 @@ class publishedJobDetail extends React.PureComponent {
           }else {
             Toast.fail(res.msg);
           }
-      } },
+  }
+
+  handleClickDelete = () => {
+    alert('删除', '你确定删除该职位吗?', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      { text: '确定', onPress: () => {
+          this.deleteJob();
+      }},
     ])
   }
+
   render() {
     const {jobDetail, dic, jobId} = this.props;
     console.log('this.props',this.props)

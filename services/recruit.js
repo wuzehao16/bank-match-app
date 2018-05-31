@@ -1,3 +1,4 @@
+import qs from 'qs';
 import request from '../lib/request';
 
 //初始化时调用
@@ -76,11 +77,11 @@ export async function updateWorkExperience(params) {
 
 //搜索工作列表
 export async function getJobList(params) {
-  return request(`/app/getJobList`, {
+  return request(`/app/getJobList?${qs.stringify(params)}`,{
     method: 'GET',
-    body: {
-      ...params,
-    },
+    headers:{
+      token: "noToken"
+    }
   });
 }
 
@@ -126,20 +127,14 @@ export async function updateCompany(params) {
 
 //删除发布职位
 export async function deleteJob(params) {
-  return request(`/app/deleteJob`, {
-    method: 'DELETE',
-    body: {
-      ...params,
-    },
+  return request(`/app/deleteJob/${params}`, {
+    method: 'DELETE'
   });
 }
 
 // 筛选人才列表
 export async function getResumeList(params) {
-  return request(`/app/getResumeList`, {
+  return request(`/app/getResumeList?${qs.stringify(params)}`,{
     method: 'GET',
-    body: {
-      ...params,
-    },
   });
 }
