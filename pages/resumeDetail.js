@@ -66,7 +66,7 @@ class Resume extends React.PureComponent {
   static async getInitialProps ({req, query}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const userInfo = await fetch('/getUserInfo',token)
+    // const userInfo = await fetch('/getUserInfo',token)
     const resume = await fetch(`/getResumeForBody?resumeId=${query.resumeId}`)
     return {
       resume: resume||'',
