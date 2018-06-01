@@ -154,12 +154,12 @@ export default class extends React.Component {
               <div>{newSum}</div>
             </div>
             <div className="price">
-              <div>收益(元)</div>
+              <div>佣金(元)</div>
               <div>{timeSlotIncome}</div>
             </div>
           </Income>
           <div className="switch">
-            <div className={type == 1? 'income active':'income'} onClick={this.handleSwitch(1)}>收益</div>
+            <div className={type == 1? 'income active':'income'} onClick={this.handleSwitch(1)}>佣金</div>
             <div className={type == 2? 'teammate active':'teammate'} onClick={this.handleSwitch(2)}>队员</div>
           </div>
             <Graph id="main"></Graph>

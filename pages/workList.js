@@ -64,10 +64,10 @@ class workList extends React.Component {
     genData(pIndex =1) {
       const dataArr = [];
       const pageSize = 8;
-      for (let i = 1; i <= this.props.data.length; i++) {
+      for (let i = 1; i <= this.state.data.length; i++) {
         dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
       }
-      console.log('dataArr',dataArr)
+      console.log('genData函数-dataArr',dataArr)
       return dataArr;
     }
 
@@ -111,17 +111,21 @@ class workList extends React.Component {
 
   async getNewData(val) {
     const res = await getJobList(val);
-    console.log("刷新",val,res)
+    console.log("getNewData函数-val-res",val,res)
     if(res.code == 0){
+      this.setState({
+        data: res.data,
+        refreshing: false,
+        isLoading: false,
+      });
       setTimeout(() => {
         this.rData = this.genData();
         this.setState({
-          data: res.data,
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
-          refreshing: false,
-          isLoading: false,
         });
-      }, 600);  
+        console.log("getNewData函数--Data",this.rData)
+        console.log('getNewData函数-datasource',this.state.dataSource)
+      }, 600);
     }else {
       Toast.fail(res.msg);
     }
@@ -133,18 +137,18 @@ class workList extends React.Component {
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
-    this.setState({ 
+    this.setState({
       isLoading: true,
       hasMore: true,
       currentPage: this.state.currentPage+1
     });
-    console.log('reach end - state', this.state);
+    console.log('onEndReached函数- state', this.state);
     this.getMoreData({currentPage:this.state.currentPage,keyword:this.state.searchValue});
   };
 
   async getMoreData(val) {
     const res = await getJobList(val);
-    console.log("搜索",val,res)
+    console.log("reachend-getMore函数",val,res)
     if(res.code == 0){
       if(res.data.length==0){
         this.setState({
@@ -154,8 +158,8 @@ class workList extends React.Component {
       }else {
       setTimeout(() => {
         this.rData = [...this.rData, ...this.genData(this.state.currentPage)];
-        console.log('this.genData(++pageIndex)',this.genData(this.state.currentPage))
-        console.log('this.rData',this.rData)
+        console.log('getMoreData函数-this.genData(++pageIndex)',this.genData(this.state.currentPage))
+        console.log('getMoreData-this.rData',this.rData)
         this.setState({
           data: this.state.data.concat(res.data),
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
@@ -163,7 +167,7 @@ class workList extends React.Component {
           hasMore: true
         });
       }, 600);
-      // console.log('更新后',this.state.data)
+      console.log('getMoreData函数-datasource',this.state.dataSource)
     }
     }else {
       Toast.fail(res.msg);
@@ -171,21 +175,23 @@ class workList extends React.Component {
   }
 
   onSearchSubmit = (val) => {
-    this.setState({ refreshing: true, isLoading: true,currentPage: 1,searchValue: val });
-    this.getNewData({currentPage:this.state.currentPage,keyword:val});
+    this.setState({ refreshing: true, isLoading: true, currentPage: 1, searchValue: val });
+    this.getNewData({currentPage: 1, keyword:val});
   }
 
   onSearchCancel = () => {
     let searchBar = this.refs.search;
     searchBar.state.value = '';
     this.setState({
-      searchValue: ''
+      searchValue: '',
+      currentPage: 1
     })
+    this.getNewData({currentPage:1,keyword:''});
   }
 
   render() {
     const data = this.state.data;
-    console.log('render-state',this.state.data)
+    console.log('render-state.data,datasource',this.state.data,this.state.dataSource)
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     const separator = (sectionID, rowID) => (
       <div
@@ -201,22 +207,24 @@ class workList extends React.Component {
 
     let index = data.length - 1;
     const row = (rowData, sectionID, rowID) => {
+      // debugger;
+      console.log("row里面",data)
       if (index < 0) {
         index = data.length - 1;
       }
       const obj = data[index--];
-      console.log('obj',obj)
       return (
         // <div key={rowID}>
             <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
               <Card full>
+              {console.log('row-obj-id',obj.jobId)}
                 <Card.Header
                   className="jobdesc"
                   title={obj.jobName}
                   extra={<span className="salary">{salaryDic[obj.salary]}</span>}
                 />
                 <Card.Header
-                className="jobInfo"
+                  className="jobInfo"
                   title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{obj.education}</div>}
                 />
                 <Card.Header
