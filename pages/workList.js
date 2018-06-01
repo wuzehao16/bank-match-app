@@ -64,7 +64,7 @@ class workList extends React.Component {
     genData(pIndex =1) {
       const dataArr = [];
       const pageSize = 8;
-      for (let i = 1; i <= this.props.data.length; i++) {
+      for (let i = 1; i <= this.state.data.length; i++) {
         dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
       }
       console.log('dataArr',dataArr)
@@ -113,15 +113,19 @@ class workList extends React.Component {
     const res = await getJobList(val);
     console.log("刷新",val,res)
     if(res.code == 0){
+      this.setState({
+        data: res.data,
+        refreshing: false,
+        isLoading: false,
+      });
       setTimeout(() => {
         this.rData = this.genData();
         this.setState({
-          data: res.data,
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
-          refreshing: false,
-          isLoading: false,
         });
-      }, 600);  
+        console.log(this.rData,"rData")
+
+      }, 600);
     }else {
       Toast.fail(res.msg);
     }
@@ -133,7 +137,7 @@ class workList extends React.Component {
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
-    this.setState({ 
+    this.setState({
       isLoading: true,
       hasMore: true,
       currentPage: this.state.currentPage+1
@@ -185,7 +189,7 @@ class workList extends React.Component {
 
   render() {
     const data = this.state.data;
-    console.log('render-state',this.state.data)
+    console.log('render-state',this.state.data,this.state.dataSource)
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     const separator = (sectionID, rowID) => (
       <div
@@ -201,11 +205,12 @@ class workList extends React.Component {
 
     let index = data.length - 1;
     const row = (rowData, sectionID, rowID) => {
+      // debugger;
+      console.log(data,"row里面")
       if (index < 0) {
         index = data.length - 1;
       }
       const obj = data[index--];
-      console.log('obj',obj)
       return (
         // <div key={rowID}>
             <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
