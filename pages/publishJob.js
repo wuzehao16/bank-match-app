@@ -126,7 +126,8 @@ class PublishJob extends React.PureComponent {
     const res = await insertJob(value);
     if (res.code == 0) {
       Router.push({
-        pathname:'/publishedJobList'
+        pathname:'/publishedJobList',
+        query: { companyId: this.props.companyId }
       })
     } else {
       Toast.fail(res.msg);
@@ -137,7 +138,8 @@ class PublishJob extends React.PureComponent {
     const res = await updateJob(value);
     if (res.code == 0) {
       Router.push({
-        pathname:'/publishedJobList'
+        pathname:'/publishedJobList',
+        query: { companyId: this.props.i.companyId }
       })
     } else {
       Toast.fail(res.msg);
@@ -222,7 +224,7 @@ class PublishJob extends React.PureComponent {
           />
       </List>
       <WingBlank>
-        <Button onClick={this.publishJob} type="primary" disabled={this.hasErrors(getFieldsError())} style={{marginTop:'50px',fontSize:'14px'}}>发布</Button><WhiteSpace />
+        <Button onClick={this.publishJob} type="primary" disabled={this.hasErrors(getFieldsError())} style={{margin:'50px 0',fontSize:'14px'}}>发布</Button><WhiteSpace />
       </WingBlank>
       <style jsx global>{`
           .am-list-extra {

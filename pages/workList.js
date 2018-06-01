@@ -49,21 +49,25 @@ class workList extends React.Component {
 
       this.state = {
         data: this.props.data,
-        // resdata:[],
         dataSource,
         refreshing: true,
         isLoading: true,
         height: '1000px',
         useBodyScroll: false,
+        hasMore: false,
+        currentPage: 1,
+        searchValue: ''
       };
     }
 
 
-    genData(pIndex = 1) {
+    genData(pIndex =1) {
       const dataArr = [];
-      for (let i = 0; i < this.props.data.length; i++) {
-        dataArr.push(`row - ${(pIndex * this.props.data.length) + i}`);
+      const pageSize = 8;
+      for (let i = 1; i <= this.props.data.length; i++) {
+        dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
       }
+      console.log('dataArr',dataArr)
       return dataArr;
     }
 
@@ -101,61 +105,87 @@ class workList extends React.Component {
 
 
   onRefresh = () => {
-    this.setState({ refreshing: true, isLoading: true });
-    // simulate initial Ajax
-    setTimeout(() => {
-      this.rData = this.genData();
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        refreshing: false,
-        isLoading: false,
-      });
-    }, 600);
+    this.setState({ refreshing: true, isLoading: true,currentPage: 1 });
+    this.getNewData({currentPage:this.state.currentPage,keyword:this.state.searchValue});
   };
 
-  // onEndReached = (event) => {
-  //   // load new data
-  //   // hasMore: from backend data, indicates whether it is the last page, here is false
-  //   if (this.state.isLoading && !this.state.hasMore) {
-  //     return;
-  //   }
-  //   console.log('reach end', event);
-  //   this.setState({ isLoading: true });
-  //   setTimeout(() => {
-  //     this.rData = [...this.rData, ...genData(++pageIndex)];
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(this.rData),
-  //       isLoading: false,
-  //     });
-  //   }, 1000);
-  // };
+  async getNewData(val) {
+    const res = await getJobList(val);
+    console.log("刷新",val,res)
+    if(res.code == 0){
+      setTimeout(() => {
+        this.rData = this.genData();
+        this.setState({
+          data: res.data,
+          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          refreshing: false,
+          isLoading: false,
+        });
+      }, 600);  
+    }else {
+      Toast.fail(res.msg);
+    }
+  }
 
-  async searchJobList(val) {
+  onEndReached = (event) => {
+    // load new data
+    // hasMore: from backend data, indicates whether it is the last page, here is false
+    if (this.state.isLoading && !this.state.hasMore) {
+      return;
+    }
+    this.setState({ 
+      isLoading: true,
+      hasMore: true,
+      currentPage: this.state.currentPage+1
+    });
+    console.log('reach end - state', this.state);
+    this.getMoreData({currentPage:this.state.currentPage,keyword:this.state.searchValue});
+  };
+
+  async getMoreData(val) {
     const res = await getJobList(val);
     console.log("搜索",val,res)
     if(res.code == 0){
-      this.state.setState=({
-        data: res.data
-      })
-      console.log('更新后',this.state.data)
+      if(res.data.length==0){
+        this.setState({
+          isLoading: false,
+          hasMore: false,
+        })
+      }else {
+      setTimeout(() => {
+        this.rData = [...this.rData, ...this.genData(this.state.currentPage)];
+        console.log('this.genData(++pageIndex)',this.genData(this.state.currentPage))
+        console.log('this.rData',this.rData)
+        this.setState({
+          data: this.state.data.concat(res.data),
+          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          isLoading: false,
+          hasMore: true
+        });
+      }, 600);
+      // console.log('更新后',this.state.data)
+    }
     }else {
       Toast.fail(res.msg);
     }
   }
 
   onSearchSubmit = (val) => {
-    const params = {keyword:val};
-    this.searchJobList(params);
+    this.setState({ refreshing: true, isLoading: true,currentPage: 1,searchValue: val });
+    this.getNewData({currentPage:this.state.currentPage,keyword:val});
   }
 
   onSearchCancel = () => {
     let searchBar = this.refs.search;
     searchBar.state.value = '';
+    this.setState({
+      searchValue: ''
+    })
   }
 
   render() {
     const data = this.state.data;
-    console.log('state',this.state.data)
+    console.log('render-state',this.state.data)
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     const separator = (sectionID, rowID) => (
       <div
@@ -168,15 +198,14 @@ class workList extends React.Component {
         }}
       />
     );
-    // const dataObj = data;
-    // console.log('data',data)
-    // console.log('dataObj',dataObj)
+
     let index = data.length - 1;
     const row = (rowData, sectionID, rowID) => {
       if (index < 0) {
         index = data.length - 1;
       }
       const obj = data[index--];
+      console.log('obj',obj)
       return (
         // <div key={rowID}>
             <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
@@ -197,8 +226,6 @@ class workList extends React.Component {
                 />
               </Card>
             </Link>
-            // <div style={{width:'100%',height:'20px',background:'rgb(245,245,249)'}}></div>
-          // </div>
       );
     };
     return (<Layout title="职位列表">
@@ -215,28 +242,28 @@ class workList extends React.Component {
         // onChange={this.onChange}
       />
       <ListView
+        style={{marginBottom:'100px'}}
         key="1"
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
         // renderHeader={() => <span></span>}
-        renderFooter={() => (<div style={{ padding: '10px 0 50px 0', textAlign: 'center' }}>
-          {this.state.isLoading ? 'Loading...' : '没有更多啦~'}
+        renderFooter={() => (<div style={{ padding: '10px 0',marginBottom:'100px', textAlign: 'center' }}>
+          {(this.state.isLoading && (this.state.refreshing || this.state.hasMore))? 'Loading...' : '没有更多啦~'}
         </div>)}
         renderRow={row}
-        // renderRow={row}
         renderSeparator={separator}
         // useBodyScroll={this.state.useBodyScroll}
         style={{
           height: this.state.height,
           border: '1px solid #ddd',
-          margin: '5px 0',
+          margin: '5px 0 200px 0',
         }}
         pullToRefresh={<PullToRefresh
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}
         />}
-        // onEndReached={this.onEndReached}
-        // pageSize={5}
+        onEndReached={this.onEndReached}
+        pageSize={8}
       />
       <style jsx global>{`
         .am-pull-to-refresh-content-wrapper {

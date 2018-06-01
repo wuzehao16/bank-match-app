@@ -136,7 +136,7 @@ class WorkDetail extends React.PureComponent {
             font-weight:bold;
             line-height:15px;
           }
-          .logo{
+          .logo img{
             position:absolute;
             top:15px;
             right:15px;

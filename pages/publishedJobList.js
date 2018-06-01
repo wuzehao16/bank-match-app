@@ -42,16 +42,7 @@ class PublishedJobList extends React.PureComponent {
     console.log('JobListData',JobListData,'dic',this.props.dic)
     return (
       <Layout title="职位管理">
-      {
-        JobListData.length==0?
-        // <WhiteSpace/>
-        <WingBlank style={{padding:'0 17px'}}>
-          <Link href={`/publishJob?companyId=${this.props.companyId}`}>
-          <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}}><i className="iconfont icon-zhifeiji"></i>去发布新职位</Button>
-          </Link>
-        </WingBlank>
-        // <WhiteSpace/>
-        :<List >
+        <List >
           {JobListData.map((item,index) =>
             <Link href={`/publishedJobDetail?jobId=${item.jobId}&companyId=${this.props.companyId}`} key={index}>
               <Item arrow="horizontal" multipleLine onClick={() => {}}>
@@ -67,8 +58,12 @@ class PublishedJobList extends React.PureComponent {
               </Item>
             </Link>
           )}
+          <WingBlank>
+          <Link href={`/publishJob?companyId=${this.props.companyId}`}>
+          <Button type="primary" style={{fontSize:'14px',margin:'40px 0 70px 0'}}><i className="iconfont icon-zhifeiji"></i>去发布新职位</Button>
+          </Link>
+        </WingBlank>
         </List>
-    }
       <style jsx global>{`
           .am-list-item .am-list-line .am-list-brief{
             font-size: 12px !important;
