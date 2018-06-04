@@ -60,12 +60,19 @@ class workList extends React.Component {
       };
     }
 
+    guid() {
+        function S4() {
+           return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    }
 
     genData(pIndex =1) {
       const dataArr = [];
       const pageSize = 8;
       for (let i = 1; i <= this.state.data.length; i++) {
-        dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
+        // dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
+        dataArr.push(`row - ${this.guid()}`);
       }
       console.log('genData函数-dataArr',dataArr)
       return dataArr;
@@ -115,13 +122,13 @@ class workList extends React.Component {
     if(res.code == 0){
       this.setState({
         data: res.data,
-        refreshing: false,
-        isLoading: false,
       });
       setTimeout(() => {
         this.rData = this.genData();
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          refreshing: false,
+          isLoading: false,
         });
         console.log("getNewData函数--Data",this.rData)
         console.log('getNewData函数-datasource',this.state.dataSource)
@@ -152,6 +159,7 @@ class workList extends React.Component {
     if(res.code == 0){
       if(res.data.length==0){
         this.setState({
+          data: this.state.data.concat(res.data),
           isLoading: false,
           hasMore: false,
         })
@@ -161,7 +169,6 @@ class workList extends React.Component {
         console.log('getMoreData函数-this.genData(++pageIndex)',this.genData(this.state.currentPage))
         console.log('getMoreData-this.rData',this.rData)
         this.setState({
-          data: this.state.data.concat(res.data),
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
           isLoading: false,
           hasMore: true
