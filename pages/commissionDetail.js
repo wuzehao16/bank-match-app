@@ -147,10 +147,13 @@ export default class extends React.Component {
                           marginTop: '10px'
                         }}>
                         <span style={{
-                            width: '60px'
+                            width: '120px'
                           }}>{i.name}</span>
                         <span>{i.time}</span>
-                        <span>{i.amt}</span>
+                        <span style={{
+                            width: '36px',
+                            textAlign:'right'
+                          }}>{i.amt}</span>
                       </div>)
                     })
                   }
