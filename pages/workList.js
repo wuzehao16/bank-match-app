@@ -18,7 +18,6 @@ class workList extends React.Component {
     static async getInitialProps ({query,req}) {
       // eslint-disable-next-line no-undef
       var data = await fetch('/getJobList');
-      console.log('data',data)
       const jobName = await fetch('/selectByType?type=jobTitle')
       const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年","5-10年","10年以上"]
       const education = await fetch('/selectByType?type=education')
@@ -60,32 +59,13 @@ class workList extends React.Component {
       };
     }
 
-    guid() {
-        function S4() {
-           return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-        }
-        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-    }
-
-    genData(pIndex =1) {
+    genData() {
       const dataArr = [];
-      const pageSize = 8;
-      for (let i = 1; i <= this.state.data.length; i++) {
-        // dataArr.push(`row - ${((pIndex-1) * pageSize) + i}`);
-        dataArr.push(`row - ${this.guid()}`);
+      for (let i = 0; i < this.state.data.length; i++) {
+        dataArr.push(this.state.data[i].jobId);
       }
-      console.log('genData函数-dataArr',dataArr)
       return dataArr;
     }
-
-  // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.dataSource !== this.props.dataSource) {
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(nextProps.dataSource),
-  //     });
-  //   }
-  // }
 
   componentDidUpdate() {
       document.body.style.overflow = 'hidden';
@@ -118,7 +98,6 @@ class workList extends React.Component {
 
   async getNewData(val) {
     const res = await getJobList(val);
-    console.log("getNewData函数-val-res",val,res)
     if(res.code == 0){
       this.setState({
         data: res.data,
@@ -130,8 +109,6 @@ class workList extends React.Component {
           refreshing: false,
           isLoading: false,
         });
-        console.log("getNewData函数--Data",this.rData)
-        console.log('getNewData函数-datasource',this.state.dataSource)
       }, 600);
     }else {
       Toast.fail(res.msg);
@@ -139,43 +116,37 @@ class workList extends React.Component {
   }
 
   onEndReached = (event) => {
-    // load new data
-    // hasMore: from backend data, indicates whether it is the last page, here is false
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
+    this.getMoreData({currentPage:this.state.currentPage+1,keyword:this.state.searchValue});
     this.setState({
       isLoading: true,
       hasMore: true,
       currentPage: this.state.currentPage+1
     });
-    console.log('onEndReached函数- state', this.state);
-    this.getMoreData({currentPage:this.state.currentPage,keyword:this.state.searchValue});
   };
 
   async getMoreData(val) {
     const res = await getJobList(val);
-    console.log("reachend-getMore函数",val,res)
     if(res.code == 0){
       if(res.data.length==0){
         this.setState({
-          data: this.state.data.concat(res.data),
-          isLoading: false,
-          hasMore: false,
+          hasMore: false
         })
-      }else {
+      }
+      this.setState({
+        data: this.state.data.concat(res.data),
+        isLoading: true,
+      })  
       setTimeout(() => {
-        this.rData = [...this.rData, ...this.genData(this.state.currentPage)];
-        console.log('getMoreData函数-this.genData(++pageIndex)',this.genData(this.state.currentPage))
-        console.log('getMoreData-this.rData',this.rData)
+        this.rData = this.genData();
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
           isLoading: false,
           hasMore: true
         });
       }, 600);
-      console.log('getMoreData函数-datasource',this.state.dataSource)
-    }
     }else {
       Toast.fail(res.msg);
     }
@@ -198,7 +169,6 @@ class workList extends React.Component {
 
   render() {
     const data = this.state.data;
-    console.log('render-state.data,datasource',this.state.data,this.state.dataSource)
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     const separator = (sectionID, rowID) => (
       <div
@@ -214,17 +184,13 @@ class workList extends React.Component {
 
     let index = data.length - 1;
     const row = (rowData, sectionID, rowID) => {
-      // debugger;
-      console.log("row里面",data)
       if (index < 0) {
         index = data.length - 1;
       }
       const obj = data[index--];
       return (
-        // <div key={rowID}>
             <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
               <Card full>
-              {console.log('row-obj-id',obj.jobId)}
                 <Card.Header
                   className="jobdesc"
                   title={obj.jobName}
@@ -245,29 +211,21 @@ class workList extends React.Component {
     };
     return (<Layout title="职位列表">
       <SearchBar
-        // value={this.state.value}
-        // onChange={this.onSearchChange}
         ref="search"
         onSubmit={this.onSearchSubmit}
-        // onClear={value => console.log(value, 'onClear')}
-        // onFocus={() => console.log('onFocus')}
-        // onBlur={() => console.log('onBlur')}
         onCancel={this.onSearchCancel}
         placeholder="搜索关键词"
-        // onChange={this.onChange}
       />
       <ListView
         style={{marginBottom:'100px'}}
         key="1"
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        // renderHeader={() => <span></span>}
         renderFooter={() => (<div style={{ padding: '10px 0',marginBottom:'100px', textAlign: 'center' }}>
           {(this.state.isLoading && (this.state.refreshing || this.state.hasMore))? 'Loading...' : '没有更多啦~'}
         </div>)}
         renderRow={row}
         renderSeparator={separator}
-        // useBodyScroll={this.state.useBodyScroll}
         style={{
           height: this.state.height,
           border: '1px solid #ddd',
