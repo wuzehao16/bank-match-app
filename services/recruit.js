@@ -138,3 +138,13 @@ export async function getResumeList(params) {
     method: 'GET',
   });
 }
+
+// 发送简历
+export async function sendResume(params) {
+  return request('/app/sendResume',{
+    method: 'POST',
+    body: {
+      ...params,
+    },
+  });
+}
