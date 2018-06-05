@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { List , WhiteSpace, WingBlank, Toast, Button } from 'antd-mobile'
 import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
-import Layout from '../layout/Blanklayout'
+import Layout from '../layout/RecruitLayout'
+import { sendResume } from '../services/recruit'
 
 const Item = List.Item;
 const Brief = Item.Brief
@@ -64,10 +65,8 @@ const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','
 class WorkDetail extends React.PureComponent {
   static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
-    // const token = getCookie('token', req);
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
-
-    console.log('jobDetail',query,jobDetail)
+    console.log('jobDetail',jobDetail)
 
     const education = await fetch('/selectByType?type=education')
 
@@ -83,6 +82,15 @@ class WorkDetail extends React.PureComponent {
               scaleDic: scale,
             }
           };
+  }
+
+ async handleClick () {
+    const res = await sendResume({mail:this.props.jobDetail.mail});
+    if (res.code == 0) {
+      Toast.success('发送成功', 1);
+    }else {
+      Toast.offline(res.msg, 1);
+    }
   }
 
   render() {
@@ -128,7 +136,7 @@ class WorkDetail extends React.PureComponent {
             </List>
         </Wrapper>
         <WingBlank>
-          <Button onClick={this.sendResume} type="primary" style={{marginTop:'30px',fontSize:'14px'}}>发送简历</Button><WhiteSpace />
+          <Button onClick={this.handleClick.bind(this)} type="primary" style={{marginTop:'30px',fontSize:'14px'}}>发送简历</Button>
         </WingBlank>
         <style jsx>{`
           .name{

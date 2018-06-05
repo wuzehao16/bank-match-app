@@ -63,6 +63,7 @@ class workList extends React.Component {
       const dataArr = [];
       for (let i = 0; i < this.state.data.length; i++) {
         dataArr.push(this.state.data[i].jobId);
+        console.log(this.state.data[i].jobId)
       }
       return dataArr;
     }
@@ -168,6 +169,7 @@ class workList extends React.Component {
   }
 
   render() {
+    const scale = ['','20人以下','20-49人','50-99人','100-499人','500人以上']
     const data = this.state.data;
     const {jobNameDic, ageLimitDic, educationDic, salaryDic, organizationCategoryDic, scaleDic} = this.props.dic;
     const separator = (sectionID, rowID) => (
