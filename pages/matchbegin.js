@@ -73,6 +73,7 @@ const Step = styled.div`
   margin: 110px 0 0 30%;
   font-size: 12px;
   p{
+    font-size: 13px;
     margin: 46px 0;
   }
   @media (min-width:320px) {
@@ -82,17 +83,19 @@ const Step = styled.div`
     }
   }
   @media (min-width:360px) {
-    margin: 90px 0 0 30%;
+    margin: 78px 0 0 30%;
   }
   @media(min-width: 375px) {
     margin: 100px 0 0 30%;
     p{
+      font-size: 14px;
       margin: 35px 0;
     }
   }
   @media (min-width: 414px){
     margin: 110px 0 0 30%;
     p{
+      font-size: 15px;
       margin: 46px 0;
     }
   }
