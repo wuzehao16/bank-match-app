@@ -35,6 +35,7 @@ class CompanyBaseInfo extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const companyInfo = await fetch(`/getCompanyDetail`,token)
+    console.log('companyInfo',companyInfo)
     return {
              companyInfo: companyInfo
             }

@@ -66,8 +66,6 @@ class WorkDetail extends React.PureComponent {
   static async getInitialProps ({query}) {
     // eslint-disable-next-line no-undef
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
-    console.log('jobDetail',jobDetail)
-
     const education = await fetch('/selectByType?type=education')
 
     return {
@@ -84,8 +82,8 @@ class WorkDetail extends React.PureComponent {
           };
   }
 
- async handleClick () {
-    const res = await sendResume({mail:this.props.jobDetail.mail});
+ async handleClick (val) {
+    const res = await sendResume({mail:val});
     if (res.code == 0) {
       Toast.success('发送成功', 1);
     }else {
@@ -95,8 +93,6 @@ class WorkDetail extends React.PureComponent {
 
   render() {
     const {jobDetail, dic, jobId} = this.props;
-    console.log('jobDetail',jobDetail)
-    console.log('dic',dic)
     return (
       <Layout>
         <Wrapper>
@@ -136,7 +132,7 @@ class WorkDetail extends React.PureComponent {
             </List>
         </Wrapper>
         <WingBlank>
-          <Button onClick={this.handleClick.bind(this)} type="primary" style={{marginTop:'30px',fontSize:'14px'}}>发送简历</Button>
+          <Button onClick={this.handleClick.bind(this,jobDetail.mail)} type="primary" style={{marginTop:'30px',fontSize:'14px'}}>发送简历</Button>
         </WingBlank>
         <style jsx>{`
           .name{

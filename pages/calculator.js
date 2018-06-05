@@ -8,26 +8,16 @@ import Input from '@material-ui/core/Input'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import {Toast} from 'antd-mobile'
 import withRoot from '../src/withRoot';
 import { Form } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import {calculatorfetch} from '../services/calculatorfetch'
 import styled from 'styled-components'
-// import Layout from '../layout/Blanklayout'
 import Layout from '../layout/Calculatorlayout'
 
 const FormItem = Form.Item;
 
-
-// const SubmitButton = styled(Button)`
-//   display:inline-block;
-//   background-color: #ee5648;
-//   width:160px;
-//   height:40px;
-//   border-radius:3px;
-//   color: #fff;
-//   background: ${props => props.main ? 'palevioletred' : 'white'};
-// `
 const SubmitButton = styled.button`
   /* Adapt the colours based on primary prop */
   background: ${props => props.primary ? '#ee5648' : '#cacaca'};
@@ -54,6 +44,7 @@ class CalculatorResult extends React.Component {
     console.log(this.props.content)
     return (
       <table style={{width:'100%'}}>
+        <tbody>
         <tr>
           <td style={{textAlign:'left'}}>每月月供</td>
           <td style={{textAlign:'right'}}><span style={{color:'#ee5648'}}>{this.props.content.preLoan}</span>元</td>
@@ -66,6 +57,7 @@ class CalculatorResult extends React.Component {
           <td style={{textAlign:'left'}}>本息共计</td>
           <td style={{textAlign:'right',color:'#646464'}}>{this.props.content.totalMoney}元</td>
         </tr>
+        </tbody>
       </table>
     )
   }
@@ -171,8 +163,92 @@ class Calculator extends React.Component {
     const loandata = res.data;
     this.setState({loandata: loandata})
   }
+
   submit = data => e => {
+    // console.log('data-event',data,e)
     e.preventDefault();
+    const mon = /^[1-9]\d*$/;
+    if(this.state.cal.loanmethod==0){
+      if(!this.state.cal.CommercialPrincipal){
+        Toast.offline("请填写商贷金额", 1);
+        return;
+      }else if(this.state.cal.CommercialPrincipal<0){
+        Toast.offline("商贷金额不能为负数", 1);
+        return;
+      }
+      if(!this.state.cal.months){
+        Toast.offline("请填写贷款期限", 1);
+        return;
+      }else if(!mon.test(this.state.cal.months)){
+        Toast.offline("贷款期限不能为负数小数", 1);
+        return;
+      }
+      if(!this.state.cal.commercialRate){
+        Toast.offline("请填写商贷利率", 1);
+        return;
+      }else if(this.state.cal.commercialRate<0 || this.state.cal.commercialRate>=100){
+        Toast.offline("请填写1-100%以内的利率", 1);
+        return;
+      }
+    }else if (this.state.cal.loanmethod==1){
+      if(!this.state.cal.publicPrincipal){
+        Toast.offline("请填写公积金贷款金额", 1);
+        return;
+      }else if(this.state.cal.publicPrincipal<0){
+        Toast.offline("公积金贷款金额不能为负数", 1);
+        return;
+      }
+      if(!this.state.cal.months){
+        Toast.offline("请填写贷款期限", 1);
+        return;
+      }else if(!mon.test(this.state.cal.months)){
+        Toast.offline("贷款期限不能为负数小数", 1);
+        return;
+      }
+      if(!this.state.cal.accumulationRate){
+        Toast.offline("请填写公积金贷利率", 1);
+        return;
+      }else if (this.state.cal.accumulationRate<0 || this.state.cal.accumulationRate>100){
+        Toast.offline("请填写1-100%以内的利率", 1);
+        return;
+      }
+    }else if(this.state.cal.loanmethod==2){
+      if(!this.state.cal.CommercialPrincipal){
+        Toast.offline("请填写商贷金额", 1);
+        return;
+      }else if(this.state.cal.CommercialPrincipal<0){
+        Toast.offline("商贷金额不能为负数", 1);
+        return;
+      }
+      if(!this.state.cal.commercialRate){
+        Toast.offline("请填写商贷利率", 1);
+        return;
+      }else if(this.state.cal.commercialRate<0 || this.state.cal.commercialRate>=100){
+        Toast.offline("请填写1-100%以内的商贷利率", 1);
+        return;
+      }
+      if(!this.state.cal.publicPrincipal){
+        Toast.offline("请填写公积金贷款金额", 1);
+        return;
+      }else if(this.state.cal.publicPrincipal<0){
+        Toast.offline("公积金贷款金额不能为负数", 1);
+        return;
+      }
+      if(!this.state.cal.accumulationRate){
+        Toast.offline("请填写公积金贷利率", 1);
+        return;
+      }else if (this.state.cal.accumulationRate<0 || this.state.cal.accumulationRate>100){
+        Toast.offline("请填写1-100%以内的公积金贷利率", 1);
+        return;
+      }
+      if(!this.state.cal.months){
+        Toast.offline("请填写贷款期限", 1);
+        return;
+      }else if(!mon.test(this.state.cal.months)){
+        Toast.offline("贷款期限不能为负数小数", 1);
+        return;
+      }
+    }
     this.setState({
       cal: {
         ...this.state.cal,
@@ -188,7 +264,7 @@ class Calculator extends React.Component {
     console.log(this.state)
     return (<Layout title='房贷计算器' className={classes.root}>
       <AppBar position="static" color="default">
-        <Tabs value={this.state.cal.loanmethod} onChange={this.handleChange} indicatorColor="primary" textColor="primary" fullWidth="fullWidth">
+        <Tabs value={this.state.cal.loanmethod} onChange={this.handleChange} indicatorColor="primary" textColor="primary" fullWidth={true}>
           <Tab label="商业贷款"/>
           <Tab label="公积金贷款"/>
           <Tab label="组合贷款"/>
