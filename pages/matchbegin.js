@@ -60,7 +60,7 @@ const Wrapper2 = styled.div`
   z-index: -1;
   width: 100%;
   @media (min-width:320px) {
-    height: 190px;
+    height: 231px;
   }
   @media (min-width: 375px){
     height: 238px;
@@ -83,7 +83,11 @@ const Step = styled.div`
     }
   }
   @media (min-width:360px) {
-    margin: 78px 0 0 30%;
+    margin: 90px 0 0 30%;
+    p{
+      font-size: 14px;
+      margin: 35px 0;
+    }
   }
   @media(min-width: 375px) {
     margin: 100px 0 0 30%;
