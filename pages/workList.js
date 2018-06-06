@@ -61,9 +61,11 @@ class workList extends React.Component {
 
     genData() {
       const dataArr = [];
-      for (let i = 0; i < this.state.data.length; i++) {
-        dataArr.push(this.state.data[i].jobId);
-        console.log(this.state.data[i].jobId)
+      if(this.state.data.length!==0){
+        for (let i = 0; i < this.state.data.length; i++) {
+          dataArr.push(this.state.data[i].jobId);
+          console.log(this.state.data[i].jobId)
+        }
       }
       return dataArr;
     }
@@ -183,8 +185,11 @@ class workList extends React.Component {
       />
     );
 
-    let index = data.length - 1;
-    const row = (rowData, sectionID, rowID) => {
+    let row;
+
+    if(data.length!==0){
+      let index = data.length - 1;
+      row = (rowData, sectionID, rowID) => {
       if (index < 0) {
         index = data.length - 1;
       }
@@ -210,6 +215,12 @@ class workList extends React.Component {
             </Link>
       );
     };
+    }else {
+      row = () =>{
+        return (<div></div>)
+      }
+    }
+    
     return (<Layout title="职位列表">
       <SearchBar
         ref="search"
