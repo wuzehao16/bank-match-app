@@ -121,6 +121,10 @@ class MatchStep1 extends React.Component {
               >
               {getFieldDecorator('name', {
                 initialValue:item.name,
+                rules: [{
+                  required: true,
+                  message:'请输入姓名'
+                }],
               })(
                 // <TextField
                 //   required
@@ -133,7 +137,7 @@ class MatchStep1 extends React.Component {
                 //   }}
                 //   placeholder="请输入姓名"
                 // />
-                <input placeholder="请输入姓名" type="text" min={0} max={100} style={{width:116}}/>
+                <input placeholder="请输入姓名" maxLength="10" pattern='[\u4e00-\u9fa5|a-zA-Z]*' style={{width:116}}/>
               )}
             </FormItem>
 
@@ -148,6 +152,10 @@ class MatchStep1 extends React.Component {
                 >
                 {getFieldDecorator('exLoanAmount', {
                   initialValue: item.exLoanAmount,
+                  rules: [{
+                    required: true,
+                    message:'请输入贷款金额'
+                  }],
                 })(
                   // <TextField
                   //   required
@@ -163,7 +171,7 @@ class MatchStep1 extends React.Component {
                   //   }}
                   //   placeholder="请输入金额"
                   // />
-                  <input placeholder="请输入金额" type="number" min={1} max={99999999} style={{width:100}}/>
+                  <input placeholder="请输入金额" type="number" onkeypress='return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )' min={1} max={99999999} style={{width:100}}/>
                 )}
               </FormItem>
               <span>元</span>

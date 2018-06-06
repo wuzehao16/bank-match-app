@@ -114,7 +114,7 @@ class publishedJobDetail extends React.PureComponent {
     const {jobDetail, dic, jobId} = this.props;
     console.log('this.props',this.props)
     return (
-      <Layout>
+      <Layout title="职位详情">
         <Container>
             <Name>{jobDetail.jobName}</Name>
             <More>{jobDetail.address}/{dic.ageLimitDic[jobDetail.ageLimit]}/{jobDetail.education}/{dic.natureDic[jobDetail.nature]}</More>

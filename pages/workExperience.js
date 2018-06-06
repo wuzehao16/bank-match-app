@@ -9,7 +9,7 @@ import { DatePicker, Picker, List, InputItem, WhiteSpace, WingBlank, TextareaIte
 import { Form } from 'antd'
 import { formatData } from '../lib/util'
 import dayjs from 'dayjs'
-import { insertWorkExperience, updateWorkExperience } from '../services/recruit'
+import { insertWorkExperience, updateWorkExperience, deleteWorkExperience } from '../services/recruit'
 
 const date = new Date();
 const currentYear = date.getFullYear();
@@ -76,6 +76,23 @@ class WorkExperience extends React.PureComponent {
       Toast.fail(res.msg);
     }
   }
+
+  async deleteData(val) {
+    console.log('val',val)
+    const res = await deleteWorkExperience(val);
+    console.log('res',res)
+    if (res.code == 0) {
+      Router.push(`/workExperienceList?resumeId=${this.props.resumeId}`)
+    } else {
+      Toast.fail(res.msg);
+    }
+  }
+
+  deleteWorkExperience = () => {
+    console.log("this.props.workExperienceId",this.props.workExperienceId)
+    this.deleteData(this.props.workExperienceId)
+  }
+
   save = () => {
     this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
