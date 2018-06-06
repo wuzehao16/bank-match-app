@@ -42,7 +42,8 @@ class CompanyBaseInfo extends React.PureComponent {
       res.end()
       res.finished = true
     }
-    companyInfo = companyInfo || JSON.parse(sessionStorage.getItem('companyInfo'))
+
+    companyInfo = companyInfo || typeof window !== 'undefined' && JSON.parse(sessionStorage.getItem('companyInfo'))
     return {
              companyInfo: companyInfo || {}
             }
