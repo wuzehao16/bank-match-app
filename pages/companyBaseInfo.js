@@ -31,12 +31,19 @@ const IDCard = styled.div`
 `
 class CompanyBaseInfo extends React.PureComponent {
 
-  static async getInitialProps ({req}) {
+  static async getInitialProps ({res, req, query}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const companyInfo = await fetch(`/getCompanyDetail`,token)
+    if (companyInfo && !query.type) {
+      res.writeHead(302, {
+        Location: '/publishedJobList'
+      })
+      res.end()
+      res.finished = true
+    }
     return {
-             companyInfo: companyInfo
+             companyInfo: companyInfo || {}
             }
   }
   state = {
