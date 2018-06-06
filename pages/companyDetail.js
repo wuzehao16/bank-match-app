@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import Router from 'next/router';
 import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
@@ -97,6 +98,14 @@ class companyDetail extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
+  updateCompanyInfo = () => {
+    Router.push({
+      pathname:'/companyBaseInfo',
+      query:{type:1}
+    }
+  )
+  }
+
   save = () => {
     this.props.form.validateFields({ force: true }, (error, value) => {
       if (!error) {
@@ -128,6 +137,7 @@ class companyDetail extends React.PureComponent {
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
     return (
       <Layout title="公司信息">
+      <button onClick={this.updateCompanyInfo}>修改</button>
         <Head>
             <Avatar
               alt="Adelle Charles"
@@ -268,6 +278,7 @@ class companyDetail extends React.PureComponent {
           />
           <P>营业执照</P>
         </ImgGroup>
+      
         <style jsx global>{`
           .am-list-header {
             background: #fff !important;

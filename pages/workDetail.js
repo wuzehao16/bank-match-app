@@ -1,8 +1,9 @@
 import React ,{ Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import Router from 'next/router'
 import { List , WhiteSpace, WingBlank, Toast, Button } from 'antd-mobile'
-import fetch from '../lib/fetch';
+import fetch from '../lib/fetch'
 import { getCookie } from '../lib/util'
 import Layout from '../layout/RecruitLayout'
 import { sendResume } from '../services/recruit'
@@ -63,12 +64,14 @@ const ageLimit = ["","经验不限","应届生","一年以下","1-3年","3-5年"
 const expectSalary = ['面议','2k以下','2k-5k','5k-10k','10k-15k','15k-25k','25k-50k','50k以上']
 
 class WorkDetail extends React.PureComponent {
-  static async getInitialProps ({query}) {
+  static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
+    const token = getCookie('token', req)
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
     const education = await fetch('/selectByType?type=education')
-
+    const resume = await fetch('/getResumeAllDetail',token)
     return {
+            resume: resume,
             jobDetail: jobDetail || {},
             jobId: query.jobId,
             companyId: query.companyId,
@@ -83,18 +86,25 @@ class WorkDetail extends React.PureComponent {
   }
 
  async handleClick (val) {
-    const res = await sendResume({mail:val});
-    if (res.code == 0) {
-      Toast.success('发送成功', 1);
-    }else {
-      Toast.offline(res.msg, 1);
-    }
+   if(this.props.resume){
+      const res = await sendResume({mail:val});
+      if (res.code == 0) {
+        Toast.success('发送成功', 1);
+      }else {
+        Toast.offline(res.msg, 1);
+      }
+   }else{
+    Toast.offline("您尚未填写简历", 1);
+    setTimeout(() => {
+      Router.push('/resume')
+    }, 1000);
+   } 
   }
 
   render() {
     const {jobDetail, dic, jobId} = this.props;
     return (
-      <Layout>
+      <Layout title="职位详情">
         <Wrapper>
           <ICard>
             <div className="name">{jobDetail.jobName}</div>

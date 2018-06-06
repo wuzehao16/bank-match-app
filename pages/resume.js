@@ -70,6 +70,7 @@ class Resume extends React.PureComponent {
     const userInfo = await fetch('/getUserInfo',token)
     console.log('userInfo',userInfo)
     const resume = await fetch('/getResumeAllDetail',token)
+    console.log('resume',resume)
     return {
       resume: resume||'',
       userInfo: userInfo
@@ -98,7 +99,7 @@ class Resume extends React.PureComponent {
     const resumeId = this.state.resumeId
     console.log(this.props.resume)
     return (
-      <Layout>
+      <Layout title="简历">
         <Head>
             <Avatar
             alt="Adelle Charles"

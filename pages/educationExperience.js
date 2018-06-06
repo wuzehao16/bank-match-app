@@ -7,7 +7,7 @@ import Layout from '../layout/RecruitLayout'
 import { formatData, getCookie } from '../lib/util'
 import { Picker, List, InputItem, WhiteSpace, WingBlank, Button, Toast } from 'antd-mobile'
 import { Form } from 'antd'
-import { insertEducation, updateEducation } from '../services/recruit'
+import { insertEducation, updateEducation, deleteEducation } from '../services/recruit'
 
 const date = new Date();
 const currentYear = date.getFullYear();
@@ -67,21 +67,29 @@ class EducationExperience extends React.PureComponent {
     }
   }
 
+  async deleteData(val) {
+    const res = await deleteEducation(val);
+    if (res.code == 0) {
+      Router.push(`/educations?resumeId=${this.props.resumeId}`)
+    } else {
+      Toast.fail(res.msg);
+    }
+  }
+
+  deleteEducation = () => {
+    this.deleteData(this.props.educationId)
+  }
+
   save = () => {
     this.props.form.validateFields({ force: true }, (error,value) => {
       if (!error) {
         value = this.props.educationId?{...formatData(value),educationId:this.props.educationId}:{...formatData(value),resumeId:this.props.resumeId}
         this.props.educationId?this.updateData(value):this.saveData(value);
-        // Router.push({
-        //   pathname:'/educations',
-        //   query: { resumeId:this.props.resumeId }
-        // })
       } else {
         console.log('Validation failed',error);
       }
     });
   }
-
 
   render() {
     const {educationDetail, resumeId, educationId} = this.props;
@@ -89,7 +97,7 @@ class EducationExperience extends React.PureComponent {
     const educationOption = education.map(i => {return {value:i.code, label:i.name}})
     const { getFieldProps, getFieldsError } = this.props.form;
     return (
-      <Layout  title="教育经历">
+      <Layout title="教育经历">
         <WhiteSpace/>
         <List>
           <InputItem

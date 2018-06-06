@@ -94,6 +94,7 @@ class CompanyBaseInfo extends React.PureComponent {
   }
   render () {
     const { companyName, businessLicense, logo } = this.props.companyInfo;
+    console.log("props",this.props)
     const { files, files2 } = this.state;
     const { getFieldProps, getFieldsError, getFieldDecorator } = this.props.form;
     const Img =(
@@ -113,7 +114,7 @@ class CompanyBaseInfo extends React.PureComponent {
         <WhiteSpace />
         <InputItem
             {...getFieldProps('companyName',{
-              initialValue:companyName,
+              initialValue:companyName?companyName:'',
               rules:[
               {
                 required: true,

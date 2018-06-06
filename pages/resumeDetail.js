@@ -78,7 +78,7 @@ class Resume extends React.PureComponent {
   render() {
     const { appResume,education,expectJob,workExperience } = this.props.resume
     console.log(this.props.resume)
-  return (<Layout>
+  return (<Layout title="简历详情">
   <Head>
     <Avatar alt="Adelle Charles" src={appResume.headPortrait
         ? appResume.headPortrait

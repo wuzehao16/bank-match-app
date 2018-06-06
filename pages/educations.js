@@ -22,7 +22,7 @@ class Educations extends React.PureComponent {
   render() {
     const {i, resumeId }= this.props
     return (
-      <Layout  title="教育经历">
+      <Layout title="教育经历">
         {i.length==0?null:<div>
           {
           i.map((item,index) =>

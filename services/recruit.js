@@ -55,6 +55,13 @@ export async function updateEducation(params) {
   });
 }
 
+//删除教育经历
+export async function deleteEducation(params) {
+  return request(`/app/deleteEducation/${params}`, {
+    method: 'DELETE'
+  });
+}
+
 //新增工作经历
 export async function insertWorkExperience(params) {
   return request(`/app/insertWorkExperience`, {
@@ -74,6 +81,14 @@ export async function updateWorkExperience(params) {
     },
   });
 }
+
+//删除工作经历
+export async function deleteWorkExperience(params) {
+  return request(`/app/deleteWorkExperience/${params}`, {
+    method: 'DELETE'
+  });
+}
+
 
 //搜索工作列表
 export async function getJobList(params) {

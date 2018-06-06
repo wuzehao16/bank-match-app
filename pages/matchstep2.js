@@ -148,7 +148,7 @@ class MatchStep2 extends React.Component {
 
           </Contain>
           {
-            (getFieldValue('age') ===0||getFieldValue('age') ===1||getFieldValue('age') ===3)
+            getFieldValue('age') ===0
               ?           <SubContain>
                             <Relative
                               style={{position:'relative',color:'#646464'}}
@@ -167,7 +167,63 @@ class MatchStep2 extends React.Component {
                                        message:'请输入具体年龄'
                                     }],
                                   })(
-                                      <input placeholder="请输入"  type="number" min={0} max={100} style={{width:60}}/>
+                                      <input placeholder="请输入"  type="number" min={0} max={18} style={{width:60}}/>
+                                  )}
+                                </FormItem>
+                                  <span>岁</span>
+                              </span>
+                            </Relative>
+                        </SubContain> : null
+          }
+          {
+            getFieldValue('age') ===1
+              ?           <SubContain>
+                            <Relative
+                              style={{position:'relative',color:'#646464'}}
+                              >
+                              <span>具体年龄</span>
+                              <span>
+                                <FormItem
+                                  style={{display:"inline-block"}}
+                                  validateStatus={specificAgeError ? 'error' : ''}
+                                  help={specificAgeError || ''}
+                                  >
+                                  {getFieldDecorator('specificAge', {
+                                    initialValue:item.specificAge,
+                                    rules: [{
+                                       required: true,
+                                       message:'请输入具体年龄'
+                                    }],
+                                  })(
+                                      <input placeholder="请输入"  type="number" min={18} max={24} style={{width:60}}/>
+                                  )}
+                                </FormItem>
+                                  <span>岁</span>
+                              </span>
+                            </Relative>
+                        </SubContain> : null
+          }
+          {
+            getFieldValue('age') ===3
+              ?           <SubContain>
+                            <Relative
+                              style={{position:'relative',color:'#646464'}}
+                              >
+                              <span>具体年龄</span>
+                              <span>
+                                <FormItem
+                                  style={{display:"inline-block"}}
+                                  validateStatus={specificAgeError ? 'error' : ''}
+                                  help={specificAgeError || ''}
+                                  >
+                                  {getFieldDecorator('specificAge', {
+                                    initialValue:item.specificAge,
+                                    rules: [{
+                                       required: true,
+                                       message:'请输入具体年龄'
+                                    }],
+                                  })(
+                                      <input placeholder="请输入"  type="number" min={55} max={100} style={{width:60}}/>
                                   )}
                                 </FormItem>
                                   <span>岁</span>
