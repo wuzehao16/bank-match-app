@@ -94,7 +94,8 @@ class publishedJobDetail extends React.PureComponent {
     console.log('res',res)
           if(res.code == 0){
             Router.push({
-              pathname:`/publishedJobList?companyId=${this.props.companyId}`
+              pathname:'/publishedJobList',
+              query:{companyId:this.props.companyId}
             })
           }else {
             Toast.fail(res.msg);
