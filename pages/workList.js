@@ -218,11 +218,11 @@ class workList extends React.Component {
         placeholder="搜索关键词"
       />
       <ListView
-        style={{marginBottom:'100px'}}
+        // style={{marginBottom:'100px'}}
         key="1"
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        renderFooter={() => (<div style={{ padding: '10px 0',marginBottom:'100px', textAlign: 'center' }}>
+        renderFooter={() => (<div style={{ padding: '10px 0',marginBottom:'50px', textAlign: 'center' }}>
           {(this.state.isLoading && (this.state.refreshing || this.state.hasMore))? 'Loading...' : '没有更多啦~'}
         </div>)}
         renderRow={row}
@@ -230,7 +230,7 @@ class workList extends React.Component {
         style={{
           height: this.state.height,
           border: '1px solid #ddd',
-          margin: '5px 0 200px 0',
+          margin: '5px 0 0 0',
         }}
         pullToRefresh={<PullToRefresh
           refreshing={this.state.refreshing}
