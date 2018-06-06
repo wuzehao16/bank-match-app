@@ -88,7 +88,7 @@ class WorkExperience extends React.PureComponent {
     }
   }
 
-  deleteWorkExperience = () => {
+  delete = () => {
     console.log("this.props.workExperienceId",this.props.workExperienceId)
     this.deleteData(this.props.workExperienceId)
   }

@@ -51,7 +51,7 @@ export default class extends React.Component {
 
     // 指定图表的配置项和数据
     var option = {
-        color: ['#969696'],
+        color: ['#ee5648'],
         tooltip: {
           trigger: 'axis',
           axisPointer : {            // 坐标轴指示器，坐标轴触发有效

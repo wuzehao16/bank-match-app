@@ -34,7 +34,7 @@ class CompanyBaseInfo extends React.PureComponent {
   static async getInitialProps ({res, req, query}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const companyInfo = await fetch(`/getCompanyDetail`,token)
+    let companyInfo = await fetch(`/getCompanyDetail`,token);
     if (companyInfo && !query.type) {
       res.writeHead(302, {
         Location: '/publishedJobList'
@@ -42,6 +42,7 @@ class CompanyBaseInfo extends React.PureComponent {
       res.end()
       res.finished = true
     }
+    companyInfo = companyInfo || JSON.parse(sessionStorage.getItem('companyInfo'))
     return {
              companyInfo: companyInfo || {}
             }

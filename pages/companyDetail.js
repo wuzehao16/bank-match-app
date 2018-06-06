@@ -98,7 +98,7 @@ class companyDetail extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
-  updateCompanyInfo = () => {
+  edit = () => {
     Router.push({
       pathname:'/companyBaseInfo',
       query:{type:1}
@@ -277,7 +277,7 @@ class companyDetail extends React.PureComponent {
           />
           <P>营业执照</P>
         </ImgGroup>
-      
+
         <style jsx global>{`
           .am-list-header {
             background: #fff !important;
