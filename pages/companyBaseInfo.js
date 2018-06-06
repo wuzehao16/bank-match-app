@@ -187,7 +187,7 @@ class CompanyBaseInfo extends React.PureComponent {
         }
         .am-list-item .am-input-control input {
           font-size: 14px !important;
-          color: #888 !important;
+          color: #666 !important;
           text-align: right;
         }
         .am-image-picker-list{

@@ -240,6 +240,7 @@ class CompanyInformation extends React.PureComponent {
               }
             ]
           })}
+          placeholder="请输入您的职位"
           >
             <div className="itemTitle">您的职位</div>
           </InputItem>
@@ -268,7 +269,7 @@ class CompanyInformation extends React.PureComponent {
           }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
-            color: #888 !important;
+            color: #666 !important;
             text-align: right;
           }
         `}</style>
