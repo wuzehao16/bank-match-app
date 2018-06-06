@@ -98,7 +98,7 @@ class companyDetail extends React.PureComponent {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
-  updateCompanyInfo = () => {
+  edit = () => {
     Router.push({
       pathname:'/companyBaseInfo',
       query:{type:1}
@@ -137,7 +137,7 @@ class companyDetail extends React.PureComponent {
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
     return (
       <Layout title="公司信息">
-      <button onClick={this.updateCompanyInfo}>修改</button>
+      <button onClick={this.edit}>修改</button>
         <Head>
             <Avatar
               alt="Adelle Charles"
@@ -278,7 +278,7 @@ class companyDetail extends React.PureComponent {
           />
           <P>营业执照</P>
         </ImgGroup>
-      
+
         <style jsx global>{`
           .am-list-header {
             background: #fff !important;

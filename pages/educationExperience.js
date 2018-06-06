@@ -76,7 +76,7 @@ class EducationExperience extends React.PureComponent {
     }
   }
 
-  deleteEducation = () => {
+  delete = () => {
     this.deleteData(this.props.educationId)
   }
 
