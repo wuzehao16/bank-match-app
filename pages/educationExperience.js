@@ -131,7 +131,7 @@ class EducationExperience extends React.PureComponent {
             title="毕业时间"
             className="forss"
             cols={1}
-            {...getFieldProps('graduate',{initialValue:[parseInt(educationDetail.graduate?educationDetail.graduate:'')],rules:[
+            {...getFieldProps('graduate',{initialValue:educationDetail.graduate?[parseInt(educationDetail.graduate)]:'',rules:[
               {
                 required: true,
               }
@@ -141,7 +141,7 @@ class EducationExperience extends React.PureComponent {
             <List.Item arrow="horizontal"><i className="iconfont icon-year" /><span className="itemTitle">毕业时间</span></List.Item>
           </Picker>
           <Picker data={educationOption} cols={1} title="学历" {...getFieldProps('educationBackground',{initialValue:
-          [educationDetail.educationBackground?(educationOption.filter( item => item.label == educationDetail.educationBackground))[0].value:'']
+          educationDetail.educationBackground?[(educationOption.filter( item => item.label == educationDetail.educationBackground))[0].value]:''
           ,rules:[
               {
                 required: true,

@@ -81,7 +81,7 @@ class PublishedJobList extends React.PureComponent {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req);
-    const resumeListData = await fetch(`/getResumeList?expectJob=1`,token);
+    const resumeListData = await fetch('/getResumeList',token);
     console.log('resumeListData',resumeListData)
     const education = await fetch('/selectByType?type=education')
     const expectJob = await fetch('/selectByType?type=jobTitle')

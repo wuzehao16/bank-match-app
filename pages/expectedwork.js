@@ -136,10 +136,10 @@ class ExpectedWork extends React.PureComponent {
       cols = {1}
        {...getFieldProps('expectJob', {
           initialValue:
-          [i.expectJob?(jobTitleOption.filter( item => item.label == i.expectJob))[0].value:''],
-          rules: [
+          i.expectJob?[(jobTitleOption.filter( item => item.label == i.expectJob))[0].value]:'',
+          rules:[
             {
-              required: true
+              required: true,
             }
           ]
         })
