@@ -141,7 +141,7 @@ class CompanyBaseInfo extends React.PureComponent {
             ]
           })(
             <Upload
-              action="http://ad.ibankmatch.com:8611/app/uploadImage"
+              action="https://api.ibankmatch.com:8620/app/uploadImage"
               onSuccess={this.handleChange}
                >
                <IDCard>
@@ -155,7 +155,7 @@ class CompanyBaseInfo extends React.PureComponent {
           }
         <P>上传营业执照</P>
         <Upload
-          action="http://localhost:3000/app/uploadImage"
+          action="https://api.ibankmatch.com:8620/app/uploadImage"
           onSuccess={this.handleChange2}
            >
            <IDCard
