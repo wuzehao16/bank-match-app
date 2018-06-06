@@ -35,9 +35,6 @@ class CompanyBaseInfo extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
     const companyInfo = await fetch(`/getCompanyDetail`,token)
-<<<<<<< HEAD
-    console.log('companyInfo',companyInfo)
-=======
     if (companyInfo && !query.type) {
       res.writeHead(302, {
         Location: '/publishedJobList'
@@ -45,7 +42,6 @@ class CompanyBaseInfo extends React.PureComponent {
       res.end()
       res.finished = true
     }
->>>>>>> 173cd8017fe88bc4d593b8752dd9dcf420bf4dad
     return {
              companyInfo: companyInfo || {}
             }
