@@ -84,12 +84,15 @@ export default class extends React.Component {
     const {   xaxis, ypaxis, yvaxis, type } = this.state;
     // 指定图表的配置项和数据
     const y = (type == 1) ? yvaxis : ypaxis
+    const name =(type == 1) ? '元' : '人'
     var option = {
-        color: ['#969696'],
+        color: ['#ee5648'],
         tooltip: {
           trigger: 'axis',
           axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-              type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+              type : 'shadow',        // 默认为直线，可选为：'line' | 'shadow'
+              backgroundColor:'#ee5648'
+
           },
         },
         grid: {
@@ -107,7 +110,7 @@ export default class extends React.Component {
         },
         yAxis: {},
         series: [{
-            name: '元',
+            name: name,
             type: 'bar',
             barWidth:'20%',
             data: y
@@ -133,7 +136,7 @@ export default class extends React.Component {
           </div>
           <div className="price">
             <div>待结算金额(元)</div>
-            <div>{ i.sumincomes }</div>
+            <div>{ i.sumincomes || 0 }</div>
           </div>
         </Income>
           <BottomNavigation
