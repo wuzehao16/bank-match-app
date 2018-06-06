@@ -37,7 +37,7 @@ class CompanyBaseInfo extends React.PureComponent {
     let companyInfo = await fetch(`/getCompanyDetail`,token);
     if (companyInfo && !query.type) {
       res.writeHead(302, {
-        Location: '/publishedJobList'
+        Location: `/publishedJobList?companyId=${companyInfo.companyId}`
       })
       res.end()
       res.finished = true
