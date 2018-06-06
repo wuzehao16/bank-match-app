@@ -137,7 +137,6 @@ class companyDetail extends React.PureComponent {
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
     return (
       <Layout title="公司信息">
-      <button onClick={this.edit}>修改</button>
         <Head>
             <Avatar
               alt="Adelle Charles"
@@ -300,7 +299,7 @@ class companyDetail extends React.PureComponent {
           }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
-            color: #888 !important;
+            color: #666 !important;
             text-align: right;
           }
         `}</style>
