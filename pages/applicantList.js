@@ -148,7 +148,7 @@ class PublishedJobList extends React.PureComponent {
           <Select
               style={{fontSize:'14px'}}
               value={this.state.age}
-              onChange={this.handleChange('expectJob')}
+              onChange={this.handleChange('job')}
               native defaultValue='none'>
               <option value="">
                 职位名称

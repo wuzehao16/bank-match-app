@@ -61,6 +61,7 @@ class workList extends React.Component {
 
     genData() {
       const dataArr = [];
+      console.log("data",this.state.data)
       if(this.state.data.length!==0){
         for (let i = 0; i < this.state.data.length; i++) {
           dataArr.push(this.state.data[i].jobId);
@@ -101,18 +102,23 @@ class workList extends React.Component {
 
   async getNewData(val) {
     const res = await getJobList(val);
+    console.log("res",res)
     if(res.code == 0){
       this.setState({
         data: res.data,
       });
+      this.rData = this.genData();
+      console.log("rData",this.rData)
       setTimeout(() => {
-        this.rData = this.genData();
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.rData),
           refreshing: false,
           isLoading: false,
         });
       }, 600);
+      setTimeout(()=> {
+          console.log("dataSource",this.state.dataSource)
+      },3000)
     }else {
       Toast.fail(res.msg);
     }
