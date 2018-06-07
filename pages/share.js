@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { keyframes } from 'styled-components'
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,7 +13,7 @@ import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
 
 const Wrapper = styled.div`
-  background: url(static/share.jpg);
+  ${'' /* background: url(static/share.jpg); */}
   background-size: cover;
   text-align: center;
   position: absolute;
@@ -22,20 +23,67 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: -1;
 `
+const rotate360 = keyframes`
+    from  {
+      left:50px;
+      top:50px;
+      opcity:75;
+      width:0;
+      height:0;
+    }
+    to {
+      left:0px;
+      top:0px;
+      opacity: 0;
+      width:100px;
+      height:100px;
+    }
+`;
 const Btn = styled.div`
-  ${'' /* background: url(static/share_btn.png); */}
-  ${'' /* background-size: cover; */}
   position:absolute;
-  right: 21%;
-  bottom: 27%;
+  right: 18%;
+  bottom: 10%;
   height: 100px;
-  ${'' /* line-height: 50px; */}
-  ${'' /* color: #fff; */}
-  ${'' /* font-size: 20px; */}
-
   width: 100px;
-  ${'' /* margin: 20px auto; */}
+  background: url('static/invite_fx.png');
+  background-size: 100%;
+  &::after {
+    content:' ';
+    position: absolute;
+    left: 20px;
+    top:20px;
+    z-index:1;
+    width:10px;
+    height:10px;
+    background-color: #ff4200;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,.3) inset;
+    animation:${rotate360} 1s ease 0s infinite normal;
+  }
 `
+const Btn1 = styled.div`
+  position:absolute;
+  left: 18%;
+  bottom: 40%;
+  height: 100px;
+  width: 100px;
+  background: url('static/invite_ck.png');
+  background-size: 100%;
+  &::after {
+    content:' ';
+    position: absolute;
+    left: 20px;
+    top:20px;
+    z-index:1;
+    width:10px;
+    height:10px;
+    background-color: #ff4200;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,.3) inset;
+    animation:${rotate360} 1s ease 0s infinite normal;
+  }
+`
+
 class Share extends React.PureComponent {
   static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
@@ -64,7 +112,7 @@ class Share extends React.PureComponent {
       <Layout title="邀请队友拿奖励">
         <Wrapper>
 
-          <img style={{  marginTop: '2%',borderRadius:'18px'}}  src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='80%' width='80%'/>
+          <img style={{  marginTop: '2%',borderRadius:'18px'}}  src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='100%' width='100%'/>
 
 
           {/* 弹框 */}
@@ -91,8 +139,10 @@ class Share extends React.PureComponent {
               </Button>
             </DialogActions>
           </Dialog>
-          <Btn onClick={this.handleClick} name="马上赚钱"></Btn>
-          <Btn onClick={this.handleDialogClick}>open</Btn>
+          <Btn onClick={this.handleClick} name="马上赚钱">
+            <div className="dot"></div>
+          </Btn>
+          <Btn1 onClick={this.handleDialogClick} name="查看规则"></Btn1>
         </Wrapper>
         <style jsx>{`
           ul{
@@ -105,6 +155,19 @@ class Share extends React.PureComponent {
           }
           li{
             font-size:12px;
+          }
+          .example {
+            position:relative;
+            margin:150px auto;
+            width:50px;
+            height:50px;
+          }
+          .dot:before{
+
+          }
+
+          .dot:after {
+
           }
         `}</style>
       </Layout>
