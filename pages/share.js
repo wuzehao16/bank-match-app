@@ -13,8 +13,9 @@ import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
 
 const Wrapper = styled.div`
-  ${'' /* background: url(static/share.jpg); */}
-  background-size: cover;
+
+  background: url(${props => props.src});
+  background-size: 100% 100%;
   text-align: center;
   position: absolute;
   top: 0;
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: -1;
 `
-const rotate360 = keyframes`
+const spread = keyframes`
     from  {
       left:50px;
       top:50px;
@@ -34,6 +35,22 @@ const rotate360 = keyframes`
     to {
       left:0px;
       top:0px;
+      opacity: 0;
+      width:100px;
+      height:100px;
+    }
+`;
+const spread1 = keyframes`
+    from  {
+      left:30px;
+      top:30px;
+      opcity:75;
+      width:0;
+      height:0;
+    }
+    to {
+      left:-10px;
+      top:-10px;
       opacity: 0;
       width:100px;
       height:100px;
@@ -58,15 +75,15 @@ const Btn = styled.div`
     background-color: #ff4200;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0,0,0,.3) inset;
-    animation:${rotate360} 1s ease 0s infinite normal;
+    animation:${spread} 1s ease 0s infinite normal;
   }
 `
 const Btn1 = styled.div`
   position:absolute;
-  left: 18%;
-  bottom: 40%;
-  height: 100px;
-  width: 100px;
+  left: 20%;
+  bottom: 38%;
+  height: 80px;
+  width: 80px;
   background: url('static/invite_ck.png');
   background-size: 100%;
   &::after {
@@ -80,7 +97,7 @@ const Btn1 = styled.div`
     background-color: #ff4200;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0,0,0,.3) inset;
-    animation:${rotate360} 1s ease 0s infinite normal;
+    animation:${spread1} 1s ease 0s infinite normal;
   }
 `
 
@@ -110,9 +127,9 @@ class Share extends React.PureComponent {
   render() {
     return (
       <Layout title="邀请队友拿奖励">
-        <Wrapper>
+        <Wrapper src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`}>
 
-          <img style={{  marginTop: '2%',borderRadius:'18px'}}  src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='100%' width='100%'/>
+          {/* <img  src={``} alt="" height='100%' width='100%'/> */}
 
 
           {/* 弹框 */}
