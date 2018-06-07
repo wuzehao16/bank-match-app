@@ -235,7 +235,7 @@ class Invatation extends React.PureComponent {
           <div className="inv-top-detail">
     				<div className="inv-top-poster text-center font-white">
     					<img className="inv-top-deil--avart" src="/static/invitation_avatar.png"/>
-    					<p style={{color:'#fff',fontSize:'15px'}}>您的好友&nbsp;<span>大爷</span></p>
+    					<p style={{color:'#fff',fontSize:'15px'}}>您的好友&nbsp;<span>{this.state.userName}</span></p>
     					<p style={{color:'#fff',fontSize:'15px'}}>诚挚邀请您成为正式经纪人</p>
     				</div>
     				<form onSubmit={this.submit} className="inv-bottom-form">
