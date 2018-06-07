@@ -167,7 +167,7 @@ class MatchStep2 extends React.Component {
                                        message:'请输入具体年龄'
                                     }],
                                   })(
-                                      <input placeholder="请输入"  type="number" min={0} max={18} style={{width:60}}/>
+                                      <input placeholder="请输入"  type="number" min={0} max={18} style={{width:60,paddingRight:'5px'}}/>
                                   )}
                                 </FormItem>
                                   <span>岁</span>
@@ -195,7 +195,7 @@ class MatchStep2 extends React.Component {
                                        message:'请输入具体年龄'
                                     }],
                                   })(
-                                      <input placeholder="请输入"  type="number" min={18} max={24} style={{width:60}}/>
+                                      <input placeholder="请输入"  type="number" min={18} max={24} style={{width:60,paddingRight:'5px'}}/>
                                   )}
                                 </FormItem>
                                   <span>岁</span>
@@ -223,7 +223,7 @@ class MatchStep2 extends React.Component {
                                        message:'请输入具体年龄'
                                     }],
                                   })(
-                                      <input placeholder="请输入"  type="number" min={55} max={100} style={{width:60}}/>
+                                      <input placeholder="请输入"  type="number" min={55} max={100} style={{width:60,paddingRight:'5px'}}/>
                                   )}
                                 </FormItem>
                                   <span>岁</span>
