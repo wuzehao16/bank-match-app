@@ -269,6 +269,12 @@ class CompanyInformation extends React.PureComponent {
             color: #666 !important;
             text-align: right;
           }
+          .am-list-item .am-input-control input:disabled {
+            color: #666 !important;
+          }
+          .am-list-item .am-list-line .am-list-extra {
+            color:#666 !important;
+          }
           ::-webkit-input-placeholder { /* WebKit browsers */
             color:#666 !important;
           }
