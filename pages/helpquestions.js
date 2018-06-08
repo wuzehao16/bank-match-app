@@ -24,8 +24,14 @@ const Li = styled.li`
   align-items: center;
 `
 class HelpInformation extends React.PureComponent {
-  static async getInitialProps () {
-    const res = await fetch(`/getHelpList`)
+  static async getInitialProps ({ query }) {
+    const helpType = query.helpType
+    let res;
+    if (helpType) {
+      res = await fetch(`/getHelpList?helpType=${helpType}`)
+    } else {
+      res = await fetch(`/getHelpList`)
+    }
     return { data: res }
   }
   render() {

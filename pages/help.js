@@ -24,12 +24,17 @@ const Li = styled.li`
 `
 
 class Help extends React.PureComponent {
+  static async getInitialProps ({ query }) {
+    console.log(query.helpType)
+
+    return { helpType: query.helpType }
+  }
   render() {
     return (
       <Layout title = '帮助中心' >
       <div className="helplist">
         <ul style={ulStyles}>
-          <a href='/helpquestions'>
+          <a href={`/helpquestions?helpType=${this.props.helpType || ''}`}>
             <Li>
               <span>常见问题</span>
 
