@@ -10,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Layout from '../layout/Blanklayout';
 import fetch from '../lib/fetch';
+import BaseUrl from '../lib/url'
 import { getCookie } from '../lib/util'
 
 const Wrapper = styled.div`
@@ -126,8 +127,8 @@ class Share extends React.PureComponent {
   }
   render() {
     return (
-      <Layout title="邀请队友拿奖励">
-        <Wrapper src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`}>
+      <Layout title="邀队友&nbsp;拿大奖">
+        <Wrapper src={`${BaseUrl}/app/qrcode?token=${this.props.token}`}>
 
           {/* <img  src={``} alt="" height='100%' width='100%'/> */}
 
