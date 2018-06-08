@@ -34,6 +34,18 @@ const Income = styled.div`
 `
 const Graph = styled.div`
   height: 387px;
+  @media (min-width:320px) {
+    height: 307px;
+  }
+  @media (min-width:360px) {
+    height: 327px;
+  }
+  @media (min-width:375px) {
+    height: 387px;
+  }
+  @media (min-width:414px) {
+    height: 387px;
+  }
 `
 
 export default class extends React.Component {

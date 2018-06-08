@@ -37,6 +37,15 @@ const Income = styled.div`
 const Graph = styled.div`
   height: 322px;
   margin-top:50px;
+  @media (min-width:320px) {
+    height: 267px;
+  }
+  @media (min-width:360px) {
+    height: 304px;
+  }
+  @media (min-width:375px) {
+    height: 364px;
+  }
   @media (min-width:414px) {
     height: 364px;
   }
