@@ -35,8 +35,11 @@ const Income = styled.div`
   background-color: #ffffff;
 `
 const Graph = styled.div`
-  height: 362px;
+  height: 322px;
   margin-top:50px;
+  @media (min-width:414px) {
+    height: 364px;
+  }
 `
 
 class Myteam extends React.Component {
