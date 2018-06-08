@@ -90,6 +90,7 @@ class MatchStep2 extends React.Component {
     });
   }
   hasErrors = (fieldsError) => {
+    console.log('fieldsError',fieldsError)
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
   render () {

@@ -65,7 +65,7 @@ class workList extends React.Component {
       if(this.state.data.length!==0){
         for (let i = 0; i < this.state.data.length; i++) {
           dataArr.push(this.state.data[i].jobId);
-          console.log(this.state.data[i].jobId)
+          console.log('genData',this.state.data[i].jobId)
         }
       }
       return dataArr;
@@ -109,16 +109,18 @@ class workList extends React.Component {
       });
       this.rData = this.genData();
       console.log("rData",this.rData)
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.rData)
+      })
       setTimeout(() => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+        this.setState({     
           refreshing: false,
           isLoading: false,
         });
       }, 600);
-      setTimeout(()=> {
+      // setTimeout(()=> {
           console.log("dataSource",this.state.dataSource)
-      },3000)
+      // },1000)
     }else {
       Toast.fail(res.msg);
     }
@@ -196,31 +198,32 @@ class workList extends React.Component {
     if(data.length!==0){
       let index = data.length - 1;
       row = (rowData, sectionID, rowID) => {
-      if (index < 0) {
-        index = data.length - 1;
-      }
-      const obj = data[index--];
-      return (
-            <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
-              <Card full>
-                <Card.Header
-                  className="jobdesc"
-                  title={obj.jobName}
-                  extra={<span className="salary">{salaryDic[obj.salary]}</span>}
-                />
-                <Card.Header
-                  className="jobInfo"
-                  title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{obj.education}</div>}
-                />
-                <Card.Header
-                  title={<div style={{width:'100%'}}><p className="companyName">{obj.companyName}</p><p className="companyInfo" style={{width:'100%'}}>{scaleDic[obj.scale]}/{obj.organizationCategory}<span className="publishedTime" style={{float:'right'}}>{dayjs(obj.createTime).format("MM月DD日 HH:mm")}</span></p></div>}
-                  thumb={obj.logo}
-                  thumbStyle={{width:'64px',height:'64px'}}
-                />
-              </Card>
-            </Link>
-      );
-    };
+        if (index < 0) {
+          index = data.length - 1;
+        }
+        const obj = data[index--];
+        return (
+              <Link key={rowID} href={`/workDetail?jobId=${obj.jobId}`}>
+                <Card full>
+                {console.log('row',obj.jobId)}
+                  <Card.Header
+                    className="jobdesc"
+                    title={obj.jobName}
+                    extra={<span className="salary">{salaryDic[obj.salary]}</span>}
+                  />
+                  <Card.Header
+                    className="jobInfo"
+                    title={<div>{obj.address}|{ageLimitDic[obj.ageLimit]}|{obj.education}</div>}
+                  />
+                  <Card.Header
+                    title={<div style={{width:'100%'}}><p className="companyName">{obj.companyName}</p><p className="companyInfo" style={{width:'100%'}}>{scaleDic[obj.scale]}/{obj.organizationCategory}<span className="publishedTime" style={{float:'right'}}>{dayjs(obj.createTime).format("MM月DD日 HH:mm")}</span></p></div>}
+                    thumb={obj.logo}
+                    thumbStyle={{width:'64px',height:'64px'}}
+                  />
+                </Card>
+              </Link>
+        );
+      };
     }else {
       row = () =>{
         return (<div></div>)
