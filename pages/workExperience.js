@@ -51,7 +51,10 @@ class WorkExperience extends React.PureComponent {
             i: i || {},
             }
   }
-
+  componentDidMount () {
+    this.props.form.validateFields();
+    window.deleteWork = this.delete;
+  }
   async saveData(value) {
     console.log('value',value)
     const res = await insertWorkExperience(value);
@@ -106,9 +109,6 @@ class WorkExperience extends React.PureComponent {
     });
   }
 
-  componentDidMount () {
-    this.props.form.validateFields();
-  }
 
   hasErrors = (fieldsError) => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);

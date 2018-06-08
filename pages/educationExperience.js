@@ -43,6 +43,7 @@ class EducationExperience extends React.PureComponent {
 
   componentDidMount () {
     this.props.form.validateFields();
+    window.deleteEducation = this.delete;
   }
 
   hasErrors = (fieldsError) => {

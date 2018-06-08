@@ -41,7 +41,7 @@ const Graph = styled.div`
     height: 267px;
   }
   @media (min-width:360px) {
-    height: 304px;
+    height: 294px;
   }
   @media (min-width:375px) {
     height: 364px;
@@ -119,6 +119,7 @@ class Myteam extends React.Component {
         grid: {
             left: '5%',
             right: '4%',
+            top:'10%',
             bottom: '3%',
             containLabel: true
         },
