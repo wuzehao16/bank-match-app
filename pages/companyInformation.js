@@ -32,23 +32,23 @@ const Name = styled.h3`
 const scaleOption = [
   {
     label: '20人以下',
-    value: '1'
+    value: "1"
   },
   {
     label: '20-49人',
-    value: '2'
+    value: "2"
   },
   {
     label: '50-99人',
-    value: '3'
+    value: "3"
   },
   {
     label: '100-499人',
-    value: '4'
+    value: "4"
   },
   {
     label: '500人以上',
-    value: '5'
+    value: "5"
   }
 ]
 
@@ -60,7 +60,6 @@ class CompanyInformation extends React.PureComponent {
     const userInfo = await fetch(`/getUserInfo`,token)
     const orgType = await fetch(`/selectByType?type=orgType`)
     const companyInfo = JSON.parse(sessionStorage.getItem('companyInfo'));
-    console.log('companyInfo',companyInfo)
     return {
       dic: {
         orgType: orgType
@@ -106,8 +105,6 @@ class CompanyInformation extends React.PureComponent {
           ...formatData(value)
         }
         this.sendData(value)
-
-        console.log(value);
       } else {
         console.log('Validation failed',error);
       }
@@ -119,7 +116,7 @@ class CompanyInformation extends React.PureComponent {
     const { companyName, intro, organizationCategory, scale, mail,address, addressDetial, job } = this.props.companyInfo;
     const { getFieldProps, getFieldsError } = this.props.form;
     const { orgType} = this.props.dic;
-    const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
+    const orgTypeOption = orgType.map(i => {return {value:parseInt(i.code), label:i.name}})
     return (
       <Layout title="基本信息">
         <Head>
@@ -160,9 +157,7 @@ class CompanyInformation extends React.PureComponent {
             <div className="intro">公司简称</div>
           </InputItem>
           <Picker data={orgTypeOption} cols={1} title="机构类别" {...getFieldProps('organizationCategory',{
-            initialValue:
-            [organizationCategory?(orgTypeOption.filter( item => item.label == organizationCategory))[0].value:'']
-            ,
+            initialValue:organizationCategory?parseInt((orgTypeOption.filter( item => item.label == organizationCategory))[0].value):'',
             rules:[
               {
                 required: true,
