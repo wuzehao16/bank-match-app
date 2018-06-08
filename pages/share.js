@@ -61,7 +61,7 @@ class Share extends React.PureComponent {
   }
   render() {
     return (
-      <Layout title="邀请队友拿奖励">
+      <Layout title="邀请队友&nbsp;拿大奖">
         <Wrapper>
 
           <img style={{  marginTop: '2%',borderRadius:'18px'}}  src={`http://47.106.70.82:8611/app/qrcode?token=${this.props.token}`} alt="" height='80%' width='80%'/>

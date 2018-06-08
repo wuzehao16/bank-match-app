@@ -95,6 +95,7 @@ class Resume extends React.PureComponent {
   }
   render() {
     const { userInfo, resume:{appResume,education,expectJob,workExperience} } = this.props
+    console.log("this.props",this.props)
     console.log('userInfo',userInfo)
     const resumeId = this.state.resumeId
     console.log(this.props.resume)
@@ -140,7 +141,7 @@ class Resume extends React.PureComponent {
           }
           <Title>工作经历</Title>
           {
-            workExperience
+            workExperience.length
             ? <Card>
                 <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
                   <Edit>
@@ -169,7 +170,7 @@ class Resume extends React.PureComponent {
 
           <Title>教育经历</Title>
           {
-            education
+            education.length
             ? <Card>
                 <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
                   <Edit>

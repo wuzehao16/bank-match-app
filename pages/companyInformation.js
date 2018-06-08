@@ -155,6 +155,7 @@ class CompanyInformation extends React.PureComponent {
               }
             ]
           })}
+          placeholder="请输入公司简称"
           >
             <div className="intro">公司简称</div>
           </InputItem>
@@ -194,6 +195,7 @@ class CompanyInformation extends React.PureComponent {
           })}
             type="email"
             labelNumber="6"
+            placeholder="请输入邮箱地址"
           >
             <div className="itemTitle">接收简历邮箱</div>
           </InputItem>
@@ -271,6 +273,18 @@ class CompanyInformation extends React.PureComponent {
             font-size: 14px !important;
             color: #666 !important;
             text-align: right;
+          }
+          ::-webkit-input-placeholder { /* WebKit browsers */
+            color:#666 !important;
+          }
+          :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #666 !important;
+          }
+          ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #666 !important;
+          }
+          :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color: #666 !important;
           }
         `}</style>
       </Layout>

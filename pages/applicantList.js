@@ -82,7 +82,6 @@ class PublishedJobList extends React.PureComponent {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req);
     const resumeListData = await fetch('/getResumeList',token);
-    console.log('resumeListData',resumeListData)
     const education = await fetch('/selectByType?type=education')
     const expectJob = await fetch('/selectByType?type=jobTitle')
 
@@ -105,11 +104,9 @@ class PublishedJobList extends React.PureComponent {
   }
 
   async getResumeList (data) {
-    console.log('data',data)
   const res = await getResumeList({
     ...data
   });
-    console.log('res',res);
     if (res.code == 0) {
       this.setState({
         resumeListData: res.data,
@@ -129,7 +126,6 @@ class PublishedJobList extends React.PureComponent {
     this.setState({
       params: params
     })
-    console.log('params',this.state.params)
     this.getResumeList(params);
   }
 
@@ -138,12 +134,9 @@ class PublishedJobList extends React.PureComponent {
     const {educationDic,expectJobDic} = this.props.dic
     const educationOption = educationDic.map(i => {return {value:i.code, label:i.name}})
     const expectJobOption = expectJobDic.map(i => {return {value:i.code, label:i.name}})
-    // const expectJobArr = expectJobDic.map(item => item.name);
-    console.log('resumeListData',resumeListData)
     
     return (
       <Layout title="人才列表">
-        {/* <WhiteSpace/> */}
         <div className="filter">
           <Select
               style={{fontSize:'14px'}}
@@ -159,8 +152,6 @@ class PublishedJobList extends React.PureComponent {
                 })
               }
             </Select>
-          {/* <FormControl  style={{minWidth:'45%'}}> */}
-          {/* <InputLabel htmlFor="controlled-open-select">工作年限</InputLabel> */}
           <Select
             style={{fontSize:'14px'}}
             value={this.state.age}
@@ -175,9 +166,6 @@ class PublishedJobList extends React.PureComponent {
               })
             }
           </Select>
-          {/* </FormControl> */}
-          {/* <FormControl style={{minWidth:'45%'}}> */}
-                {/* <InputLabel htmlFor="controlled-open-select1">最该学历</InputLabel> */}
                 <Select
                   style={{fontSize:'14px'}}
                   
@@ -193,18 +181,14 @@ class PublishedJobList extends React.PureComponent {
                     })
                   }
                 </Select>
-              {/* </FormControl> */}
-
         </div>
-        {/* <SegmentedControl selectedIndex={this.state.params.expectJob} onChange={this.onChange}  onValueChange={this.onValueChange} values={expectJobArr} /> */}
-        {/* <WhiteSpace/> */}
         <List>
           {
             resumeListData.length ? resumeListData.map((item,index) =>
               <Link key={index} href={`/resumeDetail?resumeId=${item.resumeId}`}>
                 <Item
                   align="top"
-                  thumb={item.headPortrait}
+                  thumb={item.headPortrait?item.headPortrait:"/static/resume_head.png"}
                   multipleLine>
                 <Name>{item.name}</Name>
                 <Brief>
