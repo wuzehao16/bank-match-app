@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Router from 'next/router';
+import { Form } from 'antd';
 import { InputItem, List, WingBlank, WhiteSpace, Picker, TextareaItem } from 'antd-mobile';
 import Layout from '../layout/HasFooterRecruitLayout';
 import Avatar from '@material-ui/core/Avatar';
@@ -9,7 +10,6 @@ import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util';
 import addressData from '../lib/address';
 import withRoot from '../src/withRoot';
-import { Form } from 'antd';
 
 const FormItem = Form.Item;
 const Item = List.Item;
