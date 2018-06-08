@@ -9,6 +9,8 @@ import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
 import { getCookie } from '../lib/util'
 import { fetchDetail } from '../services/commission'
+import NoData from '../components/NoData'
+
 const Wrapper = styled.div`
   padding: 5px 15px 15px;
   background: #fff;
@@ -179,7 +181,7 @@ export default class extends React.Component {
         </PullToRefresh>
         {
           list.length < 1
-            ? <Nomessage>暂无数据...</Nomessage>
+            ? <NoData/>
             : null
         }
 
