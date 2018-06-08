@@ -696,5 +696,11 @@ class MatchStep2 extends React.Component {
 
 const WrappedMatchStep2 = Form.create()(MatchStep2);
 
-// export default connect(state => state)(withReduxSaga(withRoot(WrappedMatchStep2)));
+// {
+//   onValuesChange(props, _, values) {
+//     const err = this.props.form.getFieldsError()
+//     Object.keys(err).some(field => err[field]);
+//   }
+// }
+
 export default withReduxSaga(withRoot(WrappedMatchStep2));

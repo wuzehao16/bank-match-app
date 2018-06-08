@@ -78,9 +78,7 @@ class WorkExperience extends React.PureComponent {
   }
 
   async deleteData(val) {
-    console.log('val',val)
     const res = await deleteWorkExperience(val);
-    console.log('res',res)
     if (res.code == 0) {
       Router.push(`/workExperienceList?resumeId=${this.props.resumeId}`)
     } else {

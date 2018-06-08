@@ -91,6 +91,8 @@ class companyDetail extends React.PureComponent {
 }
 
   componentDidMount () {
+    window.editData= this.edit();
+    
     this.props.form.validateFields();
   }
 
@@ -301,6 +303,9 @@ class companyDetail extends React.PureComponent {
             font-size: 14px !important;
             color: #666 !important;
             text-align: right;
+          }
+          .am-list-item .am-input-control input:disabled {
+            color: #666 !important;
           }
         `}</style>
       </Layout>
