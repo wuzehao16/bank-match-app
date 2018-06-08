@@ -65,7 +65,7 @@ class AboutUs extends React.PureComponent {
             <p style={{fontSize:'14px',color: '#969696',textIndent:'2em'}}>致力于让用户更快捷了解产品资讯,并能通过智能工具更高效的开展工作，解决行业痛点!</p>
           </div>
           <Ul>
-            <Link href='/wechat'>
+            {/* <Link href='/wechat'>
               <Li >
                 <span>官方微信</span>
                 <Icon>chevron_right</Icon>
@@ -76,9 +76,14 @@ class AboutUs extends React.PureComponent {
               <span>服务协议</span>
               <Icon>chevron_right</Icon>
             </Li>
-            </Link>
+            </Link> */}
           </Ul>
           <footer style={footerStyles}>
+            <Link href={{ pathname: '/servicecontract' }} >
+              <a style={{textDecoration:'none',color:'#576b95'}}>
+                《众银云测服务协议》
+            </a>
+            </Link>
               <p style={{fontSize:'12px',color: '#969696'}}>众银云测，用户的智能顾问</p>
               <p style={{fontSize:'12px',color: '#969696'}}>Copyright2018深圳市众银云测信息技术有限公司 版权所有</p>
           </footer>
@@ -128,6 +133,13 @@ class AboutUs extends React.PureComponent {
         body {
           background: url('/static/aboutus-background.jpg') bottom center no-repeat #f2f2f2;
           background-size: 400px 300px;
+        }
+        a,a:hover,a:active,a:visited,a:link,a:focus{
+            -webkit-tap-highlight-color:rgba(0,0,0,0);
+            -webkit-tap-highlight-color: transparent;
+            outline:none;
+            background: none;
+            text-decoration: none;
         }
       `}
       </style>

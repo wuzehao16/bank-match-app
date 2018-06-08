@@ -6,6 +6,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Layout from '../layout/Elayout'
 import fetch from '../lib/fetch'
+import withRoot from '../src/withRoot';
 import { getCookie } from '../lib/util'
 const theme = createMuiTheme({
   overrides: {
@@ -34,11 +35,11 @@ const Income = styled.div`
   background-color: #ffffff;
 `
 const Graph = styled.div`
-  height: 387px;
+  height: 362px;
   margin-top:50px;
 `
 
-export default class extends React.Component {
+class Myteam extends React.Component {
   static async getInitialProps ({query,req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
@@ -49,7 +50,7 @@ export default class extends React.Component {
     super(props);
     const {   xaxis, ypaxis, yvaxis, newSum, timeSlotIncome } = this.props.i.sevenDays;
     this.state = {
-      value: 0,
+      value: 'sevenDays',
       checkedA: true,
       timeSlotIncome: timeSlotIncome,
       newSum: newSum,
@@ -64,6 +65,7 @@ export default class extends React.Component {
   handleChange = (event, value) => {
     const { i } = this.props;
     this.setState({
+      value:value,
       newSum:i[value].newSum,
       timeSlotIncome:i[value].timeSlotIncome,
       xaxis:i[value].xaxis,
@@ -85,6 +87,13 @@ export default class extends React.Component {
     // 指定图表的配置项和数据
     const y = (type == 1) ? yvaxis : ypaxis
     const name =(type == 1) ? '元' : '人'
+    const max = (type == 1)
+      ? function(value) {
+        return value.max;
+      }
+      : function(value) {
+        return value.max + 1;
+      }
     var option = {
         color: ['#ee5648'],
         tooltip: {
@@ -108,7 +117,11 @@ export default class extends React.Component {
                 alignWithLabel: true
             }
         },
-        yAxis: {},
+        yAxis: [{
+          type:'value',
+          minInterval: 1,
+          max: max
+        }],
         series: [{
             name: name,
             type: 'bar',
@@ -188,6 +201,7 @@ export default class extends React.Component {
             width:53px;
             border: 1px solid #cacaca;
             text-align:center;
+            line-height:24px;
           }
           .income {
             border-top-left-radius: 20px;
@@ -208,3 +222,5 @@ export default class extends React.Component {
     )
   }
 }
+
+export default withRoot(Myteam);
