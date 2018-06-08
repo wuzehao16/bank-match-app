@@ -250,7 +250,10 @@ class Invatation extends React.PureComponent {
     						<div className="form-item-prepend">
     							<img className="inv-bottom-form--icon" src="static/main_icon_passwd.png"/>
     						</div>
-    						<input id="passWord" name="passWord" placeholder="请输入您的密码" type="password" />
+    						<input
+                  value={this.state.loginPassord}
+                  onChange={this.handleChange('loginPassord')}
+                   id="passWord" name="passWord" placeholder="请输入您的密码" type="password" />
     					</div>
     					<div className="sl-table">
     						<div className="sl-table-cell cell-left">
