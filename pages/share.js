@@ -127,7 +127,7 @@ class Share extends React.PureComponent {
   }
   render() {
     return (
-      <Layout title="邀队友&nbsp;拿大奖">
+      <Layout title="邀队友&nbsp;赢大奖">
         <Wrapper src={`${BaseUrl}/app/qrcode?token=${this.props.token}`}>
 
           {/* <img  src={``} alt="" height='100%' width='100%'/> */}
