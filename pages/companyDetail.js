@@ -91,8 +91,7 @@ class companyDetail extends React.PureComponent {
 }
 
   componentDidMount () {
-    window.editData= this.edit();
-    
+    window.editData= this.edit;
     this.props.form.validateFields();
   }
 
