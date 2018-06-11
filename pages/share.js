@@ -143,10 +143,10 @@ class Share extends React.PureComponent {
             <DialogContent>
               <DialogContentText style={{textAlign:'center'}} id="alert-dialog-description">
                 <ul>
-                  <li>1、  将二维码图片分享至微信好友、朋友圈、QQ好友、QQ空间、新浪微博，也可保存图片通过其他渠道分享，二维码在活动期间内有效；</li>
-                  <li>2、  好友通过扫描您分享的二维码，下载众银云测APP并成功注册众银云测后将成为您的队友；</li>
-                  <li>3、  此次分享活动期间，新增队友排名前十的用户，将获得活动大礼包，具体奖励请查看奖品清单；</li>
-                  <li>4、活动时间：2018-6-01 00:00至2018-6-30 24:00；</li>
+                  <li>1、将二维码图片分享至微信好友、朋友圈、QQ好友、QQ空间、新浪微博，也可保存图片通过其他渠道分享，二维码在活动期间内有效；</li>
+                  <li>2、好友通过扫描您分享的二维码，下载众银云测APP并成功注册众银云测后将成为您的队友；</li>
+                  <li>3、此次分享活动期间，新增队友排名前十的用户，将依次获取888/688/688/288/288/288/188/188/188/188元现金红包，于活动截止日三日内发放奖励。</li>
+                  <li>4、活动时间：2018-6-12 00:00至2018-7-11 24:00。</li>
                   <li>5、本次活动为众银云测发起，最终解释权将归众银云测所有。</li>
                 </ul>
               </DialogContentText>
@@ -173,6 +173,7 @@ class Share extends React.PureComponent {
           }
           li{
             font-size:12px;
+            word-break:break-all;
           }
           .example {
             position:relative;
