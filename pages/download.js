@@ -16,6 +16,7 @@ const styles = theme => ({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    marginTop: 30,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)',
   },
 });
@@ -32,11 +33,19 @@ const Wrapper = styled.div`
   width: 100%;
 `
 class Download extends React.PureComponent {
+  handleClick = () => {
+    if (typeof window !== "undefined") {
+    navigator.userAgent.match(/iPhone|iPad|iPod/i)
+     ? window.location.href = 'itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist'
+      :  window.location.href = 'https://back.ibankmatch.com/ZYYC.apk'
+    }
+  }
   render() {
     const {classes} = this.props;
-    const href =  typeof window !=="undefined" &&  navigator.userAgent.match(/iPhone|iPad|iPod/i)
-          ? 'itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist'
-          : 'https://back.ibankmatch.com/ZYYC.apk'
+    var href;
+
+
+    console.log(href)
     return (
       <Layout>
         <Wrapper>
@@ -53,9 +62,9 @@ class Download extends React.PureComponent {
             <div>>点击【信任TOP LTD TOV】</div>
           </h2>
 
-          <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href={href}>
-          <Button className={classes.button}>下载</Button>
-          </a>
+          {/* <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href={`${href}`}> */}
+          <Button onClick={this.handleClick} className={classes.button}>下载</Button>
+          {/* </a> */}
         </Wrapper>
         <style jsx>{`
           h2{
