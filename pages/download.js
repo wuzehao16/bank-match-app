@@ -50,7 +50,7 @@ class Download extends React.PureComponent {
       <Layout>
         <Wrapper>
           <img src="/static/logo.png" style={{width:120,height:120,display:'block',margin:'40% auto 15px'}}/>
-          <h1 style={{color:'#646464',fontSize:'24px',textAlign:'center',marginTop:'50px'}}>众银云测</h1>
+          <h1 style={{color:'#646464',fontSize:'24px',textAlign:'center',marginTop:'30px'}}>众银云测</h1>
           {/* <Divider style={{marginTop:'30px',width:'200px',margin: '30px auto'}}/> */}
           <h3>V1.0.0</h3>
           <h2 style={{color:'#a93220',fontSize:'16px',textAlign:'center',marginTop:'10%'}}>
