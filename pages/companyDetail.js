@@ -246,7 +246,7 @@ class companyDetail extends React.PureComponent {
             rows={3}
             // count={50}
             // placeholder='请输入公司详细地址'
-            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#3c3c3c'}}
+            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#888'}}
           />
         </List>
         <WhiteSpace />
@@ -300,11 +300,11 @@ class companyDetail extends React.PureComponent {
           }
           .am-list-item .am-input-control input {
             font-size: 14px !important;
-            color: #666 !important;
+            color: #888 !important;
             text-align: right;
           }
           .am-list-item .am-input-control input:disabled {
-            color: #666 !important;
+            color: #888 !important;
           }
         `}</style>
       </Layout>
