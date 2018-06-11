@@ -60,7 +60,12 @@ export default class extends React.Component {
     // 基于准备好的dom，初始化echarts实例
     const item = this.props.item
     var myChart = echarts.init(document.getElementById('main'));
-
+    var type =item.yaxis.some(item => item>0)
+    const max = type
+      ? null
+      : function(value) {
+        return 10000;
+      }
     // 指定图表的配置项和数据
     var option = {
         color: ['#ee5648'],
@@ -84,6 +89,7 @@ export default class extends React.Component {
             }
         },
         yAxis: [{
+          max:max,
           minInterval: 1,
         }],
         series: [{
