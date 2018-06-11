@@ -100,9 +100,7 @@ class Myteam extends React.Component {
     const y = (type == 1) ? yvaxis : ypaxis
     const name =(type == 1) ? '元' : '人'
     const max = (type == 1)
-      ? function(value) {
-        return value.max;
-      }
+      ? null
       : function(value) {
         return value.max + 1;
       }

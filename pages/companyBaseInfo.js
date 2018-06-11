@@ -9,6 +9,7 @@ import { getCookie } from '../lib/util';
 import  Upload  from 'rc-upload';
 import { uploadImage } from '../services/recruit'
 import UploadImage from '../components/uploadImage'
+import BaseUrl from '../lib/url'
 const FormItem = Form.Item;
 
 const P = styled.p`
@@ -85,6 +86,10 @@ class CompanyBaseInfo extends React.PureComponent {
     });
   }
   handleChange = (res) => {
+    if (res.code !== 0) {
+      Toast.fail(res.msg);
+      return
+    }
     this.setState({
       businessLicense:res.data
     })
@@ -93,6 +98,10 @@ class CompanyBaseInfo extends React.PureComponent {
     })
   }
   handleChange2 = (res) => {
+    if (res.code !== 0) {
+      Toast.fail(res.msg);
+      return
+    }
     this.setState({
       logo:res.data
     })
@@ -143,7 +152,7 @@ class CompanyBaseInfo extends React.PureComponent {
             ]
           })(
             <Upload
-              action="https://api.ibankmatch.com:8620/app/uploadImage"
+              action={`${BaseUrl}/app/uploadImage`}
               onSuccess={this.handleChange}
                >
                <IDCard>
@@ -157,7 +166,7 @@ class CompanyBaseInfo extends React.PureComponent {
           }
         <P>上传营业执照</P>
         <Upload
-          action="https://api.ibankmatch.com:8620/app/uploadImage"
+          action={`${BaseUrl}/app/uploadImage`}
           onSuccess={this.handleChange2}
            >
            <IDCard
