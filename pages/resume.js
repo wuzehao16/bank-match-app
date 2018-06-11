@@ -82,7 +82,11 @@ class Resume extends React.PureComponent {
     }else {
       const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
         { text: '取消', onPress: () => Router.push('/workList') },
-        { text: '确定', onPress: () => Router.push('/help') },
+        { text: '确定', onPress: () => {
+          if(typeof window !== 'undefined'){
+            navigator.userAgent.match(/iPhone|iPad|iPod/i) ? window.webkit.messageHandlers.login.postMessage({}) : ''
+          }
+        } },
       ]);
     }
     return {
@@ -99,25 +103,18 @@ class Resume extends React.PureComponent {
   async componentDidMount () {
     console.log(this.props)
     if (this.props.resume&&this.props.resume.appResume.resumeId) {
-      console.log('if')
+      // console.log('if')
       this.setState({
         resumeId:this.props.resume.appResume.resumeId
       })
     } else {
       const resumeId = (await addBaseInformation()).data
-      console.log('else')
+      // console.log('else')
       this.setState({
         resumeId:resumeId
       })
     }
   }
-
-  // showAlert = () => {
-  //   const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
-  //     { text: '取消', onPress: () => alertInstance.close() },
-  //     { text: '确定', onPress: () => Router.push('/workList') },
-  //   ]);
-  // };
 
   render() {
       const { userInfo, resume:{appResume,education,expectJob,workExperience},notoken } = this.props
