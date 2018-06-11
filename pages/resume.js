@@ -72,18 +72,11 @@ class Resume extends React.PureComponent {
     const token = getCookie('token', req)
     if (token) {
       const userInfo = await fetch('/getUserInfo',token)
-      console.log('userInfo',userInfo)
       const resume = await fetch('/getResumeAllDetail',token)
-      console.log('resume',resume)
       return {
         resume: resume || '',
         userInfo: userInfo
       }
-    }else {
-      const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
-        { text: '取消', onPress: () => Router.push('/workList') },
-        { text: '确定', onPress: () => Router.push('/help') },
-      ]);
     }
     return {
       resume:  '',
@@ -97,7 +90,12 @@ class Resume extends React.PureComponent {
   }
 
   async componentDidMount () {
-    console.log(this.props)
+    if (this.props.notoken) {
+      const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
+        { text: '取消', onPress: () => Router.push('/workList') },
+        { text: '确定', onPress: () => Router.push('/workList') },
+      ]);
+    }
     if (this.props.resume&&this.props.resume.appResume.resumeId) {
       console.log('if')
       this.setState({
@@ -195,7 +193,7 @@ class Resume extends React.PureComponent {
                   </AddContainer>
                 </Link>
             }
-  
+
             <Title>教育经历</Title>
             {
               education && education.length
@@ -222,7 +220,7 @@ class Resume extends React.PureComponent {
                   </AddContainer>
                 </Link>
             }
-  
+
             <Title>期望工作</Title>
             {
               expectJob
@@ -248,7 +246,7 @@ class Resume extends React.PureComponent {
                   </Link>
             }
           </Wrapper>
-          </div>}  
+          </div>}
           <style jsx>{`
             .ul{
               margin:0;
@@ -282,6 +280,6 @@ class Resume extends React.PureComponent {
       )
     }
   }
-    
+
 
 export default withRoot(Resume);
