@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../layout/RecruitLayout';
 import styled from 'styled-components'
-import { InputItem, List, Button, WingBlank, WhiteSpace, ImagePicker } from 'antd-mobile';
+import { InputItem, List, Button, WingBlank, WhiteSpace, ImagePicker, Toast } from 'antd-mobile';
 import { Form } from 'antd';
 import Router from 'next/router'
 import fetch from '../lib/fetch';
@@ -97,6 +97,20 @@ class CompanyBaseInfo extends React.PureComponent {
       businessLicense:res.data
     })
   }
+  beforeUpload = (file) => {
+    console.log(1)
+    const isPic = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isPic) {
+      Toast.offline('上传的文件不是图片类型，请重新上传！');
+      this.setState({ fileList: [] })
+    }
+
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      Toast.offline('上传图片大小应该小于 2MB!');
+    }
+    return isPic && isLt2M;
+  }
   handleChange2 = (res) => {
     if (res.code !== 0) {
       Toast.fail(res.msg);
@@ -154,6 +168,7 @@ class CompanyBaseInfo extends React.PureComponent {
             <Upload
               action={`${BaseUrl}/app/uploadImage`}
               onSuccess={this.handleChange}
+              beforeUpload={this.beforeUpload}
                >
                <IDCard>
                  {this.state.businessLicense
@@ -168,7 +183,8 @@ class CompanyBaseInfo extends React.PureComponent {
         <Upload
           action={`${BaseUrl}/app/uploadImage`}
           onSuccess={this.handleChange2}
-           >
+          beforeUpload={this.beforeUpload}
+        >
            <IDCard
              {...getFieldProps('logo',{
                initialValue:logo,

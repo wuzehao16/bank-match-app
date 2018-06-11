@@ -22,11 +22,12 @@ const Head = styled.div`
   justify-content: left;
   align-items: center;
 `
-const Name = styled.h3`
+const Name = styled.input`
   font-size: 14px;
   color: #333;
   padding-left: 15px;
   font-weight: normal;
+  border: none;
 `
 
 const scaleOption = [
@@ -119,6 +120,10 @@ class CompanyInformation extends React.PureComponent {
     const { getFieldProps, getFieldsError } = this.props.form;
     const { orgType} = this.props.dic;
     const orgTypeOption = orgType.map(i => {return {value:i.code, label:i.name}})
+    if (!userInfo.userHead) {
+      userInfo.userHead = '/static/resume_head.png'
+    }
+    userInfo.userName ="wuzehao"
     return (
       <Layout title="基本信息">
         <Head>
@@ -128,7 +133,15 @@ class CompanyInformation extends React.PureComponent {
               style={{height:60,width:60}}
               {...getFieldProps('headProtrait',{initialValue:userInfo.userHead})}
             />
-            <Name {...getFieldProps('userName',{initialValue:userInfo.userName})}>{userInfo.userName}</Name>
+            <Name placeholder="请输入名称" {...getFieldProps('userName',{
+              initialValue:userInfo.userName,
+              rules:[
+              {
+                required: true,
+              }
+            ]
+
+            })}/>
         </Head>
         <WhiteSpace />
         <List>
