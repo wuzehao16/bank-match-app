@@ -53,9 +53,9 @@ class Download extends React.PureComponent {
           <h1 style={{color:'#646464',fontSize:'24px',textAlign:'center',marginTop:'50px'}}>众银云测</h1>
           {/* <Divider style={{marginTop:'30px',width:'200px',margin: '30px auto'}}/> */}
           <h3>V1.0.0</h3>
-          <h2 style={{color:'#a93220',fontSize:'16px',textAlign:'center',marginTop:'15%'}}>
+          <h2 style={{color:'#a93220',fontSize:'16px',textAlign:'center',marginTop:'10%'}}>
             <div>
-              首次下载完成后请前往【设置】
+              IOS首次下载完成后请前往【设置】
             </div>
             <div>>点击【通用】</div>
             <div>>点击【描述文件与设备管理】</div>
