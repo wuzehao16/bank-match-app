@@ -69,9 +69,11 @@ class WorkDetail extends React.PureComponent {
     const token = getCookie('token', req)
     const jobDetail = await fetch(`/getJobDetail?jobId=${query.jobId}`);
     const education = await fetch('/selectByType?type=education')
-    const resume = await fetch('/getResumeAllDetail',token)
+    if(token){
+      var resume = await fetch('/getResumeAllDetail',token)
+    }
     return {
-            resume: resume,
+            resume: resume || '',
             jobDetail: jobDetail || {},
             jobId: query.jobId,
             companyId: query.companyId,
@@ -83,6 +85,7 @@ class WorkDetail extends React.PureComponent {
               scaleDic: scale,
             }
           };
+          token: token?true:false
   }
 
  async handleClick (val) {
@@ -93,7 +96,9 @@ class WorkDetail extends React.PureComponent {
       }else {
         Toast.offline(res.msg, 1);
       }
-   }else{
+   }else if(!this.props.token){
+    Toast.offline("请先登录并填写简历信息", 1);
+  }else{
     Toast.offline("您尚未填写简历", 1);
     setTimeout(() => {
       Router.push('/resume')

@@ -185,7 +185,7 @@ class PublishedJobList extends React.PureComponent {
         <List>
           {
             resumeListData.length ? resumeListData.map((item,index) =>
-              <Link key={index} href={`/resumeDetail?resumeId=${item.resumeId}`}>
+              <Link key={item.resumeId} href={`/resumeDetail?resumeId=${item.resumeId}`}>
                 <Item
                   align="top"
                   thumb={item.headPortrait?item.headPortrait:"/static/resume_head.png"}

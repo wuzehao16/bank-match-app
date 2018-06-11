@@ -44,7 +44,7 @@ class PublishedJobList extends React.PureComponent {
       <Layout title="职位管理">
         <List >
           {JobListData.map((item,index) =>
-            <Link href={`/publishedJobDetail?jobId=${item.jobId}&companyId=${this.props.companyId}`} key={index}>
+            <Link href={`/publishedJobDetail?jobId=${item.jobId}&companyId=${this.props.companyId}`} key={item.jobId}>
               <Item arrow="horizontal" multipleLine onClick={() => {}}>
                 <Name>{item.jobName}</Name>
                 <Brief>

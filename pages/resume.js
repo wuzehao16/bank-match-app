@@ -99,12 +99,13 @@ class Resume extends React.PureComponent {
   async componentDidMount () {
     console.log(this.props)
     if (this.props.resume&&this.props.resume.appResume.resumeId) {
+      console.log('if')
       this.setState({
         resumeId:this.props.resume.appResume.resumeId
       })
     } else {
       const resumeId = (await addBaseInformation()).data
-      console.log(resumeId)
+      console.log('else')
       this.setState({
         resumeId:resumeId
       })
@@ -123,7 +124,7 @@ class Resume extends React.PureComponent {
       console.log("this.props",this.props)
       console.log('userInfo',userInfo)
       const resumeId = this.state.resumeId
-      console.log(this.props.resume)
+      console.log('resumeId',resumeId)
       return (
         <Layout title="简历">
         { this.props.notoken? null:
@@ -168,7 +169,7 @@ class Resume extends React.PureComponent {
             }
             <Title>工作经历</Title>
             {
-              workExperience.length
+              workExperience && workExperience.length
               ? <Card>
                   <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
                     <Edit>
@@ -197,7 +198,7 @@ class Resume extends React.PureComponent {
   
             <Title>教育经历</Title>
             {
-              education.length
+              education && education.length
               ? <Card>
                   <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
                     <Edit>
@@ -246,7 +247,6 @@ class Resume extends React.PureComponent {
                     </AddContainer>
                   </Link>
             }
-  
           </Wrapper>
           </div>}  
           <style jsx>{`
