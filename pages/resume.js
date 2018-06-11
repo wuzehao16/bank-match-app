@@ -95,7 +95,7 @@ class Resume extends React.PureComponent {
         { text: '取消', onPress: () => Router.push('/workList') },
         { text: '确定', onPress: () => {
             if(typeof window !== 'undefined'){
-              navigator.userAgent.match(/iPhone|iPad|iPod/i) ? window.webkit.messageHandlers.login.postMessage({}) : ''
+              navigator.userAgent.match(/iPhone|iPad|iPod/i) ? window.webkit.messageHandlers.login.postMessage({}) : androidRef.notifyLoginAction()
             }
         }},
       ]);
