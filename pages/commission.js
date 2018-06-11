@@ -83,7 +83,9 @@ export default class extends React.Component {
                 alignWithLabel: true
             }
         },
-        yAxis: {},
+        yAxis: [{
+          minInterval: 1,
+        }],
         series: [{
             name: '元',
             type: 'bar',
