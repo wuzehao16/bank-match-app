@@ -179,7 +179,6 @@ class CompanyBaseInfo extends React.PureComponent {
          </Upload>
 
         <P>上传公司标志</P>
-
         <WingBlank style={{padding:'0 17px'}}>
           <Button type="primary" style={{fontSize:'14px',marginTop:'50px'}} disabled={this.hasErrors(getFieldsError())} onClick={this.saveCompanyInfo}>{this.props.companyInfo?"下一步":"保存"}</Button>
         </WingBlank>

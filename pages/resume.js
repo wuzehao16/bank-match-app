@@ -4,11 +4,14 @@ import styled from 'styled-components'
 import ControlPoint from '@material-ui/icons/ControlPoint';
 import Avatar from '@material-ui/core/Avatar';
 import dayjs from 'dayjs'
+import Router from 'next/router';
+import { Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
 import Layout from '../layout/HasFooterWantedLayout';
 import fetch from '../lib/fetch';
 import { getCookie } from '../lib/util'
 import { addBaseInformation } from '../services/recruit'
 import withRoot from '../src/withRoot';
+const alert = Modal.alert;
 
 const Head = styled.div`
   height:111px;
@@ -67,18 +70,32 @@ class Resume extends React.PureComponent {
   static async getInitialProps ({req}) {
     // eslint-disable-next-line no-undef
     const token = getCookie('token', req)
-    const userInfo = await fetch('/getUserInfo',token)
-    console.log('userInfo',userInfo)
-    const resume = await fetch('/getResumeAllDetail',token)
-    console.log('resume',resume)
+    if (token) {
+      const userInfo = await fetch('/getUserInfo',token)
+      console.log('userInfo',userInfo)
+      const resume = await fetch('/getResumeAllDetail',token)
+      console.log('resume',resume)
+      return {
+        resume: resume || '',
+        userInfo: userInfo
+      }
+    }else {
+      const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
+        { text: '取消', onPress: () => Router.push('/workList') },
+        { text: '确定', onPress: () => Router.push('/help') },
+      ]);
+    }
     return {
-      resume: resume||'',
-      userInfo: userInfo
-     }
+      resume:  '',
+      userInfo: '',
+      notoken: true
+    }
   }
+
   state = {
     resumeId: ''
   }
+
   async componentDidMount () {
     console.log(this.props)
     if (this.props.resume&&this.props.resume.appResume.resumeId) {
@@ -93,166 +110,178 @@ class Resume extends React.PureComponent {
       })
     }
   }
+
+  // showAlert = () => {
+  //   const alertInstance = alert('您尚未登录', '登陆后即可填写查看简历，前往登录?', [
+  //     { text: '取消', onPress: () => alertInstance.close() },
+  //     { text: '确定', onPress: () => Router.push('/workList') },
+  //   ]);
+  // };
+
   render() {
-    const { userInfo, resume:{appResume,education,expectJob,workExperience} } = this.props
-    console.log("this.props",this.props)
-    console.log('userInfo',userInfo)
-    const resumeId = this.state.resumeId
-    console.log(this.props.resume)
-    return (
-      <Layout title="简历">
-        <Head>
-            <Avatar
-            alt="Adelle Charles"
-            src={userInfo?userInfo.userHead:"/static/resume_head.png"}
-            style={{height:60,width:60}}
-          />
-        </Head>
-        <Wrapper>
-          <Title>基本信息</Title>
-          {
-            appResume
+      const { userInfo, resume:{appResume,education,expectJob,workExperience},notoken } = this.props
+      console.log("this.props",this.props)
+      console.log('userInfo',userInfo)
+      const resumeId = this.state.resumeId
+      console.log(this.props.resume)
+      return (
+        <Layout title="简历">
+        { this.props.notoken? null:
+        <div>
+          <Head>
+              <Avatar
+              alt="Adelle Charles"
+              src={userInfo?userInfo.userHead:"/static/resume_head.png"}
+              style={{height:60,width:60}}
+            />
+          </Head>
+          <Wrapper>
+            <Title>基本信息</Title>
+            {
+              appResume
+                ? <Card>
+                  <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId,avatar:userInfo.userHead}}}>
+                    <Edit>
+                      <i className="iconfont icon-edit"/>
+                      <span style={{paddingLeft:'5px'}}>编辑</span>
+                    </Edit>
+                  </Link>
+                    <ul className="ul">
+                      <li>姓名：{appResume.name}</li>
+                      <li>性别：{appResume.sex==1?'女':'男'}</li>
+                      <li>出生年月：{appResume.birthYear}</li>
+                      <li>最高学历：{appResume.education}</li>
+                      <li>工作年限：{appResume.workingYear}</li>
+                      <li>电话号码：{appResume.phone}</li>
+                      <li>邮箱：{appResume.mail}</li>
+                      <li>所在城市：{appResume.city}</li>
+                      <li>在职状态：{appResume.status==1?'在职':'离职'}</li>
+                    </ul>
+                  </Card>
+                : <Link prefetch href={{pathname:'/baseinformation',query:{resumeId:resumeId},avatar:userInfo.userHead}}>
+                    <AddContainer>
+                      <Add ><ControlPoint/>
+                        <span>添加基本信息</span>
+                      </Add>
+                    </AddContainer>
+                  </Link>
+            }
+            <Title>工作经历</Title>
+            {
+              workExperience.length
               ? <Card>
-                <Link href={{pathname:'/baseinformation',query:{resumeId:resumeId,avatar:userInfo.userHead}}}>
+                  <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
+                    <Edit>
+                      <i className="iconfont icon-edit"/>
+                      <span style={{paddingLeft:'5px'}}>编辑</span>
+                    </Edit>
+                  </Link>
+                    {workExperience.map(i => {
+                      return(
+                        <ul className="list" key={i.workExperienceId}>
+                      <li>{dayjs(i.entryTime).format('YYYY.MM')}-{dayjs(i.leaveTime).format('YYYY.MM')}</li>
+                      <li className="company">{i.companyName}</li>
+                      <li className="job">{i.job}</li>
+                    </ul>
+                    )
+                    })}
+                </Card>
+                : <Link prefetch href={{pathname:'/workExperience',query:{resumeId:resumeId}}}>
+                  <AddContainer>
+                    <Add ><ControlPoint/>
+                      <span>添加工作经历</span>
+                    </Add>
+                  </AddContainer>
+                </Link>
+            }
+  
+            <Title>教育经历</Title>
+            {
+              education.length
+              ? <Card>
+                  <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
+                    <Edit>
+                      <i className="iconfont icon-edit"/>
+                      <span style={{paddingLeft:'5px'}}>编辑</span>
+                    </Edit>
+                  </Link>
+                    {education.map(i => {
+                      return(
+                        <ul className="list" key={i.educationId}>
+                      <li>毕业年份：{i.graduate}</li>
+                      <li className="company">{i.school}</li>
+                      <li className="job">{i.educationBackground}-{i.major}</li>
+                    </ul>
+                    )
+                    })}
+                </Card>
+               :  <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId}}}>
+                  <AddContainer>
+                    <Add ><ControlPoint/><span>添加教育经历</span></Add>
+                  </AddContainer>
+                </Link>
+            }
+  
+            <Title>期望工作</Title>
+            {
+              expectJob
+              ? <Card>
+                <Link href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
                   <Edit>
                     <i className="iconfont icon-edit"/>
                     <span style={{paddingLeft:'5px'}}>编辑</span>
                   </Edit>
                 </Link>
                   <ul className="ul">
-                    <li>姓名：{appResume.name}</li>
-                    <li>性别：{appResume.sex==1?'女':'男'}</li>
-                    <li>出生年月：{appResume.birthYear}</li>
-                    <li>最高学历：{appResume.education}</li>
-                    <li>工作年限：{appResume.workingYear}</li>
-                    <li>电话号码：{appResume.phone}</li>
-                    <li>邮箱：{appResume.mail}</li>
-                    <li>所在城市：{appResume.city}</li>
-                    <li>在职状态：{appResume.status==1?'在职':'离职'}</li>
+                    <li>期望岗位：{expectJob.expectJob}</li>
+                    <li>期望城市：{expectJob.expectCity}</li>
+                    <li>期望月薪：{salary[expectJob.expectSalary]}</li>
                   </ul>
                 </Card>
-              : <Link prefetch href={{pathname:'/baseinformation',query:{resumeId:resumeId},avatar:userInfo.userHead}}>
-                  <AddContainer>
-                    <Add ><ControlPoint/>
-                      <span>添加基本信息</span>
-                    </Add>
-                  </AddContainer>
-                </Link>
-          }
-          <Title>工作经历</Title>
-          {
-            workExperience.length
-            ? <Card>
-                <Link href={{pathname:'/workExperienceList',query:{resumeId:resumeId}}}>
-                  <Edit>
-                    <i className="iconfont icon-edit"/>
-                    <span style={{paddingLeft:'5px'}}>编辑</span>
-                  </Edit>
-                </Link>
-                  {workExperience.map(i => {
-                    return(
-                      <ul className="list" key={i.workExperienceId}>
-                    <li>{dayjs(i.entryTime).format('YYYY.MM')}-{dayjs(i.leaveTime).format('YYYY.MM')}</li>
-                    <li className="company">{i.companyName}</li>
-                    <li className="job">{i.job}</li>
-                  </ul>
-                  )
-                  })}
-              </Card>
-              : <Link prefetch href={{pathname:'/workExperience',query:{resumeId:resumeId}}}>
-                <AddContainer>
-                  <Add ><ControlPoint/>
-                    <span>添加工作经历</span>
-                  </Add>
-                </AddContainer>
-              </Link>
-          }
-
-          <Title>教育经历</Title>
-          {
-            education.length
-            ? <Card>
-                <Link href={{pathname:'/educations',query:{resumeId:resumeId}}}>
-                  <Edit>
-                    <i className="iconfont icon-edit"/>
-                    <span style={{paddingLeft:'5px'}}>编辑</span>
-                  </Edit>
-                </Link>
-                  {education.map(i => {
-                    return(
-                      <ul className="list" key={i.educationId}>
-                    <li>毕业年份：{i.graduate}</li>
-                    <li className="company">{i.school}</li>
-                    <li className="job">{i.educationBackground}-{i.major}</li>
-                  </ul>
-                  )
-                  })}
-              </Card>
-             :  <Link prefetch href={{pathname:'/educationExperience',query:{resumeId:resumeId}}}>
-                <AddContainer>
-                  <Add ><ControlPoint/><span>添加教育经历</span></Add>
-                </AddContainer>
-              </Link>
-          }
-
-          <Title>期望工作</Title>
-          {
-            expectJob
-            ? <Card>
-              <Link href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
-                <Edit>
-                  <i className="iconfont icon-edit"/>
-                  <span style={{paddingLeft:'5px'}}>编辑</span>
-                </Edit>
-              </Link>
-                <ul className="ul">
-                  <li>期望岗位：{expectJob.expectJob}</li>
-                  <li>期望城市：{expectJob.expectCity}</li>
-                  <li>期望月薪：{salary[expectJob.expectSalary]}</li>
-                </ul>
-              </Card>
-              : <Link prefetch href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
-                  <AddContainer>
-                    <Add ><ControlPoint/>
-                      <span>添加期望工作</span>
-                    </Add>
-                  </AddContainer>
-                </Link>
-          }
-
-        </Wrapper>
-        <style jsx>{`
-          .ul{
-            margin:0;
-            padding:0;
-            list-style:none;
-            font-size: 13px;
-            line-height: 30px;
-          }
-          .list{
-            background:url(static/resume_list.jpg) no-repeat;
-            background-size:15px 100%;
-            color:#333333;
-            margin:0;
-            padding:0 20px;
-            list-style:none;
-            font-size: 13px;
-          }
-          .company{
-            margin:10px 0;
-          }
-          .job{
-            font-size:12px;
-            color:#999999;
-            padding-bottom:20px;
-          }
-          .iconfont{
-            font-size: 14px;
-          }
-        `}</style>
-      </Layout>
-    )
+                : <Link prefetch href={{pathname:'/expectedwork',query:{resumeId:resumeId}}}>
+                    <AddContainer>
+                      <Add ><ControlPoint/>
+                        <span>添加期望工作</span>
+                      </Add>
+                    </AddContainer>
+                  </Link>
+            }
+  
+          </Wrapper>
+          </div>}  
+          <style jsx>{`
+            .ul{
+              margin:0;
+              padding:0;
+              list-style:none;
+              font-size: 13px;
+              line-height: 30px;
+            }
+            .list{
+              background:url(static/resume_list.jpg) no-repeat;
+              background-size:15px 100%;
+              color:#333333;
+              margin:0;
+              padding:0 20px;
+              list-style:none;
+              font-size: 13px;
+            }
+            .company{
+              margin:10px 0;
+            }
+            .job{
+              font-size:12px;
+              color:#999999;
+              padding-bottom:20px;
+            }
+            .iconfont{
+              font-size: 14px;
+            }
+          `}</style>
+        </Layout>
+      )
+    }
   }
-}
+    
 
 export default withRoot(Resume);

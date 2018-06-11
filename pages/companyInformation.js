@@ -238,7 +238,7 @@ class CompanyInformation extends React.PureComponent {
             rows={3}
             // count={50}
             // placeholder='请输入公司详细地址'
-            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#3c3c3c'}}
+            style={{background:'#f2f2f2',padding:'3px 3px',fontSize:'14px',color:'#666'}}
           />
         </List>
         <WhiteSpace />
@@ -291,16 +291,16 @@ class CompanyInformation extends React.PureComponent {
             color:#666 !important;
           }
           ::-webkit-input-placeholder { /* WebKit browsers */
-            color:#666 !important;
+            color:#888 !important;
           }
           :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color: #666 !important;
+            color: #888 !important;
           }
           ::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color: #666 !important;
+            color: #888 !important;
           }
           :-ms-input-placeholder { /* Internet Explorer 10+ */
-            color: #666 !important;
+            color: #888 !important;
           }
         `}</style>
       </Layout>
