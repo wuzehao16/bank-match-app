@@ -34,6 +34,9 @@ const Wrapper = styled.div`
 class Download extends React.PureComponent {
   render() {
     const {classes} = this.props;
+    const href =  typeof window !=="undefined" &&  navigator.userAgent.match(/iPhone|iPad|iPod/i)
+          ? 'itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist'
+          : 'https://back.ibankmatch.com/ZYYC.apk'
     return (
       <Layout>
         <Wrapper>
@@ -50,7 +53,7 @@ class Download extends React.PureComponent {
             <div>>点击【信任TOP LTD TOV】</div>
           </h2>
 
-          <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href="itms-services://?action=download-manifest&amp;url=https://back.ibankmatch.com/manifest.plist">
+          <a style={{  textDecoration: 'none',display:'block',width:'200px',margin:'30px auto'}} href={href}>
           <Button className={classes.button}>下载</Button>
           </a>
         </Wrapper>
